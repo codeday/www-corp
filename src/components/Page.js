@@ -40,6 +40,7 @@ export default function Page ({ children, title, darkHeader, slug }) {
           <Menu>
             <Button as="a" variant="ghost" href="https://www.srnd.org/contact" target="_blank">Contact</Button>
             <Button as="a" variant="ghost" href="https://www.srnd.org/press" target="_blank">Press</Button>
+            <Button as="a" variant="ghost" href="https://blog.codeday.org/" target="_blank">Blog</Button>
           </Menu>
         </Header>
         {children}
