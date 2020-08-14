@@ -25,7 +25,7 @@ export default function Programs() {
                 p={2}
                 as="a"
                 d="block"
-                href={`https://www.codeday.org/${region.webname}`}
+                href={`https://old.codeday.org/${region.webname}`}
                 target="_blank"
                 fontSize="xl"
                 borderColor="current.border"
