@@ -1,0 +1,42 @@
+fragment IndexProgramsComponent on Query {
+  cms {
+    codeDayProgram: programs(where: { name:"CodeDay" }) {
+      items {
+        shortDescription
+      }
+    }
+
+    mainPrograms: programs(where: { name_not:"CodeDay", type:"primary" }) {
+      items {
+        name
+        url
+        shortDescription
+        logo {
+          url
+        }
+      }
+    }
+
+    otherPrograms: programs(where: { name_not:"CodeDay", type_not:"primary" }) {
+      items {
+        name
+        url
+        shortDescription
+        logo {
+          url
+        }
+      }
+    }
+
+    regions (limit: 500) {
+      items {
+        name
+        webname
+        location {
+          lat
+          lon
+        }
+      }
+    }
+  }
+}

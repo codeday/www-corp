@@ -1,0 +1,29 @@
+fragment IndexHeroComponent on Query {
+  cms {
+    mission: strings (where: { key: "common.mission" }) {
+      items {
+        value
+      }
+    }
+    explainer: asset(id:"6BoY9Ec9J8YRrHcj2RqsCg"){
+      url
+    }
+    indexHeroPhotos: pressPhotos(limit: 50) {
+      items {
+        region {
+          name
+        }
+        event {
+          program {
+            name
+          }
+          startsAt
+        }
+        photo {
+          jpg: url(transform: { width: 200, height: 150, format: JPG_PROGRESSIVE, resizeStrategy: FILL })
+          webp: url(transform: { width: 200, height: 150, format: JPG_PROGRESSIVE, resizeStrategy: FILL })
+        }
+      }
+    }
+  }
+}

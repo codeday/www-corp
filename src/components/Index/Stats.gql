@@ -1,0 +1,12 @@
+fragment IndexStatsComponent on Query {
+  cms {
+    stats: events (limit:500) {
+      items {
+        statEventCount
+        statStudentCount
+        statLowInterestCount
+        statLowInterestContinuedCount
+      }
+    }
+  }
+}

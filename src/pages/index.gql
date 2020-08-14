@@ -1,0 +1,12 @@
+#import "../components/Page.gql"
+#import "../components/Index/Hero.gql"
+#import "../components/Index/Stats.gql"
+#import "../components/Index/Programs.gql"
+#import "../components/Index/Sponsors.gql"
+query IndexQuery {
+  ...PageComponent
+  ...IndexHeroComponent
+  ...IndexStatsComponent
+  ...IndexProgramsComponent
+  ...IndexSponsorsComponent
+}

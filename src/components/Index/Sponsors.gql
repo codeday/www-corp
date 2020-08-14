@@ -1,0 +1,23 @@
+fragment IndexSponsorsComponent on Query {
+  cms {
+    majorSponsors: globalSponsors(where: { type: "major" }, order: [sys_firstPublishedAt_ASC]) {
+      items {
+        name
+        link
+        logo {
+          url(transform: {height: 60, resizeStrategy: FIT})
+        }
+      }
+    }
+
+    minorSponsors: globalSponsors(where: { type: "minor" }, order: [sys_firstPublishedAt_ASC]) {
+      items {
+        name
+        link
+        logo {
+          url(transform: {height: 20, resizeStrategy: FIT})
+        }
+      }
+    }
+  }
+}
