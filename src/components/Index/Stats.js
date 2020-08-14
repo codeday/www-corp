@@ -44,7 +44,7 @@ export default function Stats(props) {
           <StatBox
             num={Math.round(100 * (rollupStats.statLowInterestCount / rollupStats.statStudentCount))}
             unit="%"
-            label="Didn't Like CS"
+            label="Didn't Like CS Coming In"
             d={{ base: 'none', md: 'block' }}
           />
           <StatBox
