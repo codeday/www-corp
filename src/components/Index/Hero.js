@@ -44,7 +44,7 @@ export default function Hero({ seed, ...props }) {
   const photos = shuffle(indexHeroPhotos?.items || [], seed);
 
   return (
-    <Box {...props}>
+    <Box maxWidth="1800px" m="0 auto" {...props}>
       <Grid
         templateColumns={{ base: '1fr', md: '8fr 5fr', lg: '8fr 10fr', xl: '4fr 3fr' }}
         gap={4}
@@ -72,6 +72,7 @@ export default function Hero({ seed, ...props }) {
             gapMax={15}
             yOffsetMin={-25}
             yOffsetMax={75}
+            height={(150+75)*2}
           >
             {photoSlides(rand, splitGroups(photos, 4))}
           </FlexScatter>
@@ -85,6 +86,7 @@ export default function Hero({ seed, ...props }) {
             gapMax={50}
             yOffsetMin={-25}
             yOffsetMax={75}
+            height={(150+75)*2}
           >
             {photoSlides(rand, splitGroups(photos, 6))}
           </FlexScatter>

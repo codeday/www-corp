@@ -1,0 +1,25 @@
+fragment IndexAnnouncementComponent on Query {
+  cms {
+    announcements(
+      where: { visibility: "Public", displayAt_lte: $cmsDate, endAt_gte: $cmsDate }
+    ) {
+
+      items {
+        sys {
+          id
+        }
+        title
+        oneline
+        displayAt
+        type
+        link
+        displayAt
+        programs {
+          items {
+            webname
+          }
+        }
+      }
+    }
+  }
+}

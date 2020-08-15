@@ -3,7 +3,6 @@ import Box from '@codeday/topo/Atom/Box';
 import Header, { SiteLogo, Menu } from '@codeday/topo/Organism/Header';
 import Footer from '@codeday/topo/Organism/Footer';
 import { CodeDay } from '@codeday/topo/Atom/Logo';
-import Announcement from '@codeday/topo/Organism/Announcement';
 import { useQuery } from '../query';
 import Button from '@codeday/topo/Atom/Button';
 
@@ -13,7 +12,6 @@ export default function Page ({ children, title, darkHeader, slug }) {
   const { cms: { navBar, mission } } = useQuery();
   return (
     <>
-      <Announcement />
       <DefaultSeo
         title={title}
         description={mission?.items[0]?.value}

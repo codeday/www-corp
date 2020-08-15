@@ -40,22 +40,21 @@ export default function Stats(props) {
       <Content>
         <Grid templateColumns={{ base: 'repeat(3, 1fr)', md: 'repeat(4, 1fr)', lg: 'repeat(5, 1fr)' }} gap={4}>
           <StatBox num={rollupStats.statEventCount} label="Events" />
-          <StatBox num={rollupStats.statStudentCount} label="Attendees" />
+          <StatBox num={rollupStats.statStudentCount} label="CodeDay Alums" />
           <StatBox
-            num={Math.round(100 * (rollupStats.statLowInterestCount / rollupStats.statStudentCount))}
-            unit="%"
-            label="Didn't Like CS"
-            d={{ base: 'none', md: 'block' }}
+            num={rollupStats.statLowInterestCount}
+            label="Didn't Like CS Before"
           />
           <StatBox
             num={Math.round(100 * (rollupStats.statLowInterestContinuedCount / rollupStats.statLowInterestCount))}
             unit="%"
-            label="Kept Coding"
-            d={{ base: 'none', lg: 'block' }}
+            label="Kept Coding After"
+            d={{ base: 'none', md: 'block' }}
           />
           <StatBox
             num={rollupStats.statLowInterestContinuedCount}
-            label="Coders Created"
+            label="New Coders Created"
+            d={{ base: 'none', lg: 'block' }}
           />
         </Grid>
       </Content>

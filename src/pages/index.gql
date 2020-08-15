@@ -3,10 +3,12 @@
 #import "../components/Index/Stats.gql"
 #import "../components/Index/Programs.gql"
 #import "../components/Index/Sponsors.gql"
-query IndexQuery {
+#import "../components/Index/Announcement.gql"
+query IndexQuery ($cmsDate: CmsDateTime) {
   ...PageComponent
   ...IndexHeroComponent
   ...IndexStatsComponent
   ...IndexProgramsComponent
   ...IndexSponsorsComponent
+  ...IndexAnnouncementComponent
 }
