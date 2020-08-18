@@ -4,6 +4,7 @@
 #import "../components/Index/Programs.gql"
 #import "../components/Index/Sponsors.gql"
 #import "../components/Index/Announcement.gql"
+#import "../components/Index/Community.gql"
 query IndexQuery ($cmsDate: CmsDateTime) {
   ...PageComponent
   ...IndexHeroComponent
@@ -11,4 +12,5 @@ query IndexQuery ($cmsDate: CmsDateTime) {
   ...IndexProgramsComponent
   ...IndexSponsorsComponent
   ...IndexAnnouncementComponent
+  ...IndexCommunityComponent
 }

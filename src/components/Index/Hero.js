@@ -24,10 +24,11 @@ function photoSlides(rand, photoGroups) {
             left={0}
             right={0}
             mb={0}
-            bg={`blackAlpha.500`}
+            backgroundImage="linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1))"
             color="white"
             p={1}
             fontSize="sm"
+            bold
           >
             {[p.event?.program?.name, p.region?.name, p.event?.startsAt?.substring(0,4)].join(' ')}
           </Text>

@@ -7,6 +7,7 @@ import Stats from '../components/Index/Stats';
 import Programs from '../components/Index/Programs';
 import Sponsors from '../components/Index/Sponsors';
 import Announcement from '../components/Index/Announcement';
+import Community from '../components/Index/Community';
 import { IndexQuery } from './index.gql';
 
 export default function Home({ seed }) {
@@ -17,6 +18,7 @@ export default function Home({ seed }) {
       <Stats />
       <Programs />
       <Sponsors />
+      <Community />
     </Page>
   );
 }

@@ -1,0 +1,30 @@
+fragment IndexCommunityComponent on Query {
+  showYourWork {
+    messages(take:50) {
+      text
+      imageUrl(width: 300, height: 300, strategy: CROP)
+      author {
+        name
+        picture
+      }
+    }
+  }
+  cms {
+    indexCommunityPhotos: pressPhotos(limit: 50) {
+      items {
+        region {
+          name
+        }
+        event {
+          program {
+            name
+          }
+          startsAt
+        }
+        photo {
+          url(transform: { width: 300, height: 300, format: JPG_PROGRESSIVE, resizeStrategy: FILL })
+        }
+      }
+    }
+  }
+}
