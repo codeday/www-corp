@@ -41,12 +41,10 @@ export default function Programs() {
         <Box>
           {mainPrograms?.items?.map((prog) => (
             <Box
-              borderWidth={1}
+              borderBottomWidth={1}
               borderColor="current.border"
-              borderRadius={2}
               p={4}
               mb={4}
-              boxShadow="sm"
               d="block"
               as="a"
               href={prog.url}
@@ -65,14 +63,12 @@ export default function Programs() {
 
           {/* Even more programs! */}
           <Grid templateColumns="repeat(3, 1fr)" textAlign="center" gap={4}>
-            {otherPrograms?.items?.map((prog) => (
+            {otherPrograms?.items?.map((prog, i) => (
                 <Box
-                  borderWidth={1}
+                  borderRightWidth={Math.min(1, (i+1) % 3)}
                   borderColor="current.border"
-                  borderRadius={2}
                   p={4}
                   mb={4}
-                  boxShadow="sm"
                   d="block"
                   as="a"
                   href={prog.url}

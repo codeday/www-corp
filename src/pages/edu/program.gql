@@ -1,0 +1,40 @@
+query ProgramQuery ($webname: String) {
+  cms {
+    programs(where: { webname: $webname }, limit: 1) {
+      items {
+        name
+        webname
+        description
+        logo {
+          url
+        }
+        educationDetails {
+          json
+          links {
+            assets {
+              block {
+                sys {
+                  id
+                }
+                contentType
+                url
+              }
+            }
+          }
+        }
+        eligibility {
+          json
+        }
+        presentingSponsors {
+          items {
+            name
+            link
+            logo {
+              url(transform: {height: 60, resizeStrategy: FIT})
+            }
+          }
+        }
+      }
+    }
+  }
+}

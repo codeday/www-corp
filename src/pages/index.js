@@ -11,7 +11,7 @@ import { IndexQuery } from './index.gql';
 
 export default function Home({ seed }) {
   return (
-    <Page slug="/" title="CodeDay">
+    <Page slug="/">
       <Announcement mt={-12} mb={8} />
       <Hero seed={seed} mb={8} />
       <Stats />

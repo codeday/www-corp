@@ -13,7 +13,7 @@ export default function Page ({ children, title, darkHeader, slug }) {
   return (
     <>
       <DefaultSeo
-        title={title}
+        title={title ? `${title} ~ CodeDay` : 'CodeDay'}
         description={mission?.items[0]?.value}
         canonical={`${DOMAIN}${slug}`}
         openGraph={{
