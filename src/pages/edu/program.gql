@@ -1,39 +1,56 @@
-query ProgramQuery ($webname: String) {
-  cms {
-    programs(where: { webname: $webname }, limit: 1) {
-      items {
-        name
-        webname
-        description
-        logo {
+#import "../../components/Page.gql"
+fragment ProgramInformation on CmsProgram {
+  name
+  webname
+  description
+  logo {
+    url
+  }
+  educationDetails {
+    json
+    links {
+      assets {
+        block {
+          sys {
+            id
+          }
+          contentType
           url
         }
-        educationDetails {
-          json
-          links {
-            assets {
-              block {
-                sys {
-                  id
-                }
-                contentType
-                url
-              }
-            }
-          }
-        }
-        eligibility {
-          json
-        }
-        presentingSponsors {
-          items {
-            name
-            link
-            logo {
-              url(transform: {height: 60, resizeStrategy: FIT})
-            }
-          }
-        }
+      }
+    }
+  }
+  eligibility {
+    json
+  }
+  presentingSponsors(limit: 5) {
+    items {
+      name
+      link
+      logo {
+        url(transform: {height: 60, resizeStrategy: FIT})
+      }
+    }
+  }
+}
+
+query AllProgramsQuery {
+  ...PageComponent
+  cms {
+    eduPrograms: programs(limit: 10) {
+      items {
+        ...ProgramInformation
+      }
+    }
+  }
+}
+
+query ProgramQuery ($webname: String) {
+  ...PageComponent
+  cms {
+    eduPrograms: programs(where: { webname: $webname }, limit: 1) {
+      items {
+        ...ProgramInformation
       }
     }
   }

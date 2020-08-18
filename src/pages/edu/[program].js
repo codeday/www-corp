@@ -1,24 +1,55 @@
 import React from 'react';
 import { print } from 'graphql';
+import { useRouter } from 'next/router';
 import { apiFetch } from '@codeday/topo/utils';
 import Content from '@codeday/topo/Molecule/Content';
 import Box, { Grid } from '@codeday/topo/Atom/Box';
 import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
+import Skelly from '@codeday/topo/Atom/Skelly';
 import CognitoForm from '@codeday/topo/Molecule/CognitoForm';
 import Image from '@codeday/topo/Atom/Image';
 import ContentfulRichText from '../../components/ContentfulRichText';
 import Page from '../../components/Page';
+import Error404 from '../404';
 import { useQuery } from '../../query';
-import { ProgramQuery } from './program.gql';
+import { ProgramQuery, ProgramNamesQuery } from './program.gql';
 
 export default function EducationProgram() {
   const { cms } = useQuery();
-  const program = cms?.programs?.items[0];
+  const { isFallback, query } = useRouter();
+  const program = cms?.eduPrograms?.items[0];
+  const pageProps = {
+    slug: `/edu/${query.program}`,
+    title: program ? `${program.name} for Education` : 'CodeDay for Education',
+  };
 
-  if (!program) return <></>;
+  if (isFallback) return (
+    <Page {...pageProps}>
+      <Content>
+        <Skelly height={12} mb={4} />
+        <Grid templateColumns={{ base: "1fr", md: "1fr 1fr", lg: "6fr 3fr" }} gap={8}>
+          <Box>
+            <Skelly />
+            <Skelly />
+            <Skelly />
+            <Skelly />
+            <Skelly />
+            <Skelly />
+          </Box>
+          <Box>
+            <Skelly />
+            <Skelly />
+            <Skelly />
+            <Skelly />
+          </Box>
+        </Grid>
+      </Content>
+    </Page>
+  );
+  if (!program || !program.educationDetails) return <Error404 />;
 
   return (
-    <Page slug={`/edu/${program.webname}`} title={`${program.name} for Education`}>
+    <Page {...pageProps}>
       <Content>
         <Heading as="h2" fontSize="5xl" mb={8}>
           <Image
@@ -57,19 +88,15 @@ export default function EducationProgram() {
               links={program.educationDetails.links}
               h1Size="3xl"
             />
-            <Box borderWidth={2} borderColor="green.600" rounded="sm" mt={8}>
-              <Heading as="h3" fontSize="2xl" mb={2} bg="green.600" p={4} color="white">Request More Info</Heading>
-              <Box p={4}>
-                <CognitoForm formId={76} prefill={{ Program: program.webname }} fallback />
-              </Box>
-            </Box>
           </Box>
 
           <Box>
-            <Box p={4} bg="blue.50" borderWidth={1} borderColor="blue.200" color="blue.900">
-              <Heading as="h3" fontSize="xl" mb={0}>Eligibility</Heading>
-              <ContentfulRichText json={program.eligibility.json} h1Size="3xl" />
-            </Box>
+            {program.eligibility && (
+              <Box p={4} bg="blue.50" borderWidth={1} borderColor="blue.200" color="blue.900">
+                <Heading as="h3" fontSize="xl" mb={0}>Eligibility</Heading>
+                <ContentfulRichText json={program.eligibility.json} h1Size="3xl" />
+              </Box>
+            )}
             {program.presentingSponsors?.items?.length > 0 && (
               <Box mt={4} textAlign="center">
                 <Heading as="h3" fontSize="lg" color="current.textLight" mb={4}>Presented in partnership with</Heading>
@@ -81,6 +108,14 @@ export default function EducationProgram() {
               </Box>
             )}
           </Box>
+
+
+          <Box borderWidth={2} borderColor="green.600" rounded="sm">
+            <Heading as="h3" fontSize="2xl" mb={2} bg="green.600" p={4} color="white">Request More Info</Heading>
+            <Box p={4}>
+              <CognitoForm formId={76} prefill={{ Program: program.webname }} fallback />
+            </Box>
+          </Box>
         </Grid>
       </Content>
     </Page>
@@ -88,8 +123,14 @@ export default function EducationProgram() {
 }
 
 export async function getStaticPaths() {
+  const query = await apiFetch(print(ProgramNamesQuery));
+
   return {
-    paths: [],
+    paths: query?.cms?.programs?.items?.map((i) => ({
+      params: {
+        program: i.webname
+      }
+    })) || [],
     fallback: true,
   };
 }

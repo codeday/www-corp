@@ -1,4 +1,5 @@
 import { DefaultSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import Box from '@codeday/topo/Atom/Box';
 import Header, { SiteLogo, Menu } from '@codeday/topo/Organism/Header';
 import Footer from '@codeday/topo/Organism/Footer';
@@ -9,7 +10,9 @@ import Button from '@codeday/topo/Atom/Button';
 const DOMAIN = 'https://www.codeday.org';
 
 export default function Page ({ children, title, darkHeader, slug }) {
-  const { cms: { navBar, mission } } = useQuery();
+  const { cms } = useQuery();
+  const { mission } = cms || {};
+
   return (
     <>
       <DefaultSeo
