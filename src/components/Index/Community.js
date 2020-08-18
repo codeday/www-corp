@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Ticker from 'react-ticker';
 import shuffle from 'knuth-shuffle-seeded';
 import truncate from 'truncate';
+import PageVisibility from 'react-page-visibility';
 import Content from '@codeday/topo/Molecule/Content';
 import Box, { Grid } from '@codeday/topo/Atom/Box';
 import Image from '@codeday/topo/Atom/Image';
@@ -111,6 +112,7 @@ function Card({
 }
 
 export default function Community({ seed, ...props }) {
+  const [pageIsVisible, setPageIsVisible] = useState(true);
   const { showYourWork, cms: { indexCommunityPhotos } } = useQuery();
   const cards = shuffle([
     ...(showYourWork.messages
@@ -128,20 +130,22 @@ export default function Community({ seed, ...props }) {
   ];
 
   return (
-    <Box mt={32} mb={32} {...props}>
-      <Box key={rows[0][0].imageUrl}>
-        <Ticker>{({ index }) => rows[0][index % rows[0].length]}</Ticker>
-      </Box>
+    <PageVisibility onChange={(visible) => setPageIsVisible(visible)}>
+      <Box mt={32} mb={32} {...props}>
+        <Box key={rows[0][0].imageUrl}>
+          <Ticker move={pageIsVisible}>{({ index }) => rows[0][index % rows[0].length]}</Ticker>
+        </Box>
 
-      <Content>
-        <Heading as="h2" fontSize="5xl" textAlign="center" mb={8} mt={8} bold>
-          More than 50,000 students have created amazing projects at CodeDay events.
-        </Heading>
-      </Content>
+        <Content>
+          <Heading as="h2" fontSize="5xl" textAlign="center" mb={8} mt={8} bold>
+            More than 50,000 students have created amazing projects at CodeDay events.
+          </Heading>
+        </Content>
 
-      <Box key={rows[1][0].imageUrl} mb={8}>
-        <Ticker offset={100}>{({ index }) => rows[1][index % rows[0].length]}</Ticker>
+        <Box key={rows[1][0].imageUrl} mb={8}>
+          <Ticker move={pageIsVisible} offset={100}>{({ index }) => rows[1][index % rows[0].length]}</Ticker>
+        </Box>
       </Box>
-    </Box>
+    </PageVisibility>
   );
 }

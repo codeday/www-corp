@@ -26,6 +26,7 @@
     "react": "^16.13.1",
     "react-countup": "^4.3.3",
     "react-dom": "^16.13.1",
+    "react-page-visibility": "^6.2.0",
     "react-responsive-modal": "^5.0.2",
     "react-ticker": "^1.2.2",
     "truncate": "^2.1.0"

@@ -5461,6 +5461,13 @@ react-load-script@^0.0.6:
   resolved "https://registry.yarnpkg.com/react-load-script/-/react-load-script-0.0.6.tgz#db6851236aaa25bb622677a2eb51dad4f8d2c258"
   integrity sha512-aRGxDGP9VoLxcsaYvKWIW+LRrMOzz2eEcubTS4NvQPPugjk2VvMhow0wWTkSl7RxookomD1MwcP4l5UStg5ShQ==
 
+react-page-visibility@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/react-page-visibility/-/react-page-visibility-6.2.0.tgz#bae8a905f996eb0a2d20b86d59053cb3b3e72415"
+  integrity sha512-jCXAMx+8tioRoviWuaJqcAfu3DzQ3JBQBUn0KoneTQ0FQqMSpNWU4VbUuyVm9+i8+8T0beeDv1aV7VZq280vBA==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-pdf@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/react-pdf/-/react-pdf-4.2.0.tgz#b83a01eb070912522075b7a51aee7d63b2c912ed"
