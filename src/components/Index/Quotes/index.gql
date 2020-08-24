@@ -13,6 +13,9 @@ fragment IndexQuotesComponent on Query {
         image {
           url(transform: {width: 32, height: 32})
         }
+        largeImage: image {
+          url(transform: {width: 300, height: 150})
+        }
         video {
           url
         }

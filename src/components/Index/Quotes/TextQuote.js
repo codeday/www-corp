@@ -8,7 +8,7 @@ export default function TextQuote({ testimonial, ...props }) {
   return (
     <Box {...props}>
       <Text
-        fontSize="2xl"
+        fontSize={testimonial.quote.length > 350 ? 'xl' : '2xl'}
         fontStyle="italic"
         borderLeftWidth={2}
         borderColor="current.border"
