@@ -1,0 +1,44 @@
+fragment IndexQuotesComponent on Query {
+  cms {
+    quoteTestimonials: testimonials {
+      items {
+        quote
+        firstName
+        lastName
+        groupName
+        title
+        company
+        experience
+        type
+        image {
+          url(transform: {width: 32, height: 32})
+        }
+        video {
+          url
+        }
+        program {
+          name
+        }
+        region {
+          name
+          webname
+          location {
+            lat
+            lon
+          }
+        }
+      }
+    }
+
+    quoteRegions: regions {
+      items {
+        webname
+        name
+        location {
+          lat
+          lon
+        }
+      }
+    }
+  }
+}
