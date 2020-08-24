@@ -23,7 +23,7 @@ export default function VideoQuote({ testimonial, ...props }) {
         mb={8}
         {...props}
       >
-        <Box d="inline" position="absolute" top="calc(50% - 0.5em)">
+        <Box d="inline" position="absolute" top="calc(50% - 0.5em)" left="calc(50% - 0.5em)">
           <MediaPlay />
         </Box>
       </Box>
