@@ -36,12 +36,10 @@ export default function Globe({ testimonial, regions }) {
     coordinates: [r.location.lat, r.location.lon],
   }));
 
-  console.log(isVisible);
-
   useLayoutEffect(() => {
     if (typeof window === 'undefined') return;
     const recalc = () => setIsVisible(ref.current.offsetParent !== null);
-    recalc();
+    setTimeout(recalc, 700);
     window.addEventListener('resize', recalc, { passive: true });
     return () => window.removeEventListener('resize', recalc);
   }, [typeof window, ref]);
@@ -69,15 +67,15 @@ export default function Globe({ testimonial, regions }) {
   }, [globe, testimonial]);
 
   return (
-    <Box ref={ref}>
+    <Box ref={ref} height="30em" width="100%">
       {isVisible && (
         <ReactGlobe
-          height="30em"
+          height="100%"
           width="100%"
           globeCloudsTexture={null}
           markers={markers}
           globeTexture="/globe.jpg"
-          globeBackgroundTexture="/background.jpg"
+          globeBackgroundTexture="/background.png"
           options={{
             ...options
           }}
