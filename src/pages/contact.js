@@ -23,7 +23,7 @@ export default function Home({ seed }) {
         />
         <Heading as="h2" fontSize="5xl" mb={4}>Let&apos;s Talk.</Heading>
         <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap={8} alignItems="center">
-          <Text bold mb={1} fontSize="xl">CodeDay<br />340 S Lemon Ave PMB 4741<br />Walnut, CA 91789</Text>
+          <Text bold mb={1} fontSize="xl">CodeDay<br />340 S Lemon Ave PMB 7763<br />Walnut, CA 91789</Text>
           <Text bold fontSize="2xl" mb={1} textAlign={{ base: 'left', md: 'center' }}>
             <Link href="mailto:team@codeday.org">team@codeday.org</Link>
           </Text>
