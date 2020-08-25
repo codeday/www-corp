@@ -28,7 +28,7 @@ function parseIsoString(s) {
 }
 
 function formatShortDate(d) {
-  return `${MONTHS[d.getMonth()]} ${d.getDay()}`;
+  return `${MONTHS[d.getMonth()]} ${d.getDate()}`;
 }
 
 export default function Volunteer() {
@@ -87,7 +87,7 @@ export default function Volunteer() {
                     <Box mb={4}>
                       <Text bold mb={1}>Upcoming Dates</Text>
                       <List styleType="disc" pl={2}>
-                        {program.upcoming.map((event) => (
+                        {program.upcoming.slice(0,3).map((event) => (
                           <ListItem>
                             {formatShortDate(event.startsAt)} - {formatShortDate(event.endsAt)}
                           </ListItem>
@@ -101,7 +101,7 @@ export default function Volunteer() {
                   <ContentfulRichText json={program.volunteerDetails.json} />
                   {program.virtual && (
                     <Box fontWeight="bold" color="red.600">
-                      Volunteer online!
+                      Online volunteer opportunity.
                     </Box>
                   )}
                 </Box>
