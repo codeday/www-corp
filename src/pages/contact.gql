@@ -1,0 +1,19 @@
+query ContactQuery {
+  account {
+    employees: roleUsers (roleId: "rol_llN0357VXrEoIxoj") {
+      id
+      name
+      title
+      picture
+      bio
+      pronoun
+    }
+
+    volunteers: roleUsers (roleId: "rol_Z10C6Hfr4bfqYa4r") {
+      id
+      name
+      title
+      picture
+    }
+  }
+}
