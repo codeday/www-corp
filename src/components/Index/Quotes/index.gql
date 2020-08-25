@@ -1,6 +1,6 @@
 fragment IndexQuotesComponent on Query {
   cms {
-    quoteTestimonials: testimonials {
+    quoteTestimonials: testimonials(where: { featured: true }) {
       items {
         quote
         firstName

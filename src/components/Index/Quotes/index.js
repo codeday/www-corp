@@ -44,7 +44,13 @@ export default function Quotes({ seed }) {
 
 
         {/* Globe */}
-        <Box display={{ base: 'none', lg: 'block'}} borderColor="current.border" borderWidth={1} boxShadow="lg">
+        <Box
+          display={{ base: 'none', lg: 'block'}}
+          borderColor="current.border"
+          borderWidth={1}
+          boxShadow="lg"
+          rounded="md"
+        >
           <Globe testimonial={textQuotes[visibleQuoteIndex]} regions={quoteRegions?.items} />
         </Box>
 

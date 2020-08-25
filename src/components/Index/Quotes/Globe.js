@@ -13,7 +13,7 @@ const options = {
   focusEasingFunction: ['Linear', 'None'],
   markerTooltipRenderer: () => ``,
   enableCameraRotate: false,
-  focusDistanceRadiusScale: 1.5,
+  focusDistanceRadiusScale: 2.1,
   enableMarkerGlow: false,
   enableDefocus: false,
   enableCameraZoom: false,
@@ -42,7 +42,7 @@ export default function Globe({ testimonial, regions }) {
     if (typeof window === 'undefined') return;
     const recalc = () => setIsVisible(ref.current.offsetParent !== null);
     recalc();
-    window.addEventListener('resize', recalc);
+    window.addEventListener('resize', recalc, { passive: true });
     return () => window.removeEventListener('resize', recalc);
   }, [typeof window, ref]);
 
@@ -57,12 +57,11 @@ export default function Globe({ testimonial, regions }) {
     setLastTestimonialHadRegion(Boolean(testimonial?.region));
 
     const focusOn = testimonial?.region
-        ? [testimonial.region.location.lat, testimonial.region.location.lon + 5]
+        ? [testimonial.region.location.lat, testimonial.region.location.lon + 4]
         : [38.0000, -88.0000]
     globe.updateFocus(focusOn, {
       ...options,
       ...(!testimonial?.region ? {
-          focusDistanceRadiusScale: 1.8,
           cameraRotateSpeed: 0,
           disableCameraRotate: true,
         } : {})
@@ -74,9 +73,11 @@ export default function Globe({ testimonial, regions }) {
       {isVisible && (
         <ReactGlobe
           height="30em"
+          width="100%"
           globeCloudsTexture={null}
           markers={markers}
-          disableGl
+          globeTexture="/globe.jpg"
+          globeBackgroundTexture="/background.jpg"
           options={{
             ...options
           }}
