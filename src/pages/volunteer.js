@@ -50,7 +50,7 @@ export default function Volunteer() {
   })
   .sort((a, b) => {
     if (a.upcoming.length > 0 && b.upcoming.length > 0)
-      return b.upcoming[0].startsAt - a.upcoming[0].startsAt;
+      return a.upcoming[0].startsAt - b.upcoming[0].startsAt;
     if (a.upcoming.length > 0) return -1;
     if (b.upcoming.length > 0) return 1;
     return PROGRAM_WEIGHT.indexOf(a.type) - PROGRAM_WEIGHT.indexOf(b.type);
