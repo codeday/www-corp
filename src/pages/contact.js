@@ -1,6 +1,6 @@
 import React from 'react';
 import { print } from 'graphql';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
+import { Grid } from '@codeday/topo/Atom/Box';
 import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
 import Image from '@codeday/topo/Atom/Image';
 import Content from '@codeday/topo/Molecule/Content';
@@ -19,7 +19,7 @@ export default function Home({ seed }) {
           alt=""
           mt={-8}
           mb={4}
-          rounded="sm"
+          rounded="md"
         />
         <Heading as="h2" fontSize="5xl" mb={4}>Let&apos;s Talk.</Heading>
         <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap={8} alignItems="center">

@@ -1,0 +1,17 @@
+query EduProgramsQuery {
+  cms {
+    eduPrograms: programs {
+      items {
+        name
+        webname
+        shortDescription
+        logo {
+          url
+        }
+        educationDetails {
+          json
+        }
+      }
+    }
+  }
+}
