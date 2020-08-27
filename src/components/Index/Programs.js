@@ -4,10 +4,24 @@ import Image from '@codeday/topo/Atom/Image';
 import Text, { Heading } from '@codeday/topo/Atom/Text';
 import Content from '@codeday/topo/Molecule/Content';
 import { CodeDay } from '@codeday/topo/Atom/Logo';
+import { nextUpcomingEvent, formatInterval } from '../../utils/time';
 import { useQuery } from '../../query';
+
+function NextEventDate({ upcoming }) {
+  const next = nextUpcomingEvent(upcoming);
+  return next ? (
+    <Text color="current.textLight" mb={0} bold>
+      Next event: {formatInterval(next.startsAt, next.endsAt)}
+    </Text>
+  ) : (
+    <></>
+  );
+}
 
 export default function Programs() {
   const { cms: { regions, mainPrograms, otherPrograms, codeDayProgram }} = useQuery();
+  const codeDay = codeDayProgram?.items[0];
+
   return (
     <Content>
 
@@ -17,7 +31,8 @@ export default function Programs() {
       <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={8}>
         <Box borderWidth={1} borderColor="current.border" borderRadius={2} p={4} boxShadow="md">
           <CodeDay fontSize="4xl" withText />
-          <Text fontSize="md" mt={4} mb={4}>{codeDayProgram?.items[0]?.shortDescription}</Text>
+          <NextEventDate upcoming={codeDay?.linkedFrom?.events?.items} />
+          <Text fontSize="md" mt={4} mb={4}>{codeDay?.shortDescription}</Text>
           <Text fontSize="md" mb={4} bold>Choose a location:</Text>
           <Box borderWidth={1} border="current.border" maxHeight={{ base: "sm", md: "md" }} overflowY="auto">
             {regions?.items?.map((region) => (
@@ -39,7 +54,7 @@ export default function Programs() {
 
         {/* More Programs */}
         <Box>
-          {mainPrograms?.items?.map((prog) => (
+          {mainPrograms?.items?.map((program) => (
             <Box
               borderBottomWidth={1}
               borderColor="current.border"
@@ -47,17 +62,18 @@ export default function Programs() {
               mb={4}
               d="block"
               as="a"
-              href={prog.url}
+              href={program.url}
               target="_blank"
               rel="noopener"
             >
-              <Box>
+              <Box mb={1}>
                 <Box float="left" width={10} pr={4}>
-                  <Image src={prog.logo.url} height={6} alt="" />
+                  <Image src={program.logo.url} height={6} alt="" />
                 </Box>
-                <Text fontSize="lg" bold>{prog.name}</Text>
+                <Text fontSize="lg" mb={0} bold>{program.name}</Text>
               </Box>
-              <Text clear="both" mb={0}>{prog.shortDescription}</Text>
+              <NextEventDate upcoming={program.linkedFrom?.events?.items} />
+              <Text mt={2} clear="both" mb={0}>{program.shortDescription}</Text>
             </Box>
           ))}
 

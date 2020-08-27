@@ -3,6 +3,14 @@ fragment IndexProgramsComponent on Query {
     codeDayProgram: programs(where: { name:"CodeDay" }) {
       items {
         shortDescription
+        linkedFrom {
+          events (limit: 100) {
+            items {
+              startsAt
+              endsAt
+            }
+          }
+        }
       }
     }
 
@@ -13,6 +21,14 @@ fragment IndexProgramsComponent on Query {
         shortDescription
         logo {
           url
+        }
+        linkedFrom {
+          events (limit: 100) {
+            items {
+              startsAt
+              endsAt
+            }
+          }
         }
       }
     }

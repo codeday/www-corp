@@ -9,6 +9,7 @@ import Button from '@codeday/topo/Atom/Button';
 import Content from '@codeday/topo/Molecule/Content';
 import Page from '../components/Page';
 import ContentfulRichText from '../components/ContentfulRichText';
+import { formatInterval, upcomingEvents } from '../utils/time';
 import { useQuery } from '../query';
 import { VolunteerQuery } from './volunteer.gql';
 
@@ -19,33 +20,14 @@ const ROLE_COLORS = {
   speaker: 'orange',
   'career advisor': 'purple',
 };
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const PROGRAM_WEIGHT = ["primary", "secondary", "minor"];
-
-function parseIsoString(s) {
-  var b = s.split(/\D+/);
-  return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
-}
-
-function formatShortDate(d) {
-  return `${MONTHS[d.getMonth()]} ${d.getDate()}`;
-}
 
 export default function Volunteer() {
   const { cms: { volunteerPrograms } } = useQuery();
   const programsWithUpcoming = volunteerPrograms?.items?.map((program) => {
-
-    const upcoming = program.linkedFrom.events?.items?.map((e) => ({
-      startsAt: parseIsoString(e.startsAt),
-      endsAt: parseIsoString(e.endsAt),
-    }))
-    .filter((e) => e.endsAt > (new Date()))
-    .sort((a, b) => a.endsAt - b.endsAt)
-     || [];
-
     return {
       ...program,
-      upcoming
+      upcoming: upcomingEvents(program.linkedFrom?.events?.items || []),
     };
   })
   .sort((a, b) => {
@@ -89,7 +71,7 @@ export default function Volunteer() {
                       <List styleType="disc" pl={2}>
                         {program.upcoming.slice(0,3).map((event) => (
                           <ListItem>
-                            {formatShortDate(event.startsAt)} - {formatShortDate(event.endsAt)}
+                            {formatInterval(event.startsAt, event.endsAt)}
                           </ListItem>
                         ))}
                       </List>
