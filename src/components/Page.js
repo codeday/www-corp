@@ -1,5 +1,5 @@
 import { DefaultSeo } from 'next-seo';
-import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Box from '@codeday/topo/Atom/Box';
 import Header, { SiteLogo, Menu } from '@codeday/topo/Organism/Header';
 import Footer from '@codeday/topo/Organism/Footer';
@@ -14,7 +14,10 @@ export default function Page ({ children, title, darkHeader, slug }) {
   const { mission } = cms || {};
 
   return (
-    <>
+    <Box overflow="hidden">
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
       <DefaultSeo
         title={title ? `${title} ~ CodeDay` : 'CodeDay'}
         description={mission?.items[0]?.value}
@@ -50,6 +53,6 @@ export default function Page ({ children, title, darkHeader, slug }) {
         <Box mb={32} />
         <Footer />
       </Box>
-    </>
+    </Box>
   )
 }

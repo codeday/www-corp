@@ -71,7 +71,7 @@ export default function Quotes({ seed }) {
             testimonial={textQuotes[visibleQuoteIndex]}
             opacity={isTransitioning ? 0 : 1}
             transition={`opacity ${TRANSITION_TIME/2}s`}
-            pt={16}
+            pt={{ base: 0, lg: 16 }}
           />
         </Box>
       </Grid>

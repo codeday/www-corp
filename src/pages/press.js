@@ -35,7 +35,7 @@ export default function Press() {
         <Heading as="h3" fontSize="2xl" mb={8}>Our Programs</Heading>
         <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }} gap={8} mb={8}>
           {programs?.items?.map((program) => (
-            <Box textAlign="center" key={program.name}>
+            <Box textAlign={{ base: 'left', md: 'center' }} key={program.name}>
               <Text bold>
                 <Image src={program.logo.url} height="1em" display="inline-block" mr={2} alt="" />
                 {program.name}
