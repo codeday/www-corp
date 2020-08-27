@@ -1,0 +1,11 @@
+#import "./Photo.gql"
+
+fragment PressPhotoGalleryComponent on Query {
+  cms {
+    pressPhotos {
+      items {
+        ...PressPhotoComponent
+      }
+    }
+  }
+}

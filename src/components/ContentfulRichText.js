@@ -27,25 +27,33 @@ function ContentfulAsset({ id, links, ...props }) {
 
 }
 
-function mapRichText({
-  nodeType, content, value, marks, data, links, h1Size, isRootElement,
-}) {
-  const h1SizeCalculated = h1Size || '4xl';
+function renderTextContent({ value, marks }) {
+  if (["\r\n", "\n\r", "\r", "\n"].includes(value)) return <br />;
+
   const markMap = (marks || [])
     .reduce((accum, { type, ...rest }) => ({
       ...accum,
       [type]: Object.keys(rest).length > 0 ? rest : true,
     }), {});
 
+  if (marks && marks.length > 0) {
+    return (
+      <Text as="span" fontWeight={markMap.bold && 'bold'} fontStyle={markMap.italic && 'italic'}>
+        {value}
+      </Text>
+    );
+  }
+  return value;
+
+}
+
+function mapRichText({
+  nodeType, content, value, marks, data, links, h1Size, isRootElement,
+}) {
+  const h1SizeCalculated = h1Size || '4xl';
+
   if (nodeType === 'text') {
-    if (marks && marks.length > 0) {
-      return (
-        <Text as="span" fontWeight={markMap.bold && 'bold'} fontStyle={markMap.italic && 'italic'}>
-          {value}
-        </Text>
-      );
-    }
-    return value;
+    return value.split(/(\r\n|\n\r|\r|\n)/g).map((part) => renderTextContent({ value: part, marks }));
   }
 
   const innerContent = content && content

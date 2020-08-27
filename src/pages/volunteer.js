@@ -1,5 +1,5 @@
 import React from 'react';
-import { print, parse } from 'graphql';
+import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
 import Box, { Grid } from '@codeday/topo/Atom/Box';
 import Image from '@codeday/topo/Atom/Image';

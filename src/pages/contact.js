@@ -8,9 +8,16 @@ import { apiFetch } from '@codeday/topo/utils';
 import Page from '../components/Page';
 import Employees from '../components/Contact/Employees';
 import Volunteers from '../components/Contact/Volunteers';
+import { useQuery } from '../query';
 import { ContactQuery } from './contact.gql';
 
+function nl2br(str) {
+  return str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
+}
+
 export default function Home({ seed }) {
+  const { cms: { email, phone, address } } = useQuery();
+
   return (
     <Page slug="/contact" title="Contact">
       <Content>
@@ -18,17 +25,21 @@ export default function Home({ seed }) {
           src="https://img.codeday.org/o/1/9/191yum8oauq3rnagx6aakycvrxxmw4vdg46vei71sfaxessdj3qdn2inwx58derbbi.jpg"
           alt=""
           mt={-8}
-          mb={4}
+          mb={8}
           rounded="md"
         />
-        <Heading as="h2" fontSize="5xl" mb={4}>Let&apos;s Talk.</Heading>
-        <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap={8} alignItems="center">
-          <Text bold mb={1} fontSize="xl">CodeDay<br />340 S Lemon Ave PMB 7763<br />Walnut, CA 91789</Text>
-          <Text bold fontSize="2xl" mb={1} textAlign={{ base: 'left', md: 'center' }}>
-            <Link href="mailto:team@codeday.org">team@codeday.org</Link>
+        <Heading as="h2" fontSize="5xl" mb={12}>Let&apos;s Talk.</Heading>
+        <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap={8} alignItems="center" mb={12}>
+          <Text bold mb={1} fontSize="xl">
+            <span dangerouslySetInnerHTML={{ __html: nl2br(address?.items[0]?.value)}} />
           </Text>
+
           <Text bold fontSize="2xl" mb={1} textAlign={{ base: 'left', md: 'center' }}>
-            <Link href="tel:18886077763">(888) 607-7763</Link>
+            <Link href={`mailto:${email?.items[0]?.value}`}>{email?.items[0]?.value}</Link>
+          </Text>
+
+          <Text bold fontSize="2xl" mb={1} textAlign={{ base: 'left', md: 'right' }}>
+            <Link href={`tel:${phone?.items[0]?.value.replace(/[^0-9]/g, '')}`}>{phone?.items[0]?.value}</Link>
           </Text>
         </Grid>
         <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>

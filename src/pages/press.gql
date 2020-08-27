@@ -1,0 +1,38 @@
+#import "../components/Press/PhotoGallery.gql"
+
+query PressQuery {
+  ...PressPhotoGalleryComponent
+  cms {
+    pressOverview: strings (where: { key: "press.overview" }, limit: 1) {
+      items {
+        value
+      }
+    }
+
+    pressDetails: strings (where: { key: "press.details" }, limit: 1) {
+      items {
+        richValue {
+          json
+        }
+      }
+    }
+
+    pressContact: strings (where: { key: "press.contact" }, limit: 1) {
+      items {
+        richValue {
+          json
+        }
+      }
+    }
+
+    programs(where: {type:"primary"}) {
+      items {
+        logo {
+          url
+        }
+        name
+        shortDescription
+      }
+    }
+  }
+}

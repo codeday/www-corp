@@ -1,0 +1,21 @@
+fragment PressPhotoComponent on CmsPressPhoto {
+  tags
+  photo {
+    title
+    description
+    original: url
+    preview: url(transform: { width: 400, height: 250})
+  }
+  event {
+    startsAt
+    program {
+      name
+    }
+  }
+  subProgram {
+    name
+  }
+  region {
+    name
+  }
+}

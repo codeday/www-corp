@@ -1079,10 +1079,10 @@
     eslint-plugin-react-hooks "^2.3.0"
     eslint-plugin-sonarjs "^0.5.0"
 
-"@codeday/topo@^3.12.0":
-  version "3.12.0"
-  resolved "https://registry.yarnpkg.com/@codeday/topo/-/topo-3.12.0.tgz#f15c2300fcc08440b2130d8734dc0cee0e835833"
-  integrity sha512-/el/QpMHihHxcZ7SVzdXx2xPApYNlR5pLkNBVpk5VXjjUbEdtCltrRMbd1lJViCcQ8WUaz14fFIxgHVvVfPSLA==
+"@codeday/topo@^3.13.0":
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/@codeday/topo/-/topo-3.13.0.tgz#f00cca3bd704d0a371a726cf8ad6d547061de1fe"
+  integrity sha512-vogq0kc1HC7RGjV3udKpqyecz4LL8Mro2+lPTleyfeTY4egqx7SaORWDXhOSi80ZMxDPZog2ZbHCs87Xxgv3jw==
   dependencies:
     "@accessible/use-id" "^1.1.1"
     "@chakra-ui/core" "^0.7.0"
@@ -1099,10 +1099,10 @@
     react-pdf "^4.2.0"
     react-syntax-highlighter "^13.2.1"
 
-"@codeday/topocons@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@codeday/topocons/-/topocons-1.3.0.tgz#5e1d9f589f7d59fab740bad9df26a936808da668"
-  integrity sha512-uyILsg9NwBo8TFdu6Ciu/dE6Oimumqls+R/rrcM1lUqNja3yGoHNNyl6ZNaNNAGQjt3tf80yBR6l8OyGoezeXA==
+"@codeday/topocons@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@codeday/topocons/-/topocons-1.5.0.tgz#c3662faa7c4046db389c460fffe842209d20fb4b"
+  integrity sha512-E0IjdPlt3mtreVHlDGGvDaRkLWA+bJSDdmo4e1jRFKS1HDjUDKhV8zsC+kw+aSW+qiLp6cOOW7rhbV/QXILFSA==
   dependencies:
     react "^16.8.6"
 

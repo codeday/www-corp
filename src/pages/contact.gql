@@ -16,4 +16,24 @@ query ContactQuery {
       picture
     }
   }
+
+  cms {
+    email: strings (where: { key: "contact.public.email" }, limit: 1) {
+      items {
+        value
+      }
+    }
+
+    phone: strings (where: { key: "contact.public.phone" }, limit: 1) {
+      items {
+        value
+      }
+    }
+
+    address: strings (where: { key: "contact.public.address" }, limit: 1) {
+      items {
+        value
+      }
+    }
+  }
 }
