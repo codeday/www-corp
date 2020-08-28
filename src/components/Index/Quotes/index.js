@@ -1,13 +1,13 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Box, { Grid, Flex } from '@codeday/topo/Atom/Box';
+import Box, { Grid } from '@codeday/topo/Atom/Box';
 import Text, { Heading } from '@codeday/topo/Atom/Text';
 import Content from '@codeday/topo/Molecule/Content';
 import shuffle from 'knuth-shuffle-seeded';
 import TextQuote from './TextQuote';
 import Globe from './Globe';
 import { useQuery } from '../../../query';
-import VideoQuote from './VideoQuote';
+import VideoTestimonialThumbnail from '../../VideoTestimonialThumbnail';
 
 const DISPLAY_TIME = 10;
 const TRANSITION_TIME = 0.5;
@@ -78,11 +78,11 @@ export default function Quotes({ seed }) {
       <Text color="current.textLight" fontSize="2xl" mt={8} textAlign="center">
         Hear from more students and volunteers:
       </Text>
-      <Flex justify="space-evenly" alignContent="space-around" wrap="wrap">
+      <Grid templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)'}} gap={4}>
         {videoQuotes.map((q) => (
-          <VideoQuote testimonial={q} />
+          <VideoTestimonialThumbnail video={q} />
         ))}
-      </Flex>
+      </Grid>
     </Content>
   )
 }

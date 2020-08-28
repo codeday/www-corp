@@ -1,26 +1,16 @@
+#import "../components/VideoTestimonialThumbnail.gql"
+#import "../components/Volunteer/ProgramInfo.gql"
+
 query VolunteerQuery {
+  ...VolunteerProgramInfoComponent
   cms {
-    volunteerPrograms: programs {
+    testimonials: testimonials(where: { featured: true, type_in:["Volunteer", "Mentor"] }) {
       items {
-        name
-        logo {
-          url
-        }
-        virtual
-        volunteerUrl
-        volunteerDetails {
-          json
-        }
-        type
-        volunteerPositions
-        linkedFrom {
-          events (limit: 100) {
-            items {
-              startsAt
-              endsAt
-            }
-          }
-        }
+        ...VideoTestimonialThumbnailComponent
+        firstName
+        lastName
+        title
+        company
       }
     }
   }

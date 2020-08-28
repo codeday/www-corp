@@ -15,7 +15,7 @@ export default function Employees(props) {
           <Box p={4}>
             <Box>
               <Image
-                src={emp.picture.replace('256x256', 'w=64;h=64;fit=crop').replace('s=480', 's=64')}
+                src={emp.picture.replace('256x256', 'w=100;h=100;fit=crop').replace('s=480', 's=64')}
                 float="left"
                 mr={4}
                 rounded="full"

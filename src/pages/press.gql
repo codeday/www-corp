@@ -1,9 +1,11 @@
 #import "../components/Press/PhotoGallery.gql"
+#import "../components/PreviousCoverageLogos.gql"
 
 query PressQuery {
   ...PressPhotoGalleryComponent
+  ...PreviousCoverageLogosComponent
   cms {
-    pressOverview: strings (where: { key: "press.overview" }, limit: 1) {
+    mission: strings (where: { key: "common.mission" }, limit: 1) {
       items {
         value
       }

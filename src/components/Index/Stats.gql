@@ -1,4 +1,6 @@
+#import "../PreviousCoverageLogos.gql"
 fragment IndexStatsComponent on Query {
+  ...PreviousCoverageLogosComponent
   cms {
     stats: events (limit:500) {
       items {

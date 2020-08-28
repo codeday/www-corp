@@ -1,0 +1,8 @@
+fragment VideoTestimonialThumbnailComponent on CmsTestimonial {
+  testimonialPlayerThumb: image {
+    url(transform: {width: 500, height: 350})
+  }
+  video {
+    url
+  }
+}

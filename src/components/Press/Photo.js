@@ -29,7 +29,7 @@ export default function Photo({ photo, ...props }) {
         right="0"
         bottom="0"
         left="0"
-        p="2"
+        p={4}
       >
         <Text bold>
           {

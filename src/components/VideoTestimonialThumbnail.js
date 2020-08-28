@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@codeday/topo/Atom/Box';
-import MediaPlay from '@codeday/topocons/Icon/MediaPlay'
-import VideoLink from '../../VideoLink';
+import MediaPlay from '@codeday/topocons/Icon/MediaPlay';
+import VideoLink from './VideoLink';
 
-export default function VideoQuote({ testimonial, ...props }) {
+export default function VideoTestimonialThumbnail({ video, ...props }) {
   return (
-    <VideoLink url={testimonial.video.url} poster={testimonial.largeImage?.url} autoPlay>
+    <VideoLink url={video.video.url} poster={video.largeImage?.url} autoPlay>
       <Box
-        width={64}
-        height={40}
-        backgroundImage={`url(${testimonial.largeImage?.url})`}
+        width="100%"
+        p={0}
+        pb="55%"
+        backgroundImage={`url(${video.testimonialPlayerThumb?.url})`}
         backgroundSize="cover"
         backgroundPosition="50% 50%"
-        alt={`Video quote from ${testimonial.firstName || testimonial.groupName}`}
+        alt={`Video quote from ${video.firstName || video.groupName}`}
         rounded="sm"
         textAlign="center"
         color="white"
@@ -30,6 +31,6 @@ export default function VideoQuote({ testimonial, ...props }) {
     </VideoLink>
   );
 }
-VideoQuote.propTypes = {
-  testimonial: PropTypes.object.isRequired,
+VideoTestimonialThumbnail.propTypes = {
+  video: PropTypes.object.isRequired,
 };

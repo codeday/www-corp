@@ -13,14 +13,14 @@ export default function Sponsors(props) {
       <Box mr={-4} lineHeight={4} mb={8}>
         {majorSponsors?.items?.map((sponsor) => (
           <Link href={sponsor.link} target="_blank" rel="noopener" pr={8}>
-            <Image src={sponsor.logo.url} d="inline-block" />
+            <Image src={sponsor.logo.url} h={16} d="inline-block" />
           </Link>
         ))}
       </Box>
       <Box mr={-4} mb={8} lineHeight={3}>
         {minorSponsors?.items?.map((sponsor) => (
           <Link href={sponsor.link} target="_blank" rel="noopener" key={sponsor.link} pr={8}>
-            <Image src={sponsor.logo.url} d="inline-block" />
+            <Image src={sponsor.logo.url} h={5} d="inline-block" />
           </Link>
         ))}
       </Box>

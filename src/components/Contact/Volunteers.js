@@ -20,7 +20,7 @@ export default function Volunteers(props) {
         {justVolunteers.map((vol) => (
           <Box>
             <Image
-              src={vol.picture.replace('256x256', 'w=32;h=32;fit=crop').replace('s=480', 's=32')}
+              src={vol.picture.replace('256x256', 'w=64;h=64;fit=crop').replace('s=480', 's=32')}
               rounded="full"
               width="32px"
               alt=""

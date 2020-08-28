@@ -1,0 +1,27 @@
+fragment VolunteerProgramInfoComponent on Query {
+  cms {
+    volunteerPrograms: programs {
+      items {
+        name
+        logo {
+          url
+        }
+        virtual
+        volunteerUrl
+        volunteerDetails {
+          json
+        }
+        type
+        volunteerPositions
+        linkedFrom {
+          events (limit: 100) {
+            items {
+              startsAt
+              endsAt
+            }
+          }
+        }
+      }
+    }
+  }
+}
