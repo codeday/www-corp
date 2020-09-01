@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:13-alpine
 
 ENV NODE_ENV=production
 RUN mkdir /app
