@@ -45,7 +45,7 @@ export default function Hero({ seed, ...props }) {
   const photos = shuffle(JSON.parse(JSON.stringify(indexHeroPhotos?.items)) || [], seed);
 
   return (
-    <Box maxWidth="1800px" m="0 auto" {...props}>
+    <Box maxWidth="1800px" role="banner" m="0 auto" {...props}>
       <Grid
         templateColumns={{ base: '1fr', md: '8fr 5fr', lg: '8fr 10fr', xl: '4fr 3fr' }}
         gap={4}
@@ -53,10 +53,10 @@ export default function Hero({ seed, ...props }) {
         overflow="hidden"
       >
         <Box m={{ base: 0, lg: 16 }} mt={{ base: 0, lg: 0 }} textAlign={{ base: 'center', md: 'left'}}>
-          <Heading as="h2" fontSize="6xl" fontWeight="bold" lineHeight="1.1" mt={8}>
+          <Heading as="h2" fontSize="6xl" fontWeight="bold" lineHeight="1.1" color="#311c1c" mt={8}>
             There's a place in tech for everyone.
           </Heading>
-          <Text fontSize="xl" mt={8} mb={8}>{mission?.items[0]?.value}</Text>
+          <Text fontSize="xl" mt={8} mb={8} color="#311c1c">{mission?.items[0]?.value}</Text>
           {explainer && (
             <VideoLink url={explainer.url} autoPlay>
               <Button variantColor="red">Learn More&nbsp;<Play /></Button>

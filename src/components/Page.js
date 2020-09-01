@@ -2,6 +2,7 @@ import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
 import Box from '@codeday/topo/Atom/Box';
 import Header, { SiteLogo, Menu } from '@codeday/topo/Organism/Header';
+import Main from '@codeday/topo/Organism/Main';
 import Footer from '@codeday/topo/Organism/Footer';
 import { CodeDay } from '@codeday/topo/Atom/Logo';
 import { useQuery } from '../query';
@@ -39,6 +40,9 @@ export default function Page ({ children, title, darkHeader, slug }) {
           <SiteLogo>
             <a href="/">
               <CodeDay withText />
+              <Box as="h1" visuallyHidden>
+                CodeDay
+              </Box>
             </a>
           </SiteLogo>
           <Menu>
@@ -49,7 +53,9 @@ export default function Page ({ children, title, darkHeader, slug }) {
             <Button as="a" variant="ghost" href="https://blog.codeday.org/" target="_blank">Blog</Button>
           </Menu>
         </Header>
-        {children}
+        <Main>
+          {children}
+        </Main>
         <Box mb={32} />
         <Footer />
       </Box>

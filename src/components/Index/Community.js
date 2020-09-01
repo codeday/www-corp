@@ -105,7 +105,15 @@ function Card({
     : <PhotoCard photo={photo} author={author} wip={wip} eventInfo={eventInfo} />;
 
   return (
-    <Box height={40} borderColor="current.border" borderWidth={1} overflow="hidden" mr={8} boxShadow="md">
+    <Box
+      role="figure"
+      height={40}
+      borderColor="current.border"
+      borderWidth={1}
+      overflow="hidden"
+      mr={8}
+      boxShadow="md"
+    >
       {elem}
     </Box>
   );

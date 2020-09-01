@@ -14,7 +14,7 @@ export default function VideoTestimonialThumbnail({ video, ...props }) {
         backgroundImage={`url(${video.testimonialPlayerThumb?.url})`}
         backgroundSize="cover"
         backgroundPosition="50% 50%"
-        alt={`Video quote from ${video.firstName || video.groupName}`}
+        aria-label={`Video quote from ${video.firstName || video.groupName}`}
         rounded="sm"
         textAlign="center"
         color="white"

@@ -34,7 +34,7 @@ export default function Programs() {
           <NextEventDate upcoming={codeDay?.linkedFrom?.events?.items} />
           <Text fontSize="md" mt={4} mb={4}>{codeDay?.shortDescription}</Text>
           <Text fontSize="md" mb={4} bold>Choose a location:</Text>
-          <Box borderWidth={1} border="current.border" maxHeight={{ base: "sm", md: "md" }} overflowY="auto">
+          <Box borderWidth={1} borderColor="current.border" maxHeight={{ base: "sm", md: "md" }} overflowY="auto">
             {regions?.items?.map((region) => (
               <Box
                 p={2}
