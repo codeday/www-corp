@@ -1,6 +1,6 @@
 fragment VolunteerProgramInfoComponent on Query {
   cms {
-    volunteerPrograms: programs {
+    volunteerPrograms: programs (limit: 15) {
       items {
         name
         logo {
@@ -10,6 +10,17 @@ fragment VolunteerProgramInfoComponent on Query {
         volunteerUrl
         volunteerDetails {
           json
+        }
+        volunteerBlurb {
+          json
+        }
+        volunteerRecruitingResources (limit: 10) {
+          items {
+            title
+            contentType
+            url
+            preview: url(transform: { width:100, height:100, resizeStrategy:FILL })
+          }
         }
         type
         volunteerPositions
