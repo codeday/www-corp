@@ -4,7 +4,7 @@ fragment PressPhotoComponent on CmsPressPhoto {
     title
     description
     original: url
-    preview: url(transform: { width: 400, height: 250})
+    preview: url(transform: { width: 400, height: 250, resizeStrategy: FILL })
   }
   event {
     startsAt
