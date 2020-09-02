@@ -2,6 +2,7 @@ import React from 'react';
 import Box from '@codeday/topo/Atom/Box';
 import Text, { Link, Heading } from '@codeday/topo/Atom/Text';
 import List, { Item as ListItem } from '@codeday/topo/Atom/List';
+import Divider from '@codeday/topo/Atom/Divider';
 
 const MEDIA_TYPE_VIDEO = ['video/mp4', 'video/mov'];
 const MEDIA_TYPE_IMAGE = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
@@ -63,7 +64,7 @@ function mapRichText({
 
   const nodeTypes = {
     document: <>{innerContent}</>,
-    hyperlink: <Link href={data.uri} target="_blank" rel="noopener">{innerContent}</Link>,
+    hyperlink: <Link href={data?.uri} target="_blank" rel="noopener">{innerContent}</Link>,
     paragraph: <Text as={!isRootElement && 'span'} mb={isRootElement && 6}>{innerContent}</Text>,
     'heading-1': <Heading mb={4} mt={8} as="h1" fontSize={h1SizeCalculated}>{innerContent}</Heading>,
     'heading-2': <Heading mb={4} mt={8} as="h2" fontSize={getSize(h1SizeCalculated, -1)}>{innerContent}</Heading>,
@@ -74,6 +75,7 @@ function mapRichText({
     'unordered-list': <List styleType="disc" mb={6} pl={4} stylePos="outside">{innerContent}</List>,
     'ordered-list': <List as="ol" styleType="decimal" mb={6} pl={4} stylePos="outside">{innerContent}</List>,
     'list-item': <ListItem mb={1}>{innerContent}</ListItem>,
+    'hr': <Divider />,
     'embedded-asset-block': <ContentfulAsset mt={4} mb={8} id={data?.target?.sys?.id} links={links} />,
   };
 
@@ -82,5 +84,6 @@ function mapRichText({
 }
 
 export default function FaqAnswers({ json, links, h1Size }) {
+  if (!json) return <></>;
   return mapRichText({ ...json, links, h1Size });
 }

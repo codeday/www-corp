@@ -1,0 +1,34 @@
+query ConductQuery {
+  cms {
+    conduct: strings(where: {key: "conduct"}, limit: 1) {
+      items {
+        value
+        richValue {
+          json
+        }
+        subvalues (limit: 10) {
+          items {
+            richValue {
+              json
+            }
+            subvalues (limit: 1) {
+              items {
+                richValue {
+                  json
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    report: strings(where: { key: "conduct.report" }, limit: 1) {
+      items {
+        richValue {
+          json
+        }
+      }
+    }
+  }
+}

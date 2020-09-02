@@ -1,0 +1,12 @@
+query PrivacyThirdPartyQuery {
+  cms {
+    policy: strings(where: {key: "legal.privacy-policy.third-party"}, limit: 1) {
+      items {
+        value
+        richValue {
+          json
+        }
+      }
+    }
+  }
+}

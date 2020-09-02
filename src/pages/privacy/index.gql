@@ -1,0 +1,16 @@
+query PrivacyIndexQuery {
+  cms {
+    heading: strings(where: {key: "legal.cookies"}, limit: 1) {
+      items {
+        value
+      }
+    }
+    policy: strings(where: {key: "legal.privacy-policy"}, limit: 1) {
+      items {
+        richValue {
+          json
+        }
+      }
+    }
+  }
+}
