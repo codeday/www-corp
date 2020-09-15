@@ -1,5 +1,6 @@
 import React from 'react';
 import Box from '@codeday/topo/Atom/Box';
+import Image from '@codeday/topo/Atom/Image';
 import Text, { Link, Heading } from '@codeday/topo/Atom/Text';
 import List, { Item as ListItem } from '@codeday/topo/Atom/List';
 import Divider from '@codeday/topo/Atom/Divider';
@@ -23,7 +24,7 @@ function ContentfulAsset({ id, links, ...props }) {
   }
 
   if (MEDIA_TYPE_IMAGE.includes(asset.contentType)) {
-    return <Image src={asset.url} alt="" {...props} />
+    return <Image src={`${asset.url}?w=600`} alt="" {...props} />
   }
 
 }
