@@ -13,7 +13,7 @@ import PreviousCoverageLogos from '../components/PreviousCoverageLogos';
 import { useQuery } from '../query';
 import { PressQuery } from './press.gql';
 
-export default function Press() {
+export default function Press({ seed }) {
   const { cms: { mission, pressContact, pressDetails, programs }} = useQuery();
 
   return (
@@ -67,7 +67,7 @@ export default function Press() {
         </Text>
         <Button as="a" href="https://f1.codeday.org/logos.zip" variantColor="blue">Download Logos</Button>
       </Content>
-      <PhotoGallery />
+      <PhotoGallery seed={seed} />
     </Page>
   );
 }
@@ -78,6 +78,7 @@ export async function getStaticProps() {
   return {
     props: {
       query,
+      seed: Math.random().toString(),
     },
     revalidate: 300,
   };

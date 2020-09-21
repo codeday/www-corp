@@ -4,11 +4,13 @@ import Content from '@codeday/topo/Molecule/Content';
 import { useQuery } from '../../query';
 import Photo from './Photo';
 import PhotoTagPicker from './PhotoTagPicker';
+import shuffle from 'knuth-shuffle-seeded';
 
-export default function PhotoGallery(props) {
+export default function PhotoGallery({seed, ...props}) {
   const [filter, setFilter] = useState(null);
   const { cms: { pressPhotos } } = useQuery();
-  const photos = pressPhotos?.items || [];
+  const photos = shuffle((pressPhotos?.items || []).map(m => m), seed);
+  console.log(seed);
 
   return (
     <Content wide {...props}>

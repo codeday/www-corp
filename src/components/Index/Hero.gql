@@ -8,7 +8,7 @@ fragment IndexHeroComponent on Query {
     explainer: asset(id:"6BoY9Ec9J8YRrHcj2RqsCg"){
       url
     }
-    indexHeroPhotos: pressPhotos(limit: 50) {
+    indexHeroPhotos: pressPhotos(limit: 100) {
       items {
         region {
           name

@@ -10,7 +10,7 @@ fragment IndexCommunityComponent on Query {
     }
   }
   cms {
-    indexCommunityPhotos: pressPhotos(limit: 50) {
+    indexCommunityPhotos: pressPhotos(limit: 100) {
       items {
         region {
           name

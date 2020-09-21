@@ -3,7 +3,7 @@ fragment PressPhotoComponent on CmsPressPhoto {
   photo {
     title
     description
-    original: url
+    original: contentfulBaseUrl
     preview: url(transform: { width: 400, height: 250, resizeStrategy: FILL })
   }
   event {

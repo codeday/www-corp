@@ -42,7 +42,7 @@ export default function Hero({ seed, ...props }) {
   const { cms: { indexHeroPhotos, mission, explainer } } = useQuery();
 
   const rand = create(seed);
-  const photos = shuffle(JSON.parse(JSON.stringify(indexHeroPhotos?.items)) || [], seed);
+  const photos = shuffle(JSON.parse(JSON.stringify(indexHeroPhotos?.items)) || [], seed).slice(0, 6*5);
 
   return (
     <Box maxWidth="1800px" role="banner" m="0 auto" {...props}>

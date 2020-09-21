@@ -127,10 +127,10 @@ export default function Community({ seed, ...props }) {
       .map((m) => <Card key={m.imageUrl} photo={m.imageUrl} text={m.text} author={m.author} wip />)
         || []
     ),
-    ...(indexCommunityPhotos.items
+    ...(shuffle(indexCommunityPhotos.items.map(i => i), seed)
       .map((p) => <Card key={p.photo.url} photo={p.photo.url} eventInfo={{ region: p.region, event: p.event }} />)
         || []
-    ),
+    ).slice(0, 25),
   ], seed);
   const rows = [
     cards.slice(0, Math.floor(cards.length / 2)),
