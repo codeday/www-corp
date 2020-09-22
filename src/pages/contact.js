@@ -46,8 +46,13 @@ export default function Home({ seed }) {
           Meet our team:
         </Heading>
       </Content>
-      <Employees mb={16} />
-      <Volunteers />
+      <Employees seed={seed} mb={16} />
+      <Content>
+        <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
+          Volunteers:
+        </Heading>
+      </Content>
+      <Volunteers seed={seed} />
     </Page>
   );
 }

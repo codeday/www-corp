@@ -8,10 +8,23 @@ import { useQuery } from '../../query';
 export default function Employees(props) {
   const { account: { employees } } = useQuery();
 
+  const titleContents = ['Director', 'Manager', 'Lead'];
+  const titlePrecedence = (title) => titleContents
+    .reduce((accum, t, i) => ((title.indexOf(t) >= 0) ? Math.min(i, accum) : accum), titleContents.length);
+  const sortedEmployees = employees.sort((a, b) => {
+    const aPrec = titlePrecedence(a.title);
+    const bPrec = titlePrecedence(b.title);
+    if (aPrec !== bPrec) return aPrec - bPrec;
+
+    if (a.name > b.name) return -1;
+    if (b.name > a.name) return 1;
+    return 0;
+  });
+
   return (
     <Content wide {...props}>
       <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }} gap={4}>
-        {employees.map((emp) => (
+        {sortedEmployees.map((emp) => (
           <Box p={4}>
             <Box>
               <Image
