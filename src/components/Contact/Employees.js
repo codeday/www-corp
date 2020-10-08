@@ -10,7 +10,7 @@ export default function Employees(props) {
 
   const titleContents = ['Director', 'Manager', 'Lead'];
   const titlePrecedence = (title) => titleContents
-    .reduce((accum, t, i) => ((title.indexOf(t) >= 0) ? Math.min(i, accum) : accum), titleContents.length);
+    .reduce((accum, t, i) => (title && (title.indexOf(t) >= 0) ? Math.min(i, accum) : accum), titleContents.length);
   const sortedEmployees = employees.sort((a, b) => {
     const aPrec = titlePrecedence(a.title);
     const bPrec = titlePrecedence(b.title);
