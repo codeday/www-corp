@@ -3,10 +3,11 @@ import Head from 'next/head';
 import Box from '@codeday/topo/Atom/Box';
 import Header, { SiteLogo, Menu } from '@codeday/topo/Organism/Header';
 import Main from '@codeday/topo/Organism/Main';
-import Footer from '@codeday/topo/Organism/Footer';
+import Footer, { CustomLinks } from '@codeday/topo/Organism/Footer';
 import { CodeDay } from '@codeday/topo/Atom/Logo';
 import { useQuery } from '../query';
 import Button from '@codeday/topo/Atom/Button';
+import Link from '@codeday/topo/Atom/Text/Link';
 
 const DOMAIN = 'https://www.codeday.org';
 
@@ -57,7 +58,11 @@ export default function Page ({ children, title, darkHeader, slug }) {
           {children}
         </Main>
         <Box mb={32} />
-        <Footer />
+        <Footer>
+          <CustomLinks>
+            <Link href="/docs">Legal Documents</Link>
+          </CustomLinks>
+        </Footer>
       </Box>
     </Box>
   )
