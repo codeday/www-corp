@@ -24,7 +24,8 @@ function Faq({ faq }) {
         as="h4"
         fontSize="lg"
         onClick={() => setIsOpen(!isOpen)}
-        bg="gray.50"
+        bg={isOpen ? 'gray.900' : 'gray.50'}
+        color={isOpen && 'white'}
         cursor="pointer"
         p={4}
       >
@@ -46,7 +47,8 @@ export default function EducationProgram({ seed }) {
   const { cms } = useQuery();
   const { isFallback, query } = useRouter();
   const program = cms?.eduPrograms?.items[0];
-  const testimonial = shuffle(JSON.parse(JSON.stringify(cms?.testimonials?.items || [])), seed)[0];
+  const testimonial = shuffle(JSON.parse(JSON.stringify(cms?.testimonials?.items || [])), seed)
+    .filter((e) => !e.groupName)[0];
   const faqs = cms?.faqs?.items;
   const pageProps = {
     slug: `/edu/${query.program}`,
@@ -161,7 +163,7 @@ export default function EducationProgram({ seed }) {
             {faqs && faqs.length > 0 && (
               <>
                 <Heading as="h3" fontSize="2xl" mt={8} mb={2}>FAQs</Heading>
-                <Box mt={4} borderRadius="sm" borderWidth={1}>
+                <Box mt={4} rounded="sm" borderWidth={1}>
                   {faqs.map((faq) => <Faq faq={faq} />)}
                 </Box>
               </>
