@@ -1,4 +1,4 @@
-query EduProgramsQuery {
+query EduProgramsQuery ($cmsDate: CmsDateTime) {
   cms {
     eduPrograms: programs {
       items {
@@ -10,6 +10,25 @@ query EduProgramsQuery {
         }
         educationDetails {
           json
+        }
+      }
+    }
+
+    communityPartners(
+      where: { audience_contains_all: "educators", expires_gte: $cmsDate },
+      order: sys_publishedAt_ASC
+    ) {
+      items {
+        logo {
+          url(transform: { width: 300, height: 100 })
+        }
+        name
+        blurb
+        url
+        regions (limit: 8) {
+          items {
+            name
+          }
         }
       }
     }

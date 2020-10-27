@@ -11,7 +11,7 @@ import { useQuery } from '../../query';
 import { EduProgramsQuery } from './index.gql';
 
 export default function EduIndex() {
-  const { cms: { eduPrograms } } = useQuery();
+  const { cms: { eduPrograms, communityPartners } } = useQuery();
   return (
     <Page slug="/edu" title="Education">
       <Content>
@@ -29,10 +29,32 @@ export default function EduIndex() {
         </Text>
         <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }} gap={4}>
           {eduPrograms?.items?.filter((program) => program.educationDetails).map((program) => (
-            <IconBox as="a" d="block" href={`/edu/${program.webname}`} h="100%">
+            <IconBox as="a" d="block" href={`/edu/${program.webname}`} h="100%" key={program.webname}>
               <HeaderIcon><Image src={program.logo.url} h={16} alt="" /></HeaderIcon>
               <HeaderText>{program.name}</HeaderText>
               <BoxBody>{program.shortDescription}</BoxBody>
+            </IconBox>
+          ))}
+        </Grid>
+
+        <Heading as="h3" fontSize="3xl" mt={12} mb={4}>Partner Organizations and Programs</Heading>
+        <Text fontSize="md" mb={8}>
+          We partner with the following organizations who we think might be great fit for CS educators.
+          {' '}<Text as="strong" bold>(Not CodeDay-run programs.)</Text>
+        </Text>
+        <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }} gap={4}>
+          {communityPartners?.items?.map((partner) => (
+            <IconBox as="a" d="block" href={partner.url} target="_blank" rel="noopener" h="100%" key={partner.url}>
+              <HeaderIcon><Image src={partner.logo.url} h={16} alt="" /></HeaderIcon>
+              <HeaderText>{partner.name}</HeaderText>
+              <BoxBody>
+                {partner.blurb}
+                {partner.regions?.items?.length > 0 && (
+                  <>
+                    <br /><br />({partner.regions.items.map((r) => r.name).join(', ')})
+                  </>
+                )}
+              </BoxBody>
             </IconBox>
           ))}
         </Grid>
@@ -41,8 +63,14 @@ export default function EduIndex() {
   );
 }
 
+const getDate = () => {
+  const d = new Date();
+  d.setUTCHours(d.getUTCHours() - 7);
+  return d.toISOString();
+};
+
 export async function getStaticProps() {
-  const query = await apiFetch(print(EduProgramsQuery));
+  const query = await apiFetch(print(EduProgramsQuery, { cmsDate: getDate() }));
 
   return {
     props: {

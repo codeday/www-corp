@@ -1,56 +1,66 @@
 #import "../../components/Page.gql"
-fragment ProgramInformation on CmsProgram {
-  name
-  webname
-  description
-  logo {
-    url
-  }
-  educationDetails {
-    json
-    links {
-      assets {
-        block {
-          sys {
-            id
-          }
-          contentType
-          url
-        }
-      }
-    }
-  }
-  eligibility {
-    json
-  }
-  presentingSponsors(limit: 5) {
-    items {
-      name
-      link
-      logo {
-        url(transform: {height: 60, resizeStrategy: FIT})
-      }
-    }
-  }
-}
-
-query AllProgramsQuery {
-  ...PageComponent
-  cms {
-    eduPrograms: programs(limit: 10) {
-      items {
-        ...ProgramInformation
-      }
-    }
-  }
-}
 
 query ProgramQuery ($webname: String) {
   ...PageComponent
   cms {
+    testimonials(where:{program: {webname: $webname }, type_in: ["Teacher", "Student"], featured: true}) {
+      items {
+        firstName
+        lastName
+        type
+        title
+        company
+        quote
+        image {
+          url(transform: { width: 100, height: 100, resizeStrategy: FILL})
+        }
+      }
+    }
+
+
+    faqs (where: { program: { webname: $webname }, audience_contains_all: ["School"] }) {
+      items {
+        title
+        answer {
+          json
+        }
+      }
+    }
+
     eduPrograms: programs(where: { webname: $webname }, limit: 1) {
       items {
-        ...ProgramInformation
+        name
+        webname
+        description
+        logo {
+          url
+        }
+        educationDetails {
+          json
+          links {
+            assets {
+              block {
+                sys {
+                  id
+                }
+                contentType
+                url
+              }
+            }
+          }
+        }
+        eligibility {
+          json
+        }
+        presentingSponsors(limit: 5) {
+          items {
+            name
+            link
+            logo {
+              url(transform: {height: 60, resizeStrategy: FIT})
+            }
+          }
+        }
       }
     }
   }

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { print } from 'graphql';
 import { useRouter } from 'next/router';
+import shuffle from 'knuth-shuffle-seeded';
 import { apiFetch } from '@codeday/topo/utils';
 import Content from '@codeday/topo/Molecule/Content';
 import Box, { Grid } from '@codeday/topo/Atom/Box';
@@ -14,10 +15,39 @@ import Error404 from '../404';
 import { useQuery } from '../../query';
 import { ProgramQuery, ProgramNamesQuery } from './program.gql';
 
-export default function EducationProgram() {
+function Faq({ faq }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <Box borderBottomWidth={1}>
+      <Heading
+        as="h4"
+        fontSize="lg"
+        onClick={() => setIsOpen(!isOpen)}
+        bg="gray.50"
+        cursor="pointer"
+        p={4}
+      >
+        {faq.title}
+      </Heading>
+      {isOpen && (
+        <Box p={4}>
+          <ContentfulRichText
+            json={faq.answer.json}
+            h1Size="xl"
+          />
+        </Box>
+      )}
+    </Box>
+  )
+}
+
+export default function EducationProgram({ seed }) {
   const { cms } = useQuery();
   const { isFallback, query } = useRouter();
   const program = cms?.eduPrograms?.items[0];
+  const testimonial = shuffle(JSON.parse(JSON.stringify(cms?.testimonials?.items || [])), seed)[0];
+  const faqs = cms?.faqs?.items;
   const pageProps = {
     slug: `/edu/${query.program}`,
     title: program ? `${program.name} for Education` : 'CodeDay for Education',
@@ -83,6 +113,17 @@ export default function EducationProgram() {
 
           <Box>
             <Text fontSize="xl" bold>{program.description}</Text>
+            {testimonial && (
+              <Box borderLeftWidth={2} pl={4} ml={2} mb={8}>
+                <Text fontSize="lg" fontStyle="italic">
+                  {testimonial.quote}
+                </Text>
+                <Text>
+                  &mdash;{testimonial.firstName} {testimonial.lastName},
+                  {' '}{testimonial.title || testimonial.type} {testimonial.company}
+                </Text>
+              </Box>
+            )}
             <ContentfulRichText
               json={program.educationDetails.json}
               links={program.educationDetails.links}
@@ -109,14 +150,25 @@ export default function EducationProgram() {
             )}
           </Box>
 
-
-          <Box borderWidth={2} borderColor="green.600" rounded="sm">
-            <Heading as="h3" fontSize="2xl" mb={2} bg="green.600" p={4} color="white">Request More Info</Heading>
-            <Box p={4}>
-              <CognitoForm formId={76} prefill={{ Program: program.webname }} fallback />
+          <Box>
+            <Box borderWidth={2} borderColor="green.600" rounded="sm">
+              <Heading as="h3" fontSize="2xl" mb={2} bg="green.600" p={4} color="white">Request More Info</Heading>
+              <Box p={4}>
+                <CognitoForm formId={76} prefill={{ Program: program.webname }} fallback />
+              </Box>
             </Box>
+
+            {faqs && faqs.length > 0 && (
+              <>
+                <Heading as="h3" fontSize="2xl" mt={8} mb={2}>FAQs</Heading>
+                <Box mt={4} borderRadius="sm" borderWidth={1}>
+                  {faqs.map((faq) => <Faq faq={faq} />)}
+                </Box>
+              </>
+            )}
           </Box>
         </Grid>
+
       </Content>
     </Page>
   );
@@ -141,6 +193,7 @@ export async function getStaticProps({ params: { program } }) {
   return {
     props: {
       query,
+      seed: Math.random(),
     },
     revalidate: 300,
   };
