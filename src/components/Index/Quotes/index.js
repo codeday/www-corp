@@ -75,7 +75,7 @@ export default function Quotes({ seed }) {
           />
         </Box>
       </Grid>
-      <Text color="current.textLight" fontSize="2xl" mt={8} textAlign="center">
+      <Text color="current.textLight" fontSize="2xl" mt={12} mb={8} textAlign="center">
         Hear from more students and volunteers:
       </Text>
       <Grid templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)'}} gap={4}>
