@@ -5,7 +5,7 @@ fragment IndexSponsorsComponent on Query {
         name
         link
         logo {
-          url(transform: {height: 80, resizeStrategy: FIT})
+          url(transform: {height: 80, width: 160, resizeStrategy: PAD})
         }
       }
     }
@@ -15,7 +15,7 @@ fragment IndexSponsorsComponent on Query {
         name
         link
         logo {
-          url(transform: {height: 40, resizeStrategy: FIT})
+          url(transform: {height: 40, width: 80, resizeStrategy: PAD})
         }
       }
     }

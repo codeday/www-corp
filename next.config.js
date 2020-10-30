@@ -1,4 +1,7 @@
 module.exports = {
+  images: {
+    domains: ['f2.codeday.org'],
+  },
   async redirects() {
     return [
       {

@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Ticker from 'react-ticker';
 import shuffle from 'knuth-shuffle-seeded';
 import truncate from 'truncate';
 import PageVisibility from 'react-page-visibility';
+import { useInView } from 'react-intersection-observer';
 import Content from '@codeday/topo/Molecule/Content';
 import Box, { Grid } from '@codeday/topo/Atom/Box';
 import Image from '@codeday/topo/Atom/Image';
 import Text, { Heading } from '@codeday/topo/Atom/Text';
 import { useQuery } from '../../query';
+
 
 function PhotoTextCard({
   photo, text, author, wip, eventInfo
@@ -121,6 +123,13 @@ function Card({
 
 export default function Community({ seed, ...props }) {
   const [pageIsVisible, setPageIsVisible] = useState(true);
+  const { ref, inView } = useInView({ rootMargin: '200px' });
+  const [hasLoaded, setHasLoaded] = useState(false);
+
+  useEffect(() => {
+    if (inView) setHasLoaded(true);
+  }, [inView]);
+
   const { showYourWork, cms: { indexCommunityPhotos } } = useQuery();
   const cards = shuffle([
     ...(showYourWork.messages
@@ -138,10 +147,12 @@ export default function Community({ seed, ...props }) {
   ];
 
   return (
-    <PageVisibility onChange={(visible) => setPageIsVisible(visible)}>
-      <Box mt={32} mb={32} {...props}>
+    <PageVisibility onChange={setPageIsVisible}>
+      <Box ref={ref} mt={32} mb={32} {...props}>
         <Box key={rows[0][0].imageUrl}>
-          <Ticker move={pageIsVisible}>{({ index }) => rows[0][index % rows[0].length]}</Ticker>
+          {(hasLoaded || (pageIsVisible && inView)) && (
+            <Ticker move={pageIsVisible && inView}>{({ index }) => rows[0][index % rows[0].length]}</Ticker>
+          )}
         </Box>
 
         <Content>
@@ -151,7 +162,11 @@ export default function Community({ seed, ...props }) {
         </Content>
 
         <Box key={rows[1][0].imageUrl} mb={8}>
-          <Ticker move={pageIsVisible} offset={100}>{({ index }) => rows[1][index % rows[0].length]}</Ticker>
+          {(hasLoaded || (pageIsVisible && inView)) && (
+            <Ticker move={pageIsVisible && inView} offset={100}>{
+              ({ index }) => rows[1][index % rows[0].length]
+            }</Ticker>
+          )}
         </Box>
       </Box>
     </PageVisibility>

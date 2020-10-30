@@ -78,7 +78,7 @@ export default function Quotes({ seed }) {
       <Text color="current.textLight" fontSize="2xl" mt={12} mb={8} textAlign="center">
         Hear from more students and volunteers:
       </Text>
-      <Grid templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)'}} gap={4}>
+      <Grid templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, minmax(0, 1fr))'}} gap={4}>
         {videoQuotes.map((q) => (
           <VideoTestimonialThumbnail video={q} />
         ))}
