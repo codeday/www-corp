@@ -35,7 +35,8 @@
     "react-responsive-modal": "^5.0.2",
     "react-ticker": "^1.2.2",
     "three": "^0.119.1",
-    "truncate": "^2.1.0"
+    "truncate": "^2.1.0",
+    "webpack-bundle-analyzer": "^3.9.0"
   },
   "devDependencies": {
     "@codeday/eslint-config": "^2.1.2",

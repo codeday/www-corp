@@ -9,6 +9,7 @@ import Image from '@codeday/topo/Atom/Image';
 import Slides from '@codeday/topo/Molecule/Slides';
 import FlexScatter from '../FlexScatter';
 import VideoLink from '../VideoLink';
+import OnlyVisibleBox from '../OnlyVisibleBox';
 import { useQuery } from '../../query';
 import splitGroups from '../../utils/splitGroups';
 
@@ -67,30 +68,34 @@ export default function Hero({ seed, ...props }) {
 
         {/* Small display: 4x images */}
         <Box d={{ base: 'none', md: 'block', lg: 'none'}} marginRight='-100px'>
-          <FlexScatter
-            seed={seed}
-            gapMin={5}
-            gapMax={15}
-            yOffsetMin={-25}
-            yOffsetMax={75}
-            height={(150+75)*2}
-          >
-            {photoSlides(rand, splitGroups(photos, 4))}
-          </FlexScatter>
+          <OnlyVisibleBox>
+            <FlexScatter
+              seed={seed}
+              gapMin={5}
+              gapMax={15}
+              yOffsetMin={-25}
+              yOffsetMax={75}
+              height={(150+75)*2}
+            >
+              {photoSlides(rand, splitGroups(photos, 4))}
+            </FlexScatter>
+          </OnlyVisibleBox>
         </Box>
 
         {/* Large display: 6x images */}
         <Box d={{ base: 'none', lg: 'block'}} marginRight={{ base: '-125px', xl: '0'}}>
-          <FlexScatter
-            seed={seed}
-            gapMin={25}
-            gapMax={50}
-            yOffsetMin={-25}
-            yOffsetMax={75}
-            height={(150+75)*2}
-          >
-            {photoSlides(rand, splitGroups(photos, 6))}
-          </FlexScatter>
+          <OnlyVisibleBox>
+            <FlexScatter
+              seed={seed}
+              gapMin={25}
+              gapMax={50}
+              yOffsetMin={-25}
+              yOffsetMax={75}
+              height={(150+75)*2}
+            >
+              {photoSlides(rand, splitGroups(photos, 6))}
+            </FlexScatter>
+          </OnlyVisibleBox>
         </Box>
       </Grid>
     </Box>
