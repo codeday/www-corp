@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import Box from '@codeday/topo/Atom/Box';
 import dynamic from 'next/dynamic'
+import PropTypes from 'prop-types';
+import { useInView } from 'react-intersection-observer';
+import Box from '@codeday/topo/Atom/Box';
 import { useTheme } from '@codeday/topo/utils';
-
-const ReactGlobe = dynamic(() => import('react-globe'), { ssr: false });
-
 
 const options = {
   cameraRotateSpeed: 0.2,
@@ -22,31 +20,12 @@ const options = {
   pointLightIntensity: 0.5,
 };
 
-export default function Globe({ testimonial, regions }) {
+const ReactGlobe = dynamic(() => import('react-globe'), { ssr: false });
+
+function InnerGlobe({ regions, testimonial }){
   const { colors } = useTheme();
   const [globe, setGlobe] = useState();
   const [lastTestimonialHadRegion, setLastTestimonialHadRegion] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef();
-
-  const markers = regions?.map((r) => ({
-    id: `${r.webname}-${testimonial?.region?.webname === r.webname ? 'active' : 'inactive'}`,
-    color: testimonial?.region?.webname === r.webname ? colors.red[600] : colors.white,
-    value: 10,
-    coordinates: [r.location.lat, r.location.lon],
-  }));
-
-  useLayoutEffect(() => {
-    if (typeof window === 'undefined') return;
-    const recalc = () => setIsVisible(ref.current.offsetParent !== null);
-    setTimeout(recalc, 700);
-    window.addEventListener('resize', recalc, { passive: true });
-    return () => window.removeEventListener('resize', recalc);
-  }, [typeof window, ref]);
-
-  useEffect(() => {
-    if (globe) globe.updateFocus([38.0000, -88.0000]);
-  }, [globe]);
 
   useEffect(() => {
     if (!globe) return;
@@ -66,24 +45,53 @@ export default function Globe({ testimonial, regions }) {
     });
   }, [globe, testimonial]);
 
+  const markers = regions?.map((r) => ({
+    id: `${r.webname}-${testimonial?.region?.webname === r.webname ? 'active' : 'inactive'}`,
+    color: testimonial?.region?.webname === r.webname ? colors.red[600] : colors.white,
+    value: 10,
+    coordinates: [r.location.lat, r.location.lon],
+  }));
+
+  useEffect(() => {
+    if (globe) globe.updateFocus([38.0000, -88.0000]);
+  }, [globe]);
+
+  return (
+    <ReactGlobe
+      height="100%"
+      width="100%"
+      globeCloudsTexture={null}
+      markers={markers}
+      globeTexture="/globe.jpg"
+      globeBackgroundTexture="/background.png"
+      options={{
+        ...options
+      }}
+      onClickMarker={() => {}}
+      onMouseOutMarker={() => {}}
+      onMouseOverMarker={() => {}}
+      onGetGlobe={setGlobe}
+    />
+  );
+}
+
+export default function Globe({ testimonial, regions }) {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  const { ref, inView } = useInView({ rootMargin: '500px' });
+  const [hasLoaded, setHasLoaded] = useState(false);
+  useEffect(() => {
+    if (inView) {
+      setHasLoaded(true);
+    }
+  }, [ inView ]);
+
   return (
     <Box ref={ref} height="30em" width="100%">
-      {isVisible && (
-        <ReactGlobe
-          height="100%"
-          width="100%"
-          globeCloudsTexture={null}
-          markers={markers}
-          globeTexture="/globe.jpg"
-          globeBackgroundTexture="/background.png"
-          options={{
-            ...options
-          }}
-          onClickMarker={() => {}}
-          onMouseOutMarker={() => {}}
-          onMouseOverMarker={() => {}}
-          onGetGlobe={setGlobe}
-        />
+      {hasLoaded && (
+        <InnerGlobe regions={regions} testimonial={testimonial} />
       )}
     </Box>
   );

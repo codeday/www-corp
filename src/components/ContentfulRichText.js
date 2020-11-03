@@ -4,6 +4,7 @@ import Image from '@codeday/topo/Atom/Image';
 import Text, { Link, Heading } from '@codeday/topo/Atom/Text';
 import List, { Item as ListItem } from '@codeday/topo/Atom/List';
 import Divider from '@codeday/topo/Atom/Divider';
+import StaticContent from './StaticContent';
 
 const MEDIA_TYPE_VIDEO = ['video/mp4', 'video/mov'];
 const MEDIA_TYPE_IMAGE = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
@@ -86,5 +87,9 @@ function mapRichText({
 
 export default function FaqAnswers({ json, links, h1Size }) {
   if (!json) return <></>;
-  return mapRichText({ ...json, links, h1Size });
+  return (
+    <StaticContent>
+      {mapRichText({ ...json, links, h1Size })}
+    </StaticContent>
+  );
 }
