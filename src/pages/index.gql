@@ -7,7 +7,8 @@
 #import "../components/Index/Community.gql"
 #import "../components/Index/Quotes/index.gql"
 #import "../components/Index/EcoBox.gql"
-query IndexQuery ($cmsDate: CmsDateTime) {
+#import "../components/Index/Workshops.gql"
+query IndexQuery ($cmsDate: CmsDateTime, $calendarDateStart: CalendarDateTime!, $calendarDateEnd: CalendarDateTime!) {
   ...PageComponent
   ...IndexHeroComponent
   ...IndexStatsComponent
@@ -17,4 +18,5 @@ query IndexQuery ($cmsDate: CmsDateTime) {
   ...IndexCommunityComponent
   ...IndexQuotesComponent
   ...IndexEcoBoxComponent
+  ...IndexWorkshopsComponent
 }

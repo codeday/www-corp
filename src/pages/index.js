@@ -9,6 +9,7 @@ import Sponsors from '../components/Index/Sponsors';
 import Announcement from '../components/Index/Announcement';
 import Community from '../components/Index/Community';
 import Quote from '../components/Index/Quotes';
+import Workshops from '../components/Index/Workshops';
 import EcoBox from '../components/Index/EcoBox';
 import { IndexQuery } from './index.gql';
 
@@ -22,21 +23,26 @@ export default function Home({ seed }) {
       <Sponsors />
       <Community />
       <Quote seed={seed} />
+      <Workshops />
       <EcoBox />
     </Page>
   );
 }
 
-const getDate = () => {
+const getDate = (offsetHours) => {
   const d = new Date();
-  d.setUTCHours(d.getUTCHours() - 7);
+  d.setUTCHours(d.getUTCHours() - 7 + (offsetHours || 0));
   return d.toISOString();
 };
 
 export async function getStaticProps() {
   return {
     props: {
-      query: await apiFetch(print(IndexQuery), { cmsDate: getDate() }),
+      query: await apiFetch(print(IndexQuery), {
+        cmsDate: getDate(),
+        calendarDateStart: getDate(24 * -2),
+        calendarDateEnd: getDate(24 * 7 * 2),
+      }),
       seed: Math.random(),
     },
     revalidate: 300,
