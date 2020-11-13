@@ -1,0 +1,23 @@
+query HelpIndexQuery {
+  cms {
+    programs {
+    	items {
+        name
+        webname
+        shortDescription
+        logo {
+          url(transform: { width: 300, height: 100 })
+        }
+        linkedFrom {
+          faqs(limit: 1) {
+            items {
+              sys {
+                id
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

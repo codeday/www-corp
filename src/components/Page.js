@@ -60,7 +60,8 @@ export default function Page ({ children, title, darkHeader, slug }) {
         <Box mb={32} />
         <Footer>
           <CustomLinks>
-            <Link href="/docs">Legal Documents</Link>
+            <Link href="/help" d="block">FAQs &amp; Help</Link>
+            <Link href="/docs" d="block">Legal Documents</Link>
           </CustomLinks>
         </Footer>
       </Box>

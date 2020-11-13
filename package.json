@@ -22,6 +22,7 @@
     "graphql-tag": "^2.11.0",
     "hls.js": "^0.14.8",
     "knuth-shuffle-seeded": "^1.0.6",
+    "luxon": "^1.25.0",
     "next": "^10.0.0",
     "next-seo": "^4.7.3",
     "prop-types": "^15.7.2",
