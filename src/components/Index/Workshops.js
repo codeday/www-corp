@@ -6,7 +6,7 @@ import Content from '@codeday/topo/Molecule/Content';
 import { parseIsoString, formatShortDate } from '../../utils/time';
 import { useQuery } from '../../query';
 
-const colors = ['green', 'blue', 'cyan', 'yellow', 'pink'];
+const colors = ['green', 'blue', 'orange', 'cyan', 'purple', 'yellow', 'indigo'];
 
 export default function Workshops() {
   const { calendar } = useQuery();
@@ -17,8 +17,8 @@ export default function Workshops() {
     <Content>
       <Heading as="h3" textAlign="center" fontSize="xl" mb={8}>Upcoming Workshops &amp; Events</Heading>
       <Grid templateColumns="minmax(0, 1fr) minmax(0, 2fr) minmax(0, 4fr)" gap={4}>
-        {calendar.events.slice(0,10).map((e) => {
-          const color = colors[create(e.calendarId).intBetween(0, colors.length)];
+        {calendar.events.map((e) => {
+          const color = colors[create(e.calendarName).intBetween(0, colors.length)];
           const start = parseIsoString(e.start);
 
           return (

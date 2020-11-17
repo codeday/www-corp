@@ -41,7 +41,7 @@ export async function getStaticProps() {
       query: await apiFetch(print(IndexQuery), {
         cmsDate: getDate(),
         calendarDateStart: getDate(24 * -2),
-        calendarDateEnd: getDate(24 * 7 * 2),
+        calendarDateEnd: getDate(24 * 7 * 4),
       }),
       seed: Math.random(),
     },
