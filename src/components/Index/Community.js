@@ -150,8 +150,8 @@ export default function Community({ seed, ...props }) {
     <PageVisibility onChange={setPageIsVisible}>
       <Box ref={ref} mt={32} mb={32} {...props}>
         <Box key={rows[0][0].imageUrl}>
-          {(hasLoaded || (pageIsVisible && inView)) && (
-            <Ticker move={pageIsVisible && inView}>{({ index }) => rows[0][index % rows[0].length]}</Ticker>
+          {(pageIsVisible && inView) && (
+            <Ticker>{({ index }) => rows[0][index % rows[0].length]}</Ticker>
           )}
         </Box>
 
@@ -162,8 +162,8 @@ export default function Community({ seed, ...props }) {
         </Content>
 
         <Box key={rows[1][0].imageUrl} mb={8}>
-          {(hasLoaded || (pageIsVisible && inView)) && (
-            <Ticker move={pageIsVisible && inView} offset={100}>{
+          {(pageIsVisible && inView) && (
+            <Ticker offset={-100}>{
               ({ index }) => rows[1][index % rows[0].length]
             }</Ticker>
           )}
