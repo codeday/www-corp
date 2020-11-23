@@ -5,7 +5,7 @@ import 'react-responsive-modal/styles.css';
 
 export default function App ({ Component, pageProps }) {
   return (
-    <Theme  brandColor="red" analyticsId="AHHYLKBK">
+    <Theme withChat brandColor="red" analyticsId="AHHYLKBK">
       <Provider value={pageProps?.query || {}}>
         <Component {...pageProps} />
       </Provider>
