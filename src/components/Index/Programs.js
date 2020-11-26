@@ -36,7 +36,7 @@ export default function Programs() {
         <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={8}>
           <Box borderWidth={1} borderColor="current.border" borderRadius={2} p={4} boxShadow="md">
             <CodeDay fontSize="4xl" withText />
-            {JSON.stringify(nextUpcomingEvent(codeDay?.linkedFrom?.events?.items)) == JSON.stringify(nextEventDate) &&
+            {JSON.stringify(nextUpcomingEvent(codeDay?.linkedFrom?.events?.items)) == JSON.stringify(nextEventDate) && Math.floor((nextUpcomingEvent(codeDay?.linkedFrom?.events?.items).startsAt - new Date())/(24*60*60*1000)) <= 30 &&
               <Image src="/soon.svg" height={10} alt="" float="right" />}
             <NextEventDate upcoming={codeDay?.linkedFrom?.events?.items} />
             <Text fontSize="md" mt={4} mb={4}>{codeDay?.shortDescription}</Text>
@@ -77,7 +77,7 @@ export default function Programs() {
                   <Box float="left" width={10} pr={4}>
                     <Image src={program.logo.url} height={6} alt="" />
                   </Box>
-                  {JSON.stringify(nextUpcomingEvent(program.linkedFrom?.events?.items)) == JSON.stringify(nextEventDate) &&
+                  {JSON.stringify(nextUpcomingEvent(program.linkedFrom?.events?.items)) == JSON.stringify(nextEventDate) && Math.floor((nextUpcomingEvent(program.linkedFrom?.events?.items).startsAt - new Date())/(24*60*60*1000)) <= 30 &&
                     <Image src="/soon.svg" height={10} alt="" float="right" />}
                   <Text fontSize="lg" mb={0} bold>{program.name}</Text>
                 </Box>
