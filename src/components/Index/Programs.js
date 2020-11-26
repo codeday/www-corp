@@ -22,6 +22,9 @@ function NextEventDate({ upcoming }) {
 export default function Programs() {
   const { cms: { regions, mainPrograms, otherPrograms, codeDayProgram }} = useQuery();
   const codeDay = codeDayProgram?.items[0];
+  let programs = codeDay?.linkedFrom?.events?.items;
+  mainPrograms?.items?.map(program => programs = programs.concat(program.linkedFrom?.events?.items));
+  const nextEventDate = nextUpcomingEvent(programs)
 
   return (
     <StaticContent>
@@ -33,6 +36,8 @@ export default function Programs() {
         <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={8}>
           <Box borderWidth={1} borderColor="current.border" borderRadius={2} p={4} boxShadow="md">
             <CodeDay fontSize="4xl" withText />
+            {JSON.stringify(nextUpcomingEvent(codeDay?.linkedFrom?.events?.items)) == JSON.stringify(nextEventDate) &&
+              <Image src="/soon.svg" height={10} alt="" float="right" />}
             <NextEventDate upcoming={codeDay?.linkedFrom?.events?.items} />
             <Text fontSize="md" mt={4} mb={4}>{codeDay?.shortDescription}</Text>
             <Text fontSize="md" mb={4} bold>Choose a location:</Text>
@@ -72,6 +77,8 @@ export default function Programs() {
                   <Box float="left" width={10} pr={4}>
                     <Image src={program.logo.url} height={6} alt="" />
                   </Box>
+                  {JSON.stringify(nextUpcomingEvent(program.linkedFrom?.events?.items)) == JSON.stringify(nextEventDate) &&
+                    <Image src="/soon.svg" height={10} alt="" float="right" />}
                   <Text fontSize="lg" mb={0} bold>{program.name}</Text>
                 </Box>
                 <NextEventDate upcoming={program.linkedFrom?.events?.items} />
