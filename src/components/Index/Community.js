@@ -12,31 +12,55 @@ import { useQuery } from '../../query';
 
 
 function PhotoTextCard({
-  photo, text, author, wip, eventInfo
+  photo, text, authors, wip, href, eventInfo
 }) {
   return (
-    <Box rounded="md" width="sm" maxHeight="100%" overflow="hidden">
+    <Box
+      rounded="md"
+      width="sm"
+      maxHeight="100%"
+      overflow="hidden"
+      as={href && 'a'}
+      href={href}
+      target="_blank"
+    >
       <Grid templateColumns="3fr 3fr">
         <Image src={photo} alt="" />
         <Box p={2} overflow="hidden">
-          {author && (
-            <Box>
-              <Image
-                src={author.picture.replace('256x256', '32x32')}
-                alt=""
-                float="left"
-                w={4}
-                h={4}
-                mr={2}
-                rounded="full"
-              />
-              <Text mb={0} bold fontSize="sm">{author.name}</Text>
-            </Box>
+          {authors && authors.length > 0 && (
+            authors.length > 1 ? (
+              <Box>
+                {authors.map((author) => (
+                  <Image
+                    src={author.picture}
+                    float="left"
+                    alt=""
+                    w={4}
+                    h={4}
+                    mr={2}
+                    rounded="full"
+                  />
+                ))}
+              </Box>
+            ) : (
+              <Box>
+                <Image
+                  src={authors[0].picture}
+                  alt=""
+                  float="left"
+                  w={4}
+                  h={4}
+                  mr={2}
+                  rounded="full"
+                />
+                <Text mb={0} bold fontSize="sm">{authors[0].name}</Text>
+              </Box>
+            )
           )}
-          <Text fontSize="sm" mb={0}>
+          <Text fontSize="sm" mb={0} style={{ clear: 'both'}}>
             {truncate(text, 90)}{' '}
             {wip && (
-              <Text as="span" fontStyle="italic">(work-in-progress)</Text>
+              <Text as="span" fontStyle="italic">#work-in-progress</Text>
             )}
           </Text>
         </Box>
@@ -45,7 +69,7 @@ function PhotoTextCard({
   );
 }
 
-function PhotoCard({ photo, author, wip, eventInfo }) {
+function PhotoCard({ photo, authors, wip, eventInfo, projectTitle, href }) {
   return (
     <Box
       rounded="md"
@@ -55,34 +79,69 @@ function PhotoCard({ photo, author, wip, eventInfo }) {
       w={64}
       h="100%"
       position="relative"
+      as={href && 'a'}
+      href={href}
+      target="_blank"
+      d="block"
     >
-      {author && (
-        <Box p={2} backgroundImage="linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))">
-          <Image
-            src={author.picture.replace('256x256', '32x32')}
-            alt=""
-            float="left"
-            w={4}
-            h={4}
-            mr={2}
-            rounded="full"
-          />
-          <Text mb={0} bold fontSize="sm" color="white">{author.name}</Text>
-        </Box>
+      {authors && authors.length > 0 && (
+        authors.length > 1 ? (
+          <Box p={2} backgroundImage="linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))">
+            {authors.map((author) => (
+              <Image
+                src={author.picture}
+                alt=""
+                w={4}
+                h={4}
+                mr={2}
+                float="left"
+                rounded="full"
+              />
+            ))}
+            <Text mb={0} bold fontSize="sm" color="white">&nbsp;</Text>
+          </Box>
+        ) : (
+          <Box p={2} backgroundImage="linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))">
+            <Image
+              src={authors[0].picture}
+              alt=""
+              float="left"
+              w={4}
+              h={4}
+              mr={2}
+              rounded="full"
+            />
+            <Text mb={0} bold fontSize="sm" color="white">{authors[0].name}</Text>
+          </Box>
+        )
       )}
-      {!author && eventInfo && (
+      {!(authors && authors.length > 0) && eventInfo && (
         <Box p={2} backgroundImage="linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))">
           <Text mb={0} fontSize="sm" color="white" bold>
-            {
-              [
-                eventInfo.event?.program?.name,
-                eventInfo.region?.name,
-                eventInfo.event?.startsAt?.substring(0,4)
-              ].join(' ')
+            { eventInfo
+              ? [
+                  eventInfo.event?.program?.name,
+                  eventInfo.region?.name,
+                  eventInfo.event?.startsAt?.substring(0,4)
+                ].join(' ')
+              : projectTitle
             }
           </Text>
         </Box>
       )}
+      {projectTitle && (
+        <Box
+          position="absolute"
+          bottom={0}
+          left={0}
+          right={0}
+          p={2}
+          backgroundImage="linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1))"
+        >
+          <Text mb={0} fontSize="sm" color="white" bold>Project: {projectTitle}</Text>
+        </Box>
+      )}
+
       {wip && (
         <Box
           position="absolute"
@@ -92,7 +151,7 @@ function PhotoCard({ photo, author, wip, eventInfo }) {
           p={2}
           backgroundImage="linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1))"
         >
-          <Text mb={0} fontSize="sm" color="white" fontStyle="italic">(work-in-progress)</Text>
+          <Text mb={0} fontSize="sm" color="white" fontStyle="italic">#work-in-progress</Text>
         </Box>
       )}
     </Box>
@@ -100,11 +159,11 @@ function PhotoCard({ photo, author, wip, eventInfo }) {
 }
 
 function Card({
-  photo, text, author, wip, eventInfo,
+  photo, text, authors, wip, eventInfo, projectTitle, href,
 }) {
   const elem = (text && text.length > 0)
-    ? <PhotoTextCard photo={photo} text={text} author={author} wip={wip} eventInfo={eventInfo} />
-    : <PhotoCard photo={photo} author={author} wip={wip} eventInfo={eventInfo} />;
+    ? <PhotoTextCard photo={photo} text={text} authors={authors} wip={wip} eventInfo={eventInfo} href={href} />
+    : <PhotoCard photo={photo} authors={authors} wip={wip} eventInfo={eventInfo} projectTitle={projectTitle} href={href} />;
 
   return (
     <Box
@@ -130,11 +189,31 @@ export default function Community({ seed, ...props }) {
     if (inView) setHasLoaded(true);
   }, [inView]);
 
-  const { showYourWork, cms: { indexCommunityPhotos } } = useQuery();
+  const { showYourWork, showcase, cms: { indexCommunityPhotos } } = useQuery();
+
+  const showcaseDemos = showcase.projects
+    .map((p) => ({
+      ...p,
+      members: p.members && p.members.map((a) => a.account).filter((a) => a),
+      media: p.media && p.media.filter((m) => m.type === 'IMAGE' && m.topic !== 'TEAM')[0] || null,
+    }))
+    .filter((p) => p.media && p.members && p.members.length > 0);
+
   const cards = shuffle([
-    ...(showYourWork.messages
-      .map((m) => <Card key={m.imageUrl} photo={m.imageUrl} text={m.text} author={m.author} wip />)
+    ...(showYourWork.messages.filter((m => m.author))
+      .map((m) => <Card key={m.imageUrl} photo={m.imageUrl} text={m.text} authors={[m.author]} wip />)
         || []
+    ),
+    ...(showcaseDemos
+      .map((d) => (
+        <Card
+          key={d.media.image}
+          photo={d.media.image}
+          projectTitle={d.name}
+          authors={d.members}
+          href={`https://showcase.codeday.org/project/${d.id}`}
+        />
+      ))
     ),
     ...(shuffle(indexCommunityPhotos.items.map(i => i), seed)
       .map((p) => <Card key={p.photo.url} photo={p.photo.url} eventInfo={{ region: p.region, event: p.event }} />)

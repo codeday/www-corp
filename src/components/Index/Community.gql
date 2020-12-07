@@ -5,10 +5,29 @@ fragment IndexCommunityComponent on Query {
       imageUrl(width: 300, height: 300, strategy: CROP)
       author {
         name
-        picture
+        picture(transform: { width: 32, height: 32, fit: CROP})
       }
     }
   }
+
+  showcase {
+    projects( where:{media: IMAGES}) {
+      id
+      name
+      media {
+        type
+        topic
+        image(width: 300, height: 300, strategy: CROP)
+      }
+      members {
+        account {
+          name
+          picture(transform: { width: 32, height: 32, fit:CROP })
+        }
+      }
+    }
+  }
+
   cms {
     indexCommunityPhotos: pressPhotos(limit: 100) {
       items {
