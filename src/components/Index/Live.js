@@ -34,7 +34,7 @@ export default function Live(props) {
   if (!username) return <></>;
 
   return (
-    <Content maxWidth="xl" {...props}>
+    <Content maxWidth="3xl" {...props}>
       <Box color="red.600" fontWeight="bold"><Broadcast /> LIVE</Box>
       <Box
         ref={ref}
@@ -45,6 +45,9 @@ export default function Live(props) {
         frameBorder="no"
         scrolling="no"
         allowFullScreen="no"
+        shadow="sm"
+        rounded="sm"
+        borderWidth={1}
       />
     </Content>
   );
