@@ -16,7 +16,7 @@ export default function Workshops() {
   return (
     <Content>
       <Heading as="h3" textAlign="center" fontSize="xl" mb={2}>Upcoming Workshops &amp; Events</Heading>
-      <Heading as="h6" textAlign="center" fontSize="md" mb={5}>Automatically put into your time</Heading>
+      <Heading as="h6" textAlign="center" fontSize="md" mb={5}>(Converted to Your Timezone)</Heading>
       <Grid templateColumns="minmax(0, 1fr) minmax(0, 2fr) minmax(0, 4fr)" gap={4}>
         {calendar.events.map((e) => {
           const color = colors[create(e.calendarName).intBetween(0, colors.length)];
@@ -40,7 +40,7 @@ export default function Workshops() {
               </Box>
               <Text>
                 {formatShortDate(start, true)}{' '}
-                @ {formatAMPM(start)} 
+                @ {formatAMPM(start)}
               </Text>
               <Text>
                 <Link href={e.location} target="_blank" rel="noopener">
