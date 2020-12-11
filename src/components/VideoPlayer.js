@@ -4,7 +4,7 @@ import Box from '@codeday/topo/Atom/Box';
 
 const Hls = dynamic(() => import('hls.js/dist/hls.light.js'), { ssr: false });
 
-export default function VideoPlayer({ url, poster, autoPlay, ...props }) {
+export default function VideoPlayer({ url, poster, autoPlay, volume, ...props }) {
   const player = useRef();
   useEffect(() => {
     if (typeof window === 'undefined' || typeof player === 'undefined') return;
@@ -25,6 +25,7 @@ export default function VideoPlayer({ url, poster, autoPlay, ...props }) {
           preload="auto"
           autoPlay={autoPlay || false}
           src={url}
+          volume={volume}
           width="100%"
           height="100%">
       </video>
