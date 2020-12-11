@@ -12,15 +12,16 @@ import Community from '../components/Index/Community';
 import Quote from '../components/Index/Quotes';
 import Workshops from '../components/Index/Workshops';
 import EcoBox from '../components/Index/EcoBox';
+import useTwitch from '../useTwitch';
 import { IndexQuery } from './index.gql';
 
 export default function Home({ seed }) {
+  const { username } = useTwitch();
   return (
     <Page slug="/">
       <Announcement mt={-12} mb={8} />
-      <Hero seed={seed} mb={8} />
+      <Hero twitchUsername={username} seed={seed} mb={8} />
       <Stats />
-      <Live />
       <Programs />
       <Sponsors />
       <Community />
