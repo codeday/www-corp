@@ -7,6 +7,7 @@ import Button from '@codeday/topo/Atom/Button';
 import Play from '@codeday/topocons/Icon/MediaPlay';
 import Image from '@codeday/topo/Atom/Image';
 import Slides from '@codeday/topo/Molecule/Slides';
+import Live from './Live';
 import FlexScatter from '../FlexScatter';
 import VideoLink from '../VideoLink';
 import OnlyVisibleBox from '../OnlyVisibleBox';
@@ -39,64 +40,74 @@ function photoSlides(rand, photoGroups) {
   ));
 }
 
-export default function Hero({ seed, ...props }) {
+export default function Hero({ seed, twitchUsername, ...props }) {
   const { cms: { indexHeroPhotos, mission, explainer } } = useQuery();
 
   const rand = create(seed);
   const photos = shuffle(JSON.parse(JSON.stringify(indexHeroPhotos?.items)) || [], seed).slice(0, 6*5);
 
+  const tagline = (
+    <Box m={{ base: 8, lg: 0, xl: 16 }} mt={{ base: 0, xl: 0 }} textAlign={{ base: 'center', lg: 'left'}}>
+      <Heading as="h2" fontSize="6xl" fontWeight="bold" lineHeight="1.1" color="#311c1c" mt={8}>
+        There's a place in tech for everyone.
+      </Heading>
+      <Text fontSize="xl" mt={8} mb={8} color="#311c1c">{mission?.items[0]?.value}</Text>
+      {explainer && (
+        <VideoLink url={explainer.url} autoPlay>
+          <Button variantColor="red">Learn More&nbsp;<Play /></Button>
+        </VideoLink>
+      )}
+    </Box>
+  );
+
+  const imagesSmall = (
+    <Box d={{ base: 'none', lg: 'block', xl: 'none'}} marginRight='-100px'>
+      <OnlyVisibleBox>
+        <FlexScatter
+          seed={seed}
+          gapMin={5}
+          gapMax={15}
+          yOffsetMin={-25}
+          yOffsetMax={75}
+          height={(150+75)*2}
+        >
+          {photoSlides(rand, splitGroups(photos, 4))}
+        </FlexScatter>
+      </OnlyVisibleBox>
+    </Box>
+  );
+
+  const imagesLarge = (
+    <Box d={{ base: 'none', xl: 'block'}} marginRight={{ base: '-125px', xl: '0'}}>
+      <OnlyVisibleBox>
+        <FlexScatter
+          seed={seed}
+          gapMin={25}
+          gapMax={50}
+          yOffsetMin={-25}
+          yOffsetMax={75}
+          height={(150+75)*2}
+        >
+          {photoSlides(rand, splitGroups(photos, 6))}
+        </FlexScatter>
+      </OnlyVisibleBox>
+    </Box>
+  );
+
   return (
     <Box maxWidth="1800px" role="banner" m="0 auto" {...props}>
       <Grid
-        templateColumns={{ base: '1fr', md: '8fr 5fr', lg: '8fr 10fr', xl: '4fr 3fr' }}
+        templateColumns={{ base: '1fr', lg: '8fr 10fr', xl: '4fr 3fr' }}
         gap={4}
         pl={4}
-        overflow="hidden"
+        overflow={!twitchUsername && 'hidden'}
       >
-        <Box m={{ base: 0, lg: 16 }} mt={{ base: 0, lg: 0 }} textAlign={{ base: 'center', md: 'left'}}>
-          <Heading as="h2" fontSize="6xl" fontWeight="bold" lineHeight="1.1" color="#311c1c" mt={8}>
-            There's a place in tech for everyone.
-          </Heading>
-          <Text fontSize="xl" mt={8} mb={8} color="#311c1c">{mission?.items[0]?.value}</Text>
-          {explainer && (
-            <VideoLink url={explainer.url} autoPlay>
-              <Button variantColor="red">Learn More&nbsp;<Play /></Button>
-            </VideoLink>
-          )}
-        </Box>
-
-
-        {/* Small display: 4x images */}
-        <Box d={{ base: 'none', md: 'block', lg: 'none'}} marginRight='-100px'>
-          <OnlyVisibleBox>
-            <FlexScatter
-              seed={seed}
-              gapMin={5}
-              gapMax={15}
-              yOffsetMin={-25}
-              yOffsetMax={75}
-              height={(150+75)*2}
-            >
-              {photoSlides(rand, splitGroups(photos, 4))}
-            </FlexScatter>
-          </OnlyVisibleBox>
-        </Box>
-
-        {/* Large display: 6x images */}
-        <Box d={{ base: 'none', lg: 'block'}} marginRight={{ base: '-125px', xl: '0'}}>
-          <OnlyVisibleBox>
-            <FlexScatter
-              seed={seed}
-              gapMin={25}
-              gapMax={50}
-              yOffsetMin={-25}
-              yOffsetMax={75}
-              height={(150+75)*2}
-            >
-              {photoSlides(rand, splitGroups(photos, 6))}
-            </FlexScatter>
-          </OnlyVisibleBox>
-        </Box>
+        {tagline}
+        {twitchUsername ? (
+          <Box d={{ base: 'none', lg: 'block' }} mt={-12}>
+            <Live username={twitchUsername} />
+          </Box>
+        ) : [imagesSmall, imagesLarge]}
       </Grid>
     </Box>
   );
