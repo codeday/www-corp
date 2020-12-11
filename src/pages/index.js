@@ -16,11 +16,11 @@ import useTwitch from '../useTwitch';
 import { IndexQuery } from './index.gql';
 
 export default function Home({ seed }) {
-  const { username } = useTwitch();
+  const twitch = useTwitch();
   return (
     <Page slug="/">
       <Announcement mt={-12} mb={8} />
-      <Hero twitchUsername={username} seed={seed} mb={8} />
+      <Hero twitch={twitch} mb={8} />
       <Stats />
       <Programs />
       <Sponsors />

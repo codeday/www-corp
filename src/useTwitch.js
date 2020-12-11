@@ -7,7 +7,7 @@ export default function useTwitch() {
   useEffect(() => {
     if (typeof window === 'undefined') return () => {};
 
-    const interval = setInterval(async () => {
+    const updateTwitch = async () => {
       const result = await apiFetch(`query {
         twitch {
           live {
@@ -20,7 +20,9 @@ export default function useTwitch() {
         }
       }`);
       setData(result?.twitch?.live || {});
-    }, 60 * 1000);
+    }
+    updateTwitch();
+    const interval = setInterval(updateTwitch, 60 * 1000);
     return () => clearInterval(interval);
   }, [typeof window]);
 
