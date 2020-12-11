@@ -11,7 +11,8 @@ const options = {
   focusEasingFunction: ['Linear', 'None'],
   markerTooltipRenderer: () => ``,
   enableCameraRotate: false,
-  focusDistanceRadiusScale: 2.1,
+  enableCameraZoom: false,
+  focusDistanceRadiusScale: 3.5,
   enableMarkerGlow: false,
   enableDefocus: false,
   enableCameraZoom: false,
@@ -63,7 +64,7 @@ function InnerGlobe({ regions, testimonial }){
       globeCloudsTexture={null}
       markers={markers}
       globeTexture="/globe.jpg"
-      globeBackgroundTexture="/background.png"
+      globeBackgroundTexture={null}
       options={{
         ...options
       }}
@@ -98,5 +99,5 @@ export default function Globe({ testimonial, regions }) {
 }
 Globe.propTypes = {
   testimonial: PropTypes.object.isRequired,
-  regions: PropTypes.arrayOf([PropTypes.object]).isRequired,
+  regions: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -8,22 +8,5 @@ fragment IndexHeroComponent on Query {
     explainer: asset(id:"6BoY9Ec9J8YRrHcj2RqsCg"){
       url
     }
-    indexHeroPhotos: pressPhotos(limit: 100) {
-      items {
-        region {
-          name
-        }
-        event {
-          program {
-            name
-          }
-          startsAt
-        }
-        photo {
-          jpg: url(transform: { width: 200, height: 150, format: JPG_PROGRESSIVE, resizeStrategy: FILL })
-          webp: url(transform: { width: 200, height: 150, format: JPG_PROGRESSIVE, resizeStrategy: FILL })
-        }
-      }
-    }
   }
 }

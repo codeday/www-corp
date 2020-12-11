@@ -229,9 +229,9 @@ export default function Community({ seed, ...props }) {
     <PageVisibility onChange={setPageIsVisible}>
       <Box ref={ref} mt={32} mb={32} {...props}>
         <Box key={rows[0][0].imageUrl}>
-          {(pageIsVisible && inView) && (
+          {(pageIsVisible && inView) ? (
             <Ticker>{({ index }) => rows[0][index % rows[0].length]}</Ticker>
-          )}
+          ) : <Box h={40} />}
         </Box>
 
         <Content>
@@ -241,11 +241,11 @@ export default function Community({ seed, ...props }) {
         </Content>
 
         <Box key={rows[1][0].imageUrl} mb={8}>
-          {(pageIsVisible && inView) && (
+          {(pageIsVisible && inView) ? (
             <Ticker offset={-100}>{
               ({ index }) => rows[1][index % rows[0].length]
             }</Ticker>
-          )}
+          ) : <Box h={40} />}
         </Box>
       </Box>
     </PageVisibility>
