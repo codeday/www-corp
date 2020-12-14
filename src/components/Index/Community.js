@@ -39,6 +39,7 @@ function PhotoTextCard({
                     h={4}
                     mr={2}
                     rounded="full"
+                    key={author.picture}
                   />
                 ))}
               </Box>
@@ -96,6 +97,7 @@ function PhotoCard({ photo, authors, wip, eventInfo, projectTitle, href }) {
                 mr={2}
                 float="left"
                 rounded="full"
+                key={author.picture}
               />
             ))}
             <Text mb={0} bold fontSize="sm" color="white">&nbsp;</Text>

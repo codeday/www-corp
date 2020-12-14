@@ -39,8 +39,8 @@ export default function StaticContent({ children, element = 'div', ...props }) {
   });
 }
 StaticContent.propTypes = {
-  children: PropTypes.oneOf([PropTypes.element, PropTypes.arrayOf(PropTypes.element)], PropTypes.string).isRequired,
-  element: PropTypes.oneOf([PropTypes.string, PropTypes.elementType]),
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element), PropTypes.string]).isRequired,
+  element: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 };
 StaticContent.defaultProps = {
   element: 'div',

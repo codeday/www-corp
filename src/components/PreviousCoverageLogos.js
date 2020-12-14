@@ -15,7 +15,7 @@ export default function PreviousCoverageLogos({ num, ...props }) {
     <StaticContent>
       {
         pubs.map((pub) => (
-          <Link href={pub.url} target="_blank" rel="noopener">
+          <Link href={pub.url} target="_blank" rel="noopener" key={pub.url}>
             <Image src={pub.publicationLogo.url} alt={pub.publicationName} d="inline-block" {...props} />
           </Link>
         ))
