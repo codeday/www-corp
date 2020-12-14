@@ -41,6 +41,15 @@ export default function Quotes({ seed }) {
   return (
     <>
       <Content>
+        <Heading
+          as="h3"
+          fontSize="2xl"
+          bold
+          mt={0}
+          textAlign="center"
+        >
+          In-person in {quoteRegions?.items?.length } cities + worldwide online events.
+        </Heading>
         <Grid templateColumns={{ base: '1fr', lg: '40% 60%'}} alignItems="center" gap={8} position="relative">
           {/* Globe */}
           <VisibilityCheckBox display={{ base: 'none', lg: 'block'}}>
@@ -51,22 +60,10 @@ export default function Quotes({ seed }) {
 
           {/* Text Quote */}
           <Box>
-            <Heading
-              as="h3"
-              fontSize="2xl"
-              bold
-              mb={8}
-              mt={0}
-              d={{ base: 'none', lg: 'block' }}
-              position="absolute" top="0"
-            >
-              In-person in {quoteRegions?.items?.length } cities + worldwide online events.
-            </Heading>
             <TextQuote
               testimonial={textQuotes[visibleQuoteIndex]}
               opacity={isTransitioning ? 0 : 1}
               transition={`opacity ${TRANSITION_TIME/2}s`}
-              pt={{ base: 0, lg: 16 }}
             />
           </Box>
         </Grid>
@@ -77,7 +74,7 @@ export default function Quotes({ seed }) {
         </Text>
         <Grid templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, minmax(0, 1fr))'}} gap={4}>
           {videoQuotes.map((q) => (
-            <VideoTestimonialThumbnail video={q} />
+            <VideoTestimonialThumbnail key={q.video.url} video={q} />
           ))}
         </Grid>
       </Content>

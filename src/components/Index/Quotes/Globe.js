@@ -10,6 +10,7 @@ const options = {
   focusAnimationDuration: 1000,
   focusEasingFunction: ['Linear', 'None'],
   markerTooltipRenderer: () => ``,
+  markerRadiusScaleRange: [0.02, 0.03],
   enableCameraRotate: false,
   enableCameraZoom: false,
   focusDistanceRadiusScale: 3.5,
@@ -49,9 +50,10 @@ function InnerGlobe({ regions, testimonial }){
   const markers = regions?.map((r) => ({
     id: `${r.webname}-${testimonial?.region?.webname === r.webname ? 'active' : 'inactive'}`,
     color: testimonial?.region?.webname === r.webname ? colors.red[600] : colors.white,
-    value: 10,
+    value: testimonial?.region?.webname === r.webname ? 20 : 10,
     coordinates: [r.location.lat, r.location.lon],
-  }));
+  }))
+  .sort((a, b) => b.value - a.value);
 
   useEffect(() => {
     if (globe) globe.updateFocus([38.0000, -88.0000]);
@@ -90,7 +92,7 @@ export default function Globe({ testimonial, regions }) {
   }, [ inView ]);
 
   return (
-    <Box ref={ref} height="30em" width="100%">
+    <Box ref={ref} height="100%" width="100%">
       {hasLoaded && (
         <InnerGlobe regions={regions} testimonial={testimonial} />
       )}

@@ -52,6 +52,7 @@ export default function Programs() {
                   fontSize="xl"
                   borderColor="current.border"
                   borderBottomWidth="1px"
+                  key={region.webname}
                 >
                   {region.name}
                 </Box>
@@ -72,6 +73,7 @@ export default function Programs() {
                 href={program.url}
                 target="_blank"
                 rel="noopener"
+                key={program.url}
               >
                 <Box mb={1}>
                   <Box float="left" width={10} pr={4}>
@@ -99,6 +101,7 @@ export default function Programs() {
                     href={prog.url}
                     target="_blank"
                     rel="noopener"
+                    key={prog.url}
                   >
                     <Image d="inline-block" src={prog.logo.url} height={12} mb={2} />
                     <br />

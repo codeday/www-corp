@@ -12,7 +12,7 @@ export default function Sponsors(props) {
       <Heading as="h2" color="current.textLight" fontSize="2xl" mt={16} mb={8} bold>With support from...</Heading>
       <Box mr={-4} lineHeight={4} mb={8}>
         {majorSponsors?.items?.map((sponsor) => (
-          <Link href={sponsor.link} target="_blank" rel="noopener" pr={8}>
+          <Link href={sponsor.link} target="_blank" rel="noopener" pr={8} key={sponsor.link}>
               <Box d="inline-block" h={16}>
                 <Image src={sponsor.logo.url} height={80} width={160} alt={sponsor.name} />
               </Box>
