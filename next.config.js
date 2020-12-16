@@ -1,3 +1,4 @@
+/* eslint-disable node/no-process-env */
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
@@ -47,5 +48,10 @@ module.exports = {
         permanent: false,
       },
     ];
+  },
+  serverRuntimeConfig: {
+    stripe: {
+      secretKey: process.env.STRIPE_SECRET_KEY,
+    },
   },
 };
