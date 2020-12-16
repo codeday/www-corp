@@ -62,6 +62,7 @@ export default function Page ({ children, title, darkHeader, slug }) {
           <CustomLinks>
             <Link href="/help" d="block">FAQs &amp; Help</Link>
             <Link href="/docs" d="block">Legal Documents</Link>
+            <Link href="/donate" d="block">Make a Donation</Link>
           </CustomLinks>
         </Footer>
       </Box>
