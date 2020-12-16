@@ -25,6 +25,7 @@
     "luxon": "^1.25.0",
     "next": "^10.0.0",
     "next-seo": "^4.7.3",
+    "node-fetch": "^2.6.1",
     "prop-types": "^15.7.2",
     "random-seed": "^0.3.0",
     "react": "^17.0.1",
@@ -36,6 +37,8 @@
     "react-player": "^2.7.0",
     "react-responsive-modal": "^5.0.2",
     "react-ticker": "^1.2.2",
+    "sane-email-validation": "^3.0.1",
+    "stripe": "^8.129.0",
     "three": "^0.119.1",
     "truncate": "^2.1.0",
     "webpack-bundle-analyzer": "^3.9.0"
