@@ -6,10 +6,24 @@ import rateLimit from 'express-rate-limit';
 const { serverRuntimeConfig } = getConfig();
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 3,
+  max: 2,
 });
 
+function realIp(req) {
+  return (
+    req.headers['Fastly-Client-IP']
+    || req.headers['fastly-client-ip']
+    || req.headers['X-Real-IP']
+    || req.headers['x-real-ip']
+  );
+}
+
 function runMiddleware(req, res, fn) {
+  if (realIp(req)) {
+    req.ip = realIp(req);
+  } else if (!req.ip) {
+    req.ip = req.connection.remoteAddress;
+  }
   return new Promise((resolve, reject) => {
     fn(req, res, (result) => {
       if (result instanceof Error) {
