@@ -1,10 +1,28 @@
 import Stripe from 'stripe';
 import getConfig from 'next/config';
 import isEmail from 'sane-email-validation';
+import rateLimit from 'express-rate-limit';
 
 const { serverRuntimeConfig } = getConfig();
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 3,
+});
+
+function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+
+      return resolve(result);
+    });
+  });
+}
 
 async function Donate(req, res) {
+  await runMiddleware(req, res, limiter);
   const { name, email, amount: amountStr } = req.body;
   const stripe = Stripe(serverRuntimeConfig.stripe.secretKey);
 
