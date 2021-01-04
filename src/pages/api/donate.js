@@ -40,7 +40,8 @@ async function Donate(req, res) {
   const { hosted_invoice_url: url } = await stripe.invoices.finalizeInvoice(invoiceId);
   await stripe.invoices.sendInvoice(invoiceId);
 
-  res.send({ url });
+  // res.send({ url });
+  res.send({ ok: true });
 }
 
 export default async function TryDonate(req, res) {

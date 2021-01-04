@@ -14,6 +14,21 @@ export default function Donate() {
   const [email, setEmail] = useState(null);
   const [amount, setAmount] = useState(25);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [checkEmail, setCheckEmail] = useState(false);
+
+  if (checkEmail) {
+    return (
+      <Page title="Donate" slug="/donate">
+        <Content maxWidth="containers.md">
+          <Heading as="h2" fontSize="5xl" mt={-2} mb={2}>Payment Link Emailed</Heading>
+          <Text>
+            Recently scammers have been using our donation form to test stolen credit cards. To prevent costly
+            chargebacks, we have emailed you a link to complete your donation.
+          </Text>
+        </Content>
+      </Page>
+    );
+  }
 
   return (
     <Page title="Donate" slug="/donate">
@@ -55,10 +70,11 @@ export default function Donate() {
                   },
                   body: JSON.stringify({ name, email, amount }),
                 });
-                const { url, error } = await result.json();
-                if (error) setError(error);
-                // eslint-disable-next-line no-undef
-                else window.location = url;
+                const { url, ok, error: err } = await result.json();
+                if (err) setError(err);
+                else if (url) window.location = url;
+                else if (ok) setCheckEmail(true);
+                else setError('An unknown error ocurred.');
               } catch (err) {}
               setIsSubmitting(false);
             }}
