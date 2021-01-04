@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import fetch from 'node-fetch';
 import isEmail from 'sane-email-validation';
-import Text, { Heading } from '@codeday/topo/Atom/Text';
+import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
 import Content from '@codeday/topo/Molecule/Content';
 import Button from '@codeday/topo/Atom/Button';
 import Box, { Grid } from '@codeday/topo/Atom/Box';
@@ -39,7 +39,7 @@ export default function Donate() {
           opportunities for under-served students to explore a future in tech and beyond.
         </Text>
         {error && (
-          <Box p={4} bg="red.50" borderColor="red.800" borderWidth={2} color="red.900">
+          <Box p={4} bg="red.50" borderColor="red.800" borderWidth={2} color="red.900" mb={4}>
             {error}
           </Box>
         )}
@@ -70,12 +70,16 @@ export default function Donate() {
                   },
                   body: JSON.stringify({ name, email, amount }),
                 });
+                if (result.status === 429) throw new Error('You are trying to donate too fast.');
+                else if (result.status !== 200) throw new Error('Server error, email us at team@codeday.org.');
                 const { url, ok, error: err } = await result.json();
                 if (err) setError(err);
-                else if (url) window.location = url;
+                else if (typeof url !== 'undefined') window.location = url;
                 else if (ok) setCheckEmail(true);
                 else setError('An unknown error ocurred.');
-              } catch (err) {}
+              } catch (err) {
+                setError(err.toString());
+              }
               setIsSubmitting(false);
             }}
             mt={4}
@@ -90,8 +94,13 @@ export default function Donate() {
             You will be taken to our payment processor, Stripe, to complete your donation by card or ACH transfer.
           </Text>
           <Text>
-            To pay by check, make payable to &ldquo;Student Research and Development&rdquo; and mail to:<br />
-            340 S Lemon Ave, #7763, Walnut CA 91789.
+            <Text as="span" bold>Check Donations:</Text> make payable to &ldquo;Student Research and Development&rdquo;
+            and mail to:<br />340 S Lemon Ave, #7763, Walnut CA 91789.
+          </Text>
+          <Text>
+            <Text as="span" bold>Employer Matching:</Text> search for &ldquo;CodeDay&rdquo; or &ldquo;Student Research
+            and Development&rdquo; in your employer&apos;s matching portal. Our EIN is 26-4742589.{' '}
+            <Link href="https://f1.codeday.org/exempt.pdf">Download our exemption letter.</Link>
           </Text>
         </Box>
       </Content>
