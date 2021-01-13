@@ -43,6 +43,11 @@ export default function Stats(props) {
           <StatBox num={rollupStats.statEventCount} label="Events" />
           <StatBox num={rollupStats.statStudentCount} label="CodeDay Alums" />
           <StatBox
+            num={rollupStats.statStudentCount * 0.71}
+            label="Underrepresented in CS"
+            d={{ base: 'none', lg: 'block' }}
+          />
+          <StatBox
             num={rollupStats.statLowInterestCount}
             label="Didn't Like CS Before"
           />
@@ -51,11 +56,6 @@ export default function Stats(props) {
             unit="%"
             label="Kept Coding After"
             d={{ base: 'none', md: 'block' }}
-          />
-          <StatBox
-            num={rollupStats.statLowInterestContinuedCount}
-            label="New Coders Created"
-            d={{ base: 'none', lg: 'block' }}
           />
         </Grid>
         <Box textAlign="center" mt={8} opacity="0.7">
