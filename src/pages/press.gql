@@ -27,6 +27,16 @@ query PressQuery {
       }
     }
 
+
+    previousCoverage: newsCoverages (order: date_DESC, limit: 12) {
+      items {
+        title
+        date
+        publicationName
+        url
+      }
+    }
+
     programs(where: {type:"primary"}) {
       items {
         logo {
