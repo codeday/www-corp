@@ -27,8 +27,6 @@ export default function Press({ seed }) {
             <Text fontSize="xl" mb={8}>{mission?.items[0]?.value}</Text>
             <ContentfulRichText json={pressDetails?.items[0]?.richValue?.json} />
 
-            <Button variantColor="blue" as="a" href="#assets">Download Press Images &amp; Logos</Button>
-
             <Heading as="h4" fontSize="lg" mt={6} mb={4}>Our Programs:</Heading>
             {programs?.items?.map((program) => (
               <Box key={program.name}>
@@ -41,10 +39,15 @@ export default function Press({ seed }) {
             ))}
           </Box>
           <Box>
-            <Box p={4} pb={0} borderWidth={1} borderColor="blue.600" bg="blue.50" color="blue.900">
+            <Box p={4} pb={0} mb={4} borderWidth={1} borderColor="blue.600" bg="blue.50" color="blue.900">
               <Heading as="h3" fontSize="lg" mb={4} bold>Press Contact</Heading>
               <ContentfulRichText json={pressContact?.items[0]?.richValue?.json} />
             </Box>
+
+            <Box textAlign="center">
+              <Button variantColor="blue" as="a" href="#assets">Download Press Images &amp; Logos</Button>
+            </Box>
+
             <Box textAlign="center" mt={4}>
               <Text color="current.textLight" bold>As Seen In</Text>
               <PreviousCoverageLogos
