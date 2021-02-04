@@ -1,5 +1,6 @@
 import React from 'react';
 import Box, { Grid } from '@codeday/topo/Atom/Box';
+import Button from '@codeday/topo/Atom/Button';
 import Image from '@codeday/topo/Atom/Image';
 import Text, { Heading } from '@codeday/topo/Atom/Text';
 import Content from '@codeday/topo/Molecule/Content';
@@ -41,7 +42,7 @@ export default function Programs() {
             <NextEventDate upcoming={codeDay?.linkedFrom?.events?.items} />
             <Text fontSize="md" mt={4} mb={4}>{codeDay?.shortDescription}</Text>
             <Text fontSize="md" mb={4} bold>Choose a location:</Text>
-            <Box borderWidth={1} borderColor="current.border" maxHeight={{ base: "sm", md: "md" }} overflowY="auto">
+            <Box borderWidth={1} borderColor="current.border" maxHeight={{ base: "sm", md: "lg" }} overflowY="auto">
               {regions?.items?.map((region) => (
                 <Box
                   p={2}
@@ -84,7 +85,10 @@ export default function Programs() {
                   <Text fontSize="lg" mb={0} bold>{program.name}</Text>
                 </Box>
                 <NextEventDate upcoming={program.linkedFrom?.events?.items} />
-                <Text mt={2} clear="both" mb={0}>{program.shortDescription}</Text>
+                <Text mt={2} clear="both">{program.shortDescription}</Text>
+                <Box>
+                  <Button size="sm">Learn More &raquo;</Button>
+                </Box>
               </Box>
             ))}
 
