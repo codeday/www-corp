@@ -32,6 +32,7 @@ export default function Hero({ twitch, ...props }) {
         gap={8}
         pl={4}
         pr={4}
+        pt={8}
         overflow={!twitch?.username && 'hidden'}
       >
         {tagline}
