@@ -7,6 +7,7 @@ import Content from '@codeday/topo/Molecule/Content';
 import { apiFetch } from '@codeday/topo/utils';
 import Page from '../components/Page';
 import Employees from '../components/Contact/Employees';
+import Board from '../components/Contact/Board';
 import Volunteers from '../components/Contact/Volunteers';
 import { useQuery } from '../query';
 import { ContactQuery } from './contact.gql';
@@ -47,6 +48,12 @@ export default function Home({ seed }) {
         </Heading>
       </Content>
       <Employees seed={seed} mb={16} />
+      <Content>
+        <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
+          Board of Directors:
+        </Heading>
+      </Content>
+      <Board seed={seed} mb={16} />
       <Content>
         <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
           Volunteers:
