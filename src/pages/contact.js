@@ -1,5 +1,6 @@
 import React from 'react';
 import { print } from 'graphql';
+import { sign } from 'jsonwebtoken';
 import { Grid } from '@codeday/topo/Atom/Box';
 import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
 import Image from '@codeday/topo/Atom/Image';
@@ -50,7 +51,7 @@ export default function Home({ seed }) {
       <Employees seed={seed} mb={16} />
       <Content>
         <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
-          Board of Directors:
+          Independent members of the board:
         </Heading>
       </Content>
       <Board seed={seed} mb={16} />
@@ -65,9 +66,10 @@ export default function Home({ seed }) {
 }
 
 export async function getStaticProps() {
+  const token = sign({ scopes: 'read:users' }, process.env.ACCOUNT_SECRET, { expiresIn: '3m' });
   return {
     props: {
-      query: await apiFetch(print(ContactQuery)),
+      query: await apiFetch(print(ContactQuery), {}, { Authorization: `Bearer ${token}` }),
       seed: Math.random(),
     },
     revalidate: 300,

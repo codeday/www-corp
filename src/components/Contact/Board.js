@@ -23,14 +23,15 @@ export default function Employees(props) {
                 mr={4}
                 rounded="full"
                 w="64px"
+                w
                 h="64px"
                 alt=""
               />
-              <Text mb={0} pt={2} bold>{director.name}</Text>
+              <Text mb={0} pt={2} bold>{director.givenName} {director.familyName}</Text>
               <Text fontSize="sm" color="current.textLight">Board Member, {director.pronoun}</Text>
             </Box>
             <Box ml="64px" pl={4}>
-              <Text>{director.bio || `${director.name} is a member of the CodeDay board of directors.`}</Text>
+              <Text>{director.bio || `${director.givenName} is a member of the CodeDay board.`}</Text>
             </Box>
           </Box>
         ))}

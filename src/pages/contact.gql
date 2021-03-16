@@ -11,7 +11,8 @@ query ContactQuery {
 
     board: roleUsers (roleId: "rol_cU5c8wlFVbSh6I2w") {
       id
-      name
+      givenName
+      familyName
       title
       picture
       bio
