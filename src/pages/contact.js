@@ -1,5 +1,6 @@
 import React from 'react';
 import { print } from 'graphql';
+import { sign } from 'jsonwebtoken';
 import { Grid } from '@codeday/topo/Atom/Box';
 import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
 import Image from '@codeday/topo/Atom/Image';
@@ -7,6 +8,7 @@ import Content from '@codeday/topo/Molecule/Content';
 import { apiFetch } from '@codeday/topo/utils';
 import Page from '../components/Page';
 import Employees from '../components/Contact/Employees';
+import Board from '../components/Contact/Board';
 import Volunteers from '../components/Contact/Volunteers';
 import { useQuery } from '../query';
 import { ContactQuery } from './contact.gql';
@@ -49,6 +51,12 @@ export default function Home({ seed }) {
       <Employees seed={seed} mb={16} />
       <Content>
         <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
+          Independent members of the board:
+        </Heading>
+      </Content>
+      <Board seed={seed} mb={16} />
+      <Content>
+        <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
           Volunteers:
         </Heading>
       </Content>
@@ -58,9 +66,10 @@ export default function Home({ seed }) {
 }
 
 export async function getStaticProps() {
+  const token = sign({ scopes: 'read:users' }, process.env.ACCOUNT_SECRET, { expiresIn: '3m' });
   return {
     props: {
-      query: await apiFetch(print(ContactQuery)),
+      query: await apiFetch(print(ContactQuery), {}, { Authorization: `Bearer ${token}` }),
       seed: Math.random(),
     },
     revalidate: 300,
