@@ -34,7 +34,7 @@ export default function Home() {
     return <Error404 />;
   }
 
-  const { image, title, cognitoForm, details, sidebar } = cms.forms.items[0];
+  const { image, title, cognitoForm, details, sidebar, prefill } = cms.forms.items[0];
 
   return (
     <Page slug={`/f/${query.slug}`} title={title}>
@@ -48,7 +48,7 @@ export default function Home() {
             {details && (
               <ContentfulRichText json={details.json} links={details.links} />
             )}
-            <CognitoForm formId={cognitoForm} fallback />
+            <CognitoForm formId={cognitoForm} prefill={prefill} fallback />
           </Box>
           {sidebar && (
             <Box>
