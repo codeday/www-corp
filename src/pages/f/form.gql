@@ -15,6 +15,7 @@ query FormQuery($slug: String) {
         title
         cognitoForm
         slug
+        prefill
         image {
           url(transform: { width: 1000, height: 300, resizeStrategy: CROP})
         }
