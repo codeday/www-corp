@@ -6,6 +6,7 @@ import Content from '@codeday/topo/Molecule/Content';
 import Button from '@codeday/topo/Atom/Button';
 import Box, { Grid } from '@codeday/topo/Atom/Box';
 import { default as Input } from '@codeday/topo/Atom/Input/Text';
+import Divider from '@codeday/topo/Atom/Divider';
 import Page from '../components/Page';
 
 export default function Donate() {
@@ -38,6 +39,15 @@ export default function Donate() {
           CodeDay is a 501(c)(3) non-profit. Your donation supports our work providing welcoming and diverse
           opportunities for under-served students to explore a future in tech and beyond.
         </Text>
+        <Divider mt={8} mb={8} />
+        <Heading as="h3" fontSize="2xl" mb={8} textAlign="center">Set Up Recurring Donations</Heading>
+        <Text textAlign="center">
+          <Button as="a" href="https://github.com/sponsors/codeday" bg="#2f3337" color="#fff" mr={2}>Github</Button>
+          <Button as="a" href="https://www.patreon.com/codeday" bg="#ff424d" color="#fff" m={2}>Patreon</Button>
+          <Button as="a" href="https://www.every.org/codeday" bg="#00a37f" color="#fff" m={2}>every.org</Button>
+        </Text>
+        <Divider mt={8} mb={8} />
+        <Heading as="h3" fontSize="2xl" mb={8} textAlign="center">Make a One-Time Donation</Heading>
         {error && (
           <Box p={4} bg="red.50" borderColor="red.800" borderWidth={2} color="red.900" mb={4}>
             {error}
