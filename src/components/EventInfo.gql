@@ -1,0 +1,9 @@
+fragment EventInfo on CalendarCalendarEvent {
+  title
+  description
+  location
+  metadata
+  calendarName
+  start
+  end
+}
