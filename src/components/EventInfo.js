@@ -68,8 +68,8 @@ export default function Event({ event, ...rest }) {
         </Box>
       </Grid>
       <Heading as="h2" fontSize="4xl">{title || 'TBA'}</Heading>
-      {event.metadata?.test && (
-        <Text>Presented by {event.metadata.test}</Text>
+      {event.metadata?.presenter && (
+        <Text>Presented by {event.metadata.presenter}</Text>
       )}
       <Box mt={4}>
         {!hasEnded ? (
