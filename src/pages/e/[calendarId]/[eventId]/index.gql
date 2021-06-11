@@ -1,0 +1,12 @@
+#import "../../../../components/EventInfo.gql"
+
+query EventByIdQuery ($calendarId: String!, $id: ID!) {
+  calendar {
+    event(calendars: [$calendarId], id: $id, format: HTML) {
+      id
+      title
+      description
+      ...EventInfo
+    }
+  }
+}
