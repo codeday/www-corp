@@ -43,7 +43,7 @@ export default function Workshops() {
                 @ {formatAMPM(start)}
               </Text>
               <Text>
-                <Link href={e.location} target="_blank" rel="noopener">
+                <Link href={`/e/${e.calendarId}/${e.id}`} target="_blank" rel="noopener">
                   {e.title}
                 </Link>
               </Text>
