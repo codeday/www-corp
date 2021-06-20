@@ -42,6 +42,8 @@ async function Donate(req, res) {
 
   const amount = Number.parseInt(amountStr, 10);
 
+  throw new Error('Online donations are disabled right now due to fraud.');
+
   if (!name) throw new Error('Name is required.');
   if (!email) throw new Error('Email is required.');
   if (!isEmail(email)) throw new Error('Email must be valid.');
