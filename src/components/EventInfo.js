@@ -4,11 +4,52 @@ import Box, { Grid } from '@codeday/topo/Atom/Box';
 import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
 import Button from '@codeday/topo/Atom/Button';
 import Html from '@codeday/topo/Molecule/Html';
+import { default as Input } from '@codeday/topo/Atom/Input/Text';
+import { useToasts, apiFetch } from '@codeday/topo/utils';
 import { DateTime } from 'luxon';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import { SubscribeToEvent } from './EventInfo.gql'
 
 const SERVER_TIMEZONE = 'America/Los_Angeles';
+
+function SubscribeBox({ event, ...rest }) {
+  const { success, error } = useToasts();
+  const [isLoading, setIsLoading] = useState(false);
+  const [destination, setDestination] = useState('');
+  return (
+    <Box {...rest}>
+      <Input
+        value={destination}
+        onChange={(e) => setDestination(e.target.value)}
+        placeholder="Phone Number / Email"
+        d="inline-block"
+        w="sm"
+        borderTopRightRadius={0}
+        borderBottomRightRadius={0}
+      />
+      <Button
+        borderTopLeftRadius={0}
+        borderBottomLeftRadius={0}
+        position="relative"
+        top={-1}
+        variantColor="blue"
+        onClick={async () => {
+          setIsLoading(true);
+          try {
+            await apiFetch(SubscribeToEvent, { id: event.id, calendarId: event.calendarId, destination });
+            success(`We'll let you know when this event starts.`);
+          } catch (ex) {
+            error(ex.toString());
+          }
+          setIsLoading(false);
+        }}
+        >
+          Remind Me
+        </Button>
+    </Box>
+  )
+}
 
 export default function Event({ event, ...rest }) {
   const [timezone, setTimezone] = useState(SERVER_TIMEZONE);
@@ -27,6 +68,7 @@ export default function Event({ event, ...rest }) {
   const now = DateTime.local();
   const startLocal = start.setZone(timezone);
   const endLocal = end.setZone(timezone);
+  const almostHasStarted = now > (startLocal.minus({ minutes: 15 }));
   const hasStarted = now > startLocal;
   const hasEnded = now > endLocal;
 
@@ -59,7 +101,8 @@ export default function Event({ event, ...rest }) {
                 : { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' },
             )}{' '}
           </Text>
-          <Text>{relative}</Text>
+          <Text mb={0}>{relative}</Text>
+          <Text>{event.subscriberCount} subscribed</Text>
         </Box>
         <Box textAlign="right">
           {type && (
@@ -73,14 +116,16 @@ export default function Event({ event, ...rest }) {
       )}
       <Box mt={4}>
         {!hasEnded ? (
-          <>
-            {event.location && (
-              <>
-                <Link fontSize="lg" href={event.location} target="_blank" mr={4}>{event.location}</Link>
-                <Button as="a" href={event.location} target="_blank" variantColor="blue">Join</Button>
-              </>
-            )}
-          </>
+          almostHasStarted ? (
+            <>
+              {event.location && (
+                <>
+                  <Link fontSize="lg" href={event.location} target="_blank" mr={4}>{event.location}</Link>
+                  <Button as="a" href={event.location} target="_blank" variantColor="blue">Join</Button>
+                </>
+              )}
+            </>
+          ) : <SubscribeBox event={event} mt={4} />
         ) : (
           <>
             <Button
