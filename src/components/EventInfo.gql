@@ -3,7 +3,16 @@ fragment EventInfo on CalendarCalendarEvent {
   description
   location
   metadata
+  calendarId
   calendarName
   start
   end
+  subscriberCount
+}
+
+
+mutation SubscribeToEvent($calendarId: String!, $id: String!, $destination: String!) {
+  calendar {
+    subscribe(calendarId: $calendarId, eventId: $id, destination: $destination)
+  }
 }
