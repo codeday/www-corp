@@ -90,7 +90,7 @@ export default function Event({ event, ...rest }) {
 
   return (
     <Box {...rest}>
-      <Grid templateColumns="3fr 2fr">
+      <Grid templateColumns="3fr 2fr" mb={4}>
         <Box>
           <Text mb={0} fontWeight="bold">
             {startLocal.toLocaleString(DateTime.DATETIME_MED)}
@@ -110,11 +110,11 @@ export default function Event({ event, ...rest }) {
           )}
         </Box>
       </Grid>
-      <Heading as="h2" fontSize="4xl">{title || 'TBA'}</Heading>
+      <Heading as="h2" fontSize="5xl">{title || 'TBA'}</Heading>
       {event.metadata?.presenter && (
-        <Text>Presented by {event.metadata.presenter}</Text>
+        <Text fontSize="xl" mt={2}>Presented by {event.metadata.presenter}</Text>
       )}
-      <Box mt={4}>
+      <Box mt={8}>
         {!hasEnded ? (
           almostHasStarted ? (
             <>

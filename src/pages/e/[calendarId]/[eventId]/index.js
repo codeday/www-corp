@@ -23,19 +23,11 @@ export default function Home({ event }) {
   );
 }
 
-export async function getStaticPaths() {
-  return {
-    fallback: 'blocking',
-    paths: [],
-  };
-}
-
-export async function getStaticProps({ req, params: { calendarId, eventId } }) {
+export async function getServerSideProps({ req, params: { calendarId, eventId } }) {
   const resp = await apiFetch(EventByIdQuery, { id: eventId, calendarId });
   return {
     props: {
       event: resp?.calendar?.event,
     },
-    revalidate: 60,
   }
 }
