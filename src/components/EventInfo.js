@@ -68,7 +68,7 @@ export default function Event({ event, ...rest }) {
   const now = DateTime.local();
   const startLocal = start.setZone(timezone);
   const endLocal = end.setZone(timezone);
-  const almostHasStarted = now > (startLocal.minus({ minutes: 15 }));
+  const almostHasStarted = now > (startLocal.minus({ minutes: 45 }));
   const hasStarted = now > startLocal;
   const hasEnded = now > endLocal;
 

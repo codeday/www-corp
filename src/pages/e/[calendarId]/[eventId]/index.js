@@ -36,6 +36,6 @@ export async function getStaticProps({ req, params: { calendarId, eventId } }) {
     props: {
       event: resp?.calendar?.event,
     },
-    revalidate: 120,
+    revalidate: 60,
   }
 }
