@@ -22,7 +22,7 @@ function SubscribeBox({ event, ...rest }) {
       <Input
         value={destination}
         onChange={(e) => setDestination(e.target.value)}
-        placeholder="Phone Number / Email"
+        placeholder="Phone Number"
         d="inline-block"
         w="sm"
         borderTopRightRadius={0}
