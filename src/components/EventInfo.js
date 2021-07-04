@@ -9,6 +9,7 @@ import { useToasts, apiFetch } from '@codeday/topo/utils';
 import { DateTime } from 'luxon';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
+import { stringify as urlencode } from 'urlencode';
 import { SubscribeToEvent } from './EventInfo.gql'
 
 const SERVER_TIMEZONE = 'America/Los_Angeles';
@@ -17,6 +18,18 @@ function SubscribeBox({ event, ...rest }) {
   const { success, error } = useToasts();
   const [isLoading, setIsLoading] = useState(false);
   const [destination, setDestination] = useState('');
+  const dtFormat = `yyyyLLdd'T'HHmmssZZZ`;
+  const start = DateTime.fromISO(event.start).toFormat(dtFormat);
+  const end = DateTime.fromISO(event.end).toFormat(dtFormat);
+  const addLinkGoogleParams = urlencode({
+    action: 'TEMPLATE',
+    text: event.title,
+    dates: `${start}/${end}`,
+    location: event.location,
+    sf: 'true',
+    output: 'xml',
+  });
+  const addLinkGoogle = `https://www.google.com/calendar/render?${addLinkGoogleParams}`;
   return (
     <Box {...rest}>
       <Input
@@ -47,6 +60,7 @@ function SubscribeBox({ event, ...rest }) {
         >
           Remind Me
         </Button>
+        <Button as="a" href={addLinkGoogle} target="_blank" ml={2}>Add to Google Calendar</Button>
     </Box>
   )
 }

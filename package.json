@@ -45,6 +45,7 @@
     "stripe": "^8.129.0",
     "three": "^0.119.1",
     "truncate": "^2.1.0",
+    "urlencode": "^1.1.0",
     "webpack-bundle-analyzer": "^3.9.0"
   },
   "devDependencies": {
