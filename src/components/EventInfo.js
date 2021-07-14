@@ -18,13 +18,13 @@ function SubscribeBox({ event, ...rest }) {
   const { success, error } = useToasts();
   const [isLoading, setIsLoading] = useState(false);
   const [destination, setDestination] = useState('');
-  const dtFormat = `yyyyLLdd'T'HHmmssZZZ`;
-  const start = DateTime.fromISO(event.start).toFormat(dtFormat);
-  const end = DateTime.fromISO(event.end).toFormat(dtFormat);
+  const dtFormat = `yyyyLLdd'T'HHmmss`;
+  const start = DateTime.fromISO(event.start).toUTC().toFormat(dtFormat);
+  const end = DateTime.fromISO(event.end).toUTC().toFormat(dtFormat);
   const addLinkGoogleParams = urlencode({
     action: 'TEMPLATE',
     text: event.title,
-    dates: `${start}/${end}`,
+    dates: `${start}Z/${end}Z`,
     location: event.location,
     sf: 'true',
     output: 'xml',
