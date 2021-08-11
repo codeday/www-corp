@@ -13,7 +13,7 @@ function NextEventDate({ upcoming }) {
   const next = nextUpcomingEvent(upcoming);
   return next ? (
     <Text color="current.textLight" mb={0} bold>
-      Next event: {formatInterval(next.startsAt, next.endsAt)}
+      {formatInterval(next.startsAt, next.endsAt)}
     </Text>
   ) : (
     <></>
@@ -32,8 +32,6 @@ export default function Programs() {
   return (
     <StaticContent>
       <Content>
-
-
         {/* CodeDay */}
         <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={8}>
           <Box borderWidth={1} borderColor="current.border" borderRadius={2} p={4} boxShadow="md">
