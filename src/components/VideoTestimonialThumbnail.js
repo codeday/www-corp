@@ -19,14 +19,13 @@ export default function VideoTestimonialThumbnail({ video, ...props }) {
         boxShadow="md"
         position="relative"
         mb={8}
+        backgroundImage={`url(${video.testimonialPlayerThumb?.url})`}
+        backgroundSize="cover"
+        backgroundPosition="50% 50%"
+        backgroundRepeat="no-repeat"
+        height={40}
         {...props}
       >
-        <Image
-          src={video.testimonialPlayerThumb?.url}
-          width={400}
-          height={220}
-          style={{ position: 'absolute', top: 0}}
-        />
         <Box d="inline" position="absolute" top="calc(50% - 0.5em)" left="calc(50% - 0.5em)">
           <MediaPlay />
         </Box>

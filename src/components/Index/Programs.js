@@ -25,13 +25,14 @@ export default function Programs() {
   const codeDay = codeDayProgram?.items[0];
   let programs = codeDay?.linkedFrom?.events?.items;
   mainPrograms?.items?.map(program => programs = programs.concat(program.linkedFrom?.events?.items));
-  const nextEventDate = nextUpcomingEvent(programs)
+  const nextEventDate = nextUpcomingEvent(programs);
+
+  const otherProgramsRowSize = Math.max(3, Math.min((otherPrograms?.items || []).length, 5));
 
   return (
     <StaticContent>
       <Content>
 
-        <Heading as="h2" fontSize="5xl" textAlign="center" mb={16} mt={16} bold>Attend an Event</Heading>
 
         {/* CodeDay */}
         <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={8}>
@@ -93,13 +94,18 @@ export default function Programs() {
             ))}
 
             {/* Even more programs! */}
-            <Grid templateColumns="repeat(3, 1fr)" textAlign="center" gap={4}>
+            <Grid
+              templateColumns={`repeat(${otherProgramsRowSize}, minmax(0, 1fr))`}
+              textAlign="center"
+              gap={Math.round(otherProgramsRowSize/5)}
+            >
               {otherPrograms?.items?.map((prog, i) => (
                   <Box
-                    borderRightWidth={Math.min(1, (i+1) % 3)}
+                    borderRightWidth={Math.min(1, (i+1) % Math.min(otherProgramsRowSize, otherPrograms.items.length))}
                     borderColor="current.border"
-                    p={4}
-                    mb={4}
+                    p={otherProgramsRowSize >= 5 ? 1 : 4}
+                    pt={4}
+                    pb={4}
                     d="block"
                     as="a"
                     href={prog.url}
@@ -109,9 +115,10 @@ export default function Programs() {
                   >
                     <Image d="inline-block" src={prog.logo.url} height={12} mb={2} />
                     <br />
-                    <Text fontSize="lg" mb={0} bold>{prog.name}</Text>
+                    <Text fontSize={['lg', 'lg', 'lg', 'md', 'sm'][otherProgramsRowSize-1]} mb={0} bold>{prog.name}</Text>
                   </Box>
               ))}
+              {[...new Array(1)].map(() => <Box />)}
             </Grid>
           </Box>
         </Grid>
