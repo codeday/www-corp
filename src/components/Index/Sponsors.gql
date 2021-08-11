@@ -4,8 +4,9 @@ fragment IndexSponsorsComponent on Query {
       items {
         name
         link
+        type
         logo {
-          url(transform: {height: 80, width: 160, resizeStrategy: PAD})
+          url(transform: {height: 160, width: 320, resizeStrategy: PAD})
         }
       }
     }
@@ -14,8 +15,9 @@ fragment IndexSponsorsComponent on Query {
       items {
         name
         link
+        type
         logo {
-          url(transform: {height: 40, width: 80, resizeStrategy: PAD})
+          url(transform: {height: 80, width: 160, resizeStrategy: PAD})
         }
       }
     }

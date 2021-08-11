@@ -19,13 +19,20 @@ function PhotoTextCard({
       rounded="md"
       width="sm"
       maxHeight="100%"
+      h="100%"
       overflow="hidden"
       as={href && 'a'}
       href={href}
       target="_blank"
     >
-      <Grid templateColumns="3fr 3fr">
-        <Image src={photo} alt="" />
+      <Grid templateColumns="3fr 3fr" h="100%">
+        <Box
+          backgroundImage={`url(${photo})`}
+          backgroundPosition="50% 50%"
+          backgroundSize="cover"
+          backgroundRepeat="no-repeat"
+          h="100%"
+        />
         <Box p={2} overflow="hidden">
           {authors && authors.length > 0 && (
             authors.length > 1 ? (
@@ -140,7 +147,7 @@ function PhotoCard({ photo, authors, wip, eventInfo, projectTitle, href }) {
           p={2}
           backgroundImage="linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1))"
         >
-          <Text mb={0} fontSize="sm" color="white" bold>Project: {projectTitle}</Text>
+          <Text mb={0} fontSize="sm" color="white" bold>{projectTitle}</Text>
         </Box>
       )}
 
@@ -191,8 +198,11 @@ export default function Community({ seed, ...props }) {
     if (inView) setHasLoaded(true);
   }, [inView]);
 
-  const { showYourWork, showcase, cms: { indexCommunityPhotos } } = useQuery();
+  const { showYourWork, showcase, cms: { indexCommunityPhotos, stats } } = useQuery();
 
+  const studentCount = stats?.items?.reduce((accum, e) => accum + e.statStudentCount, 0);
+  const studentCountRound = Math.round(studentCount/10000) * 10000;
+  const studentCountPrefix = ['More than', 'Nearly'][studentCountRound > studentCount ? 1 : 0];
   const showcaseDemos = showcase.projects
     .map((p) => ({
       ...p,
@@ -238,7 +248,7 @@ export default function Community({ seed, ...props }) {
 
         <Content>
           <Heading as="h2" fontSize="5xl" textAlign="center" mb={8} mt={8} bold>
-            More than 50,000 students have created amazing projects at CodeDay events.
+            {studentCountPrefix} {studentCountRound.toLocaleString()} students have created amazing projects at CodeDay events.
           </Heading>
         </Content>
 
