@@ -2,16 +2,13 @@ import React from 'react';
 import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
 import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Image from '@codeday/topo/Atom/Image';
 import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
 import Content from '@codeday/topo/Molecule/Content';
-import MediaPlay from '@codeday/topocons/Icon/MediaPlay'
-import VideoLink from '../components/VideoLink';
-import ProgramInfo from '../components/Volunteer/ProgramInfo';
-import Page from '../components/Page';
-import VideoTestimonialThumbnail from '../components/VideoTestimonialThumbnail';
-import { upcomingEvents } from '../utils/time';
-import { useQuery } from '../query';
+import Wizard from '../../components/Volunteer/Wizard';
+import Page from '../../components/Page';
+import VideoTestimonialThumbnail from '../../components/VideoTestimonialThumbnail';
+import { upcomingEvents } from '../../utils/time';
+import { useQuery } from '../../query';
 import { VolunteerQuery } from './volunteer.gql';
 
 const PROGRAM_WEIGHT = ["primary", "secondary", "minor"];
@@ -37,14 +34,7 @@ export default function Volunteer() {
 
   return (
     <Page slug="/volunteer" title="Volunteer">
-      <Content>
-        <Image
-          src="https://img.codeday.org/o/m/f/mfwgeuyxb7euvouiwx5252n79xan15ujhprpjqh1q198s7uutheambb6eamm2zdyu1.jpg"
-          rounded="md"
-          mt={-8}
-          mb={4}
-          alt=""
-        />
+      <Content mt={-8}>
         <Heading as="h2" fontSize="5xl" mb={8} mt={8}>Have fun. Make a difference. Volunteer.</Heading>
         <Grid templateColumns={{ base: '1fr', md: '1fr 1fr', lg: '3fr 2fr' }} gap={8}>
           <Box>
@@ -68,11 +58,7 @@ export default function Volunteer() {
             <VideoTestimonialThumbnail video={videoTestimonial} />
           </Box>
         </Grid>
-        <Box>
-          {programsWithUpcoming.filter((program) => program.volunteerDetails).map((program) => (
-            <ProgramInfo program={program} />
-          ))}
-        </Box>
+        <Wizard programs={programsWithUpcoming.filter((program) => program.volunteerDetails)} />
       </Content>
     </Page>
   );

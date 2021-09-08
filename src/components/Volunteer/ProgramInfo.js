@@ -12,14 +12,10 @@ import { formatInterval } from '../../utils/time';
 import ContentfulRichText from '../ContentfulRichText';
 import Divider from '@codeday/topo/Atom/Divider';
 import Link from '@codeday/topo/Atom/Text/Link';
+import { VOLUNTEER_ROLES } from './wizardConfig';
 
-const ROLE_COLORS = {
-  mentor: 'blue',
-  judge: 'gray',
-  'general volunteer': 'red',
-  speaker: 'orange',
-  'career advisor': 'purple',
-};
+const ROLE_COLORS = Object.keys(VOLUNTEER_ROLES)
+  .reduce((accum, type) => ({ [type]: VOLUNTEER_ROLES[type].color, ...accum }), {});
 
 export default function ProgramInfo({ program }) {
   const [blurbVisible, setBlurbVisible] = useState(false);

@@ -1,5 +1,5 @@
-#import "../components/VideoTestimonialThumbnail.gql"
-#import "../components/Volunteer/ProgramInfo.gql"
+#import "../../components/VideoTestimonialThumbnail.gql"
+#import "../../components/Volunteer/ProgramInfo.gql"
 
 query VolunteerQuery {
   ...VolunteerProgramInfoComponent
