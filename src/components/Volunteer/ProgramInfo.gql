@@ -3,6 +3,7 @@ fragment VolunteerProgramInfoComponent on Query {
     volunteerPrograms: programs (limit: 15) {
       items {
         name
+        webname
         logo {
           url
         }
