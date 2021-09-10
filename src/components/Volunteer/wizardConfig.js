@@ -20,6 +20,7 @@ export const VOLUNTEER_ROLES = {
     name: 'Mentor',
     description: 'Help students find their place in tech, from writing their first line of code, to shipping an'
                   + ' industry-ready PR, to the non-technical skills they need to succeed.',
+    time: 'Varies.',
     allowed: ['industrySde', 'industryDesign', 'industryPm', 'studentSde'],
     color: 'blue',
   },
@@ -51,7 +52,7 @@ export const VOLUNTEER_ROLES = {
   'general volunteer': {
     name: 'General Volunteer',
     description: 'Help promote, organize event logistics, and run fun activities.',
-    time: 'Varies, see more at the next step.',
+    time: 'Varies.',
     color: 'red',
   },
 };

@@ -37,11 +37,15 @@ export default function Volunteer() {
       <Content mt={-8}>
         <Heading as="h2" fontSize="5xl" mb={8} mt={8}>Have fun. Make a difference. Volunteer.</Heading>
         <Grid templateColumns={{ base: '1fr', md: '1fr 1fr', lg: '3fr 2fr' }} gap={8}>
-          <Box>
-            <Text fontSize="xl" mb={8}>
+          <Box fontSize="xl">
+            <Text>
               We need everyone's help to create a more inclusive tech future for students! (Even if you don&apos;t
-              have a tech background!) For corporate volunteering please email us at{' '}
-              <Link href="mailto:volunteer@codeday.org">volunteer@codeday.org</Link>.
+              have a tech background!)
+            </Text>
+            <Text mb={8}>
+              For corporate volunteering please email us at{' '}
+              <Link href="mailto:volunteer@codeday.org">volunteer@codeday.org</Link>. You can also{' '}
+              <Link href="/volunteer/share">share upcoming volunteer opportunities with coworkers.</Link>
             </Text>
           </Box>
           <Box>
