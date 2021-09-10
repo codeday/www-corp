@@ -1,0 +1,78 @@
+import React, { useState } from 'react';
+import Box, { Grid } from '@codeday/topo/Atom/Box';
+import Text, { Heading } from '@codeday/topo/Atom/Text';
+import Image from '@codeday/topo/Atom/Image';
+import Button from '@codeday/topo/Atom/Button';
+import UiArrowDown from '@codeday/topocons/Icon/UiArrowDown';
+import UiArrowUp from '@codeday/topocons/Icon/UiArrowUp';
+import FilePdf from '@codeday/topocons/Icon/FilePdf';
+import ContentfulRichText from '../ContentfulRichText';
+import Divider from '@codeday/topo/Atom/Divider';
+import Link from '@codeday/topo/Atom/Text/Link';
+
+export default function ProgramShareBlurb({ program }) {
+  const [blurbVisible, setBlurbVisible] = useState(false);
+  if (!program.volunteerBlurb) return <></>;
+
+  return (
+    <>
+      <Link as="div" onClick={() => setBlurbVisible(!blurbVisible)} position="relative" mt={4}>
+        <Box textAlign="center">
+          <Box bg="current.bg" d="inline-block" p={4} color="blue.800">
+            <Link as="div" d="inline-block" mr={2}>
+              {blurbVisible ? 'Hide' : 'Share With Co-Workers'}
+            </Link>
+            {blurbVisible ? <UiArrowUp /> : <UiArrowDown />}
+          </Box>
+        </Box>
+        <Divider
+          d={blurbVisible ? null : 'none'}
+          position="absolute"
+          top="50%"
+          transform="translateY(-0.5em)"
+          left={0}
+          right={0}
+          zIndex={-1}
+        />
+      </Link>
+      <Grid d={blurbVisible ? null : 'none'} templateColumns={{ base: '1fr', md: '8fr 3fr'}} gap={8}>
+        <Box>
+          <Heading as="h4" fontSize="2xl" mb={4}>Copy-Pastable Email Blurb</Heading>
+          <Box pl={4} ml={4} borderLeftWidth={2} borderColor="blue.600">
+            <ContentfulRichText json={program.volunteerBlurb.json} />
+          </Box>
+        </Box>
+        <Box>
+          <Button
+            as="a"
+            target="_blank"
+            href={`https://www.linkedin.com/shareArticle/?url=${encodeURIComponent(`https://www.codeday.org/volunteer/${program.webname}`)}`}
+            variantColor="blue"
+            mb={8}
+          >
+            Share on LinkedIn
+          </Button>
+          {program.volunteerRecruitingResources?.items.length > 0 && (
+            <>
+              <Heading as="h4" fontSize="xl" mb={4}>More Resources</Heading>
+              {program.volunteerRecruitingResources?.items.map((i) => (
+                <Link href={i.url} target="_blank" rel="noopener">
+                  <Grid templateColumns="1fr 3fr" borderWidth={1} mb={1} gap={2} alignItems="center" minHeight={16}>
+                      {i.contentType.split('/')[0] === 'image' ? (
+                        <Image src={i.preview} alt={i.title} />
+                      ) : (
+                        <Box fontSize={32} textAlign="center">
+                          <FilePdf />
+                        </Box>
+                      )}
+                      <Text fontSize="sm" color="current.textLight" mb={0}>{i.title}</Text>
+                    </Grid>
+                </Link>
+              ))}
+            </>
+          )}
+        </Box>
+      </Grid>
+    </>
+  )
+}
