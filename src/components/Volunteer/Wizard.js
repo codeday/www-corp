@@ -89,7 +89,7 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
   if (backgrounds.length > 0 && defaultRoles && defaultRoles.length > 0 && page > 0
       && defaultRoles.filter((r) => !isAllowedVolunteerType(r, backgrounds)).length > 0) {
     return (
-      <Box>
+      <Box borderWidth={1} p={6} rounded="md" shadow="sm">
         <Text>Sorry, you are not eligible for this volunteer role.</Text>
       </Box>
     );
@@ -98,14 +98,14 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
   if (backgrounds.length > 0 && roleOnly && page > 0
       && roleOnly.filter((r) => isAllowedVolunteerType(r, backgrounds)).length === 0) {
     return (
-      <Box>
+      <Box borderWidth={1} p={6} rounded="md" shadow="sm">
         <Text>Sorry, we have no matching volunteer roles.</Text>
       </Box>
     );
   }
 
   return (
-    <Box>
+    <Box borderWidth={1} p={6} rounded="md" shadow="sm">
       {pages[page]}
       {!isFinalPage && (
         <Box textAlign={{ base: 'center', md: 'right' }} mt={8}>

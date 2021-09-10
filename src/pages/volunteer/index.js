@@ -1,4 +1,5 @@
 import React from 'react';
+import { NextSeo } from 'next-seo';
 import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
 import Box, { Grid } from '@codeday/topo/Atom/Box';
@@ -34,6 +35,21 @@ export default function Volunteer() {
 
   return (
     <Page slug="/volunteer" title="Volunteer">
+      <NextSeo
+        description="We need everyone's help to create a more inclusive tech future for students! (Even if you don't have a tech background!)"
+        openGraph={{
+          title: 'Volunteer for CodeDay',
+          description: `We need everyone's help to create a more inclusive tech future for students! (Even if you don't have a tech background!)`,
+          images: [
+            {
+              url: 'https://f2.codeday.org/d5pti1xheuyu/5HXduujNbKhEwAsFchjNcU/5ca87b445e48ae78593b8a4841e94775/gray-wallaby-965e09f9_o.jpg?w=1200&h=630&fit=fill',
+              width: 1200,
+              height: 630,
+              alt: 'Volunteers watching a presentation at CodeDay.'
+            }
+          ]
+        }}
+      />
       <Content mt={-8}>
         <Heading as="h2" fontSize="5xl" mb={8} mt={8}>Have fun. Make a difference. Volunteer.</Heading>
         <Grid templateColumns={{ base: '1fr', md: '1fr 1fr', lg: '3fr 2fr' }} gap={8}>

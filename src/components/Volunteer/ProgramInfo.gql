@@ -4,6 +4,7 @@ fragment VolunteerProgramInfoComponent on Query {
       items {
         name
         webname
+        shortDescription
         logo {
           url
         }
