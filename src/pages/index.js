@@ -11,7 +11,6 @@ import Announcement from '../components/Index/Announcement';
 import Community from '../components/Index/Community';
 import Quote from '../components/Index/Quotes';
 import Workshops from '../components/Index/Workshops';
-import EcoBox from '../components/Index/EcoBox';
 import useTwitch from '../useTwitch';
 import { IndexQuery } from './index.gql';
 
@@ -27,7 +26,6 @@ export default function Home({ seed }) {
       <Community />
       <Quote seed={seed} />
       <Workshops />
-      <EcoBox />
     </Page>
   );
 }
@@ -43,7 +41,7 @@ export async function getStaticProps() {
     props: {
       query: await apiFetch(print(IndexQuery), {
         cmsDate: getDate(),
-        calendarDateStart: getDate(24 * -2),
+        calendarDateStart: getDate(12 * -1),
         calendarDateEnd: getDate(24 * 7 * 4),
       }),
       seed: Math.random(),

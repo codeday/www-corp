@@ -8,6 +8,7 @@ fragment IndexWorkshopsComponent on Query {
       location
       start
       description
+      metadata
     }
   }
 }
