@@ -116,7 +116,11 @@ export default function Event({ event, ...rest }) {
             )}{' '}
           </Text>
           <Text mb={0}>{relative}</Text>
-          <Text>{event.subscriberCount} subscribed</Text>
+          {event.metadata?.preregister ? (
+            <Text>Requires registration</Text>
+          ) : (
+            <Text>{event.subscriberCount} subscribed</Text>
+          )}
         </Box>
         <Box textAlign="right">
           {type && (
@@ -130,12 +134,14 @@ export default function Event({ event, ...rest }) {
       )}
       <Box mt={8}>
         {!hasEnded ? (
-          almostHasStarted ? (
+          (almostHasStarted || event.metadata?.preregister) ? (
             <>
               {event.location && (
                 <>
                   <Link fontSize="lg" href={event.location} target="_blank" mr={4}>{event.location}</Link>
-                  <Button as="a" href={event.location} target="_blank" variantColor="blue">Join</Button>
+                  <Button as="a" href={event.location} target="_blank" variantColor="blue">
+                    {almostHasStarted ? 'Join' : 'Pre-Register'}
+                  </Button>
                 </>
               )}
             </>
