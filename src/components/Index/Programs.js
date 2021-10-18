@@ -25,7 +25,6 @@ export default function Programs() {
   const codeDay = codeDayProgram?.items[0];
   let programs = codeDay?.linkedFrom?.events?.items;
   mainPrograms?.items?.map(program => programs = programs.concat(program.linkedFrom?.events?.items));
-  const nextEventDate = nextUpcomingEvent(programs);
 
   const otherProgramsRowSize = Math.max(3, Math.min((otherPrograms?.items || []).length, 5));
 
