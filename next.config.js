@@ -1,5 +1,6 @@
 /* eslint-disable node/no-process-env */
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { apiFetch } = require('@codeday/topo/utils');
 
 module.exports = {
   webpack: (config, {
@@ -21,7 +22,9 @@ module.exports = {
     domains: ['f2.codeday.org'],
   },
   async redirects() {
-    return [
+    const { cms } = await apiFetch('{ cms { regions { items { webname } } } }');
+    const webnames = (cms && cms.regions && cms.regions.items ? cms.regions.items : []).map((r) => r.webname);
+    const staticRedirects = [
       {
         source: '/privacy/controls',
         destination: '/f/data-controls',
@@ -47,6 +50,15 @@ module.exports = {
         destination: '/f/swag',
         permanent: false,
       },
+    ];
+
+    return [
+      ...staticRedirects,
+      ...webnames.map((webname) => ({
+        source: `/${webname}`,
+        destination: `https://event.codeday.org/${webname}`,
+        permanent: false,
+      })),
     ];
   },
   serverRuntimeConfig: {
