@@ -41,6 +41,7 @@ export async function getStaticProps() {
     props: {
       query: await apiFetch(print(IndexQuery), {
         cmsDate: getDate(),
+        clearDate: getDate(),
         calendarDateStart: getDate(12 * -1),
         calendarDateEnd: getDate(24 * 7 * 4),
       }),

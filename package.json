@@ -19,6 +19,7 @@
     "babel-plugin-inline-import-graphql-ast": "^2.4.1",
     "emotion-theming": "^10.0.27",
     "express-rate-limit": "^5.2.3",
+    "geo-haversine": "^1.0.5",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
     "hls.js": "^0.14.8",
