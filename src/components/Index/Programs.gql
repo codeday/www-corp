@@ -1,4 +1,18 @@
+query GetMyLocation{
+  geo {
+    mine {
+      lat
+      lng
+    }
+  }
+}
+
 fragment IndexProgramsComponent on Query {
+  clear {
+    events (where: { endDate: { gte: $clearDate }, registrationsOpen: { equals: true } }) {
+      contentfulWebname
+    }
+  }
   cms {
     codeDayProgram: programs(where: { name:"CodeDay" }) {
       items {

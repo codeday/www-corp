@@ -2107,6 +2107,11 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
+geo-haversine@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/geo-haversine/-/geo-haversine-1.0.5.tgz#c3f04a6e67806870f4b024e5640d09c75f89bac0"
+  integrity sha512-vSTaXTgTOIZ00bbQph1wkx4d7mCjuzRaiYiaQjbd2uw5uc5ImIvyT87W/J3JMuw7C//2eevycMUL4cRVMLjk9Q==
+
 get-orientation@1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/get-orientation/-/get-orientation-1.1.2.tgz#20507928951814f8a91ded0a0e67b29dfab98947"
