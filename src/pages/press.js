@@ -2,11 +2,10 @@ import React from 'react';
 import { print } from 'graphql';
 import { DateTime } from 'luxon';
 import { apiFetch } from '@codeday/topo/utils';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text, { Heading } from '@codeday/topo/Atom/Text';
+import Box, { Flex, Grid } from '@codeday/topo/Atom/Box';
+import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
 import Button from '@codeday/topo/Atom/Button';
 import Image from '@codeday/topo/Atom/Image';
-import Divider from '@codeday/topo/Atom/Divider';
 import Content from '@codeday/topo/Molecule/Content';
 import ContentfulRichText from '../components/ContentfulRichText';
 import Page from '../components/Page';
@@ -80,14 +79,38 @@ export default function Press({ seed }) {
 
       <Content>
         <Heading as="h3" fontSize="2xl" mb={4}><a name="assets"></a>Assets</Heading>
+        <Box
+          as="a"
+          d="block"
+          rel="license"
+          href="http://creativecommons.org/licenses/by/4.0/"
+          mb={2}
+        >
+          <Image
+            alt="Creative Commons License"
+            src="https://i.creativecommons.org/l/by/4.0/88x31.png"
+          />
+        </Box>
         <Text>
-          You may use any of the photos below without prior permission for editorial use, or other use under
-          a CC-BY-SA license. All pictured individuals have signed media waivers.
+          The assets on this page are licensed under a{' '}
+          <Link
+            rel="license"
+            href="http://creativecommons.org/licenses/by/4.0/"
+          >
+            Creative Commons Attribution 4.0 International License
+          </Link>,
+          you may use them without prior permission so long as you provide credit to CodeDay.
         </Text>
         <Text>
-          Logos are available for media use. All logos and names are trademarks of CodeDay.
+          Editorial use by the media without attribution is permitted. All pictured individuals have media waivers
+          on file.
         </Text>
-        <Button as="a" href="https://f1.codeday.org/logos.zip" variantColor="blue">Download Logos</Button>
+        <Flex alignItems="center">
+          <Button as="a" href="https://f1.codeday.org/logos.zip" variantColor="blue">Download Logos</Button>
+          <Text mb={0} pl={4} fontSize="sm" color="current.textLight">
+            All logos and names are trademarks of CodeDay.
+          </Text>
+        </Flex>
       </Content>
       <PhotoGallery seed={seed} />
     </Page>
