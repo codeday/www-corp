@@ -40,7 +40,7 @@ export default function BioInfo({
             textAlign="center"
             pt="0.5em"
           >
-            {firstName[0].toUpperCase()}{lastName[0].toUpperCase()}
+            {firstName[0].toUpperCase()}{lastName ? lastName[0].toUpperCase() : ''}
           </Box>
         )}
       </Box>
