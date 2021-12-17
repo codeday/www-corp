@@ -1,8 +1,12 @@
 #import "../../components/VideoTestimonialThumbnail.gql"
 #import "../../components/Volunteer/ProgramInfo.gql"
+#import "../../components/Volunteer/Testimonials.gql"
+#import "../../components/Volunteer/PhotoGallery.gql"
 
 query VolunteerQuery {
   ...VolunteerProgramInfoComponent
+  ...VolunteerTestimonials
+  ...VolunteerPhotoGallery
   cms {
     testimonials: testimonials(where: { featured: true, type_in:["Volunteer", "Mentor"] }) {
       items {

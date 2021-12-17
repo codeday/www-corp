@@ -27,10 +27,9 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
 
   const pageBackground = (
     <Box>
-      <Heading as="h3" fontSize="2xl">What do you do for a living?</Heading>
-      <Text mb={4}>
-        If you're retired, choose what best desribes how you spent your career. Please do not choose "full-time"
-        if you are a student.
+      <Heading as="h3" fontSize="xl" mb={2}>What do you do for a living?</Heading>
+      <Text mb={6}>
+        If you're retired, choose how you spent your career. Do not choose "full-time" if you are a student.
       </Text>
       <BackgroundPicker onChange={selectAnd(setBackgrounds)} />
     </Box>
@@ -38,8 +37,8 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
 
   const pageRole = (
     <Box>
-      <Heading as="h3" fontSize="2xl">How are you interested in helping?</Heading>
-      <Text mb={4}>
+      <Heading as="h3" fontSize="xl" mb={2}>How are you interested in helping?</Heading>
+      <Text mb={6}>
         This is not a final commitment, so choose as many as you'd like. We've filtered the volunteer opportunities
         to only ones you're eligible for.
       </Text>
@@ -53,8 +52,8 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
 
   const pageProgram = (
     <Box>
-      <Heading as="h3" fontSize="2xl">Choose which programs you'd like to help with:</Heading>
-      <Text mb={4}>
+      <Heading as="h3" fontSize="xl" mb={2}>Choose which programs you'd like to help with:</Heading>
+      <Text mb={6}>
         This is not a final commitment, so choose as many as you'd like.
       </Text>
       <ProgramsPicker onChange={selectAnd(setPrograms)} programs={programs} roles={roles} />
@@ -105,7 +104,7 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
   }
 
   return (
-    <Box borderWidth={1} p={6} rounded="md" shadow="sm">
+    <Box>
       {pages[page]}
       {!isFinalPage && (
         <Box textAlign={{ base: 'center', md: 'right' }} mt={8}>
