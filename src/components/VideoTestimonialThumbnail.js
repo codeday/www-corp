@@ -18,7 +18,6 @@ export default function VideoTestimonialThumbnail({ video, ...props }) {
         fontSize="4xl"
         boxShadow="md"
         position="relative"
-        mb={8}
         backgroundImage={`url(${video.testimonialPlayerThumb?.url})`}
         backgroundSize="cover"
         backgroundPosition="50% 50%"
