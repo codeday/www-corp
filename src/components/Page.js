@@ -51,7 +51,9 @@ export default function Page ({ children, title, darkHeader, slug }) {
             <Button as="a" variant="ghost" href="/edu">Educators</Button>
             <Button as="a" variant="ghost" href="/volunteer">Volunteer</Button>
             <Button as="a" variant="ghost" href="/press">Press</Button>
-            <Button as="a" variant="ghost" href="https://blog.codeday.org/" target="_blank">Blog</Button>
+            <Box mt={-4} d="inline-block" minW="129px">
+              <a href="#XBSBRRMF" style={{ display: 'none' }}></a>
+            </Box>
           </Menu>
         </Header>
         <Main>
