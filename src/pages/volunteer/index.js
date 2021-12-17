@@ -64,7 +64,7 @@ export default function Volunteer() {
             </Text>
             <Text>
               CodeDay volunteers help with everything from mentoring, to judging, to operational support at events.{' '}
-              <Highlight>No matter who you are, we need your help!</Highlight> Your can volunteer whether you're a
+              <Highlight>No matter who you are, we need your help!</Highlight> You can volunteer whether you're a
               professional software engineer, a student, or a general community member.{' '}
 
             </Text>
