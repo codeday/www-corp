@@ -3,6 +3,9 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { apiFetch } = require('@codeday/topo/utils');
 
 module.exports = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   webpack: (config, {
     isServer,
   }) => {
