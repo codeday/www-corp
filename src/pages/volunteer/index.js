@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NextSeo } from 'next-seo';
 import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
@@ -14,11 +14,13 @@ import { VolunteerQuery } from './volunteer.gql';
 import Testimonials from '../../components/Volunteer/Testimonials';
 import PhotoGallery from '../../components/Volunteer/PhotoGallery';
 import Highlight from '../../components/Highlight';
+import {LinkedInTag} from "react-linkedin-insight";
 
 const PROGRAM_WEIGHT = ["primary", "secondary", "minor"];
 
 export default function Volunteer() {
   const { cms: { volunteerPrograms, testimonials } } = useQuery();
+  useEffect(() => typeof window !== 'undefined' && LinkedInTag.init('1831116', null, false), typeof window);
   const programsWithUpcoming = volunteerPrograms?.items?.map((program) => {
     return {
       ...program,
