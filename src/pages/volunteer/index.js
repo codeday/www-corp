@@ -20,7 +20,6 @@ const PROGRAM_WEIGHT = ["primary", "secondary", "minor"];
 
 export default function Volunteer() {
   const { cms: { volunteerPrograms, testimonials } } = useQuery();
-  useEffect(() => typeof window !== 'undefined' && LinkedInTag.init('1831116', null, false), typeof window);
   const programsWithUpcoming = volunteerPrograms?.items?.map((program) => {
     return {
       ...program,
