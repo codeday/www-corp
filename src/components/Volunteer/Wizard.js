@@ -5,6 +5,7 @@ import Box, { Grid } from '@codeday/topo/Atom/Box';
 import Button from '@codeday/topo/Atom/Button';
 import Text, { Heading } from '@codeday/topo/Atom/Text';
 import CognitoForm from '@codeday/topo/Molecule/CognitoForm';
+import LinkedInTag from 'react-linkedin-insight';
 import BackgroundPicker from './BackroundPicker';
 import VolunteerRolePicker from './VolunteerRolePicker';
 import ProgramsPicker from './ProgramsPicker';
@@ -84,6 +85,11 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
   const isFinalPage = page === pages.length - 1;
 
   useEffect(() => setHasSelection(false), [page]);
+  useEffect(() => {
+    if (typeof window !== 'undefined' && page !== 0) {
+      LinkedInTag.init('1831116', null, false);
+    }
+  }, [typeof window, page]);
 
   if (backgrounds.length > 0 && defaultRoles && defaultRoles.length > 0 && page > 0
       && defaultRoles.filter((r) => !isAllowedVolunteerType(r, backgrounds)).length > 0) {
