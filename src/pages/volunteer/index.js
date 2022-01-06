@@ -7,7 +7,7 @@ import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
 import Content from '@codeday/topo/Molecule/Content';
 import Wizard from '../../components/Volunteer/Wizard';
 import Page from '../../components/Page';
-import VideoTestimonialThumbnail from '../../components/VideoTestimonialThumbnail';
+import PreviewVideo from '../../components/Volunteer/PreviewVideo';
 import { upcomingEvents } from '../../utils/time';
 import { useQuery } from '../../query';
 import { VolunteerQuery } from './volunteer.gql';
@@ -17,8 +17,8 @@ import Highlight from '../../components/Highlight';
 
 const PROGRAM_WEIGHT = ["primary", "secondary", "minor"];
 
-export default function Volunteer() {
-  const { cms: { volunteerPrograms, testimonials } } = useQuery();
+export default function Volunteer({ program, role }) {
+  const { cms: { volunteerPrograms } } = useQuery();
   const programsWithUpcoming = volunteerPrograms?.items?.map((program) => {
     return {
       ...program,
@@ -33,8 +33,6 @@ export default function Volunteer() {
     return PROGRAM_WEIGHT.indexOf(a.type) - PROGRAM_WEIGHT.indexOf(b.type);
   })
    || [];
-
-  const videoTestimonial = testimonials?.items?.filter((t) => t.video)[0];
 
   return (
     <Page slug="/volunteer" title="Volunteer">
@@ -54,9 +52,20 @@ export default function Volunteer() {
         }}
       />
       <Content mt={-8}>
-        <Heading as="h2" fontSize="4xl" mb={8} mt={8}>You can help students find their place in the tech industry.</Heading>
-        <Grid templateColumns={{ base: '1fr', md: '1fr 1fr', lg: '3fr 1fr' }} gap={8} mb={8}>
+        <Heading
+          as="h2"
+          fontSize={{ base: "3xl", lg: "4xl" }}
+          mb={8}
+          mt={8}
+          textAlign={{ base: "center", lg: "left" }}
+        >
+          You can help students find their place in the tech industry.
+        </Heading>
+        <Grid templateColumns={{ base: '1fr', md: '2fr 1fr', lg: '3fr 1fr' }} gap={8} mb={8}>
           <Box fontSize="lg">
+            <Box maxW="32rem" margin="auto">
+              <PreviewVideo mb={8} />
+            </Box>
             <Text>
               Thousands of volunteers just like you have{' '}
               <Highlight>helped 50,000+ students find their place in tech,</Highlight> but hundreds of thousands more
@@ -68,44 +77,29 @@ export default function Volunteer() {
               professional software engineer, a student, or a general community member.{' '}
 
             </Text>
-            <Text mb={8}>
-              For corporate volunteering please email us at{' '}
-              <Link href="mailto:volunteer@codeday.org">volunteer@codeday.org</Link>. You can also{' '}
-              <Link href="/volunteer/share">share upcoming volunteer opportunities with coworkers.</Link>
-            </Text>
           </Box>
-          <Box bg="gray.100" p={4} textAlign="center">
-            <Heading as="h3" fontSize="xl">Time Commitment</Heading>
-            <Text>
-              Varies by role:<br />
-              30min, 2hr, or 20hr
-            </Text>
-            <Heading as="h3" fontSize="xl">Deadline</Heading>
-            <Text>
-              Opportunities available year-round
-            </Text>
-            <Heading as="h3" fontSize="xl">Requirements</Heading>
-            <Text mb={0}>
-              Varies by role, see form below
-            </Text>
-          </Box>
-        </Grid>
-        <Grid templateColumns={{ base: '1fr', md: '2fr 3fr' }} gap={8} mb={8}>
           <Box>
-            <Heading as="h3" fontSize="lg" mb={2}>CodeDay Volunteers Make a Difference</Heading>
-            <VideoTestimonialThumbnail video={videoTestimonial} />
-            <Text fontSize="sm" color="current.textLight" mt={1} mb={2}>
-              {videoTestimonial.firstName}
-              {videoTestimonial.company && (
-                <>
-                  {videoTestimonial.title ? `, ${videoTestimonial.title} at ` : ' from '}
-                  {videoTestimonial.company}
-                </>
-              )}
-            </Text>
-          </Box>
-          <Box mt={4} mb={8}>
-            <Testimonials />
+            <Box bg="gray.100" p={4} textAlign="center">
+              <Heading as="h3" fontSize="xl">Time Commitment</Heading>
+              <Text>
+                Varies by role:<br />
+                30min, 2hr, or 20hr
+              </Text>
+              <Heading as="h3" fontSize="xl">Deadline</Heading>
+              <Text>
+                Opportunities available year-round
+              </Text>
+              <Heading as="h3" fontSize="xl">Requirements</Heading>
+              <Text>
+                Varies by role, see form below
+              </Text>
+              <Heading as="h3" fontSize="xl">Groups/Corporate</Heading>
+              <Text mb={0}>
+
+                <Link href="mailto:volunteer@codeday.org">Email us</Link> or {' '}
+                <Link href="/volunteer/share">share with coworkers</Link>
+              </Text>
+            </Box>
           </Box>
         </Grid>
         <Box rounded="md" shadow="md" borderWidth={1} borderColor="red.700">
@@ -122,12 +116,19 @@ export default function Volunteer() {
             <Heading as="h3" fontSize="xl">Volunteer Sign-Up (3min)</Heading>
           </Box>
           <Box p={6}>
-            <Wizard programs={programsWithUpcoming.filter((program) => program.volunteerDetails)} />
+            <Wizard
+              programs={programsWithUpcoming.filter((program) => program.volunteerDetails)}
+              defaultPrograms={program ? [ program ] : undefined}
+              defaultRoles={role ? [ role ] : undefined}
+            />
           </Box>
         </Box>
       </Content>
       <Content mt={12}>
-        <Heading as="h3" textAlign="center" fontSize="3xl">Volunteers in Action</Heading>
+        <Heading as="h3" textAlign="center" fontSize="3xl">CodeDay volunteers make lasting impacts towards futures in tech.</Heading>
+      </Content>
+      <Content maxW="containers.md" mt={8} mb={12}>
+        <Testimonials />
       </Content>
       <Content wide>
         <PhotoGallery />

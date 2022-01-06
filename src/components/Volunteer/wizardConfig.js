@@ -9,7 +9,7 @@ export const VOLUNTEER_BACKGROUNDS = {
 
 export const VOLUNTEER_BACKGROUND_GROUPS = [
   ['industrySde', 'industryHr', 'industryOther'],
-  ['studentSde', 'studentOther'],
+  ['studentSde'],
   ['other'],
 ];
 
