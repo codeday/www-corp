@@ -25,6 +25,7 @@ export default function Testimonials(props) {
           alignItems="center"
           position="absolute"
           top={0}
+          key={t.quote}
         >
           <Box
             opacity={j === i ? 1 : 0}

@@ -15,12 +15,12 @@ export default function BackgroundPicker({ onChange }) {
         name="wizard-background"
       >
         {VOLUNTEER_BACKGROUND_GROUPS.map((types, i) => (
-          <Box>
+          <Box key={i}>
             {i !== 0 && (
               <Divider />
             )}
             {types.map((type) => (
-              <Box mb={1} mt={1}>
+              <Box mb={1} mt={1} key={type}>
                 <Radio
                   name="wizard-background"
                   value={type}
