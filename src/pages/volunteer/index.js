@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { NextSeo } from 'next-seo';
 import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
@@ -14,11 +14,15 @@ import { VolunteerQuery } from './volunteer.gql';
 import Testimonials from '../../components/Volunteer/Testimonials';
 import PhotoGallery from '../../components/Volunteer/PhotoGallery';
 import Highlight from '../../components/Highlight';
+import RemindMe from '../../components/Volunteer/RemindMe';
+import Button from '@codeday/topo/Atom/Button';
+import Divider from '@codeday/topo/Atom/Divider';
 
 const PROGRAM_WEIGHT = ["primary", "secondary", "minor"];
 
 export default function Volunteer({ program, role }) {
   const { cms: { volunteerPrograms } } = useQuery();
+  const [wizardVisible, setWizardVisible] = useState(false);
   const programsWithUpcoming = volunteerPrograms?.items?.map((program) => {
     return {
       ...program,
@@ -116,11 +120,23 @@ export default function Volunteer({ program, role }) {
             <Heading as="h3" fontSize="xl">Volunteer Sign-Up (3min)</Heading>
           </Box>
           <Box p={6}>
-            <Wizard
-              programs={programsWithUpcoming.filter((program) => program.volunteerDetails)}
-              defaultPrograms={program ? [ program ] : undefined}
-              defaultRoles={role ? [ role ] : undefined}
-            />
+            <Box d={{ base: 'block', md: 'none' }} textAlign="center">
+              <RemindMe />
+              {!wizardVisible && (
+                <>
+                  <Text mt={4}>- or -</Text>
+                  <Button size="sm" onClick={() => setWizardVisible(true)}>fill it out now</Button>
+                </>
+              )}
+            </Box>
+            <Divider d={{ base: (wizardVisible ? 'block' : 'none' ), md: 'none' }} mt={8} mb={8} />
+            <Box d={{ base: (wizardVisible ? 'block' : 'none'), md: 'block' }}>
+              <Wizard
+                programs={programsWithUpcoming.filter((program) => program.volunteerDetails)}
+                defaultPrograms={program ? [ program ] : undefined}
+                defaultRoles={role ? [ role ] : undefined}
+              />
+            </Box>
           </Box>
         </Box>
       </Content>
