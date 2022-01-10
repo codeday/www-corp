@@ -82,7 +82,7 @@ export default function Volunteer({ program, role }) {
 
             </Text>
           </Box>
-          <Box>
+          <Box d={{ base: 'none', md: 'block' }}>
             <Box bg="gray.100" p={4} textAlign="center">
               <Heading as="h3" fontSize="xl">Time Commitment</Heading>
               <Text>
