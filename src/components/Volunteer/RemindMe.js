@@ -5,12 +5,14 @@ import Text from '@codeday/topo/Atom/Text';
 import { useToasts } from '@codeday/topo/utils';
 import { default as InputText }from '@codeday/topo/Atom/Input/Text';
 import LinkedInTag from 'react-linkedin-insight';
+import { useRouter } from 'next/router';
 
 export default function RemindMe(props) {
   const { error, success } = useToasts();
   const [email, setEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const { query } = useRouter();
 
   if (submitted) {
     return (
@@ -39,7 +41,7 @@ export default function RemindMe(props) {
             try {
               const resp = await fetch('https://hooks.zapier.com/hooks/catch/2757438/b9486tx', {
                 method: 'POST',
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({ email, referrer: query?.ref || '' }),
                 headers: {},
               });
               setSubmitted(true);
