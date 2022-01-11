@@ -9,15 +9,15 @@ export default function PhotoGallery(props) {
 
   return (
     <Grid
-      templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', xl: 'repeat(5, 1fr)' }}
+      templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(3, 1fr)', xl: 'repeat(5, 1fr)' }}
       gap={8}
       {...props}
     >
       {volunteerPhotoGallery.map((vol, i) => (
         <Box
           d={{
-            base: i >= 6 ? 'none' : 'block',
-            md: i >= 3*2 ? 'none' : 'block',
+            base: i >= 4*2 ? 'none' : 'block',
+            md: i >= 3*3 ? 'none' : 'block',
             lg: i >= 3*3 ? 'none' : 'block',
             xl: i >= 3*5 ? 'none' : 'block',
           }}

@@ -20,7 +20,7 @@ export default function RemindMe(props) {
 
   return (
     <Box {...props}>
-      <Text>Don't want to fill it out now? Enter your email and we'll remind you:</Text>
+      <Text>Don't want to fill this out on your phone? We can email you a link to sign up when you're back at your desk:</Text>
       <Flex>
         <InputText
           type="email"

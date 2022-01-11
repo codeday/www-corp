@@ -18,6 +18,7 @@ export async function getStaticProps({ params: { program, role }}) {
     props: {
       query,
       program,
+      seed: Math.random(),
     },
     revalidate: 300,
   };
