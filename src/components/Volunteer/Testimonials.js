@@ -1,14 +1,16 @@
 import Box, { Grid } from '@codeday/topo/Atom/Box';
 import Text from '@codeday/topo/Atom/Text';
 import Image from '@codeday/topo/Atom/Image';
+import shuffle from 'knuth-shuffle-seeded';
 import { useSlideshow } from '../../providers';
 import { useQuery } from '../../query';
 
 const QUOTE_DURATION = 10000;
 
-export default function Testimonials(props) {
+export default function Testimonials({ seed, ...props }) {
   const { cms } = useQuery();
-  const testimonials = cms?.volunteerTestimonials?.items || [];
+  const testimonials = shuffle((cms?.volunteerTestimonials?.items || [])
+    .filter((t) => t.quote.split(' ').length <= 6*8), seed);
   const i = useSlideshow(testimonials.length, QUOTE_DURATION);
 
   return (
@@ -44,8 +46,11 @@ export default function Testimonials(props) {
               </Box>
               <Text mb={0}>
                 {t.firstName} {t.lastName}<br />
-                {t.title && t.company && <>{t.title}, {t.company}<br /></>}
-                {t.type || 'Participant'}, {t.program?.name || 'CodeDay'}
+                {t.title && t.company ? (
+                  <>{t.title}, {t.company}<br /></>
+                ) : (
+                  <>{t.type || 'Participant'}, {t.program?.name || 'CodeDay'}</>
+                )}
               </Text>
             </Grid>
           </Box>

@@ -67,6 +67,7 @@ export default function PreviewVideo(props) {
         <ReactPlayer
           url={`https://stream.mux.com/${videoId}.m3u8`}
           playing={(!muted || (inView && pageVisible)) && playing}
+          playsinline="true"
           muted={muted}
           volume={muted ? 0 : 1}
           width="100%"

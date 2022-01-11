@@ -19,6 +19,7 @@ export async function getStaticProps({ params: { program, role }}) {
       query,
       program,
       role: role.replace(/-/g, ' '),
+      seed: Math.random(),
     },
     revalidate: 300,
   };
