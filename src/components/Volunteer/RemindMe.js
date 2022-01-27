@@ -49,8 +49,8 @@ export default function RemindMe(props) {
           isLoading={submitting}
           onClick={async () => {
             setSubmitting(true);
-            global.analytics?.identify(email);
             global.analytics?.track('volunteer.remind-me');
+            global.analytics?.identify(email);
             try {
               const resp = await fetch('https://hooks.zapier.com/hooks/catch/2757438/b9486tx', {
                 method: 'POST',
