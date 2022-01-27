@@ -75,9 +75,9 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
           Referrer: utmSource,
         }}
         onSubmit={(e) => {
+          global.analytics?.track('volunteer.submitted');
           const email = e?.entry?.Email;
           if (email) global.analytics?.identify(email);
-          global.analytics?.track('volunteer.submitted');
         }}
       />
     </Box>
