@@ -1,8 +1,8 @@
 import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
-import { VolunteerQuery } from '../volunteer.gql';
+import { VolunteerQuery } from '../../volunteer.gql';
 
-export { default } from '../index.js';
+export { default } from '../../index.js';
 
 export async function getStaticPaths() {
   return {
