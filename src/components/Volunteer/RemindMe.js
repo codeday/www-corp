@@ -6,6 +6,7 @@ import { useToasts } from '@codeday/topo/utils';
 import { default as InputText }from '@codeday/topo/Atom/Input/Text';
 import LinkedInTag from 'react-linkedin-insight';
 import { useRouter } from 'next/router';
+import { useAfterMountEffect } from '../../utils/useAfterMountEffect';
 
 export default function RemindMe(props) {
   const { error, success } = useToasts();
@@ -13,6 +14,15 @@ export default function RemindMe(props) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { query } = useRouter();
+
+  const [hasStarted, setHasStarted] = useState(false);
+  useAfterMountEffect(() => {
+    if (!hasStarted) {
+      global.analytics?.track('volunteer.started', { style: 'remind-me' });
+      LinkedInTag.init('1831116', null, false);
+    }
+    setHasStarted(true);
+  }, [email, hasStarted]);
 
   if (submitted) {
     return (
@@ -38,6 +48,8 @@ export default function RemindMe(props) {
           isLoading={submitting}
           onClick={async () => {
             setSubmitting(true);
+            global.analytics?.identify(email);
+            global.analytics?.track('volunteer.remind-me');
             try {
               const resp = await fetch('https://hooks.zapier.com/hooks/catch/2757438/b9486tx', {
                 method: 'POST',
@@ -45,7 +57,6 @@ export default function RemindMe(props) {
                 headers: {},
               });
               setSubmitted(true);
-              LinkedInTag.init('1831116', null, false);
             } catch (ex) {
               error(ex.toString());
             }

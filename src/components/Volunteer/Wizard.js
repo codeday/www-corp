@@ -11,6 +11,7 @@ import BackgroundPicker from './BackroundPicker';
 import VolunteerRolePicker from './VolunteerRolePicker';
 import ProgramsPicker from './ProgramsPicker';
 import { isAllowedVolunteerType } from './wizardConfig';
+import { useAfterMountEffect } from '../../utils/useAfterMountEffect';
 
 export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
   const [hasSelection, setHasSelection] = useState(false);
@@ -73,6 +74,11 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
           Programs: selectedPrograms,
           Referrer: query?.ref || '',
         }}
+        onSubmit={(e) => {
+          const email = e?.entry?.Email;
+          if (email) global.analytics?.identify(email);
+          global.analytics?.track('volunteer.submitted');
+        }}
       />
     </Box>
   );
@@ -83,16 +89,35 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
     ...(defaultPrograms && defaultPrograms.length > 0 ? [] : [pageProgram]),
     pageForm,
   ];
+  const pageIds = [
+    'background',
+    ...(defaultRoles && defaultRoles.length > 0 ? [] : ['role']),
+    ...(defaultPrograms && defaultPrograms.length > 0 ? [] : ['program']),
+    'form',
+  ];
 
   const [page, navigate] = useReducer((prev, action) => Math.max(0, (action === 'next' ? prev + 1 : prev - 1)), 0);
   const isFinalPage = page === pages.length - 1;
 
-  useEffect(() => setHasSelection(false), [page]);
-  useEffect(() => {
-    if (typeof window !== 'undefined' && page !== 0) {
+  const [hasStarted, setHasStarted] = useState(false);
+  useAfterMountEffect(() => {
+    if (!hasStarted) {
+      global.analytics?.track('volunteer.started', { style: 'full' });
       LinkedInTag.init('1831116', null, false);
     }
-  }, [typeof window, page]);
+    setHasStarted(true);
+  }, [backgrounds, roles, selectedPrograms, hasStarted]);
+
+  useAfterMountEffect(() => {
+      global.analytics?.track('volunteer.partial', {
+        volunteerPage: pageIds[page],
+        backgrounds: backgrounds,
+        roles: roles,
+        selectedPrograms: selectedPrograms,
+      });
+  }, [page]);
+
+  useEffect(() => setHasSelection(false), [page]);
 
   if (backgrounds.length > 0 && defaultRoles && defaultRoles.length > 0 && page > 0
       && defaultRoles.filter((r) => !isAllowedVolunteerType(r, backgrounds)).length > 0) {
