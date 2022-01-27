@@ -6,19 +6,19 @@ import Button from '@codeday/topo/Atom/Button';
 import Text, { Heading } from '@codeday/topo/Atom/Text';
 import CognitoForm from '@codeday/topo/Molecule/CognitoForm';
 import LinkedInTag from 'react-linkedin-insight';
-import { useRouter } from 'next/router';
 import BackgroundPicker from './BackroundPicker';
 import VolunteerRolePicker from './VolunteerRolePicker';
 import ProgramsPicker from './ProgramsPicker';
 import { isAllowedVolunteerType } from './wizardConfig';
 import { useAfterMountEffect } from '../../utils/useAfterMountEffect';
+import { useUtmSource } from '../../utils/useUtmSource';
 
 export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
   const [hasSelection, setHasSelection] = useState(false);
   const [backgrounds, setBackgrounds] = useState([]);
   const [roles, setRoles] = useState(defaultRoles || []);
   const [selectedPrograms, setPrograms] = useState(defaultPrograms || []);
-  const { query } = useRouter();
+  const utmSource = useUtmSource();
 
   const selectAnd = (fn) => (vals) => {
     setHasSelection(Boolean(vals && vals.length > 0));
@@ -72,7 +72,7 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
           Backgrounds: backgrounds,
           Roles: roles,
           Programs: selectedPrograms,
-          Referrer: query?.ref || '',
+          Referrer: utmSource,
         }}
         onSubmit={(e) => {
           const email = e?.entry?.Email;

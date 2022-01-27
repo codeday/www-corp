@@ -14,6 +14,7 @@ export default function RemindMe(props) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { query } = useRouter();
+  const qs = (new URLSearchParams(query)).toString();
 
   const [hasStarted, setHasStarted] = useState(false);
   useAfterMountEffect(() => {
@@ -53,7 +54,7 @@ export default function RemindMe(props) {
             try {
               const resp = await fetch('https://hooks.zapier.com/hooks/catch/2757438/b9486tx', {
                 method: 'POST',
-                body: JSON.stringify({ email, referrer: query?.ref || '' }),
+                body: JSON.stringify({ email, referrer: query?.ref || '', qs }),
                 headers: {},
               });
               setSubmitted(true);
