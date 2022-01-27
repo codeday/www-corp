@@ -13,7 +13,7 @@ import { isAllowedVolunteerType } from './wizardConfig';
 import { useAfterMountEffect } from '../../utils/useAfterMountEffect';
 import { useUtmSource } from '../../utils/useUtmSource';
 
-export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
+export default function Wizard({ programs, defaultRoles, defaultPrograms, after }) {
   const [hasSelection, setHasSelection] = useState(false);
   const [backgrounds, setBackgrounds] = useState([]);
   const [roles, setRoles] = useState(defaultRoles || []);
@@ -78,6 +78,7 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms }) {
           global.analytics?.track('volunteer.submitted');
           const email = e?.entry?.Email;
           if (email) global.analytics?.identify(email);
+          if (after) window.location = after;
         }}
       />
     </Box>

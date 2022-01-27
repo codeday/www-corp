@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
 import Box, { Grid } from '@codeday/topo/Atom/Box';
@@ -20,7 +21,8 @@ import Divider from '@codeday/topo/Atom/Divider';
 
 const PROGRAM_WEIGHT = ["primary", "secondary", "minor"];
 
-export default function Volunteer({ program, role, seed }) {
+export default function Volunteer({ program, role, seed, layout }) {
+  const { asPath, query } = useRouter();
   const { cms: { volunteerPrograms } } = useQuery();
   const [wizardVisible, setWizardVisible] = useState(false);
   const programsWithUpcoming = volunteerPrograms?.items?.map((program) => {
@@ -46,8 +48,49 @@ export default function Volunteer({ program, role, seed }) {
     </>
   );
 
+  const signUp = (
+    <Box rounded="md" shadow="md" borderWidth={1} borderColor="red.700">
+      <Box
+        p={4}
+        pl={6}
+        pr={6}
+        color="white"
+        bg="red.700"
+        rounded="md"
+        borderBottomLeftRadius={0}
+        borderBottomRightRadius={0}
+      >
+        <Heading as="h3" fontSize="xl">Volunteer Sign-Up (3min)</Heading>
+      </Box>
+      <Box p={6}>
+        {layout !== 'go' && (
+          <>
+            <Box d={{ base: 'block', md: 'none' }} textAlign="center">
+              <RemindMe />
+              {!wizardVisible && (
+                <>
+                  <Text mt={4}>- or -</Text>
+                  <Button size="sm" onClick={() => setWizardVisible(true)}>fill it out now</Button>
+                </>
+              )}
+            </Box>
+            <Divider d={{ base: (wizardVisible ? 'block' : 'none' ), md: 'none' }} mt={8} mb={8} />
+          </>
+        )}
+        <Box d={{ base: ((wizardVisible || layout === 'go') ? 'block' : 'none'), md: 'block' }}>
+          <Wizard
+            programs={programsWithUpcoming.filter((program) => program.volunteerDetails)}
+            defaultPrograms={program ? [ program ] : undefined}
+            defaultRoles={role ? [ role ] : undefined}
+            after={query?.return && query?.returnto ? `https://${query.return}.codeday.org/${query.returnto}` : undefined}
+          />
+        </Box>
+      </Box>
+    </Box>
+  );
+
   return (
-    <Page slug="/volunteer" title="Volunteer">
+    <Page slug={`/${asPath}`} title="Volunteer">
       <NextSeo
         description="We need you to help students find their place in the tech industry! (Even if you don't have a tech background!)`"
         openGraph={{
@@ -64,99 +107,75 @@ export default function Volunteer({ program, role, seed }) {
         }}
       />
       <Content mt={-8}>
-        <Heading
-          as="h2"
-          fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
-          mb={{ base: 4, md: 8 }}
-          mt={{ base: 4, md: 8 }}
-          textAlign={{ base: "center", lg: "left" }}
-        >
-          You can help students find their place in the tech industry.
-        </Heading>
-        <Grid templateColumns={{ base: '1fr', md: '2fr 1fr', lg: '3fr 1fr' }} gap={8} mb={{ base: 4, md: 8 }}>
-          <Box fontSize="lg">
-            <Box maxW="32rem" margin="auto">
-              <PreviewVideo mb={{ base: 4, md: 8 }} />
-            </Box>
-            <Text>
-              Thousands of volunteers just like you have{' '}
-              <Highlight>helped 50,000+ students find their place in tech,</Highlight> but hundreds of thousands more
-              still need your help.
-            </Text>
-            <Text d={{ base: 'none', md: 'block' }}>
-              {secondText}
-            </Text>
-          </Box>
-          <Box d={{ base: 'none', md: 'block' }}>
-            <Box bg="gray.100" p={4} textAlign="center">
-              <Heading as="h3" fontSize="xl">Time Commitment</Heading>
-              <Text>
-                Varies by role:<br />
-                30min, 2hr, or 20hr
-              </Text>
-              <Heading as="h3" fontSize="xl">Deadline</Heading>
-              <Text>
-                Opportunities available year-round
-              </Text>
-              <Heading as="h3" fontSize="xl">Requirements</Heading>
-              <Text>
-                Varies by role, see form below
-              </Text>
-              <Heading as="h3" fontSize="xl">Groups/Corporate</Heading>
-              <Text mb={0}>
+        {layout !== 'go' && (
+          <>
+            <Heading
+              as="h2"
+              fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
+              mb={{ base: 4, md: 8 }}
+              mt={{ base: 4, md: 8 }}
+              textAlign={{ base: "center", lg: "left" }}
+            >
+              You can help students find their place in the tech industry.
+            </Heading>
+            <Grid templateColumns={{ base: '1fr', md: '2fr 1fr', lg: '3fr 1fr' }} gap={8} mb={{ base: 4, md: 8 }}>
+              <Box fontSize="lg">
+                <Box maxW="32rem" margin="auto">
+                  <PreviewVideo mb={{ base: 4, md: 8 }} />
+                </Box>
+                <Text>
+                  Thousands of volunteers just like you have{' '}
+                  <Highlight>helped 50,000+ students find their place in tech,</Highlight> but hundreds of thousands more
+                  still need your help.
+                </Text>
+                <Text d={{ base: 'none', md: 'block' }}>
+                  {secondText}
+                </Text>
+              </Box>
+              <Box d={{ base: 'none', md: 'block' }}>
+                <Box bg="gray.100" p={4} textAlign="center">
+                  <Heading as="h3" fontSize="xl">Time Commitment</Heading>
+                  <Text>
+                    Varies by role:<br />
+                    30min, 2hr, or 20hr
+                  </Text>
+                  <Heading as="h3" fontSize="xl">Deadline</Heading>
+                  <Text>
+                    Opportunities available year-round
+                  </Text>
+                  <Heading as="h3" fontSize="xl">Requirements</Heading>
+                  <Text>
+                    Varies by role, see form below
+                  </Text>
+                  <Heading as="h3" fontSize="xl">Groups/Corporate</Heading>
+                  <Text mb={0}>
 
-                <Link href="mailto:volunteer@codeday.org">Email us</Link> or {' '}
-                <Link href="/volunteer/share">share with coworkers</Link>
-              </Text>
-            </Box>
-          </Box>
-        </Grid>
-        <Box rounded="md" shadow="md" borderWidth={1} borderColor="red.700">
-          <Box
-            p={4}
-            pl={6}
-            pr={6}
-            color="white"
-            bg="red.700"
-            rounded="md"
-            borderBottomLeftRadius={0}
-            borderBottomRightRadius={0}
-          >
-            <Heading as="h3" fontSize="xl">Volunteer Sign-Up (3min)</Heading>
-          </Box>
-          <Box p={6}>
-            <Box d={{ base: 'block', md: 'none' }} textAlign="center">
-              <RemindMe />
-              {!wizardVisible && (
-                <>
-                  <Text mt={4}>- or -</Text>
-                  <Button size="sm" onClick={() => setWizardVisible(true)}>fill it out now</Button>
-                </>
-              )}
-            </Box>
-            <Divider d={{ base: (wizardVisible ? 'block' : 'none' ), md: 'none' }} mt={8} mb={8} />
-            <Box d={{ base: (wizardVisible ? 'block' : 'none'), md: 'block' }}>
-              <Wizard
-                programs={programsWithUpcoming.filter((program) => program.volunteerDetails)}
-                defaultPrograms={program ? [ program ] : undefined}
-                defaultRoles={role ? [ role ] : undefined}
-              />
-            </Box>
-          </Box>
-        </Box>
+                    <Link href="mailto:volunteer@codeday.org">Email us</Link> or {' '}
+                    <Link href="/volunteer/share">share with coworkers</Link>
+                  </Text>
+                </Box>
+              </Box>
+            </Grid>
+          </>
+        )}
+        {signUp}
       </Content>
-      <Content d={{ base: 'block', md: 'none' }} mt={12}>
-        <Text fontSize="lg">{secondText}</Text>
-      </Content>
-      <Content mt={12}>
-        <Heading as="h3" textAlign="center" fontSize="3xl">CodeDay volunteers make lasting impacts towards futures in tech.</Heading>
-      </Content>
-      <Content maxW="containers.md" mt={8} mb={12}>
-        <Testimonials seed={seed} />
-      </Content>
-      <Content wide>
-        <PhotoGallery />
-      </Content>
+      {layout !== 'go' && (
+        <>
+          <Content d={{ base: 'block', md: 'none' }} mt={12}>
+            <Text fontSize="lg">{secondText}</Text>
+          </Content>
+          <Content mt={12}>
+            <Heading as="h3" textAlign="center" fontSize="3xl">CodeDay volunteers make lasting impacts towards futures in tech.</Heading>
+          </Content>
+          <Content maxW="containers.md" mt={8} mb={12}>
+            <Testimonials seed={seed} />
+          </Content>
+          <Content wide>
+            <PhotoGallery />
+          </Content>
+        </>
+      )}
     </Page>
   );
 }
