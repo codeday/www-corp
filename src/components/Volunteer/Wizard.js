@@ -16,8 +16,6 @@ import { useUtmSource } from '../../utils/useUtmSource';
 export default function Wizard({ programs, defaultRoles, defaultPrograms, after }) {
   const [hasSelection, setHasSelection] = useState(false);
   const [backgrounds, setBackgrounds] = useState([]);
-  const [roles, setRoles] = useState(defaultRoles || []);
-  const [selectedPrograms, setPrograms] = useState(defaultPrograms || []);
   const utmSource = useUtmSource();
 
   const selectAnd = (fn) => (vals) => {
@@ -39,39 +37,14 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms, after 
     </Box>
   );
 
-  const pageRole = (
-    <Box>
-      <Heading as="h3" fontSize="xl" mb={2}>How are you interested in helping?</Heading>
-      <Text mb={6}>
-        This is not a final commitment, so choose as many as you'd like. We've filtered the volunteer opportunities
-        to only ones you're eligible for.
-      </Text>
-      <VolunteerRolePicker
-        onChange={selectAnd(setRoles)}
-        backgrounds={backgrounds}
-        only={roleOnly}
-      />
-    </Box>
-  );
-
-  const pageProgram = (
-    <Box>
-      <Heading as="h3" fontSize="xl" mb={2}>Choose which programs you'd like to help with:</Heading>
-      <Text mb={6}>
-        This is not a final commitment, so choose as many as you'd like.
-      </Text>
-      <ProgramsPicker onChange={selectAnd(setPrograms)} programs={programs} roles={roles} />
-    </Box>
-  );
-
   const pageForm = (
     <Box>
       <CognitoForm
         formId={98}
         prefill={{
           Backgrounds: backgrounds,
-          Roles: roles,
-          Programs: selectedPrograms,
+          Roles: defaultRoles,
+          Programs: defaultPrograms,
           Referrer: utmSource,
         }}
         onSubmit={(e) => {
@@ -86,14 +59,10 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms, after 
 
   const pages = [
     pageBackground,
-    ...(defaultRoles && defaultRoles.length > 0 ? [] : [pageRole]),
-    ...(defaultPrograms && defaultPrograms.length > 0 ? [] : [pageProgram]),
     pageForm,
   ];
   const pageIds = [
     'background',
-    ...(defaultRoles && defaultRoles.length > 0 ? [] : ['role']),
-    ...(defaultPrograms && defaultPrograms.length > 0 ? [] : ['program']),
     'form',
   ];
 
@@ -107,14 +76,12 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms, after 
       LinkedInTag.init('1831116', null, false);
     }
     setHasStarted(true);
-  }, [backgrounds, roles, selectedPrograms, hasStarted]);
+  }, [backgrounds, hasStarted]);
 
   useAfterMountEffect(() => {
       global.analytics?.track('volunteer.partial', {
         volunteerPage: pageIds[page],
         backgrounds: backgrounds,
-        roles: roles,
-        selectedPrograms: selectedPrograms,
       });
   }, [page]);
 
