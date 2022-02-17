@@ -1,5 +1,5 @@
 import React, { useState, useReducer, useRef } from 'react';
-import Box, { RatioBox } from '@codeday/topo/Atom/Box';
+import { Box, RatioBox } from '@codeday/topo/Atom';
 import UiVolume from '@codeday/topocons/Icon/UiVolume';
 import ReactPlayer from 'react-player';
 import { useInView } from 'react-intersection-observer';

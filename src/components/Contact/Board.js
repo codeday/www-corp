@@ -1,8 +1,6 @@
 import React from 'react';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text from '@codeday/topo/Atom/Text';
-import Image from '@codeday/topo/Atom/Image';
-import Content from '@codeday/topo/Molecule/Content';
+import { Box, Grid, Text, Image } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import { useQuery } from '../../query';
 
 export default function Employees(props) {
@@ -27,7 +25,7 @@ export default function Employees(props) {
                 h="64px"
                 alt=""
               />
-              <Text mb={0} pt={2} bold>{director.givenName} {director.familyName}</Text>
+              <Text mb={0} pt={2} fontWeight="bold">{director.givenName} {director.familyName}</Text>
               <Text fontSize="sm" color="current.textLight">Board Member, {director.pronoun}</Text>
             </Box>
             <Box ml="64px" pl={4}>

@@ -3,9 +3,9 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
-import Content from '@codeday/topo/Molecule/Content';
+import { Box, Grid, Text, Heading, Link, Button, Divider } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
+import { useColorMode } from '@codeday/topo/Theme';
 import Wizard from '../../components/Volunteer/Wizard';
 import Page from '../../components/Page';
 import PreviewVideo from '../../components/Volunteer/PreviewVideo';
@@ -16,12 +16,11 @@ import Testimonials from '../../components/Volunteer/Testimonials';
 import PhotoGallery from '../../components/Volunteer/PhotoGallery';
 import Highlight from '../../components/Highlight';
 import RemindMe from '../../components/Volunteer/RemindMe';
-import Button from '@codeday/topo/Atom/Button';
-import Divider from '@codeday/topo/Atom/Divider';
 
 const PROGRAM_WEIGHT = ["primary", "secondary", "minor"];
 
 export default function Volunteer({ program, role, seed, layout }) {
+  const { colorMode } = useColorMode();
   const { asPath, query } = useRouter();
   const { cms: { volunteerPrograms } } = useQuery();
   const [wizardVisible, setWizardVisible] = useState(false);
@@ -133,23 +132,22 @@ export default function Volunteer({ program, role, seed, layout }) {
                 </Text>
               </Box>
               <Box d={{ base: 'none', md: 'block' }}>
-                <Box bg="gray.100" p={4} textAlign="center">
+                <Box bg={colorMode === 'light' ? 'gray.100' : 'gray.900'} p={4} textAlign="center">
                   <Heading as="h3" fontSize="xl">Time Commitment</Heading>
-                  <Text>
+                  <Text mb={2}>
                     Varies by role:<br />
                     30min, 2hr, or 20hr
                   </Text>
                   <Heading as="h3" fontSize="xl">Deadline</Heading>
-                  <Text>
+                  <Text mb={2}>
                     Opportunities available year-round
                   </Text>
                   <Heading as="h3" fontSize="xl">Requirements</Heading>
-                  <Text>
+                  <Text mb={2}>
                     Varies by role, see form below
                   </Text>
                   <Heading as="h3" fontSize="xl">Groups/Corporate</Heading>
-                  <Text mb={0}>
-
+                  <Text>
                     <Link href="mailto:volunteer@codeday.org">Email us</Link> or {' '}
                     <Link href="/volunteer/share">share with coworkers</Link>
                   </Text>
@@ -168,7 +166,7 @@ export default function Volunteer({ program, role, seed, layout }) {
           <Content mt={12}>
             <Heading as="h3" textAlign="center" fontSize="3xl">CodeDay volunteers make lasting impacts towards futures in tech.</Heading>
           </Content>
-          <Content maxW="containers.md" mt={8} mb={12}>
+          <Content maxW="container.md" mt={8} mb={12}>
             <Testimonials seed={seed} />
           </Content>
           <Content wide>

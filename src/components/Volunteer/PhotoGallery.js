@@ -1,6 +1,4 @@
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text from '@codeday/topo/Atom/Text';
-import Image from '@codeday/topo/Atom/Image';
+import { Box, Grid, Text, Image } from '@codeday/topo/Atom';
 import { useQuery } from '../../query';
 
 export default function PhotoGallery(props) {

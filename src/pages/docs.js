@@ -1,14 +1,11 @@
 import React from 'react';
 import { print } from 'graphql';
-import { Heading } from '@codeday/topo/Atom/Text';
-import Content from '@codeday/topo/Molecule/Content';
-import Divider from '@codeday/topo/Atom/Divider';
-import List, { Item as ListItem } from '@codeday/topo/Atom/List';
+import { Heading, Divider, List, ListItem, Link } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import { apiFetch } from '@codeday/topo/utils';
 import Page from '../components/Page';
 import { useQuery } from '../query';
 import { DocsQuery } from './docs.gql';
-import Link from '@codeday/topo/Atom/Text/Link';
 
 export default function Conduct() {
   const { legalDocuments } = useQuery().cms;
@@ -27,7 +24,7 @@ export default function Conduct() {
 
   return (
     <Page title="Documents" slug="/docs">
-      <Content maxWidth="containers.md">
+      <Content maxWidth="container.md">
         <Heading as="h2" fontSize="5xl" mt={-2} mb={8}>Legal Documents</Heading>
         {displayTypes.map((t, i) => (
           <>

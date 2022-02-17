@@ -1,8 +1,7 @@
 import React from 'react';
 import { create } from 'random-seed';
-import Text, { Link, Heading } from '@codeday/topo/Atom/Text';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Content from '@codeday/topo/Molecule/Content';
+import { Text, Box, Grid, Link, Heading } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import EcoBox from './EcoBox';
 import { parseIsoString, formatShortDate } from '../../utils/time';
 import { useQuery } from '../../query';

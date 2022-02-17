@@ -1,7 +1,7 @@
 import React from 'react';
 import { print } from 'graphql';
-import { Heading } from '@codeday/topo/Atom/Text';
-import Content from '@codeday/topo/Molecule/Content';
+import { Heading } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import { apiFetch } from '@codeday/topo/utils';
 import Page from '../../components/Page';
 import ContentfulRichText from '../../components/ContentfulRichText';

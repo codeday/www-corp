@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { create } from 'random-seed';
-import Box, { Flex } from '@codeday/topo/Atom/Box';
+import { Box, Flex } from '@codeday/topo/Atom';
 
 export default function FlexScatter({
   children, seed, gapMin, gapMax, yOffsetMin, yOffsetMax, ...props

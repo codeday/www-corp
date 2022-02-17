@@ -1,16 +1,13 @@
 import React from 'react';
 import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Image from '@codeday/topo/Atom/Image';
-import Content from '@codeday/topo/Molecule/Content';
-import Text, { Heading } from '@codeday/topo/Atom/Text';
+import { Box, Grid, Image, Text, Heading } from '@codeday/topo/Atom';
+import { Content, IconBox, IconBoxIcon as HeaderIcon, IconBoxText as HeaderText } from '@codeday/topo/Molecule';
 import StudentIcon from '@codeday/topocons/Icon/Backpack';
 import ParentIcon from '@codeday/topocons/Icon/BuildingHome';
 import SchoolIcon from '@codeday/topocons/Icon/BuildingSchool';
 import PartnerIcon from '@codeday/topocons/Icon/BuildingOffice';
 import VolunteerIcon from '@codeday/topocons/Icon/IdCard';
-import IconBox, { HeaderIcon, HeaderText, Body as BoxBody } from '@codeday/topo/Molecule/IconBox';
 import Page from '../../../components/Page';
 import { useQuery } from '../../../query';
 import { HelpProgramIndexQuery, HelpProgramIndexPathsQuery } from './index.gql';

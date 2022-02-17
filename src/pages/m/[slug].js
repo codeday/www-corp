@@ -1,6 +1,6 @@
 import React from 'react';
-import Spinner from '@codeday/topo/Atom/Spinner';
-import Content from '@codeday/topo/Molecule/Content';
+import { Spinner } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import Calendly from '../../components/Calendly';
 import Page from '../../components/Page';
 

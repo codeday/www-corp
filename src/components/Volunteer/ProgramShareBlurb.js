@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text, { Heading } from '@codeday/topo/Atom/Text';
-import Image from '@codeday/topo/Atom/Image';
-import Button from '@codeday/topo/Atom/Button';
+import { Box, Grid, Text, Heading, Image, Button, Divider, Link } from '@codeday/topo/Atom';
 import UiArrowDown from '@codeday/topocons/Icon/UiArrowDown';
 import UiArrowUp from '@codeday/topocons/Icon/UiArrowUp';
 import FilePdf from '@codeday/topocons/Icon/FilePdf';
 import ContentfulRichText from '../ContentfulRichText';
-import Divider from '@codeday/topo/Atom/Divider';
-import Link from '@codeday/topo/Atom/Text/Link';
 
 export default function ProgramShareBlurb({ program }) {
   const [blurbVisible, setBlurbVisible] = useState(false);
@@ -47,7 +42,7 @@ export default function ProgramShareBlurb({ program }) {
             as="a"
             target="_blank"
             href={`https://www.linkedin.com/shareArticle/?url=${encodeURIComponent(`https://www.codeday.org/volunteer/${program.webname}`)}`}
-            variantColor="blue"
+            colorScheme="blue"
             mb={8}
           >
             Share on LinkedIn

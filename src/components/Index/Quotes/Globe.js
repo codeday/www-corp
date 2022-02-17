@@ -2,7 +2,7 @@ import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import dynamic from 'next/dynamic'
 import PropTypes from 'prop-types';
 import { useInView } from 'react-intersection-observer';
-import Box from '@codeday/topo/Atom/Box';
+import { Box } from '@codeday/topo/Atom';
 import { useTheme } from '@codeday/topo/utils';
 
 const options = {

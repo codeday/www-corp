@@ -2,11 +2,8 @@ import React from 'react';
 import { print } from 'graphql';
 import { DateTime } from 'luxon';
 import { apiFetch } from '@codeday/topo/utils';
-import Box, { Flex, Grid } from '@codeday/topo/Atom/Box';
-import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
-import Button from '@codeday/topo/Atom/Button';
-import Image from '@codeday/topo/Atom/Image';
-import Content from '@codeday/topo/Molecule/Content';
+import { Box, Flex, Grid, Text, Heading, Link, Button, Image } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import ContentfulRichText from '../components/ContentfulRichText';
 import Page from '../components/Page';
 import PhotoGallery from '../components/Press/PhotoGallery';
@@ -29,7 +26,7 @@ export default function Press({ seed }) {
             <Heading as="h4" fontSize="lg" mt={6} mb={4}>Our Programs:</Heading>
             {programs?.items?.map((program) => (
               <Box key={program.name}>
-                <Text bold mb={0}>
+                <Text fontWeight="bold" mb={0}>
                   <Image src={program.logo.url} height="1em" display="inline-block" mr={2} alt="" />
                   {program.name}
                 </Text>
@@ -39,16 +36,16 @@ export default function Press({ seed }) {
           </Box>
           <Box>
             <Box p={4} pb={0} mb={4} borderWidth={1} borderColor="blue.600" bg="blue.50" color="blue.900">
-              <Heading as="h3" fontSize="lg" mb={4} bold>Press Contact</Heading>
+              <Heading as="h3" fontSize="lg" mb={4} fontWeight="bold">Press Contact</Heading>
               <ContentfulRichText json={pressContact?.items[0]?.richValue?.json} />
             </Box>
 
             <Box textAlign="center">
-              <Button variantColor="blue" as="a" href="#assets">Download Press Images &amp; Logos</Button>
+              <Button colorScheme="blue" as="a" href="#assets">Download Press Images &amp; Logos</Button>
             </Box>
 
             <Box textAlign="center" mt={4}>
-              <Text color="current.textLight" bold>As Seen In</Text>
+              <Text color="current.textLight" fontWeight="bold">As Seen In</Text>
               <PreviousCoverageLogos
                 num={4}
                 mr={4}
@@ -67,7 +64,7 @@ export default function Press({ seed }) {
         <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', xl: 'repeat(4, 1fr)' }} gap={8} mb={8}>
           {previousCoverage?.items?.map((coverage) => (
             <Box as="a" href={coverage.url} target="_blank" rel="noopener">
-              <Text bold mb={0}>{coverage.title}</Text>
+              <Text fontWeight="bold" mb={0}>{coverage.title}</Text>
               <Text color="current.textLight">
                 {coverage.publicationName},{' '}
                 {DateTime.fromISO(coverage.date).toLocaleString({ month: 'long', year: 'numeric' })}
@@ -106,7 +103,7 @@ export default function Press({ seed }) {
           on file.
         </Text>
         <Flex alignItems="center">
-          <Button as="a" href="https://f1.codeday.org/logos.zip" variantColor="blue">Download Logos</Button>
+          <Button as="a" href="https://f1.codeday.org/logos.zip" colorScheme="blue">Download Logos</Button>
           <Text mb={0} pl={4} fontSize="sm" color="current.textLight">
             All logos and names are trademarks of CodeDay.
           </Text>

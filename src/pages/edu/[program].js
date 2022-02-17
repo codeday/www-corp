@@ -3,12 +3,9 @@ import { print } from 'graphql';
 import { useRouter } from 'next/router';
 import shuffle from 'knuth-shuffle-seeded';
 import { apiFetch } from '@codeday/topo/utils';
-import Content from '@codeday/topo/Molecule/Content';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
-import Skelly from '@codeday/topo/Atom/Skelly';
-import CognitoForm from '@codeday/topo/Molecule/CognitoForm';
-import Image from '@codeday/topo/Atom/Image';
+import { useColorMode } from '@codeday/topo/Theme';
+import { Content, CognitoForm } from '@codeday/topo/Molecule';
+import { Box, Grid, Text, Heading, Link, Skelly, Image } from '@codeday/topo/Atom';
 import ContentfulRichText from '../../components/ContentfulRichText';
 import Page from '../../components/Page';
 import Error404 from '../404';
@@ -24,8 +21,6 @@ function Faq({ faq }) {
         as="h4"
         fontSize="lg"
         onClick={() => setIsOpen(!isOpen)}
-        bg={isOpen ? 'gray.900' : 'gray.50'}
-        color={isOpen && 'white'}
         cursor="pointer"
         p={4}
       >
@@ -44,6 +39,7 @@ function Faq({ faq }) {
 }
 
 export default function EducationProgram({ seed }) {
+  const { colorMode } = useColorMode();
   const { cms } = useQuery();
   const { isFallback, query } = useRouter();
   const program = cms?.eduPrograms?.items[0];
@@ -87,7 +83,7 @@ export default function EducationProgram({ seed }) {
           <Image
             src={program.logo.url}
             alt=""
-            size="1em"
+            h="1em"
             d="inline-block"
             position="relative"
             top="-0.075em"
@@ -114,7 +110,7 @@ export default function EducationProgram({ seed }) {
         <Grid templateColumns={{ base: '1fr', md: '1fr 1fr', lg: '6fr 3fr' }} gap={8}>
 
           <Box>
-            <Text fontSize="xl" bold>{program.description}</Text>
+            <Text fontSize="xl" fontWeight="bold">{program.description}</Text>
             {testimonial && (
               <Box borderLeftWidth={2} pl={4} ml={2} mb={8}>
                 <Text fontSize="lg" fontStyle="italic">
@@ -135,7 +131,13 @@ export default function EducationProgram({ seed }) {
 
           <Box>
             {program.eligibility && (
-              <Box p={4} bg="blue.50" borderWidth={1} borderColor="blue.200" color="blue.900">
+              <Box
+                p={4}
+                bg={colorMode === 'light' ? 'blue.50' : 'blue.900'}
+                borderColor={colorMode === 'light' ? 'blue.200' : 'blue.700'}
+                color={colorMode === 'light' ? 'blue.900' : 'blue.500'}
+                borderWidth={1}
+              >
                 <Heading as="h3" fontSize="xl" mb={0}>Eligibility</Heading>
                 <ContentfulRichText json={program.eligibility.json} h1Size="3xl" />
               </Box>
@@ -156,7 +158,7 @@ export default function EducationProgram({ seed }) {
             <Box borderWidth={2} borderColor="green.600" rounded="sm">
               <Heading as="h3" fontSize="2xl" mb={2} bg="green.600" p={4} color="white">Request More Info</Heading>
               <Box p={4}>
-                <CognitoForm formId={76} prefill={{ Program: program.webname }} fallback />
+                <CognitoForm formId={76} prefill={{ Program: program.webname }} />
               </Box>
             </Box>
 

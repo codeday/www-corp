@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import Box, { Flex } from '@codeday/topo/Atom/Box';
-import Button from '@codeday/topo/Atom/Button';
-import Text from '@codeday/topo/Atom/Text';
+import { Box, Flex, Button, Text, TextInput as InputText } from '@codeday/topo/Atom';
 import { useToasts } from '@codeday/topo/utils';
-import { default as InputText }from '@codeday/topo/Atom/Input/Text';
 import LinkedInTag from 'react-linkedin-insight';
 import { useRouter } from 'next/router';
 import { useAfterMountEffect } from '../../utils/useAfterMountEffect';
@@ -44,7 +41,7 @@ export default function RemindMe(props) {
           mr={2}
         />
         <Button
-          variantColor="green"
+          colorScheme="green"
           isDisabled={email.indexOf('@') < 0}
           isLoading={submitting}
           onClick={async () => {

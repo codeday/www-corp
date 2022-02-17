@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { print } from 'graphql';
-import Box from '@codeday/topo/Atom/Box';
-import { Heading } from '@codeday/topo/Atom/Text';
-import Button from '@codeday/topo/Atom/Button';
-import Content from '@codeday/topo/Molecule/Content';
-import Divider from '@codeday/topo/Atom/Divider';
+import { Box, Heading, Button, Divider } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import { apiFetch } from '@codeday/topo/utils';
 import Page from '../components/Page';
 import ContentfulRichText from '../components/ContentfulRichText';
@@ -22,7 +19,7 @@ function ConductEntry({ entry }) {
       {moreInfo && (
         <>
           <Box>
-            <Button variantColor="blue" variant="ghost" onClick={() => setIsOpen(!isOpen)}>
+            <Button colorScheme="blue" variant="ghost" onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? 'Hide More Info' : 'More Info'}
             </Button>
           </Box>

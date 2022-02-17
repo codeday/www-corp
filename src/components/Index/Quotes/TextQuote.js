@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Box from '@codeday/topo/Atom/Box';
-import Text from '@codeday/topo/Atom/Text';
+import { Box, Text } from '@codeday/topo/Atom';
 import BioInfo from './BioInfo';
 
 export default function TextQuote({ testimonial, ...props }) {
@@ -10,9 +9,10 @@ export default function TextQuote({ testimonial, ...props }) {
       <Text
         fontSize={testimonial.quote.length > 350 ? 'xl' : '2xl'}
         fontStyle="italic"
-        borderLeftWidth={2}
-        borderColor="current.border"
+        borderLeftWidth={3}
+        borderColor="red.600"
         pl={4}
+        mb={4}
       >
         {testimonial.quote}
       </Text>

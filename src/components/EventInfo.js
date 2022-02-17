@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
-import Button from '@codeday/topo/Atom/Button';
-import Html from '@codeday/topo/Molecule/Html';
-import { default as Input } from '@codeday/topo/Atom/Input/Text';
+import { Box, Grid, Text, Heading, Link, Button, TextInput as Input } from '@codeday/topo/Atom';
+import { Html } from '@codeday/topo/Molecule';
 import { useToasts, apiFetch } from '@codeday/topo/utils';
 import { DateTime } from 'luxon';
 import TimeAgo from 'javascript-time-ago';
@@ -46,7 +43,7 @@ function SubscribeBox({ event, ...rest }) {
         borderBottomLeftRadius={0}
         position="relative"
         top={-1}
-        variantColor="blue"
+        colorScheme="blue"
         onClick={async () => {
           setIsLoading(true);
           try {
@@ -139,7 +136,7 @@ export default function Event({ event, ...rest }) {
               {event.location && (
                 <>
                   <Link fontSize="lg" href={event.location} target="_blank" mr={4}>{event.location}</Link>
-                  <Button as="a" href={event.location} target="_blank" variantColor="blue">
+                  <Button as="a" href={event.location} target="_blank" colorScheme="blue">
                     {almostHasStarted ? 'Join' : 'Pre-Register'}
                   </Button>
                 </>
@@ -149,7 +146,7 @@ export default function Event({ event, ...rest }) {
         ) : (
           <>
             <Button
-              variantColor="blue"
+              colorScheme="blue"
               as="a"
               href="https://www.youtube.com/c/codeday"
               target="_blank"

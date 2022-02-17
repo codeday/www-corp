@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Grid } from '@codeday/topo/Atom/Box';
-import Content from '@codeday/topo/Molecule/Content';
+import { Grid } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import { useQuery } from '../../query';
 import Photo from './Photo';
 import PhotoTagPicker from './PhotoTagPicker';

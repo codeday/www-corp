@@ -1,7 +1,6 @@
 import React from 'react';
-import Content from '@codeday/topo/Molecule/Content';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Link from '@codeday/topo/Atom/Text/Link';
+import { Content } from '@codeday/topo/Molecule';
+import { Box, Grid, Link } from '@codeday/topo/Atom';
 import Eco from '@codeday/topocons/Icon/Eco';
 import { useQuery } from '../../query';
 import StaticContent from '../StaticContent';

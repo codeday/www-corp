@@ -1,9 +1,7 @@
 import React from 'react';
 import { DateTime } from 'luxon';
-import Content from '@codeday/topo/Molecule/Content';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text from '@codeday/topo/Atom/Text';
-import Button from '@codeday/topo/Atom/Button';
+import { Content } from '@codeday/topo/Molecule';
+import { Box, Text, Button, Grid } from '@codeday/topo/Atom';
 import { useQuery } from '../../query';
 
 const fromIso = (s) => {
@@ -73,12 +71,12 @@ export default function Announcement(props) {
         >
           <Box>
             <Text mb={0} d="inline">
-                <Text as="span" bold d={{ base: 'none', md: 'inline' }}>{announcement.type}: </Text>
+                <Text as="span" fontWeight="bold" d={{ base: 'none', md: 'inline' }}>{announcement.type}: </Text>
                 {announcement.oneline}
             </Text>
           </Box>
           <Box textAlign="right" display={{ base: 'none', md: 'block' }}>
-            <Button size="sm" variantColor={baseColor} mb={0}>{announcement.cta || 'Learn More'}</Button>
+            <Button size="sm" colorScheme={baseColor} mb={0}>{announcement.cta || 'Learn More'}</Button>
           </Box>
         </Grid>
       </Box>

@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text from '@codeday/topo/Atom/Text';
-import Image from '@codeday/topo/Atom/Image';
-import List, { Item as ListItem } from '@codeday/topo/Atom/List';
-import Button from '@codeday/topo/Atom/Button';
+import { Box, Grid, Text, Image, List, ListItem, Button } from '@codeday/topo/Atom/Box';
 import { formatInterval } from '../../utils/time';
 import ContentfulRichText from '../ContentfulRichText';
 import ProgramShareBlurb from './ProgramShareBlurb';

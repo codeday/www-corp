@@ -1,9 +1,5 @@
 import React from 'react';
-import Box from '@codeday/topo/Atom/Box';
-import Image from '@codeday/topo/Atom/Image';
-import Text, { Link, Heading } from '@codeday/topo/Atom/Text';
-import List, { Item as ListItem } from '@codeday/topo/Atom/List';
-import Divider from '@codeday/topo/Atom/Divider';
+import { Box, Image, Text, Link, Heading, List, ListItem, Divider } from '@codeday/topo/Atom';
 import StaticContent from './StaticContent';
 
 const MEDIA_TYPE_VIDEO = ['video/mp4', 'video/mov'];
@@ -74,8 +70,8 @@ function mapRichText({
     'heading-4': <Heading mb={2} mt={4} as="h4" fontSize={getSize(h1SizeCalculated, -3)}>{innerContent}</Heading>,
     'heading-5': <Heading mb={1} mt={2} as="h5" fontSize={getSize(h1SizeCalculated, -4)}>{innerContent}</Heading>,
     'heading-6': <Heading mb={1} mt={1} as="h6" fontSize={getSize(h1SizeCalculated, -5)}>{innerContent}</Heading>,
-    'unordered-list': <List styleType="disc" mb={6} pl={4} stylePos="outside">{innerContent}</List>,
-    'ordered-list': <List as="ol" styleType="decimal" mb={6} pl={4} stylePos="outside">{innerContent}</List>,
+    'unordered-list': <List styleType="disc" mb={6} pl={4} stylePosition="outside">{innerContent}</List>,
+    'ordered-list': <List as="ol" styleType="decimal" mb={6} pl={4} stylePosition="outside">{innerContent}</List>,
     'list-item': <ListItem mb={1}>{innerContent}</ListItem>,
     'hr': <Divider />,
     'embedded-asset-block': <ContentfulAsset mt={4} mb={8} id={data?.target?.sys?.id} links={links} />,

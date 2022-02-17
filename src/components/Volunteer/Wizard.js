@@ -1,14 +1,10 @@
 import React, {
-  useState, useReducer, useEffect, useMemo,
+  useState, useReducer, useEffect
 } from 'react';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Button from '@codeday/topo/Atom/Button';
-import Text, { Heading } from '@codeday/topo/Atom/Text';
-import CognitoForm from '@codeday/topo/Molecule/CognitoForm';
+import { Box, Button, Text, Heading } from '@codeday/topo/Atom';
+import { CognitoForm } from '@codeday/topo/Molecule';
 import LinkedInTag from 'react-linkedin-insight';
 import BackgroundPicker from './BackroundPicker';
-import VolunteerRolePicker from './VolunteerRolePicker';
-import ProgramsPicker from './ProgramsPicker';
 import { isAllowedVolunteerType } from './wizardConfig';
 import { useAfterMountEffect } from '../../utils/useAfterMountEffect';
 import { useUtmSource } from '../../utils/useUtmSource';
@@ -111,7 +107,7 @@ export default function Wizard({ programs, defaultRoles, defaultPrograms, after 
       {!isFinalPage && (
         <Box textAlign={{ base: 'center', md: 'right' }} mt={8}>
           <Button
-            variantColor="green"
+            colorScheme="green"
             onClick={() => { if (hasSelection) navigate('next'); }}
             disabled={!hasSelection}
           >

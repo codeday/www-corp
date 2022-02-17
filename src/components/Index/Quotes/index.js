@@ -1,8 +1,7 @@
 import React, { useState, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Box, { Grid, VisibilityCheckBox, RatioBox } from '@codeday/topo/Atom/Box';
-import Text, { Heading } from '@codeday/topo/Atom/Text';
-import Content from '@codeday/topo/Molecule/Content';
+import { Box, Text, Heading, Grid, VisibilityCheckBox, RatioBox } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import shuffle from 'knuth-shuffle-seeded';
 import TextQuote from './TextQuote';
 import Globe from './Globe';
@@ -44,7 +43,7 @@ export default function Quotes({ seed }) {
         <Heading
           as="h3"
           fontSize="2xl"
-          bold
+          fontWeight="bold"
           mt={0}
           textAlign="center"
         >
