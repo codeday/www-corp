@@ -1,7 +1,7 @@
 import React from 'react';
-import MailingListSubscribe from '@codeday/topo/Organism/MailingListSubscribe'
 import { Text, Heading } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
+import { MailingListSubscribe } from '@codeday/topo/Organism';
 import { useRouter } from 'next/router';
 import Page from '../../components/Page';
 
