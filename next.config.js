@@ -3,6 +3,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { apiFetch } = require('@codeday/topo/utils');
 
 module.exports = {
+  swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -10,7 +11,7 @@ module.exports = {
     isServer,
   }) => {
     // eslint-disable-next-line node/no-process-env
-    
+
     const originalEntry = config.entry;
     config.entry = async () => {
       const entries = await originalEntry();
