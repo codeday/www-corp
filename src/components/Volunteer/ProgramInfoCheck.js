@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { default as Checkbox } from '@codeday/topo/Atom/Input/Checkbox';
-import Box from '@codeday/topo/Atom/Box';
-import Text from '@codeday/topo/Atom/Text';
-import Image from '@codeday/topo/Atom/Image';
-import List, { Item as ListItem } from '@codeday/topo/Atom/List';
+import { Box, Text, Image, List, ListItem, Checkbox } from '@codeday/topo/Atom';
 import { formatInterval } from '../../utils/time';
 import ContentfulRichText from '../ContentfulRichText';
 
@@ -26,7 +22,7 @@ export default function ProgramInfoCheck({ program, disabled }) {
         alignItems="top"
         value={program.webname}
         isDisabled={disabled}
-        variantColor="green"
+        colorScheme="green"
         onChange={(e) => {
           setIsSelected(e.target.checked);
         }}
@@ -44,7 +40,7 @@ export default function ProgramInfoCheck({ program, disabled }) {
           <ContentfulRichText json={program.volunteerDetails.json} />
           {program.upcoming.length > 0 && (
           <Box mb={4}>
-            <Text bold mb={1}>Upcoming Dates</Text>
+            <Text fontWeight="bold" mb={1}>Upcoming Dates</Text>
             <List styleType="disc" pl={2}>
               {program.upcoming.slice(0, 3).map((event) => (
                 <ListItem>

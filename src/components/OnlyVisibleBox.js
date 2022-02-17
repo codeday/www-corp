@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React, { useRef, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
-import Box from '@codeday/topo/Atom/Box';
+import { Box } from '@codeday/topo/Atom';
 
 export default function OnlyVisibleBox({ children, ...props }) {
   const ref = useRef();

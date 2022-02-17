@@ -1,13 +1,8 @@
 import React from 'react';
 import { print } from 'graphql';
 import { useRouter } from 'next/router';
-import { Heading } from '@codeday/topo/Atom/Text';
-import Image from '@codeday/topo/Atom/Image';
-import Content from '@codeday/topo/Molecule/Content';
-import Skelly from '@codeday/topo/Atom/Skelly';
-import Spinner from '@codeday/topo/Atom/Spinner';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import CognitoForm from '@codeday/topo/Molecule/CognitoForm';
+import { Heading, Image, Skelly, Spinner, Box, Grid } from '@codeday/topo/Atom';
+import { Content, CognitoForm } from '@codeday/topo/Molecule';
 import { apiFetch } from '@codeday/topo/utils';
 import Error404 from '../404';
 import ContentfulRichText from '../../components/ContentfulRichText';

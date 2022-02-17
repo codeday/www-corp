@@ -1,6 +1,6 @@
 query EduProgramsQuery ($cmsDate: CmsDateTime) {
   cms {
-    eduPrograms: programs {
+    eduPrograms: programs(where: { archived_not: true }) {
       items {
         name
         webname

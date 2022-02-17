@@ -4,10 +4,8 @@ import shuffle from 'knuth-shuffle-seeded';
 import truncate from 'truncate';
 import PageVisibility from 'react-page-visibility';
 import { useInView } from 'react-intersection-observer';
-import Content from '@codeday/topo/Molecule/Content';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Image from '@codeday/topo/Atom/Image';
-import Text, { Heading } from '@codeday/topo/Atom/Text';
+import { Content } from '@codeday/topo/Molecule';
+import { Box, Grid, Image, Text, Heading } from '@codeday/topo/Atom';
 import { useQuery } from '../../query';
 
 
@@ -61,7 +59,7 @@ function PhotoTextCard({
                   mr={2}
                   rounded="full"
                 />
-                <Text mb={0} bold fontSize="sm">{authors[0].name}</Text>
+                <Text mb={0} fontWeight="bold" fontSize="sm">{authors[0].name}</Text>
               </Box>
             )
           )}
@@ -107,7 +105,7 @@ function PhotoCard({ photo, authors, wip, eventInfo, projectTitle, href }) {
                 key={author.picture}
               />
             ))}
-            <Text mb={0} bold fontSize="sm" color="white">&nbsp;</Text>
+            <Text mb={0} fontWeight="bold" fontSize="sm" color="white">&nbsp;</Text>
           </Box>
         ) : (
           <Box p={2} backgroundImage="linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))">
@@ -120,13 +118,13 @@ function PhotoCard({ photo, authors, wip, eventInfo, projectTitle, href }) {
               mr={2}
               rounded="full"
             />
-            <Text mb={0} bold fontSize="sm" color="white">{authors[0].name}</Text>
+            <Text mb={0} fontWeight="bold" fontSize="sm" color="white">{authors[0].name}</Text>
           </Box>
         )
       )}
       {!(authors && authors.length > 0) && eventInfo && (
         <Box p={2} backgroundImage="linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0))">
-          <Text mb={0} fontSize="sm" color="white" bold>
+          <Text mb={0} fontSize="sm" color="white" fontWeight="bold">
             { eventInfo
               ? [
                   eventInfo.event?.program?.name,
@@ -147,7 +145,7 @@ function PhotoCard({ photo, authors, wip, eventInfo, projectTitle, href }) {
           p={2}
           backgroundImage="linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1))"
         >
-          <Text mb={0} fontSize="sm" color="white" bold>{projectTitle}</Text>
+          <Text mb={0} fontSize="sm" color="white" fontWeight="bold">{projectTitle}</Text>
         </Box>
       )}
 
@@ -178,7 +176,6 @@ function Card({
     <Box
       role="figure"
       height={40}
-      borderColor="current.border"
       borderWidth={1}
       overflow="hidden"
       mr={8}
@@ -247,7 +244,7 @@ export default function Community({ seed, ...props }) {
         </Box>
 
         <Content>
-          <Heading as="h2" fontSize="5xl" textAlign="center" mb={8} mt={8} bold>
+          <Heading as="h2" fontSize="5xl" textAlign="center" mb={8} mt={8} fontWeight="bold">
             {studentCountPrefix} {studentCountRound.toLocaleString()} students have created amazing projects at CodeDay events.
           </Heading>
         </Content>

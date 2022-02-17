@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic';
-import Box from '@codeday/topo/Atom/Box';
+import { Box } from '@codeday/topo/Atom';
 
 const Hls = dynamic(() => import('hls.js/dist/hls.light.js'), { ssr: false });
 

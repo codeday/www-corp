@@ -1,7 +1,7 @@
 import React from 'react';
 import Script from 'next/script';
 import { useRouter } from 'next/router';
-import Theme from '@codeday/topo/Theme';
+import { ThemeProvider } from '@codeday/topo/Theme';
 import { Provider } from '../query';
 import 'react-responsive-modal/styles.css';
 import * as snippet from '@segment/snippet';
@@ -25,11 +25,11 @@ export default function App ({ Component, pageProps }) {
     <>
       <Script strategy="beforeInteractive" src="https://cdn.fundraiseup.com/widget/AHCSATYN" />
       <Script dangerouslySetInnerHTML={{ __html: renderSnippet() }} />
-      <Theme withChat brandColor="red" analyticsId="AHHYLKBK">
+      <ThemeProvider withChat brandColor="red" analyticsId="AHHYLKBK">
         <Provider value={pageProps?.query || {}}>
           <Component {...pageProps} />
         </Provider>
-      </Theme>
+      </ThemeProvider>
     </>
   );
 }

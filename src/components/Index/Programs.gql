@@ -10,6 +10,7 @@ query GetMyLocation{
 fragment IndexProgramsComponent on Query {
   clear {
     events (where: { endDate: { gte: $clearDate }, registrationsOpen: { equals: true } }) {
+      name
       contentfulWebname
     }
   }
@@ -28,7 +29,7 @@ fragment IndexProgramsComponent on Query {
       }
     }
 
-    mainPrograms: programs(where: { name_not:"CodeDay", type:"primary" }) {
+    mainPrograms: programs(where: { name_not:"CodeDay", type:"primary", archived_not: true }) {
       items {
         name
         url
@@ -47,7 +48,7 @@ fragment IndexProgramsComponent on Query {
       }
     }
 
-    otherPrograms: programs(where: { name_not:"CodeDay", type_not:"primary" }) {
+    otherPrograms: programs(where: { name_not:"CodeDay", type_not:"primary", archived_not: true }) {
       items {
         name
         url

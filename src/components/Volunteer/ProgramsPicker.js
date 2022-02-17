@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid } from '@codeday/topo/Atom/Box';
-import { CheckboxGroup } from '@chakra-ui/core';
+import { Grid, CheckboxGroup } from '@codeday/topo/Atom';
 import ProgramInfoCheck from './ProgramInfoCheck';
 
 export default function ProgramsPicker({ programs, roles, onChange }) {

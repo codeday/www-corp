@@ -1,11 +1,8 @@
 import React from 'react';
 import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
-import { Grid } from '@codeday/topo/Atom/Box';
-import Image from '@codeday/topo/Atom/Image';
-import Text, { Heading } from '@codeday/topo/Atom/Text';
-import Content from '@codeday/topo/Molecule/Content';
-import IconBox, { HeaderIcon, HeaderText, Body as BoxBody } from '@codeday/topo/Molecule/IconBox';
+import { Grid, Image, Text, Heading } from '@codeday/topo/Atom';
+import { Content, IconBox, IconBoxIcon as HeaderIcon, IconBoxText as HeaderText, IconBoxBody as BoxBody } from '@codeday/topo/Molecule';
 import Page from '../../components/Page';
 import { useQuery } from '../../query';
 import { EduProgramsQuery } from './index.gql';
@@ -23,7 +20,7 @@ export default function EduIndex() {
           alt=""
         />
         <Heading as="h2" fontSize="5xl">CodeDay Edu</Heading>
-        <Text fontSize="xl">
+        <Text fontSize="xl" mb={2}>
           Many of our programs have special offers and options for teachers, professors, club leaders,
           and educational organizations. Learn more by clicking on a program below.
         </Text>
@@ -40,7 +37,7 @@ export default function EduIndex() {
         <Heading as="h3" fontSize="3xl" mt={12} mb={4}>Partner Organizations and Programs</Heading>
         <Text fontSize="md" mb={8}>
           We partner with the following organizations who we think might be great fit for CS educators.
-          {' '}<Text as="strong" bold>(Not CodeDay-run programs.)</Text>
+          {' '}<Text as="strong" fontWeight="bold">(Not CodeDay-run programs.)</Text>
         </Text>
         <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }} gap={4}>
           {communityPartners?.items?.map((partner) => (

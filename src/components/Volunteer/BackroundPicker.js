@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import Box from '@codeday/topo/Atom/Box';
-import Text from '@codeday/topo/Atom/Text';
-import Divider from '@codeday/topo/Atom/Divider';
-import { Radio, RadioGroup } from '@chakra-ui/core';
+import { Box, Text, Divider, Radio, RadioGroup } from '@codeday/topo/Atom';
 import { VOLUNTEER_BACKGROUNDS, VOLUNTEER_BACKGROUND_GROUPS } from './wizardConfig';
 
 export default function BackgroundPicker({ onChange }) {
@@ -10,7 +7,7 @@ export default function BackgroundPicker({ onChange }) {
   return (
     <Box fontSize="lg">
       <RadioGroup
-        onChange={(e) => { setBackground(e.target.value); onChange([e.target.value]); }}
+        onChange={(e) => { setBackground(e); onChange([e]); }}
         value={background}
         name="wizard-background"
       >

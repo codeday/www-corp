@@ -1,10 +1,8 @@
 import React from 'react';
 import { print } from 'graphql';
 import { sign } from 'jsonwebtoken';
-import { Grid } from '@codeday/topo/Atom/Box';
-import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
-import Image from '@codeday/topo/Atom/Image';
-import Content from '@codeday/topo/Molecule/Content';
+import { Grid, Text, Heading, Link, Image } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import { apiFetch } from '@codeday/topo/utils';
 import Page from '../components/Page';
 import Employees from '../components/Contact/Employees';
@@ -32,15 +30,15 @@ export default function Home({ seed }) {
         />
         <Heading as="h2" fontSize="5xl" mb={12}>Let&apos;s Talk.</Heading>
         <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap={8} alignItems="center" mb={12}>
-          <Text bold mb={1} fontSize="xl">
+          <Text fontWeight="bold" mb={1} fontSize="xl">
             <span dangerouslySetInnerHTML={{ __html: nl2br(address?.items[0]?.value)}} />
           </Text>
 
-          <Text bold fontSize="2xl" mb={1} textAlign={{ base: 'left', md: 'center' }}>
+          <Text fontWeight="bold" fontSize="2xl" mb={1} textAlign={{ base: 'left', md: 'center' }}>
             <Link href={`mailto:${email?.items[0]?.value}`}>{email?.items[0]?.value}</Link>
           </Text>
 
-          <Text bold fontSize="2xl" mb={1} textAlign={{ base: 'left', md: 'right' }}>
+          <Text fontWeight="bold" fontSize="2xl" mb={1} textAlign={{ base: 'left', md: 'right' }}>
             <Link href={`tel:${phone?.items[0]?.value.replace(/[^0-9]/g, '')}`}>{phone?.items[0]?.value}</Link>
           </Text>
         </Grid>

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Box from '@codeday/topo/Atom/Box';
-import Text from '@codeday/topo/Atom/Text';
+import { Box, Text } from '@codeday/topo/Atom';
 
 export default function Photo({ photo, ...props }) {
   return (
@@ -31,7 +30,7 @@ export default function Photo({ photo, ...props }) {
         left="0"
         p={4}
       >
-        <Text bold>
+        <Text fontWeight="bold">
           {
             [
               photo.event?.program?.name,

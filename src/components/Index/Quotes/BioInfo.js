@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shuffle from 'knuth-shuffle-seeded';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text from '@codeday/topo/Atom/Text';
-import Image from '@codeday/topo/Atom/Image';
+import { Box, Grid, Text, Image } from '@codeday/topo/Atom';
 
 export default function BioInfo({
   testimonial: {
@@ -45,7 +43,7 @@ export default function BioInfo({
         )}
       </Box>
       <Box>
-        <Text mb={0} bold>
+        <Text mb={0} fontWeight="bold">
           {firstName} {lastName}
           {groupName && ((firstName || lastName) ? ` (${groupName})` : groupName)}
         </Text>

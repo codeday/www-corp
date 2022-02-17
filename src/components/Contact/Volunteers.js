@@ -1,8 +1,6 @@
 import React from 'react';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text from '@codeday/topo/Atom/Text';
-import Image from '@codeday/topo/Atom/Image';
-import Content from '@codeday/topo/Molecule/Content';
+import { Box, Grid, Text, Image } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import shuffle from 'knuth-shuffle-seeded';
 import { useQuery } from '../../query';
 

@@ -1,7 +1,5 @@
 import React from 'react';
-import Box, { Grid, VisibilityCheckBox, RatioBox } from '@codeday/topo/Atom/Box';
-import Text, { Heading } from '@codeday/topo/Atom/Text';
-import Button from '@codeday/topo/Atom/Button';
+import { Box, Grid, VisibilityCheckBox, Text, Heading, Button } from '@codeday/topo/Atom';
 import Play from '@codeday/topocons/Icon/MediaPlay';
 import Broadcast from '@codeday/topocons/Icon/Broadcast';
 import Live from './Live';
@@ -14,13 +12,13 @@ export default function Hero({ twitch, ...props }) {
 
   const tagline = (
     <Box m={{ base: 8, lg: 0, xl: 16 }} mt={{ base: 0, xl: 0 }} textAlign={{ base: 'center', lg: 'left'}}>
-      <Heading as="h2" fontSize="6xl" fontWeight="bold" lineHeight="1.1" color="#311c1c" mt={8}>
+      <Heading as="h2" fontSize="6xl" fontWeight="bold" lineHeight="1.1" mt={8}>
         There's a place in tech for everyone.
       </Heading>
-      <Text fontSize="xl" mt={8} mb={8} color="#311c1c">{mission?.items[0]?.value}</Text>
+      <Text fontSize="xl" mt={8} mb={8}>{mission?.items[0]?.value}</Text>
       {explainer && (
         <VideoLink url={explainer.url} autoPlay>
-          <Button variantColor="red">Learn More&nbsp;<Play style={{ position: 'relative', top: '-0.15em' }} /></Button>
+          <Button colorScheme="red">Learn More&nbsp;<Play style={{ position: 'relative', top: '-0.15em' }} /></Button>
         </VideoLink>
       )}
     </Box>

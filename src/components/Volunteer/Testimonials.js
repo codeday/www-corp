@@ -1,6 +1,4 @@
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text from '@codeday/topo/Atom/Text';
-import Image from '@codeday/topo/Atom/Image';
+import { Box, Grid, Text, Image } from '@codeday/topo/Atom';
 import shuffle from 'knuth-shuffle-seeded';
 import { useSlideshow } from '../../providers';
 import { useQuery } from '../../query';

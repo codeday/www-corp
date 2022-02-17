@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { GeoHaversine } from "geo-haversine";
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Button from '@codeday/topo/Atom/Button';
-import Image from '@codeday/topo/Atom/Image';
-import Text, { Heading } from '@codeday/topo/Atom/Text';
-import Content from '@codeday/topo/Molecule/Content';
-import { CodeDay } from '@codeday/topo/Atom/Logo';
+import { Box, Grid, Button, Image, Text, CodeDay } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import UiStar from '@codeday/topocons/Icon/UiStar';
-import StaticContent from '../StaticContent';
 import { nextUpcomingEvent, formatInterval } from '../../utils/time';
 import { useQuery } from '../../query';
 import { GetMyLocation } from './Programs.gql';
@@ -19,7 +14,7 @@ const geoHaversine = new GeoHaversine();
 function NextEventDate({ upcoming }) {
   const next = nextUpcomingEvent(upcoming);
   return next ? (
-    <Text color="current.textLight" mb={0} bold>
+    <Text color="current.textLight" mb={0} fontWeight="bold">
       {formatInterval(next.startsAt, next.endsAt)}
     </Text>
   ) : (
@@ -36,6 +31,7 @@ export default function Programs() {
 
   const otherProgramsRowSize = Math.max(3, Math.min((otherPrograms?.items || []).length, 5));
   const upcomingWebnames = events.map((e) => e.contentfulWebname);
+  const upcomingNameOverrides = Object.fromEntries(events.map((e) => [e.contentfulWebname, e.name]));
 
   useEffect(async () => {
     if (typeof window === 'undefined') return;
@@ -62,14 +58,14 @@ export default function Programs() {
     <Content>
       {/* CodeDay */}
       <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={8}>
-        <Box borderWidth={1} borderColor="current.border" borderRadius={2} p={4} boxShadow="md">
+        <Box borderWidth={1} borderRadius={2} p={4} boxShadow="md">
           <CodeDay fontSize="4xl" withText />
           {nextUpcomingEvent(codeDay?.linkedFrom?.events?.items) && Math.floor((nextUpcomingEvent(codeDay?.linkedFrom?.events?.items).startsAt - new Date()) / (24 * 60 * 60 * 1000)) <= 30 &&
             <Image src="/soon.svg" height={10} alt="" float="right" />}
           <NextEventDate upcoming={codeDay?.linkedFrom?.events?.items} />
           <Text fontSize="md" mt={4} mb={4}>{codeDay?.shortDescription}</Text>
           <Text fontSize="md" mb={4} bold>Choose a location:</Text>
-          <Box borderWidth={1} borderColor="current.border" maxHeight={{ base: "sm", md: "lg" }} overflowY="auto">
+          <Box borderWidth={1} maxHeight={{ base: "sm", md: "lg" }} overflowY="auto">
             {sortedRegions.map((region) => (
               <Box
                 p={2}
@@ -78,11 +74,10 @@ export default function Programs() {
                 href={`https://event.codeday.org/${region.webname}`}
                 target="_blank"
                 fontSize="xl"
-                borderColor="current.border"
                 borderBottomWidth="1px"
                 key={region.webname}
               >
-                {region.name}
+                {upcomingNameOverrides[region.webname] || region.name}
                 {region.upcoming && (
                   <Box fontSize="sm" ml={2} d="inline-block" color="current.textLight">
                     <Box position="relative" top="-0.2em" d="inline-block" mr={2}>
@@ -101,7 +96,6 @@ export default function Programs() {
           {mainPrograms?.items?.map((program) => (
             <Box
               borderBottomWidth={1}
-              borderColor="current.border"
               p={4}
               mb={4}
               d="block"
@@ -109,7 +103,7 @@ export default function Programs() {
               href={program.url}
               target="_blank"
               rel="noopener"
-              key={program.url}
+              key={program.name}
             >
               <Box mb={1}>
                 <Box float="left" width={10} pr={4}>
@@ -136,7 +130,6 @@ export default function Programs() {
             {otherPrograms?.items?.map((prog, i) => (
               <Box
                 borderRightWidth={Math.min(1, (i + 1) % Math.min(otherProgramsRowSize, otherPrograms.items.length))}
-                borderColor="current.border"
                 p={otherProgramsRowSize >= 5 ? 1 : 4}
                 pt={4}
                 pb={4}
@@ -145,7 +138,7 @@ export default function Programs() {
                 href={prog.url}
                 target="_blank"
                 rel="noopener"
-                key={prog.url}
+                key={prog.name}
               >
                 <Image d="inline-block" src={prog.logo.url} height={12} mb={2} />
                 <br />

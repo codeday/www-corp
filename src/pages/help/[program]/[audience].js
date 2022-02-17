@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Image from '@codeday/topo/Atom/Image';
-import Content from '@codeday/topo/Molecule/Content';
-import Text, { Heading } from '@codeday/topo/Atom/Text';
+import { Box, Grid, Image, Text, Heading } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
+import { useColorMode } from '@codeday/topo/Theme';
 import UiX from '@codeday/topocons/Icon/UiX';
 import Page from '../../../components/Page';
 import ContentfulRichText from '../../../components/ContentfulRichText';
@@ -12,6 +11,7 @@ import { useQuery } from '../../../query';
 import { HelpProgramAudienceQuery, HelpProgramAudiencePathsQuery } from './audience.gql';
 
 export default function Audience({ programWebname, audience }) {
+  const { colorMode } = useColorMode();
   const [tag, setTag ] = useState(null);
 
   if (!programWebname || !audience) return <></>;
@@ -43,7 +43,7 @@ export default function Audience({ programWebname, audience }) {
 
         {allTags?.length > 0 && (
           <Box borderWidth={1} p={2} mb={4} rounded="sm">
-            <Text bold color="current.textLight" mb={1}>Show only questions about:</Text>
+            <Text fontWeight="bold" color="current.textLight" mb={1}>Show only questions about:</Text>
             {allTags.map((t) => (
               <Box
                 key={t}
@@ -88,7 +88,10 @@ export default function Audience({ programWebname, audience }) {
               <Box
                 position="absolute"
                 height={24}
-                background="linear-gradient(0deg, rgba(255,255,255,1) 25%, rgba(255,255,255,0) 100%)"
+                background={colorMode === 'light'
+                  ? 'linear-gradient(0deg, rgba(255,255,255,1) 25%, rgba(255,255,255,0) 100%)'
+                  : 'linear-gradient(0deg, rgba(41,41,41,1) 25%, rgba(41,41,41,0) 100%)'
+                }
                 bottom={0}
                 left={0}
                 right={0}

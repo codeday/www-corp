@@ -37,7 +37,7 @@ query PressQuery {
       }
     }
 
-    programs(where: {type:"primary"}) {
+    programs(where: { type:"primary", archived_not: true }) {
       items {
         logo {
           url

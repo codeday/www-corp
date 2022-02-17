@@ -1,11 +1,8 @@
 import React from 'react';
 import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Image from '@codeday/topo/Atom/Image';
-import Content from '@codeday/topo/Molecule/Content';
-import Text, { Heading } from '@codeday/topo/Atom/Text';
-import IconBox, { HeaderIcon, HeaderText, Body as BoxBody } from '@codeday/topo/Molecule/IconBox';
+import { Box, Grid, Image, Text, Heading } from '@codeday/topo/Atom';
+import { Content, IconBox, IconBoxIcon as HeaderIcon, IconBoxText as HeaderText, IconBoxBody as BoxBody } from '@codeday/topo/Molecule';
 import Page from '../../components/Page';
 import { useQuery } from '../../query';
 import { HelpIndexQuery } from './index.gql';

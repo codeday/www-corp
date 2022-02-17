@@ -1,8 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
-import Content from '@codeday/topo/Molecule/Content';
-import Text, { Link } from '@codeday/topo/Atom/Text';
+import { Content } from '@codeday/topo/Molecule';
 import { apiFetch } from '@codeday/topo/utils';
 import Page from '../../../../components/Page';
 import Event from '../../../../components/EventInfo';

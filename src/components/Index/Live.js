@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Box, { RatioBox } from '@codeday/topo/Atom/Box';
+import { Box, RatioBox } from '@codeday/topo/Atom';
 
 export default function Live({ username, ...props }) {
   const [parent, setParent] = useState('www.codeday.org');

@@ -1,8 +1,8 @@
 import React from 'react';
 import CountUp from 'react-countup';
-import Text from '@codeday/topo/Atom/Text';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Content from '@codeday/topo/Molecule/Content';
+import { Text, Grid, Box } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
+import { useColorMode } from '@codeday/topo/Theme';
 import { useQuery } from '../../query';
 import PreviousCoverageLogos from '../PreviousCoverageLogos';
 
@@ -33,29 +33,41 @@ function StatBox({
 }
 
 export default function Stats(props) {
+  const { colorMode } = useColorMode();
   const { cms: { stats } } = useQuery();
   const rollupStats = rollup(stats.items);
 
+  console.log('colorMode', colorMode)
+
   return (
-    <Content full bg="red.50" color="red.900" pt={4} pb={2} {...props}>
+    <Content
+      full
+      bg={colorMode === 'light' ? 'red.50' : 'red.900'}
+      pt={4}
+      pb={2}
+      {...props}
+    >
       <Content>
         <Grid templateColumns={{ base: 'repeat(3, 1fr)', md: 'repeat(4, 1fr)', lg: 'repeat(5, 1fr)' }} gap={4}>
-          <StatBox num={rollupStats.statEventCount} label="Events" />
-          <StatBox num={rollupStats.statStudentCount} label="CodeDay Alums" />
+          <StatBox num={rollupStats.statEventCount} label="Events" opacity="0.7"/>
+          <StatBox num={rollupStats.statStudentCount} label="CodeDay Alums" opacity="0.7" />
           <StatBox
             num={rollupStats.statStudentCount * 0.71}
             label="Underrepresented in CS"
             d={{ base: 'none', lg: 'block' }}
+            opacity="0.7"
           />
           <StatBox
             num={rollupStats.statLowInterestCount}
             label="Didn't Like CS Before"
+            opacity="0.7"
           />
           <StatBox
             num={Math.round(100 * (rollupStats.statLowInterestContinuedCount / rollupStats.statLowInterestCount))}
             unit="%"
             label="Kept Coding After"
             d={{ base: 'none', md: 'block' }}
+            opacity="0.7"
           />
         </Grid>
         <Box textAlign="center" mt={8} opacity="0.7">

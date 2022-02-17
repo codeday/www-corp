@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Box from '@codeday/topo/Atom/Box';
-import Image from 'next/image';
+import { Box } from '@codeday/topo/Atom';
 import MediaPlay from '@codeday/topocons/Icon/MediaPlay';
 import VideoLink from './VideoLink';
 

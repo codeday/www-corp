@@ -1,9 +1,8 @@
 import React from 'react';
 import { print } from 'graphql';
 import { apiFetch } from '@codeday/topo/utils';
-import Box, { Grid } from '@codeday/topo/Atom/Box';
-import Text, { Heading, Link } from '@codeday/topo/Atom/Text';
-import Content from '@codeday/topo/Molecule/Content';
+import { Box, Grid, Text, Heading, Link } from '@codeday/topo/Atom';
+import { Content } from '@codeday/topo/Molecule';
 import ProgramInfo from '../../components/Volunteer/ProgramInfo';
 import Page from '../../components/Page';
 import VideoTestimonialThumbnail from '../../components/VideoTestimonialThumbnail';

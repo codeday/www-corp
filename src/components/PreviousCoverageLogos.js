@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from '@codeday/topo/Atom/Text';
-import Image from '@codeday/topo/Atom/Image';
+import { Link, Image } from '@codeday/topo/Atom';
 import StaticContent from './StaticContent';
 import { dedupeFirstByKey } from '../utils/arr';
 import { useQuery } from '../query';

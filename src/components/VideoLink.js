@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-responsive-modal';
-import Box from '@codeday/topo/Atom/Box';
+import { Box } from '@codeday/topo/Atom';
 import VideoPlayer from './VideoPlayer';
 
 export default function VideoLink({ children, ...props }) {
