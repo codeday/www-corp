@@ -3,7 +3,7 @@ import { GeoHaversine } from "geo-haversine";
 import { Box, Grid, Button, Image, Text, CodeDay } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
 import UiStar from '@codeday/topocons/Icon/UiStar';
-import { nextUpcomingEvent, formatInterval } from '../../utils/time';
+import { nextUpcomingEvent, upcomingEvents, formatInterval } from '../../utils/time';
 import { useQuery } from '../../query';
 import { GetMyLocation } from './Programs.gql';
 import { apiFetch } from '@codeday/topo/utils';
@@ -15,7 +15,7 @@ function NextEventDate({ upcoming }) {
   const next = nextUpcomingEvent(upcoming);
   return next ? (
     <Text color="current.textLight" mb={0} fontWeight="bold">
-      {formatInterval(next.startsAt, next.endsAt)}
+      {upcomingEvents(upcoming).map((e) => formatInterval(e.startsAt, e.endsAt)).join('; ')}
     </Text>
   ) : (
     <></>
@@ -31,6 +31,7 @@ export default function Programs() {
 
   const otherProgramsRowSize = Math.max(3, Math.min((otherPrograms?.items || []).length, 5));
   const upcomingWebnames = events.map((e) => e.contentfulWebname);
+  const registrationOpenWebnames = events.filter((e) => e.registrationsOpen).map((e) => e.contentfulWebname);
   const upcomingNameOverrides = Object.fromEntries(events.map((e) => [e.contentfulWebname, e.name]));
 
   useEffect(async () => {
@@ -42,12 +43,15 @@ export default function Programs() {
   const sortedRegions = (regions?.items || [])
   .map((r) => ({
     ...r,
+    open: registrationOpenWebnames.includes(r.webname),
     upcoming: upcomingWebnames.includes(r.webname),
     distance: (typeof geo?.lat !== 'undefined' && typeof geo?.lng !== 'undefined')
       ? geoHaversine.getDistance([r.location.lat, r.location.lon], [geo.lat, geo.lng])
       : undefined,
   }))
   .sort((a, b) => {
+    if (a.open && !b.open) return -1;
+    if (b.open && !a.open) return 1;
     if (a.upcoming && !b.upcoming) return -1;
     if (b.upcoming && !a.upcoming) return 1;
     if (a.distance && b.distance) return a.distance < b.distance ? -1 : 1;
@@ -83,11 +87,17 @@ export default function Programs() {
                     <Box position="relative" top="-0.2em" d="inline-block" mr={2}>
                       <UiStar />
                     </Box>
-                    Registrations open!
+                    {registrationOpenWebnames.includes(region.webname) ? `Registrations open!` : ``}
                   </Box>
                 )}
               </Box>
             ))}
+          </Box>
+          <Box fontSize="sm" mt={4} d="inline-block" color="current.textLight">
+            <Box position="relative" top="-0.2em" d="inline-block" mr={2}>
+              <UiStar />
+            </Box>
+            Event planned this season.
           </Box>
         </Box>
 

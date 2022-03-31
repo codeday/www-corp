@@ -9,9 +9,10 @@ query GetMyLocation{
 
 fragment IndexProgramsComponent on Query {
   clear {
-    events (where: { endDate: { gte: $clearDate }, registrationsOpen: { equals: true } }) {
+    events (where: { endDate: { gte: $clearDate } }) {
       name
       contentfulWebname
+      registrationsOpen
     }
   }
   cms {
