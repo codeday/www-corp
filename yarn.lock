@@ -714,10 +714,10 @@
     eslint-plugin-react-hooks "^2.3.0"
     eslint-plugin-sonarjs "^0.5.0"
 
-"@codeday/topo@^7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@codeday/topo/-/topo-7.0.1.tgz#c8160827e531bee2ec812ab5f0f9e4817d07a39e"
-  integrity sha512-2V0jHjc1hdsuNNle9NDdKlxm5JwCKZfy8Q/FdhrkhnkTj0mzBHLATnR6QTNfcZ7qZlsMiemzSvC2C5Zj4LZZSA==
+"@codeday/topo@^7.0.10":
+  version "7.0.10"
+  resolved "https://registry.yarnpkg.com/@codeday/topo/-/topo-7.0.10.tgz#26cac7a0a1d3a37caa666e12bf5b748c17c52bb9"
+  integrity sha512-U8hM+LgkEsui8Aj/nD0kgEcbfEoK+UhV3LNBmQ6/kG+YY177x6lLydVeXk2IC6nJHIvSxUEHSlZrB7RJgvslaQ==
   dependencies:
     "@accessible/use-id" "^1.1.2"
     "@chakra-ui/cli" "^1.6.0"
@@ -726,7 +726,7 @@
     "@codeday/topocons" "^1.5.0"
     "@emotion/react" "^11"
     "@emotion/styled" "^11"
-    "@tylermenezes/cognitoforms-react" "^2.0.5"
+    "@tylermenezes/cognitoforms-react" "^2.0.13"
     fathom-react "^1.0.1"
     framer-motion "^4"
     graphql "^16.0.1"
@@ -1113,10 +1113,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.2.tgz#423c77877d0569db20e1fc80885ac4118314010e"
   integrity sha512-eZxlbI8GZscaGS7kkc/trHTT5xgrjH3/1n2JDwusC9iahPKWMRvRjJSAN5mCXviuTGQ/lHnhvv8Q1YTpnfz9gA==
 
-"@tylermenezes/cognitoforms-react@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@tylermenezes/cognitoforms-react/-/cognitoforms-react-2.0.5.tgz#f3f954da865b1d8874253e3f79e5fbb8ea2c71bf"
-  integrity sha512-RWmHZ5xa8C/ZaQKjAb4E0hU0l7hqqCn0d89GlOOU3kylNnxaoK7/418w0apYAbTRROpP1ANNAxo8QS6DEF4ZSg==
+"@tylermenezes/cognitoforms-react@^2.0.13":
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/@tylermenezes/cognitoforms-react/-/cognitoforms-react-2.0.13.tgz#417f17d2070ae57d1159d8f29bb6a466b68e74be"
+  integrity sha512-Xj0y9fksjMKJkaggUdHYh/qvRVJnwL89PJt5LYKmV6snQX60YfnRMt2ce1R+d+P2seDHWLOpozz6zqK96KKZxg==
   dependencies:
     prop-types "^15.7.2"
 
