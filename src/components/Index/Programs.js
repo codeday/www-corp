@@ -8,6 +8,7 @@ import { useQuery } from '../../query';
 import { GetMyLocation } from './Programs.gql';
 import { apiFetch } from '@codeday/topo/utils';
 import { print } from 'graphql';
+import { useColorMode } from '@codeday/topo/Theme';
 
 const geoHaversine = new GeoHaversine();
 
@@ -23,9 +24,11 @@ function NextEventDate({ upcoming }) {
 }
 
 export default function Programs() {
-  const { cms: { regions, mainPrograms, otherPrograms, codeDayProgram }, clear: { events } } = useQuery();
+  const { colorMode } = useColorMode();
+  const { cms: { regions, mainPrograms, otherPrograms, codeDayProgram, labsProgram }, clear: { events } } = useQuery();
   const [geo, setGeo] = useState();
   const codeDay = codeDayProgram?.items[0];
+  const labs = labsProgram?.items[0];
   let programs = codeDay?.linkedFrom?.events?.items;
   mainPrograms?.items?.map(program => programs = programs.concat(program.linkedFrom?.events?.items));
 
@@ -103,6 +106,37 @@ export default function Programs() {
 
         {/* More Programs */}
         <Box>
+            <Box
+              borderWidth={1}
+              rounded="sm"
+              p={4}
+              mb={4}
+              d="block"
+              as="a"
+              href={labs.url}
+              target="_blank"
+              rel="noopener"
+              key={labs.name}
+            >
+              <Box>
+                <Box float="left" mt={2} pr={2}>
+                  <Image src={labs.logo.url} height={8} alt="" />
+                </Box>
+                <Text fontSize="4xl" mb={0} bold>{labs.name}</Text>
+              </Box>
+              <NextEventDate upcoming={labs.linkedFrom?.events?.items} />
+              <Text mt={2} clear="both">{labs.shortDescription}</Text>
+              <Image
+                maxW={64}
+                mt={4}
+                mb={8}
+                src={colorMode === 'dark' ? '/labs-dark.png' : 'labs-light.png'}
+                alt="1 mentor + 3 students + 1 project"
+              />
+              <Box>
+                <Button size="sm">Learn More &raquo;</Button>
+              </Box>
+            </Box>
           {mainPrograms?.items?.map((program) => (
             <Box
               borderBottomWidth={1}

@@ -16,7 +16,7 @@ fragment IndexProgramsComponent on Query {
     }
   }
   cms {
-    codeDayProgram: programs(where: { name:"CodeDay" }) {
+    codeDayProgram: programs(where: { webname:"codeday" }) {
       items {
         shortDescription
         linkedFrom {
@@ -30,7 +30,26 @@ fragment IndexProgramsComponent on Query {
       }
     }
 
-    mainPrograms: programs(where: { name_not:"CodeDay", type:"primary", archived_not: true }) {
+    labsProgram: programs(where: { webname:"labs" }) {
+      items {
+        name
+        url
+        logo {
+          url
+        }
+        linkedFrom {
+          events (limit: 100) {
+            items {
+              startsAt
+              endsAt
+            }
+          }
+        }
+        shortDescription
+      }
+    }
+
+    mainPrograms: programs(where: { webname_not_in:["codeday","labs"], type:"primary", archived_not: true }) {
       items {
         name
         url
@@ -49,7 +68,7 @@ fragment IndexProgramsComponent on Query {
       }
     }
 
-    otherPrograms: programs(where: { name_not:"CodeDay", type_not:"primary", archived_not: true }) {
+    otherPrograms: programs(where: { webname_not_in:["codeday", "labs"], type_not:"primary", archived_not: true }) {
       items {
         name
         url
