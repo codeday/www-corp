@@ -13,7 +13,7 @@ export default function Eco() {
 
   return (
     <Page title="Ecological Footprint" slug="/eco">
-      <Content maxWidth="containers.md">
+      <Content maxWidth="container.md">
         <Heading as="h2" fontSize="5xl" mt={-2} mb={8}>Ecological Footprint</Heading>
         <ContentfulRichText json={details?.items[0]?.richValue?.json} />
       </Content>
