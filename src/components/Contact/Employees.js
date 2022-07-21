@@ -3,21 +3,23 @@ import { Text, Box, Grid, Image } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
 import { useQuery } from '../../query';
 
+const titleContents = ['Director', 'Manager', 'Lead'];
+const titlePrecedence = (title) => titleContents
+  .reduce((accum, t, i) => (title && (title.indexOf(t) >= 0) ? Math.min(i, accum) : accum), titleContents.length);
+function sortFn(a, b) {
+  const aPrec = titlePrecedence(a.title);
+  const bPrec = titlePrecedence(b.title);
+  if (aPrec !== bPrec) return aPrec - bPrec;
+
+  if (a.name > b.name) return -1;
+  if (b.name > a.name) return 1;
+  return 0;
+}
+
 export default function Employees(props) {
-  const { account: { employees } } = useQuery();
+  const { account: { employees, otherTeam } } = useQuery();
 
-  const titleContents = ['Director', 'Manager', 'Lead'];
-  const titlePrecedence = (title) => titleContents
-    .reduce((accum, t, i) => (title && (title.indexOf(t) >= 0) ? Math.min(i, accum) : accum), titleContents.length);
-  const sortedEmployees = employees.sort((a, b) => {
-    const aPrec = titlePrecedence(a.title);
-    const bPrec = titlePrecedence(b.title);
-    if (aPrec !== bPrec) return aPrec - bPrec;
-
-    if (a.name > b.name) return -1;
-    if (b.name > a.name) return 1;
-    return 0;
-  });
+  const sortedEmployees = [...employees.sort(sortFn), ...otherTeam.sort(sortFn)];
 
   return (
     <Content wide {...props}>
