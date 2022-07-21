@@ -4,9 +4,9 @@ import { Content } from '@codeday/topo/Molecule';
 import { useQuery } from '../../query';
 
 export default function Employees(props) {
-  const { account: { board, employees } } = useQuery();
+  const { account: { board, employees, otherTeam } } = useQuery();
 
-  const employeeIds = employees.map((e) => e.id);
+  const employeeIds = [...employees, ...otherTeam].map((e) => e.id);
   const uniqueBoard = board.filter((director) => !employeeIds.includes(director.id));
 
   return (

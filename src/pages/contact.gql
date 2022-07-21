@@ -9,6 +9,15 @@ query ContactQuery {
       pronoun
     }
 
+    otherTeam: roleUsers (roleId: "rol_6t902YZpsOynmWDt") {
+      id
+      name
+      title
+      picture
+      bio
+      pronoun
+    }
+
     board: roleUsers (roleId: "rol_cU5c8wlFVbSh6I2w") {
       id
       givenName

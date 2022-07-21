@@ -42,8 +42,8 @@ function VolunteerBox({ vol, showTitle }) {
 }
 
 export default function Volunteers({ seed, ...props }) {
-  const { account: { employees, volunteers } } = useQuery();
-  const employeeIds = employees.map((e) => e.id);
+  const { account: { employees, otherTeam, volunteers } } = useQuery();
+  const employeeIds = [...employees, ...otherTeam].map((e) => e.id);
   const justVolunteers = shuffle(volunteers.filter((v) => !employeeIds.includes(v.id)), seed);
 
   const hasTitle = (v) => v.title && v.title !== 'Volunteer' && v.title !== 'Mentor' && v.title !== 'Staff';
