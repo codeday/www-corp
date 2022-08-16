@@ -11,6 +11,13 @@ fragment IndexCommunityComponent on Query {
   }
 
   showcase {
+    photos (orderBy: RANDOM, take: 100) {
+      url: urlSmall
+      program { name }
+      region { name }
+      thanks
+    }
+
     projects( where:{media: IMAGES}) {
       id
       name
