@@ -128,8 +128,8 @@ function PhotoCard({ photo, authors, wip, eventInfo, projectTitle, href }) {
             { eventInfo
               ? [
                   eventInfo.event?.program?.name,
+                  eventInfo.program?.name,
                   eventInfo.region?.name,
-                  eventInfo.event?.startsAt?.substring(0,4)
                 ].join(' ')
               : projectTitle
             }
@@ -224,10 +224,14 @@ export default function Community({ seed, ...props }) {
         />
       ))
     ),
-    ...(shuffle(indexCommunityPhotos.items.map(i => i), seed)
+    ...(shuffle(indexCommunityPhotos.items, seed)
       .map((p) => <Card key={p.photo.url} photo={p.photo.url} eventInfo={{ region: p.region, event: p.event }} />)
         || []
     ).slice(0, 25),
+    ...(shuffle(showcase.photos, seed)
+      .map((p) => <Card key={p.url} photo={p.url} eventInfo={{ region: p.region, program: p.program }} />)
+        || []
+    ),
   ], seed);
   const rows = [
     cards.slice(0, Math.floor(cards.length / 2)),
