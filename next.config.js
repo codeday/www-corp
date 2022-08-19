@@ -69,6 +69,11 @@ module.exports = {
         destination: '/f/swag',
         permanent: false,
       },
+      {
+        source: '/organize',
+        destination: 'https://event.codeday.org/organize',
+        permanent: false,
+      },
     ];
 
     return [
