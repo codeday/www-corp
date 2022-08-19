@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GeoHaversine } from "geo-haversine";
-import { Box, Grid, Button, Image, Text, CodeDay } from '@codeday/topo/Atom';
+import { Box, Grid, Button, Image, Text, CodeDay, Link } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
 import UiStar from '@codeday/topocons/Icon/UiStar';
 import { nextUpcomingEvent, upcomingEvents, formatInterval } from '../../utils/time';
@@ -71,7 +71,10 @@ export default function Programs() {
             <Image src="/soon.svg" height={10} alt="" float="right" />}
           <NextEventDate upcoming={codeDay?.linkedFrom?.events?.items} />
           <Text fontSize="md" mt={4} mb={4}>{codeDay?.shortDescription}</Text>
-          <Text fontSize="md" mb={4} bold>Choose a location:</Text>
+          <Text fontSize="md" bold>Choose a location:</Text>
+          <Text mb={4} fontSize="sm">
+            (Nothing planned nearby? <Link color="red.600" href="https://event.codeday.org/organize">Organize a CodeDay!</Link>)
+          </Text>
           <Box borderWidth={1} maxHeight={{ base: "sm", md: "lg" }} overflowY="auto">
             {sortedRegions.map((region) => (
               <Box
