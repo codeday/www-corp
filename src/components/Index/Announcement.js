@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 import { Content } from '@codeday/topo/Molecule';
 import { Box, Text, Button, Grid } from '@codeday/topo/Atom';
 import { useQuery } from '../../query';
+import { useColorMode } from '@codeday/topo/Theme';
 
 const fromIso = (s) => {
   var b = s.split(/\D+/);
@@ -10,6 +11,7 @@ const fromIso = (s) => {
 }
 
 export default function Announcement(props) {
+  const { colorMode } = useColorMode();
   const { cms: { announcements }, announcementWebinar: { events } } = useQuery();
 
   const now = new Date();
@@ -40,7 +42,7 @@ export default function Announcement(props) {
       oneline: `${event.title} (${start})`,
       cta: 'Register',
     };
-  } else if (sortedAnnouncements > 0) announcement = sortedAnnouncements[0];
+  } else if (sortedAnnouncements.length > 0) announcement = sortedAnnouncements[0];
   else return <></>;
 
   const baseColor = {
@@ -55,7 +57,8 @@ export default function Announcement(props) {
       <Box
           borderWidth={1}
           borderColor={`${baseColor}.500`}
-          color={`${baseColor}.900`}
+          color={colorMode === 'dark' ? `${baseColor}.100` : `${baseColor}.900`}
+          bgColor={colorMode === 'dark' ? `${baseColor}.900` : `${baseColor}.50`}
           borderRadius={4}
           p={4}
           m={0}
