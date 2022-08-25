@@ -44,7 +44,7 @@ export default function Conduct() {
 
   return (
     <Page title={conductTitle} slug="/privacy">
-      <Content maxWidth="containers.md">
+      <Content maxWidth="container.md">
         <Heading as="h2" fontSize="5xl" mt={-2} mb={8}>{conductTitle}</Heading>
         <ContentfulRichText json={conductIntro?.json} />
         {conductEntries?.map((entry) => <ConductEntry entry={entry} />)}
