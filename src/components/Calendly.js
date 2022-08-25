@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Box } from '@codeday/topo/Atom';
 
-export default function Calendly ({ slug, ...props }) {
+export default function Calendly ({ slug, meeting, calendlyURLParams, ...props }) {
   const holder = useRef(null);
   const [hasCalendlyLoaded, setHasCalendlyLoaded] = useState(false);
 
@@ -33,13 +33,13 @@ export default function Calendly ({ slug, ...props }) {
   useEffect(() => {
     if (windowCalendly && holder) {
       window.Calendly.initInlineWidget({
-        url: `https://calendly.com/${slug}`,
+        url: `https://calendly.com/${slug}${meeting? `/${meeting}`:''}${calendlyURLParams || ''}`,
         parentElement: holder.current,
         prefill: {},
         utm: {}
       });
     }
-  }, [windowCalendly, hasCalendlyLoaded, holder, slug]);
+  }, [windowCalendly, hasCalendlyLoaded, holder, slug, meeting]);
 
   return (
     <Box w="100%" h="50em" border="none" {...props} ref={holder} />
