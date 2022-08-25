@@ -54,8 +54,7 @@ export default function Page ({ children, title, darkHeader, slug }) {
         <Main>
           {children}
         </Main>
-        <Box mb={32} />
-        <Footer>
+        <Footer repository="www-corp" branch="master" mt={32}>
           <CustomLinks>
             <Link href="/help" d="block">FAQs &amp; Help</Link>
             <Link href="/docs" d="block">Legal Documents</Link>
