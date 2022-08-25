@@ -9,7 +9,7 @@ export default function CalendlyPage({ slug }) {
     <Page slug={`/m/${slug}`} title="Schedule Meeting">
       <Content>
         {!slug ? <Spinner /> : (
-          <Calendly mt={-8} slug={`${slug}?hide_event_type_details=1`} />
+          <Calendly mt={-8} slug={slug[0]} meeting={slug.length > 1? slug[1] : undefined} />
         )}
       </Content>
     </Page>
