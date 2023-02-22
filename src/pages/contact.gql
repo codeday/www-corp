@@ -34,6 +34,12 @@ query ContactQuery {
       title
       picture
     }
+
+    emeritus: roleUsers (roleId: "rol_H5SU2E05hXd2m9pJ") {
+      id
+      name
+      picture
+    }
   }
 
   cms {
