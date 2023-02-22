@@ -8,6 +8,7 @@ import Page from '../components/Page';
 import Employees from '../components/Contact/Employees';
 import Board from '../components/Contact/Board';
 import Volunteers from '../components/Contact/Volunteers';
+import Emeritus from '../components/Contact/Emeritus';
 import { useQuery } from '../query';
 import { ContactQuery } from './contact.gql';
 
@@ -46,7 +47,8 @@ export default function Home({ seed }) {
           Meet our team:
         </Heading>
       </Content>
-      <Employees seed={seed} mb={16} />
+      <Employees seed={seed} mb={8} />
+      <Emeritus seed={seed} mb={16} />
       <Content>
         <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
           Independent members of the board:
