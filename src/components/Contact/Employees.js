@@ -3,7 +3,7 @@ import { Text, Box, Grid, Image } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
 import { useQuery } from '../../query';
 
-const titleContents = ['Director', 'Head', 'Manager', 'Lead'];
+const titleContents = ['VP', 'Director', 'Head', 'Manager', 'Lead'];
 const titlePrecedence = (title) => titleContents
   .reduce((accum, t, i) => (title && (title.indexOf(t) >= 0) ? Math.min(i, accum) : accum), titleContents.length);
 function sortFn(a, b) {
