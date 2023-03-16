@@ -55,9 +55,11 @@ export default function Page ({ children, title, darkHeader, slug }) {
           {children}
         </Main>
         <Footer repository="www-corp" branch="master" mt={32}>
-          <CustomLinks>
-            <Link href="/help" d="block">FAQs &amp; Help</Link>
-            <Link href="/docs" d="block">Legal Documents</Link>
+          <CustomLinks style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Link href="https://twitter.com/codeday" target="_blank"><FaTwitter size={28}/></Link>
+            <Link href="https://discord.gg/codeday" target="_blank"><FaDiscord size={28}/></Link>
+            <Link href="https://linkedin.com/company/codeday-org" d="block"><FaLinkedin size={28}/></Link>
+            <Link href="https://instagram.com/codeday_org" d="block"><FaInstagram size={28}/></Link>
           </CustomLinks>
         </Footer>
       </Box>
