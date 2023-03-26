@@ -78,27 +78,27 @@ function CodeDayProAllFeatures() {
         />
         <Benifit
           title="Priority Support"
-          description="Pro members get early access to register for CodeDay events before they are opened to the general public."
+          description="Pro members receive priority support via email or chat for any questions or issues related to CodeDay events."
           icon={Bell}
         />
         <Benifit
           title="Premium Dining"
-          description="Pro members get early access to register for CodeDay events before they are opened to the general public."
+          description="Pro members get premium food options at a CodeDay including a 3 course menu and a fine dining experience."
           icon={FoodCookie}
         />
         <Benifit
           title="Special Discounts"
-          description="Pro members get early access to register for CodeDay events before they are opened to the general public."
+          description="Pro members get special discounts on CodeDay merchandise, tickets, and other related products and services."
           icon={PaymentCard}
         />
         <Benifit
           title="Networking Opportunities"
-          description="Pro members get early access to register for CodeDay events before they are opened to the general public."
+          description="Pro members get access to FREE high speed 6E plus pro max wifi along with FREE networking cables."
           icon={Wifi}
         />
         <Benifit
           title="Secluded Sleeping Spaces"
-          description="Pro members get early access to register for CodeDay events before they are opened to the general public."
+          description="Pro members get access to comfortable sleeping spaces with a fresh Sealy® mattress and pillows of choice. "
           icon={Night}
         />
         <Benifit
