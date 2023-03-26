@@ -127,7 +127,7 @@ function Benifit({ title, description, icon, ...props }) {
   );
 }
 
-const DISPLAY_TIME = 10;
+const DISPLAY_TIME = 20;
 const TRANSITION_TIME = 1;
 function CodeDayProTestemonials({ ...props }) {
   const [testemonyIndex, nextTestemony] = useReducer((previous) => (previous + 1) % TEXT_QUOTES.length, 0);
@@ -207,8 +207,8 @@ function CodeDayProFeatures({ ...props }) {
       <Wrap justify="center" spacing={20} mt="12">
         <WrapItem>
           <Stack alignItems="center" minWidth="270px">
-            <Icon as={TransportBus} boxSize={24} />
-            <Text fontSize="4xl" textAlign="center">
+            <Icon as={TransportBus} boxSize={20} />
+            <Text fontSize="3xl" textAlign="center">
               2-Day
               <br />
               Shipping
@@ -217,8 +217,8 @@ function CodeDayProFeatures({ ...props }) {
         </WrapItem>
         <WrapItem>
           <Stack alignItems="center" minWidth="270px">
-            <Icon as={FoodCookie} boxSize={24} />
-            <Text fontSize="4xl" textAlign="center">
+            <Icon as={FoodCookie} boxSize={20} />
+            <Text fontSize="3xl" textAlign="center">
               Premium
               <br />
               Dining
@@ -227,8 +227,8 @@ function CodeDayProFeatures({ ...props }) {
         </WrapItem>
         <WrapItem>
           <Stack alignItems="center" width="270px">
-            <Icon as={Night} boxSize={24} />
-            <Text fontSize="4xl" textAlign="center">
+            <Icon as={Night} boxSize={20} />
+            <Text fontSize="3xl" textAlign="center">
               Secluded Sleeping Spaces
             </Text>
           </Stack>
