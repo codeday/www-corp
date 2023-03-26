@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable node/no-extraneous-import */
-import { useDimensions, useDisclosure } from '@chakra-ui/hooks';
+import { useDisclosure } from '@chakra-ui/hooks';
 import { Collapse, Fade } from '@chakra-ui/transition';
-import { Center, Divider, Grid, HStack, Stack, VStack, Wrap, WrapItem } from '@chakra-ui/layout';
+import { Center, Divider, Grid, Stack, VStack, Wrap, WrapItem } from '@chakra-ui/layout';
 import { Text, Heading, Box, Button, CodeDay } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
-import React, { useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import TransportBus from '@codeday/topocons/Icon/TransportBus';
 import FoodCookie from '@codeday/topocons/Icon/FoodCookie';
 import Night from '@codeday/topocons/Icon/Night';
@@ -19,7 +19,7 @@ import { Icon } from '@chakra-ui/icon';
 import { Img, keyframes, useBreakpointValue } from '@chakra-ui/react';
 import { NextSeo } from 'next-seo';
 import Link from 'next/link';
-import { css, Global, keyframes as kf } from '@emotion/core';
+import { Global } from '@emotion/core';
 import { motion } from 'framer-motion';
 import Page from '../components/Page';
 
@@ -319,10 +319,6 @@ function CodeDayHeroText({ isOpen, ...props }) {
 }
 
 function CodeDayProHero() {
-  // const headerContainerRef = useRef();
-  // const dimensions = useDimensions(headerContainerRef, true);
-  // const wrapHero = dimensions?.contentBox?.width < 872;
-
   const VerticalOrHorizontalCollapse = useBreakpointValue({ base: true, md: false }, 'md');
   const [vertical, setVertical] = useState(VerticalOrHorizontalCollapse);
   const HVCollapse = useMemo(
@@ -348,18 +344,15 @@ function CodeDayProHero() {
     }
   }, [VerticalOrHorizontalCollapse]);
 
-  const { isOpen, onToggle, onOpen, onClose, getDisclosureProps } = useDisclosure();
+  const { isOpen, onOpen, getDisclosureProps } = useDisclosure();
 
-  const { isOpen: isTextOpen, onToggle: onTextToggle, onOpen: onTextOpen, onClose: onTextClose } = useDisclosure();
+  const { isOpen: isTextOpen, onOpen: onTextOpen } = useDisclosure();
 
   const proKeyframes = keyframes`0%{background-position:4% 0%} 50%{background-position:97% 100%} 100%{background-position:4% 0%}`;
   const borderKeyframes = keyframes`0% {background-position: 0% 50%;}100% {background-position: 200% 50%;}`;
 
   useEffect(() => {
     onOpen();
-    return () => {
-      onClose();
-    };
   }, []);
 
   return (
