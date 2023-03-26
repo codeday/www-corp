@@ -15,6 +15,7 @@ import Calendar from '@codeday/topocons/Icon/Calendar';
 import Wifi from '@codeday/topocons/Icon/Wifi';
 import Bell from '@codeday/topocons/Icon/Bell';
 import PaymentCard from '@codeday/topocons/Icon/PaymentCard';
+import TransportPlane from '@codeday/topocons/Icon/TransportPlane';
 import { Icon } from '@chakra-ui/icon';
 import { Img, keyframes, useBreakpointValue } from '@chakra-ui/react';
 import { NextSeo } from 'next-seo';
@@ -101,13 +102,18 @@ function CodeDayProAllFeatures() {
         />
         <Benefit
           title="Secluded Sleeping Spaces"
-          description="Pro members get access to comfortable sleeping spaces with a fresh Sealy® mattress and pillows of choice. "
+          description="Pro members get access to comfortable sleeping spaces with a fresh CodeMat®ess and Pillows of choice."
           icon={Night}
         />
         <Benefit
           title="2-day Shipping"
           description="Pro members get unlimited FREE Two-Day Shipping!"
           icon={TransportBus}
+        />
+        <Benefit
+          title="Priority Boarding"
+          description="Pro members get first class seating on all CodeDay flights."
+          icon={TransportPlane}
         />
       </Wrap>
     </Content>
@@ -281,6 +287,7 @@ function HorizontalCollapse({ getDisclosureProps, isOpen, onComplete = () => {},
   );
 }
 
+const proKeyframes = keyframes`0%{background-position:4% 0%} 50%{background-position:97% 100%} 100%{background-position:4% 0%}`;
 function CodeDayHeroText({ isOpen, ...props }) {
   return (
     <Box>
@@ -305,7 +312,9 @@ function CodeDayHeroText({ isOpen, ...props }) {
                 left: '0',
                 height: '5px',
                 borderRadius: '2px',
-                background: '#ff686b',
+                background: 'linear-gradient(225deg, #ffd700, #ff686b)',
+                backgroundSize: '400% 400%',
+                animation: `${proKeyframes} 15s ease infinite`,
               }}
             >
               Pro
@@ -313,6 +322,19 @@ function CodeDayHeroText({ isOpen, ...props }) {
             . Exclusive perks, priority support, and early access await.
           </Text>
         </Box>
+        {/* <Button
+          size="lg"
+          color="black"
+          backgroundImage="radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);"
+        >
+          <Text color="black" as="a">
+            Join Today
+          </Text>
+          <br/>
+          <Text fontSize="sm" color="black" as="a">
+            $750
+          </Text>
+        </Button> */}
       </Collapse>
     </Box>
   );
@@ -348,7 +370,6 @@ function CodeDayProHero() {
 
   const { isOpen: isTextOpen, onOpen: onTextOpen } = useDisclosure();
 
-  const proKeyframes = keyframes`0%{background-position:4% 0%} 50%{background-position:97% 100%} 100%{background-position:4% 0%}`;
   const borderKeyframes = keyframes`0% {background-position: 0% 50%;}100% {background-position: 200% 50%;}`;
 
   useEffect(() => {
@@ -408,6 +429,9 @@ function CodeDayProHero() {
                   <Box
                     as="span"
                     position="relative"
+                    backgroundImage="radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);"
+                    backgroundClip="text"
+                    textColor="transparent"
                     _before={{
                       content: "''",
                       position: 'absolute',
@@ -416,9 +440,7 @@ function CodeDayProHero() {
                       left: '0',
                       height: '6px',
                       borderRadius: '2px',
-                      background: 'linear-gradient(225deg, #ffd700, #ff686b)',
-                      backgroundSize: '400% 400%',
-                      animation: `${proKeyframes} 15s ease infinite`,
+                      background: '#ff686b',
                     }}
                   >
                     Pro
