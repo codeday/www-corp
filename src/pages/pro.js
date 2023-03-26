@@ -50,7 +50,28 @@ const TEXT_QUOTES = [
 
 export default function Pro() {
   return (
-    <Page seo={<NextSeo noindex />}>
+    <Page
+      seo={
+        <NextSeo
+          noindex
+          title="CodeDay ~ Pro"
+          openGraph={{
+            type: 'website',
+            url: 'https://codeday.org/pro',
+            title: 'CodeDay ~ Pro',
+            description: 'CodeDay Pro: A better way to CodeDay.',
+            images: [
+              {
+                url: '/pro/goldcard.png',
+                width: 800,
+                height: 600,
+                alt: 'CodeDay Gold Card',
+              },
+            ],
+          }}
+        />
+      }
+    >
       <CodeDayProHero />
       <Center>
         <Divider mt="6" ml="2" mr="2" maxWidth="container.xl" />
