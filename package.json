@@ -54,9 +54,11 @@
     "webpack-bundle-analyzer": "^3.9.0"
   },
   "devDependencies": {
-    "@codeday/eslint-config": "^2.1.2",
+    "@codeday/eslint-config": "^3",
     "@next/bundle-analyzer": "^9.5.2",
     "cross-env": "^7.0.2",
-    "eslint": "^7.6.0"
-  }
+    "eslint": "^8.0.0",
+    "prettier": "^2.3.2"
+  },
+  "prettier": "@codeday/eslint-config/prettier"
 }
