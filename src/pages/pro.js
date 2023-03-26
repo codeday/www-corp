@@ -63,8 +63,8 @@ export default function Pro() {
             images: [
               {
                 url: '/pro/goldcard.png',
-                width: 800,
-                height: 600,
+                width: 1943,
+                height: 1069,
                 alt: 'CodeDay Gold Card',
               },
             ],
