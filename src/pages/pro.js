@@ -17,6 +17,7 @@ import Bell from '@codeday/topocons/Icon/Bell';
 import PaymentCard from '@codeday/topocons/Icon/PaymentCard';
 import { Icon } from '@chakra-ui/icon';
 import { Img } from '@chakra-ui/react';
+import { NextSeo } from 'next-seo';
 import Page from '../components/Page';
 
 const TEXT_QUOTES = [
@@ -45,7 +46,7 @@ const TEXT_QUOTES = [
 
 export default function Pro() {
   return (
-    <Page>
+    <Page seo={<NextSeo noindex />}>
       <CodeDayProHero />
       <Center>
         <Divider mt="6" ml="2" mr="2" maxWidth="container.xl" />
@@ -66,7 +67,9 @@ export default function Pro() {
 function CodeDayProAllFeatures() {
   return (
     <Content mt={10} id="benifits">
-      <Heading textAlign="center" mb="10" textDecor="underline" size="xl">All Features</Heading>
+      <Heading textAlign="center" mb="10" textDecor="underline" size="xl">
+        All Features
+      </Heading>
       <Wrap justify="center" align="center" spacing={10}>
         <Benifit
           title="Early Access"
