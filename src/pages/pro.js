@@ -114,7 +114,7 @@ function CodeDayProAllFeatures() {
 function Benifit({ title, description, icon, ...props }) {
   return (
     <WrapItem flexBasis="280px" {...props}>
-      <Stack direction="column" alignItems="center" p="5" borderRadius={10} bg="whiteAlpha.100">
+      <Stack direction="column" alignItems="center" p="5" borderRadius={10} boxShadow="md" bg="whiteAlpha.100">
         <Icon as={icon} boxSize={16} mb={4} />
         <Heading textAlign="center" size="md" mb={2}>
           {title}
@@ -248,7 +248,7 @@ function CodeDayProHero() {
   const dimensions = useDimensions(headerContainerRef, true);
   const wrapHero = dimensions?.contentBox?.width < 872;
   return (
-    <Box bg="whiteAlpha.50" pt={10} pb={5} position="relative" mt="-12">
+    <Box bg="whiteAlpha.50" pt={10} pb={5} position="relative" mt="-12" boxShadow="sm">
       <Content maxWidth="900px">
         <Stack
           ref={headerContainerRef}
