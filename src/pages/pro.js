@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable node/no-extraneous-import */
-import { useDimensions } from '@chakra-ui/hooks';
-import { Fade } from '@chakra-ui/transition';
-import { Center, Divider, Flex, Grid, Stack, StackDivider, VStack, Wrap, WrapItem } from '@chakra-ui/layout';
-import { Text, Heading, Box, Button } from '@codeday/topo/Atom';
+import { useDimensions, useDisclosure } from '@chakra-ui/hooks';
+import { Collapse, Fade } from '@chakra-ui/transition';
+import { Center, Divider, Grid, HStack, Stack, VStack, Wrap, WrapItem } from '@chakra-ui/layout';
+import { Text, Heading, Box, Button, CodeDay } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
-import React, { useEffect, useReducer, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import TransportBus from '@codeday/topocons/Icon/TransportBus';
 import FoodCookie from '@codeday/topocons/Icon/FoodCookie';
 import Night from '@codeday/topocons/Icon/Night';
@@ -16,8 +16,11 @@ import Wifi from '@codeday/topocons/Icon/Wifi';
 import Bell from '@codeday/topocons/Icon/Bell';
 import PaymentCard from '@codeday/topocons/Icon/PaymentCard';
 import { Icon } from '@chakra-ui/icon';
-import { Img } from '@chakra-ui/react';
+import { Img, keyframes, useBreakpointValue } from '@chakra-ui/react';
 import { NextSeo } from 'next-seo';
+import Link from 'next/link';
+import { css, Global, keyframes as kf } from '@emotion/core';
+import { motion } from 'framer-motion';
 import Page from '../components/Page';
 
 const TEXT_QUOTES = [
@@ -66,42 +69,42 @@ export default function Pro() {
 
 function CodeDayProAllFeatures() {
   return (
-    <Content mt={10} id="benifits">
+    <Content mt={10} id="benefits">
       <Heading textAlign="center" mb="10" textDecor="underline" size="xl">
-        All Features
+        All Benefits
       </Heading>
       <Wrap justify="center" align="center" spacing={10}>
-        <Benifit
+        <Benefit
           title="Early Access"
           description="Pro members get early access to register for CodeDay events before they are opened to the general public."
           icon={Calendar}
         />
-        <Benifit
+        <Benefit
           title="Priority Support"
           description="Pro members receive priority support via email or chat for any questions or issues related to CodeDay events."
           icon={Bell}
         />
-        <Benifit
+        <Benefit
           title="Premium Dining"
           description="Pro members get premium food options at a CodeDay including a 3 course menu and a fine dining experience."
           icon={FoodCookie}
         />
-        <Benifit
+        <Benefit
           title="Special Discounts"
           description="Pro members get special discounts on CodeDay merchandise, tickets, and other related products and services."
           icon={PaymentCard}
         />
-        <Benifit
+        <Benefit
           title="Networking Opportunities"
           description="Pro members get access to FREE high speed 6E plus pro max wifi along with FREE networking cables."
           icon={Wifi}
         />
-        <Benifit
+        <Benefit
           title="Secluded Sleeping Spaces"
           description="Pro members get access to comfortable sleeping spaces with a fresh Sealy® mattress and pillows of choice. "
           icon={Night}
         />
-        <Benifit
+        <Benefit
           title="2-day Shipping"
           description="Pro members get unlimited FREE Two-Day Shipping!"
           icon={TransportBus}
@@ -111,7 +114,7 @@ function CodeDayProAllFeatures() {
   );
 }
 
-function Benifit({ title, description, icon, ...props }) {
+function Benefit({ title, description, icon, ...props }) {
   return (
     <WrapItem flexBasis="280px" {...props}>
       <Stack direction="column" alignItems="center" p="5" borderRadius={10} boxShadow="md" bg="whiteAlpha.100">
@@ -203,96 +206,96 @@ function TextQuote({ testemony, ...props }) {
 
 function CodeDayProFeatures({ ...props }) {
   return (
-    <Content {...props}>
-      <Wrap justify="center" spacing={20} mt="12">
-        <WrapItem>
-          <Stack alignItems="center" minWidth="270px">
-            <Icon as={TransportBus} boxSize={20} />
-            <Text fontSize="3xl" textAlign="center">
-              2-Day
-              <br />
-              Shipping
-            </Text>
-          </Stack>
-        </WrapItem>
-        <WrapItem>
-          <Stack alignItems="center" minWidth="270px">
-            <Icon as={FoodCookie} boxSize={20} />
-            <Text fontSize="3xl" textAlign="center">
-              Premium
-              <br />
-              Dining
-            </Text>
-          </Stack>
-        </WrapItem>
-        <WrapItem>
-          <Stack alignItems="center" width="270px">
-            <Icon as={Night} boxSize={20} />
-            <Text fontSize="3xl" textAlign="center">
-              Secluded Sleeping Spaces
-            </Text>
-          </Stack>
-        </WrapItem>
-      </Wrap>
-      <Center>
-        <Button rightIcon={<UiArrowRight />} bg="red.600" mt="10" as="a" href="#benifits">
-          View All Features
-        </Button>
-      </Center>
-    </Content>
+    <>
+      <Global styles="html { scroll-behavior: smooth; }" />
+      <Content {...props}>
+        <Wrap justify="center" spacing={20} mt="12">
+          <WrapItem>
+            <Stack alignItems="center" minWidth="270px">
+              <Icon as={TransportBus} boxSize={20} />
+              <Text fontSize="3xl" textAlign="center">
+                2-Day
+                <br />
+                Shipping
+              </Text>
+            </Stack>
+          </WrapItem>
+          <WrapItem>
+            <Stack alignItems="center" minWidth="270px">
+              <Icon as={FoodCookie} boxSize={20} />
+              <Text fontSize="3xl" textAlign="center">
+                Premium
+                <br />
+                Dining
+              </Text>
+            </Stack>
+          </WrapItem>
+          <WrapItem>
+            <Stack alignItems="center" width="270px">
+              <Icon as={Night} boxSize={20} />
+              <Text fontSize="3xl" textAlign="center">
+                Secluded Sleeping Spaces
+              </Text>
+            </Stack>
+          </WrapItem>
+        </Wrap>
+        <Center>
+          <Link href="#benefits">
+            <Button rightIcon={<UiArrowRight />} bg="red.600" mt="10" as="a">
+              View All Benefits
+            </Button>
+          </Link>
+        </Center>
+      </Content>
+    </>
   );
 }
 
-function CodeDayProHero() {
-  const headerContainerRef = useRef();
-  const dimensions = useDimensions(headerContainerRef, true);
-  const wrapHero = dimensions?.contentBox?.width < 872;
+function HorizontalCollapse({ getDisclosureProps, isOpen, onComplete = () => {}, children }) {
+  const [hidden, setHidden] = useState(!isOpen);
   return (
-    <Box bg="whiteAlpha.50" pt={10} pb={5} position="relative" mt="-12" boxShadow="sm">
-      <Content maxWidth="900px">
-        <Stack
-          ref={headerContainerRef}
-          direction={wrapHero ? 'column' : 'row'}
-          divider={<StackDivider />}
-          as={Center}
-          spacing={wrapHero ? '2' : '5'}
-          flexWrap="wrap"
-        >
-          <Box float="left">
-            <Center>
-              <Heading whiteSpace="nowrap" textAlign="end" fontSize="6xl" fontWeight="bold">
-                CodeDay{' '}
-                <Box
-                  as="span"
-                  position="relative"
-                  _before={{
-                    content: "''",
-                    position: 'absolute',
-                    top: '85%',
-                    width: '100%',
-                    left: '0',
-                    height: '6px',
-                    borderRadius: '2px',
-                    background: 'red.600',
-                  }}
-                >
-                  Pro
-                </Box>
-              </Heading>
-            </Center>
-          </Box>
-          <Text
-            fontSize="3xl"
-            noOfLines={4}
-            minWidth={{ sm: '465px' }}
-            flex="1"
-            {...(wrapHero ? { textAlign: 'center' } : {})}
-          >
+    <motion.div
+      {...getDisclosureProps()}
+      hidden={hidden}
+      initial={{ width: 0 }}
+      onAnimationStart={() => setHidden(false)}
+      onAnimationComplete={() => {
+        setHidden(!isOpen);
+        onComplete();
+      }}
+      animate={{ width: isOpen ? '366px' : 0 }}
+      style={{
+        margin: '0',
+        padding: '0',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+      }}
+      transition={{
+        delay: 1,
+        duration: 1.5,
+        type: 'tween',
+      }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function CodeDayHeroText({ isOpen, ...props }) {
+  return (
+    <Box>
+      <Collapse
+        transition={{ enter: { duration: 1.5, delay: 0.5 }, exit: { duration: 1.5, delay: 0 } }}
+        in={isOpen}
+        animateOpacity
+      >
+        <Box {...props} pe="5" ps="5">
+          <Text fontSize="3xl" textAlign="center">
             Elevate your CodeDay experience with{' '}
             <Box
               as="span"
               fontWeight="bold"
-              display="inline"
+              display="inline-block"
               position="relative"
               _before={{
                 content: "''",
@@ -302,15 +305,138 @@ function CodeDayProHero() {
                 left: '0',
                 height: '5px',
                 borderRadius: '2px',
-                background: 'red.600',
+                background: '#ff686b',
               }}
             >
               Pro
             </Box>
             . Exclusive perks, priority support, and early access await.
           </Text>
-        </Stack>
-      </Content>
+        </Box>
+      </Collapse>
     </Box>
+  );
+}
+
+function CodeDayProHero() {
+  // const headerContainerRef = useRef();
+  // const dimensions = useDimensions(headerContainerRef, true);
+  // const wrapHero = dimensions?.contentBox?.width < 872;
+
+  const VerticalOrHorizontalCollapse = useBreakpointValue({ base: true, md: false }, 'md');
+  const [vertical, setVertical] = useState(VerticalOrHorizontalCollapse);
+  const HVCollapse = useMemo(
+    () =>
+      ({ isOpen = true, getDisclosureProps, onComplete = () => {}, children }) =>
+        vertical ? (
+          <Collapse in={isOpen}>
+            {onComplete()}
+            {children}
+          </Collapse>
+        ) : (
+          <HorizontalCollapse isOpen={isOpen} getDisclosureProps={getDisclosureProps} onComplete={onComplete}>
+            {children}
+          </HorizontalCollapse>
+        ),
+    [vertical],
+  );
+
+  useEffect(() => {
+    // eslint-disable-next-line eqeqeq
+    if (vertical != VerticalOrHorizontalCollapse) {
+      setVertical(VerticalOrHorizontalCollapse);
+    }
+  }, [VerticalOrHorizontalCollapse]);
+
+  const { isOpen, onToggle, onOpen, onClose, getDisclosureProps } = useDisclosure();
+
+  const { isOpen: isTextOpen, onToggle: onTextToggle, onOpen: onTextOpen, onClose: onTextClose } = useDisclosure();
+
+  const proKeyframes = keyframes`0%{background-position:4% 0%} 50%{background-position:97% 100%} 100%{background-position:4% 0%}`;
+  const borderKeyframes = keyframes`0% {background-position: 0% 50%;}100% {background-position: 200% 50%;}`;
+
+  useEffect(() => {
+    onOpen();
+    return () => {
+      onClose();
+    };
+  }, []);
+
+  return (
+    <Content maxWidth="900px" display="flex" justifyContent="center" alignItems="center">
+      <VStack alignItems="center" justifyContent="center">
+        <Center
+          position="relative"
+          mt="-10"
+          boxShadow="lg"
+          background="gray.1100"
+          borderRadius="2xl"
+          width={{ base: 'auto', md: '550px' }}
+          height="72"
+          _after={{
+            position: 'absolute',
+            content: '""',
+            top: '8%',
+            left: '0',
+            right: '0',
+            zIndex: -1,
+            height: '90%',
+            width: '100%',
+            filter: 'blur(20px)',
+            background:
+              'linear-gradient(67deg, rgba(255,104,107,1) 0%, rgba(255,120,92,1) 40%, rgba(255,215,0,1) 50%, rgba(255,120,92,1) 60%, rgba(255,104,107,1) 100%)',
+            backgroundSize: '200% 200%',
+            animation: `${borderKeyframes} 15s linear infinite`,
+          }}
+        >
+          <Center
+            alignSelf="stretch"
+            width="100%"
+            justifyContent="center"
+            background="whiteAlpha.50"
+            borderRadius="2xl"
+          >
+            <Wrap justify="center" align="center" padding={vertical ? '10' : '0'}>
+              <Box>
+                <Heading
+                  whiteSpace="nowrap"
+                  // textAlign="center"
+                  fontSize="6xl"
+                  fontWeight="bold"
+                  lineHeight="0"
+                  marginInlineEnd=".5rem"
+                >
+                  <CodeDay />
+                </Heading>
+              </Box>
+              <HVCollapse getDisclosureProps={getDisclosureProps} isOpen={isOpen} onComplete={onTextOpen}>
+                <Heading fontSize="6xl" fontWeight="bold" flex="1" textAlign="center">
+                  {'CodeDay '}
+                  <Box
+                    as="span"
+                    position="relative"
+                    _before={{
+                      content: "''",
+                      position: 'absolute',
+                      top: '85%',
+                      width: '100%',
+                      left: '0',
+                      height: '6px',
+                      borderRadius: '2px',
+                      background: 'linear-gradient(225deg, #ffd700, #ff686b)',
+                      backgroundSize: '400% 400%',
+                      animation: `${proKeyframes} 15s ease infinite`,
+                    }}
+                  >
+                    Pro
+                  </Box>
+                </Heading>
+              </HVCollapse>
+            </Wrap>
+          </Center>
+        </Center>
+        <CodeDayHeroText isOpen={isTextOpen} mt="10" />
+      </VStack>
+    </Content>
   );
 }
