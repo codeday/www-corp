@@ -27,7 +27,7 @@ import Page from '../components/Page';
 const TEXT_QUOTES = [
   {
     quote:
-      "Well, I never thought I'd say this as a cowboy living in the Bahamas, but subscribing to CodeDay pro has been the most life-changing thing since discovering my horse can moonwalk. Now, instead of wrangling cattle, I'm wrangling code. Who knew coding could be more exciting than a good ol' fashioned rodeo? So, if you want to be a cool cowboy like me, mosey on over and subscribe to CodeDay pro. Just don't forget to bring your Stetson and spurs.",
+      "Well, I never thought I'd say this as a cowboy living in the Bahamas, but subscribing to CodeDay Pro has been the most life-changing thing since discovering my horse can moonwalk. Now, instead of wrangling cattle, I'm wrangling code. Who knew coding could be more exciting than a good ol' fashioned rodeo? So, if you want to be a cool cowboy like me, mosey on over and subscribe to CodeDay Pro. Just don't forget to bring your Stetson and spurs.",
     name: 'Deven Jadhav',
     title: 'Cowboy Coder',
     image: '/pro/deven.png',
@@ -322,19 +322,25 @@ function CodeDayHeroText({ isOpen, ...props }) {
             . Exclusive perks, priority support, and early access await.
           </Text>
         </Box>
-        {/* <Button
-          size="lg"
-          color="black"
-          backgroundImage="radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);"
-        >
-          <Text color="black" as="a">
-            Join Today
-          </Text>
-          <br/>
-          <Text fontSize="sm" color="black" as="a">
-            $750
-          </Text>
-        </Button> */}
+        <Center pt="10">
+          <Button
+            size="lg"
+            color="black"
+            backgroundImage="radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);"
+            flexDir="column"
+          >
+            <Box w="100%">
+              <Text color="black" as="a">
+                Join Now!
+              </Text>
+            </Box>
+            <Box lineHeight=".8">
+              <Text fontSize="xs" color="black" as="a" lineHeight="0">
+                for just $750/yr, billed bi-centennially
+              </Text>
+            </Box>
+          </Button>
+        </Center>
       </Collapse>
     </Box>
   );
@@ -424,7 +430,7 @@ function CodeDayProHero() {
                 </Heading>
               </Box>
               <HVCollapse getDisclosureProps={getDisclosureProps} isOpen={isOpen} onComplete={onTextOpen}>
-                <Heading fontSize="6xl" fontWeight="bold" flex="1" textAlign="center">
+                <Heading fontSize="6xl" fontWeight="bold" flex="1" textAlign="center" color="whiteAlpha.900">
                   {'CodeDay '}
                   <Box
                     as="span"
