@@ -5,7 +5,7 @@ import { useDisclosure } from '@chakra-ui/hooks';
 import { Collapse, Fade } from '@chakra-ui/transition';
 import { Center, Divider, Grid, Stack, VStack, Wrap, WrapItem } from '@chakra-ui/layout';
 import { Text, Heading, Box, Button, CodeDay, TextInput } from '@codeday/topo/Atom';
-import { Content } from '@codeday/topo/Molecule';
+import { Content, DataCollection } from '@codeday/topo/Molecule';
 import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import TransportBus from '@codeday/topocons/Icon/TransportBus';
 import FoodCookie from '@codeday/topocons/Icon/FoodCookie';
@@ -358,7 +358,12 @@ function CodeDayHeroText({ isOpen, ...props }) {
               m={4}
               emailList="ade92300-cfe5-11ed-bd42-99743629f670"
             />
+
         </Center>
+          <Text textAlign="center" color="red">
+            NOTICE: Due to high demand, we are processing new users in waves.
+            <br/>Existing CodeDay Pro members may speak with the Concierge for more details.
+          </Text>
       </Collapse>
     </Box>
   );
@@ -542,12 +547,12 @@ function MailingListSubscribe({
         >
             <Box>
               <Text color="black" as="a">
-                Join Now!
+                Join Waitlist!
               </Text>
             </Box>
             <Box lineHeight=".8">
               <Text fontSize="xs" color="black" as="a" lineHeight="0">
-                for just $750/yr, billed bi-centennially
+                just $750/yr, billed bi-centennially
               </Text>
             </Box>
           </Button>
