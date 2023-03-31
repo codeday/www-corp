@@ -133,7 +133,7 @@ function CodeDayProAllFeatures() {
         />
         <Benefit
           title="Priority Boarding"
-          description="Pro members get first class seating on all CodeDay flights."
+          description="Pro members get first class seating and can use the first boarding group."
           icon={TransportPlane}
         />
       </Wrap>
