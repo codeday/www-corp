@@ -1,0 +1,7 @@
+mutation SubscribeMutation($email: String!, $eventWhere: ClearEventWhereUniqueInput!) {
+    clear {
+        subscribeToMailingList(where: $eventWhere, email: $email) {
+            id
+        }
+    }
+}
