@@ -6,7 +6,7 @@ import { useQuery } from '../query';
 
 const DOMAIN = 'https://www.codeday.org';
 
-export default function Page ({ children, title, darkHeader, slug }) {
+export default function Page ({ children, title, darkHeader, slug, seo }) {
   const { cms } = useQuery();
   const { mission } = cms || {};
 
@@ -15,6 +15,7 @@ export default function Page ({ children, title, darkHeader, slug }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
+      {seo ?? 
       <DefaultSeo
         title={title ? `${title} ~ CodeDay` : 'CodeDay'}
         description={mission?.items[0]?.value}
@@ -30,7 +31,7 @@ export default function Page ({ children, title, darkHeader, slug }) {
           site: '@codeday',
           cardType: 'summary_large_image',
         }}
-      />
+      />}
       <Box position="relative">
         <Header darkBackground={darkHeader} gradAmount={darkHeader && 'lg'} underscore>
           <SiteLogo>
