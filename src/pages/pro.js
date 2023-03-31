@@ -494,7 +494,7 @@ function MailingListSubscribe({
 
   return (
     <Box {...props}>
-      <Grid templateColumns="1fr min-content">
+      <Grid templateColumns={ {base: "1fr", md: '1fr 1fr'}}>
         <TextInput
           size="lg"
           placeholder={[
@@ -503,15 +503,19 @@ function MailingListSubscribe({
           ].join(" or ")}
           value={input || undefined}
           onChange={(e) => setInput(e.target.value)}
-          borderTopRightRadius={0}
-          borderBottomRightRadius={0}
-          borderRightWidth={0}
+          borderTopRightRadius={{ base: undefined, md: 0 }}
+          borderBottomRightRadius={{ base: undefined, md: 0 }}
+          borderRightWidth={{ base: undefined, md: 0 }}
         />
         <Button
           variant={variant || "solid"}
           // colorScheme={colorScheme || "green"}
           isLoading={isSubmitting}
           onClick={() => {
+            if(!input) {
+              error('Email is required to join the waitlist')
+              return
+            }
             // TODO: Support for phone lists
             setIsSubmitting(true);
             submitEmail(emailList, input, fields)
@@ -528,8 +532,9 @@ function MailingListSubscribe({
                 setIsSubmitting(false);
               });
           }}
-          borderTopLeftRadius={0}
-          borderBottomLeftRadius={0}
+          borderTopLeftRadius={{ base: undefined, md: 0 }}
+          borderBottomLeftRadius={{ base: undefined, md: 0 }}
+          mt={{ base: 2, md: 0 }}
           size="lg"
           color="black"
           backgroundImage="radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);"
