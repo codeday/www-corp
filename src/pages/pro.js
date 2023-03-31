@@ -4,7 +4,7 @@
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Collapse, Fade } from '@chakra-ui/transition';
 import { Center, Divider, Grid, Stack, VStack, Wrap, WrapItem } from '@chakra-ui/layout';
-import { Text, Heading, Box, Button, CodeDay } from '@codeday/topo/Atom';
+import { Text, Heading, Box, Button, CodeDay, TextInput } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
 import React, { useEffect, useMemo, useReducer, useState } from 'react';
 import TransportBus from '@codeday/topocons/Icon/TransportBus';
@@ -16,6 +16,7 @@ import Wifi from '@codeday/topocons/Icon/Wifi';
 import Bell from '@codeday/topocons/Icon/Bell';
 import PaymentCard from '@codeday/topocons/Icon/PaymentCard';
 import TransportPlane from '@codeday/topocons/Icon/TransportPlane';
+import HeadMale from '@codeday/topocons/Icon/HeadMale';
 import { Icon } from '@chakra-ui/icon';
 import { Img, keyframes, useBreakpointValue } from '@chakra-ui/react';
 import { NextSeo } from 'next-seo';
@@ -23,7 +24,8 @@ import Link from 'next/link';
 import { Global } from '@emotion/core';
 import { motion } from 'framer-motion';
 import Page from '../components/Page';
-
+import { useToasts, apiFetch } from '@codeday/topo/utils';
+import { SubscribeMutation } from './proSubscribe.gql';
 const TEXT_QUOTES = [
   {
     quote:
@@ -135,6 +137,11 @@ function CodeDayProAllFeatures() {
           title="Priority Boarding"
           description="Pro members get first class seating and can use the first boarding group."
           icon={TransportPlane}
+        />
+        <Benefit
+          title="Concierge Access"
+          description="Pro members get 24/3 access to a dedicated concierge."
+          icon={HeadMale}
         />
       </Wrap>
     </Content>
@@ -310,6 +317,8 @@ function HorizontalCollapse({ getDisclosureProps, isOpen, onComplete = () => {},
 
 const proKeyframes = keyframes`0%{background-position:4% 0%} 50%{background-position:97% 100%} 100%{background-position:4% 0%}`;
 function CodeDayHeroText({ isOpen, ...props }) {
+  const { isOpen: isEmailOpen, onOpen: onEmailOpen, getDisclosureProps } = useDisclosure();
+
   return (
     <Box>
       <Collapse
@@ -344,23 +353,11 @@ function CodeDayHeroText({ isOpen, ...props }) {
           </Text>
         </Box>
         <Center pt="10">
-          <Button
-            size="lg"
-            color="black"
-            backgroundImage="radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);"
-            flexDir="column"
-          >
-            <Box w="100%">
-              <Text color="black" as="a">
-                Join Now!
-              </Text>
-            </Box>
-            <Box lineHeight=".8">
-              <Text fontSize="xs" color="black" as="a" lineHeight="0">
-                for just $750/yr, billed bi-centennially
-              </Text>
-            </Box>
-          </Button>
+
+            <MailingListSubscribe
+              m={4}
+              emailList="ade92300-cfe5-11ed-bd42-99743629f670"
+            />
         </Center>
       </Collapse>
     </Box>
@@ -481,4 +478,85 @@ function CodeDayProHero() {
       </VStack>
     </Content>
   );
+}
+
+function MailingListSubscribe({
+                                emailList,
+                                textList,
+                                fields,
+                                variant = "solid",
+                                colorScheme = "green",
+                                ...props
+                              }) {
+  const { success, error } = useToasts();
+  const [input, setInput] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  return (
+    <Box {...props}>
+      <Grid templateColumns="1fr min-content">
+        <TextInput
+          size="lg"
+          placeholder={[
+            ...(emailList ? ["email"] : []),
+            ...(textList ? ["phone"] : []),
+          ].join(" or ")}
+          value={input || undefined}
+          onChange={(e) => setInput(e.target.value)}
+          borderTopRightRadius={0}
+          borderBottomRightRadius={0}
+          borderRightWidth={0}
+        />
+        <Button
+          variant={variant || "solid"}
+          // colorScheme={colorScheme || "green"}
+          isLoading={isSubmitting}
+          onClick={() => {
+            // TODO: Support for phone lists
+            setIsSubmitting(true);
+            submitEmail(emailList, input, fields)
+              .then(() => {
+                success(`Application received, we will be in touch soon!`);
+                setInput("");
+              })
+              .catch(() => {
+                error(
+                  `Sorry, we couldn't complete your subscription, please try again.`
+                );
+              })
+              .finally(() => {
+                setIsSubmitting(false);
+              });
+          }}
+          borderTopLeftRadius={0}
+          borderBottomLeftRadius={0}
+          size="lg"
+          color="black"
+          backgroundImage="radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);"
+          flexDir="column"
+        >
+            <Box>
+              <Text color="black" as="a">
+                Join Now!
+              </Text>
+            </Box>
+            <Box lineHeight=".8">
+              <Text fontSize="xs" color="black" as="a" lineHeight="0">
+                for just $750/yr, billed bi-centennially
+              </Text>
+            </Box>
+          </Button>
+      </Grid>
+    </Box>
+  );
+}
+
+
+async function submitEmail(
+  list,
+  email,
+  fields
+) {
+  const form = new FormData();
+  return apiFetch(SubscribeMutation, { email: email, eventWhere: { id: 'clfwtpk17492668exgqb3ze434r' } })
 }
