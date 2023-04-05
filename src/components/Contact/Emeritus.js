@@ -40,8 +40,8 @@ function EmeritusBox({ e }) {
 }
 
 export default function Emeritus({ seed, ...props }) {
-  const { account: { employees, otherTeam, board, emeritus } } = useQuery();
-  const employeeIds = [...employees, ...otherTeam, ...board].map((e) => e.id);
+  const { account: { employees, otherTeam, board, contractors, emeritus } } = useQuery();
+  const employeeIds = [...employees, ...otherTeam, ...contractors, ...board].map((e) => e.id);
   const all = shuffle(emeritus.filter((v) => !employeeIds.includes(v.id)), seed);
 
   return (
