@@ -18,6 +18,15 @@ query ContactQuery {
       pronoun
     }
 
+    contractors: roleUsers (roleId: "rol_kQxfFcpISf1SyqPw") {
+      id
+      name
+      title
+      picture
+      bio
+      pronoun
+    }
+
     board: roleUsers (roleId: "rol_cU5c8wlFVbSh6I2w") {
       id
       givenName
