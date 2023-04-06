@@ -23,6 +23,8 @@ export default function Volunteer({ program, role, seed, layout }) {
   const { colorMode } = useColorMode();
   const { asPath, query } = useRouter();
   const { cms: { volunteerPrograms } } = useQuery();
+  const { clear } = useQuery();
+
   const [wizardVisible, setWizardVisible] = useState(false);
   const programsWithUpcoming = volunteerPrograms?.items?.map((program) => {
     return {
@@ -78,10 +80,7 @@ export default function Volunteer({ program, role, seed, layout }) {
         )}
         <Box d={{ base: ((wizardVisible || layout === 'go') ? 'block' : 'none'), md: 'block' }}>
           <Wizard
-            programs={programsWithUpcoming.filter((program) => program.volunteerDetails)}
-            defaultPrograms={program ? [ program ] : undefined}
-            defaultRoles={role ? [ role ] : undefined}
-            after={query?.return && query?.returnto ? `https://${query.return}.codeday.org/${query.returnto}` : undefined}
+            events={clear.events}
           />
         </Box>
       </Box>
@@ -179,8 +178,8 @@ export default function Volunteer({ program, role, seed, layout }) {
 }
 
 export async function getStaticProps() {
-  const query = await apiFetch(print(VolunteerQuery));
-
+  const query = await apiFetch(print(VolunteerQuery), { now: new Date() });
+  console.log(query)
   return {
     props: {
       query,

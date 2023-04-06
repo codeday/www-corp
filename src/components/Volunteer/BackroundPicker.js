@@ -13,9 +13,6 @@ export default function BackgroundPicker({ onChange }) {
       >
         {VOLUNTEER_BACKGROUND_GROUPS.map((types, i) => (
           <Box key={i}>
-            {i !== 0 && (
-              <Divider />
-            )}
             {types.map((type) => (
               <Box mb={1} mt={1} key={type}>
                 <Radio
