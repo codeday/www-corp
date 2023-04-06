@@ -23,6 +23,7 @@ export default function Wizard({ events }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [linkedin, setLinkedin] = useState('');
   const [region, setRegion] = useState('');
   const [isOrganize, setIsOrganize] = useState(false);
   const [commitmentLevel, setCommitmentLevel] = useState(0);
@@ -79,28 +80,6 @@ export default function Wizard({ events }) {
               <br/>
             </Collapse>
             <Collapse in={commitmentLevel >= 1} animateOpacity>
-                <Text>
-                  <Checkbox onChange={(e) => setCommitmentLevel(e.target.checked? 2 : 1)}>
-                    <b>
-                    I understand that this is a serious commitment, requiring about the same amount of time and effort
-                    as being the president of a large club at school
-                    </b>
-                  </Checkbox>
-                </Text>
-              <br/>
-            </Collapse>
-            <Collapse in={commitmentLevel >= 2} animateOpacity>
-              <Text>
-                <Checkbox onChange={(e) => setCommitmentLevel(e.target.checked? 3 : 2)}>
-                  <b>
-                    If accepted as a regional manager, I will be able to organize for at least a full year (3 events)
-                  </b>
-                  <br/>(in the event something unexpected comes up, we are willing to make exceptions to this)
-                </Checkbox>
-              </Text>
-              <br/>
-            </Collapse>
-            <Collapse in={commitmentLevel >= 3} animateOpacity>
               <Text>
                 What city/region would you like to organize an event in?
                 <TextInput value={region} onChange={(e) => { setRegion(e.target.value); setHasSelection(true) }} w="md" d="block"/>
@@ -123,6 +102,7 @@ export default function Wizard({ events }) {
           <TextInput m={1} placeholder="First Name" value={firstName} onChange={e => { setFirstName(e.target.value); checkEmailCompletion() }}/>
           <TextInput m={1} placeholder="Last Name" value={lastName} onChange={e => { setLastName(e.target.value); checkEmailCompletion() }} />
           <TextInput m={1} placeholder="Email" value={email} onChange={e => { setEmail(e.target.value); checkEmailCompletion() }}/>
+          { background === 'industry'? <TextInput m={1} placeholder="LinkedIn (optional, recommended)" value={linkedin} onChange={e => { setLinkedin(e.target.value) }} /> : undefined }
       </VStack>
       <DataCollection message="pii" />
     </Box>
