@@ -4,6 +4,7 @@ import React, {
 import { Collapse } from '@chakra-ui/transition';
 import { Box, Button, Text, Heading, HStack, VStack, TextInput, Divider, Checkbox } from '@codeday/topo/Atom';
 import { CognitoForm, DataCollection } from '@codeday/topo/Molecule';
+import { useToasts } from '@codeday/topo/utils';
 import LinkedInTag from 'react-linkedin-insight';
 import BackgroundPicker from './BackroundPicker';
 import { isAllowedVolunteerType } from './wizardConfig';
@@ -17,6 +18,7 @@ function groupBy(xs, f) {
 }
 
 export default function Wizard({ events, formRef }) {
+  const { error } = useToasts();
   const regions = new Array(...new Set(events.filter(e => !e.dontAcceptVolunteers).map((e) => ({ name: e.region?.name || e.name, country: e.region?.countryName || 'Other' }))))
   const regionsByCountry = groupBy(regions, (r) => r.country);
   const [background, setBackground] = useState(null);
@@ -28,6 +30,7 @@ export default function Wizard({ events, formRef }) {
   const [isOrganize, setIsOrganize] = useState(false);
   const [commitmentLevel, setCommitmentLevel] = useState(0);
   const [hasSelection, setHasSelection] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const utmSource = useUtmSource();
 
 
@@ -64,7 +67,8 @@ export default function Wizard({ events, formRef }) {
         ))
       }
       <Divider m={4} />
-      <Button mt={2} isActive={isOrganize} onClick={() => { setIsOrganize(true) }}>There isn't a CodeDay City in my area</Button>
+      {/* Clear region state in case they clicked some other region button before this */}
+      <Button mt={2} isActive={isOrganize} onClick={() => { setIsOrganize(true); setRegion('') }}>There isn't a CodeDay City in my area</Button>
       <Collapse in={isOrganize} animateOpacity>
         <Divider m={4} />
         <Box>
@@ -181,15 +185,41 @@ export default function Wizard({ events, formRef }) {
         <Box textAlign={{ base: 'center', md: 'right' }} mt={8}>
           <Button
             colorScheme="green"
-            onClick={() => { 
+            isLoading={isSubmitting}
+            onClick={async () => { 
               // I wish i could set behavior: 'smooth' here but for some reason
               // When i set that it stops working entirely??????????????????"??"
               // Apparently you can fix it by modifying chrome flags but i dont want
               // it to not work for pepole who are using the defaults
               formRef.current.scrollIntoView();
-              if (hasSelection) background === 'industry' && page === 0? navigate('last') : navigate('next');
-            }}
-            disabled={!hasSelection}
+              if (hasSelection) {
+                if(background === 'industry' && page === 0) {
+                  // if industry, we want to skip region selection and get them in touch with
+                  // labs team
+                  navigate('last')
+                } else if(page === pages.length - 2) {
+                  // if submitting penultimate page, we now have all info
+                  setIsSubmitting
+                  try {
+                    const resp = await fetch('https://hooks.zapier.com/hooks/catch/2757438/32k3jrs/', {
+                      method: 'POST',
+                      body: JSON.stringify({ 
+                        email, firstName, lastName,
+                        linkedin, region, isOrganize,
+                        program: background === 'industry'? 'Labs' : 'CodeDay' 
+                       }),
+                      headers: {},
+                    });
+                    navigate('next')
+                  } catch (ex) {
+                    error(ex.toString());
+                  }
+                  setIsSubmitting(false);
+                } else {
+                  navigate('next');
+                }
+            }}}
+            disabled={!hasSelection || isSubmitting}
           >
             Next
           </Button>
