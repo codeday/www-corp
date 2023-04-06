@@ -49,7 +49,6 @@ export default function Wizard({ events, formRef }) {
       </HStack>
     </Box>
   );
-  console.log(regionsByCountry)
   const pageRegion = (
     <Box>
       <Heading as="h3" fontSize="xl" mb={2}>Please select a CodeDay City:</Heading>
@@ -141,7 +140,6 @@ export default function Wizard({ events, formRef }) {
     if (!hasStarted) {
       global.analytics?.track('volunteer.started', { style: 'full' });
       LinkedInTag.init('1831116', null, false);
-      console.log('started')
     }
     setHasStarted(true);
   }, [background, hasStarted]);

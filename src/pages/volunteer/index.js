@@ -61,7 +61,7 @@ export default function Volunteer({ program, role, seed, layout }) {
         rounded="md"
         borderBottomLeftRadius={0}
         borderBottomRightRadius={0}
-        
+
       >
         <Heading as="h3" fontSize="xl">Volunteer Sign-Up (3min)</Heading>
       </Box>
@@ -182,7 +182,6 @@ export default function Volunteer({ program, role, seed, layout }) {
 
 export async function getStaticProps() {
   const query = await apiFetch(print(VolunteerQuery), { now: new Date() });
-  console.log(query)
   return {
     props: {
       query,

@@ -68,7 +68,7 @@ export default function Volunteer() {
 }
 
 export async function getStaticProps() {
-  const query = await apiFetch(print(VolunteerQuery));
+  const query = await apiFetch(print(VolunteerQuery), { now: new Date() });
 
   return {
     props: {
