@@ -1,5 +1,5 @@
 import React, {
-  useState, useReducer, useEffect 
+  useState, useReducer, useEffect
 } from 'react';
 import { Collapse } from '@chakra-ui/transition';
 import { Box, Button, Text, Heading, HStack, VStack, TextInput, Divider, Checkbox } from '@codeday/topo/Atom';
@@ -36,7 +36,7 @@ export default function Wizard({ events, formRef }) {
 
   const pageBackground = (
     <Box>
-      <Heading as="h3" fontSize="xl" mb={2}>Are you a student, or an industry professional?</Heading>
+      <Heading as="h3" fontSize="xl" mb={2}>Are you a student?</Heading>
       <HStack>
         <Button
           onClick={() => { setBackground('student'); setHasSelection(true) }}
@@ -45,7 +45,7 @@ export default function Wizard({ events, formRef }) {
         <Button
           onClick={() => { setBackground('industry'); setHasSelection(true) }}
           isActive={background === 'industry'}
-        >I am an industry professional</Button>
+        >I am not a student</Button>
       </HStack>
     </Box>
   );
@@ -160,23 +160,6 @@ export default function Wizard({ events, formRef }) {
 
   useEffect(() => setHasSelection(false), [page]);
 
-  // if (backgrounds.length > 0 && defaultRoles && defaultRoles.length > 0 && page > 0
-  //     && defaultRoles.filter((r) => !isAllowedVolunteerType(r, backgrounds)).length > 0) {
-  //   return (
-  //     <Box borderWidth={1} p={6} rounded="md" shadow="sm">
-  //       <Text>Sorry, you are not eligible for this volunteer role.</Text>
-  //     </Box>
-  //   );
-  // }
-
-  // if (backgrounds.length > 0 && roleOnly && page > 0
-  //     && roleOnly.filter((r) => isAllowedVolunteerType(r, backgrounds)).length === 0) {
-  //   return (
-  //     <Box borderWidth={1} p={6} rounded="md" shadow="sm">
-  //       <Text>Sorry, we have no matching volunteer roles.</Text>
-  //     </Box>
-  //   );
-  // }
 
   return (
     <Box>
@@ -186,11 +169,11 @@ export default function Wizard({ events, formRef }) {
           <Button
             colorScheme="green"
             isLoading={isSubmitting}
-            onClick={async () => { 
+            onClick={async () => {
               // I wish i could set behavior: 'smooth' here but for some reason
               // When i set that it stops working entirely??????????????????"??"
               // Apparently you can fix it by modifying chrome flags but i dont want
-              // it to not work for pepole who are using the defaults
+              // it to not work for people who are using the defaults
               formRef.current.scrollIntoView();
               if (hasSelection) {
                 if(background === 'industry' && page === 0) {
@@ -201,13 +184,9 @@ export default function Wizard({ events, formRef }) {
                   // if submitting penultimate page, we now have all info
                   setIsSubmitting
                   try {
-                    const resp = await fetch('https://hooks.zapier.com/hooks/catch/2757438/32k3jrs/', {
+                    const resp = await fetch('api/applyAsVolunteer', {
                       method: 'POST',
-                      body: JSON.stringify({ 
-                        email, firstName, lastName,
-                        linkedin, region, isOrganize,
-                        program: background === 'industry'? 'Labs' : 'CodeDay' 
-                       }),
+                      body: JSON.stringify({ email, firstName, lastName, linkedin, region, isOrganize, background }),
                       headers: {},
                     });
                     navigate('next')
