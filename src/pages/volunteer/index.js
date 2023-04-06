@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { print } from 'graphql';
@@ -20,6 +20,7 @@ import RemindMe from '../../components/Volunteer/RemindMe';
 const PROGRAM_WEIGHT = ["primary", "secondary", "minor"];
 
 export default function Volunteer({ program, role, seed, layout }) {
+  const formRef = useRef();
   const { colorMode } = useColorMode();
   const { asPath, query } = useRouter();
   const { cms: { volunteerPrograms } } = useQuery();
@@ -50,7 +51,7 @@ export default function Volunteer({ program, role, seed, layout }) {
   );
 
   const signUp = (
-    <Box rounded="md" shadow="md" borderWidth={1} borderColor="red.700">
+    <Box rounded="md" shadow="md" borderWidth={1} borderColor="red.700" ref={formRef}>
       <Box
         p={4}
         pl={6}
@@ -60,6 +61,7 @@ export default function Volunteer({ program, role, seed, layout }) {
         rounded="md"
         borderBottomLeftRadius={0}
         borderBottomRightRadius={0}
+        
       >
         <Heading as="h3" fontSize="xl">Volunteer Sign-Up (3min)</Heading>
       </Box>
@@ -81,6 +83,7 @@ export default function Volunteer({ program, role, seed, layout }) {
         <Box d={{ base: ((wizardVisible || layout === 'go') ? 'block' : 'none'), md: 'block' }}>
           <Wizard
             events={clear.events}
+            formRef={formRef}
           />
         </Box>
       </Box>

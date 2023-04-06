@@ -1,5 +1,5 @@
 import React, {
-  useState, useReducer, useEffect
+  useState, useReducer, useEffect 
 } from 'react';
 import { Collapse } from '@chakra-ui/transition';
 import { Box, Button, Text, Heading, HStack, VStack, TextInput, Divider, Checkbox } from '@codeday/topo/Atom';
@@ -16,7 +16,7 @@ function groupBy(xs, f) {
   return xs.reduce((r, v, i, a, k = f(v)) => ((r[k] || (r[k] = [])).push(v), r), {});
 }
 
-export default function Wizard({ events }) {
+export default function Wizard({ events, formRef }) {
   const regions = new Array(...new Set(events.filter(e => !e.dontAcceptVolunteers).map((e) => ({ name: e.region?.name || e.name, country: e.region?.countryName || 'Other' }))))
   const regionsByCountry = groupBy(regions, (r) => r.country);
   const [background, setBackground] = useState(null);
@@ -181,7 +181,14 @@ export default function Wizard({ events }) {
         <Box textAlign={{ base: 'center', md: 'right' }} mt={8}>
           <Button
             colorScheme="green"
-            onClick={() => { if (hasSelection) background === 'industry' && page === 0? navigate('last') : navigate('next'); }}
+            onClick={() => { 
+              // I wish i could set behavior: 'smooth' here but for some reason
+              // When i set that it stops working entirely??????????????????"??"
+              // Apparently you can fix it by modifying chrome flags but i dont want
+              // it to not work for pepole who are using the defaults
+              formRef.current.scrollIntoView();
+              if (hasSelection) background === 'industry' && page === 0? navigate('last') : navigate('next');
+            }}
             disabled={!hasSelection}
           >
             Next
