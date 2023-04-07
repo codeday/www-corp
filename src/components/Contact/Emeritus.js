@@ -8,6 +8,7 @@ function EmeritusBox({ e }) {
   return (
     <Box>
       <Image
+        title={e.username}
         src={e.picture.replace('256x256', 'w=64;h=64;fit=crop').replace('s=480', 's=32')}
         rounded="full"
         width="32px"

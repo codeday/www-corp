@@ -16,6 +16,7 @@ export default function Employees(props) {
           <Box p={4}>
             <Box>
               <Image
+                title={director.username}
                 src={director.picture.replace('256x256', 'w=100;h=100;fit=crop').replace('s=480', 's=64')}
                 float="left"
                 mr={4}

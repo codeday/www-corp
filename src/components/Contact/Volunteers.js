@@ -8,6 +8,7 @@ function VolunteerBox({ vol, showTitle }) {
   return (
     <Box>
       <Image
+        title={vol.username}
         src={vol.picture.replace('256x256', 'w=64;h=64;fit=crop').replace('s=480', 's=32')}
         rounded="full"
         width={showTitle ? '32px' : '18px'}
