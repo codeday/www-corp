@@ -21,10 +21,12 @@ query VolunteerQuery($now: ClearDateTime!) {
   clear {
     events(where: { startDate: { gt: $now } }) {
       name
+      contentfulWebname
       dontAcceptVolunteers: getMetadata(key: "volunteers.form.hide")
       region {
         name
         countryName
+        aliases
       }
     }
   }

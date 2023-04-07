@@ -17,19 +17,41 @@ function groupBy(xs, f) {
   return xs.reduce((r, v, i, a, k = f(v)) => ((r[k] || (r[k] = [])).push(v), r), {});
 }
 
-export default function Wizard({ events, formRef }) {
+
+export default function Wizard({ events, formRef, startBackground='', startRegion='', startPage=0, startSelection=false }) {
   const { error } = useToasts();
-  const regions = new Array(...new Set(events.filter(e => !e.dontAcceptVolunteers).map((e) => ({ name: e.region?.name || e.name, country: e.region?.countryName || 'Other' }))))
+  const regions = new Array(...new Set(events.filter(e => !e.dontAcceptVolunteers).map((e) => ({
+    name: e.region?.name || e.name,
+    webname: e.contentfulWebname,
+    country: e.region?.countryName || 'Other',
+    aliases: e.region?.aliases || []
+  }))))
   const regionsByCountry = groupBy(regions, (r) => r.country);
-  const [background, setBackground] = useState(null);
+  if(startRegion) {
+    const webnamesToRegion = {}
+    regions.forEach((r) => {
+      webnamesToRegion[r.webname] = r.name
+      r.aliases.forEach((alias) => {
+        webnamesToRegion[alias] = r.name
+      })
+    })
+    startRegion = webnamesToRegion[startRegion] || ''
+    // reset to default functionality if no region, as we dont know which program they want
+    if(!startRegion) {
+      startPage = 0
+      startBackground = ''
+      startSelection = false
+    }
+  }
+  const [background, setBackground] = useState(startBackground);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [linkedin, setLinkedin] = useState('');
-  const [region, setRegion] = useState('');
+  const [region, setRegion] = useState(startRegion);
   const [isOrganize, setIsOrganize] = useState(false);
   const [commitmentLevel, setCommitmentLevel] = useState(0);
-  const [hasSelection, setHasSelection] = useState(false);
+  const [hasSelection, setHasSelection] = useState(startSelection);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const utmSource = useUtmSource();
 
@@ -100,7 +122,12 @@ export default function Wizard({ events, formRef }) {
   }
   const pageEmail = (
     <Box>
-      <Heading as="h3" fontSize="xl" mb={2}>Let us know how to reach out:</Heading>
+      <Heading as="h3" fontSize="xl" mb={2}>
+        {/*special logic if the only page user sees is contact info*/}
+        {startPage === 2?
+          background ==='industry'?
+            'Apply to be a mentor for CodeDay Labs' : `Apply to volunteer for CodeDay ${region}` :
+          'Let us know how to reach out:'}</Heading>
       <VStack w="md" mb={3}>
           <TextInput m={1} placeholder="First Name" value={firstName} onChange={e => { setFirstName(e.target.value); checkEmailCompletion() }}/>
           <TextInput m={1} placeholder="Last Name" value={lastName} onChange={e => { setLastName(e.target.value); checkEmailCompletion() }} />
@@ -132,7 +159,7 @@ export default function Wizard({ events, formRef }) {
   ];
 
   // 'last' should really be 'penultimate' but 'last' is shorter
-  const [page, navigate] = useReducer((prev, action) => Math.max(0, (action === 'next' ? prev + 1 : prev - 1), (action === 'last' ? pages.length - 2 : 0)), 0);
+  const [page, navigate] = useReducer((prev, action) => Math.max(0, (action === 'next' ? prev + 1 : prev - 1), (action === 'last' ? pages.length - 2 : 0)), startPage);
   const isFinalPage = page === pages.length - 1;
 
   const [hasStarted, setHasStarted] = useState(false);
