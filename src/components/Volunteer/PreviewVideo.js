@@ -57,9 +57,9 @@ export default function PreviewVideo(props) {
           textAlign="center"
           fontSize="3xl"
           style={{ pointerEvents: 'none' }}
-          d={muted ? undefined : 'none'}
+          display={muted ? undefined : 'none'}
         >
-          <Box p={1} pl={2} pr={2} rounded="sm" bg="rgba(0,0,0,0.6)" d="inline-block">
+          <Box p={1} pl={2} pr={2} rounded="sm" bg="rgba(0,0,0,0.6)" display="inline-block">
             <UiVolume />
             <Box as="span" fontSize="xl" pl={4}>Unmute</Box>
           </Box>

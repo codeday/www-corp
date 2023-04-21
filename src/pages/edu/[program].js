@@ -84,14 +84,14 @@ export default function EducationProgram({ seed }) {
             src={program.logo.url}
             alt=""
             h="1em"
-            d="inline-block"
+            display="inline-block"
             position="relative"
             top="-0.075em"
             mr="0.2em"
           />
           {program.name}
           <Box
-            d="inline-block"
+            display="inline-block"
             bg="current.text"
             color="current.bg"
             ml="0.8em"
@@ -147,7 +147,7 @@ export default function EducationProgram({ seed }) {
                 <Heading as="h3" fontSize="lg" color="current.textLight" mb={4}>Presented in partnership with</Heading>
                 {program.presentingSponsors.items.map((sponsor) => (
                   <Link href={sponsor.link} rel="noopener" target="_blank">
-                    <Image src={sponsor.logo.url} alt={sponsor.name} d="inline-block" mb={4} />
+                    <Image src={sponsor.logo.url} alt={sponsor.name} display="inline-block" mb={4} />
                   </Link>
                 ))}
               </Box>

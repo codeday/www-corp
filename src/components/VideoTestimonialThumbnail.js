@@ -24,7 +24,7 @@ export default function VideoTestimonialThumbnail({ video, ...props }) {
         height={40}
         {...props}
       >
-        <Box d="inline" position="absolute" top="calc(50% - 0.5em)" left="calc(50% - 0.5em)">
+        <Box display="inline" position="absolute" top="calc(50% - 0.5em)" left="calc(50% - 0.5em)">
           <MediaPlay />
         </Box>
       </Box>

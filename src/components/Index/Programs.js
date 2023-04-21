@@ -80,7 +80,7 @@ export default function Programs() {
               <Box
                 p={2}
                 as="a"
-                d="block"
+                display="block"
                 href={`https://event.codeday.org/${region.webname}`}
                 target="_blank"
                 fontSize="xl"
@@ -89,8 +89,8 @@ export default function Programs() {
               >
                 {upcomingNameOverrides[region.webname] || region.name}
                 {region.upcoming && (
-                  <Box fontSize="sm" ml={2} d="inline-block" color="current.textLight">
-                    <Box position="relative" top="-0.2em" d="inline-block" mr={2}>
+                  <Box fontSize="sm" ml={2} display="inline-block" color="current.textLight">
+                    <Box position="relative" top="-0.2em" display="inline-block" mr={2}>
                       <UiStar />
                     </Box>
                     {registrationOpenWebnames.includes(region.webname) ? `Registrations open!` : ``}
@@ -99,8 +99,8 @@ export default function Programs() {
               </Box>
             ))}
           </Box>
-          <Box fontSize="sm" mt={4} d="inline-block" color="current.textLight">
-            <Box position="relative" top="-0.2em" d="inline-block" mr={2}>
+          <Box fontSize="sm" mt={4} display="inline-block" color="current.textLight">
+            <Box position="relative" top="-0.2em" display="inline-block" mr={2}>
               <UiStar />
             </Box>
             Event planned this season.
@@ -114,7 +114,7 @@ export default function Programs() {
               rounded="sm"
               p={4}
               mb={4}
-              d="block"
+              display="block"
               as="a"
               href={labs.url}
               target="_blank"
@@ -145,7 +145,7 @@ export default function Programs() {
               borderBottomWidth={1}
               p={4}
               mb={4}
-              d="block"
+              display="block"
               as="a"
               href={program.url}
               target="_blank"
@@ -180,14 +180,14 @@ export default function Programs() {
                 p={otherProgramsRowSize >= 5 ? 1 : 4}
                 pt={4}
                 pb={4}
-                d="block"
+                display="block"
                 as="a"
                 href={prog.url}
                 target="_blank"
                 rel="noopener"
                 key={prog.name}
               >
-                <Image d="inline-block" src={prog.logo.url} height={12} mb={2} />
+                <Image display="inline-block" src={prog.logo.url} height={12} mb={2} />
                 <br />
                 <Text fontSize={['lg', 'lg', 'lg', 'md', 'sm'][otherProgramsRowSize - 1]} mb={0} bold>{prog.name}</Text>
               </Box>
