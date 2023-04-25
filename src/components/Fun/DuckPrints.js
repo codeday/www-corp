@@ -15,11 +15,8 @@ const fade = keyframes`
 `
 
 function DuckPrint({x, y, r, d}) {
-  const prefersReducedMotion = usePrefersReducedMotion()
 
-  const animation = prefersReducedMotion
-    ? undefined
-    : `${fade} 5s linear ${d}s`
+  const animation = `${fade} 5s linear ${d}s`
   return (
         <Image
           pointerEvents="none"
@@ -78,6 +75,7 @@ function makePath(startX, startY, startR, numSteps) {
 
 export default function DuckPrints({ stepDelay=1500 }) {
   const PATH_CHUNKS = 40
+  const prefersReducedMotion = usePrefersReducedMotion()
   const [path, setPath] = useState(makePath(Math.random() * 100 + 1000, -2, Math.random() * 45, PATH_CHUNKS))
   // initial path has a large offset because wrap does not work with negative numbers
   const [offset, setOffset] = useState(0)
@@ -100,6 +98,9 @@ export default function DuckPrints({ stepDelay=1500 }) {
     // I'm not sure what would be causing this, or how to fix it
 
   }, [])
+  if(prefersReducedMotion) {
+    return <></>
+  }
     return (
         <Box position="absolute" w="100%" h="100%" overflow="clip">
           {path.map((p, idx) => {
