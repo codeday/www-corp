@@ -6,6 +6,7 @@ import { Header, SiteLogo, Main, Menu, Footer, CustomLinks } from '@codeday/topo
 import { Fade } from '@chakra-ui/react';
 import { useQuery } from '../query';
 import Script from 'next/script';
+import DuckPrints from "./Fun/DuckPrints";
 
 
 const DOMAIN = 'https://www.codeday.org';
@@ -16,10 +17,11 @@ export default function Page ({ children, title, darkHeader, slug, seo }) {
   const [isFundraiseLoaded, setIsFundraiseLoaded] = useState(false)
   return (
     <Box overflow="hidden">
+      <DuckPrints />
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      {seo ?? 
+      {seo ??
       <DefaultSeo
         title={title ? `${title} ~ CodeDay` : 'CodeDay'}
         description={mission?.items[0]?.value}
@@ -60,7 +62,7 @@ export default function Page ({ children, title, darkHeader, slug, seo }) {
                   clearTimeout(checkLoadedTask)
                 }
               }, 500)
-            }}/>  
+            }}/>
               <Fade in={isFundraiseLoaded}>
                 <Box>
                 <a href="#XBSBRRMF" />
