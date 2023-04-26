@@ -74,7 +74,7 @@ function makePath(startX, startY, startR, numSteps) {
 
 
 export default function DuckPrints({ stepDelay=1500 }) {
-  const PATH_CHUNKS = 200
+  const PATH_CHUNKS = 40
   const prefersReducedMotion = usePrefersReducedMotion()
   const [path, setPath] = useState(makePath(Math.random() * 100 + 1000, -2, Math.random() * 45, PATH_CHUNKS))
   // initial path has a large offset because wrap does not work with negative numbers
