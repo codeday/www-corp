@@ -6,9 +6,11 @@ import Live from './Live';
 import Teaser from './Teaser';
 import VideoLink from '../VideoLink';
 import { useQuery } from '../../query';
+import useTwitch from "../../useTwitch";
 
-export default function Hero({ twitch, ...props }) {
+export default function Hero({ ...props }) {
   const { cms: { mission, explainer } } = useQuery();
+  const twitch = useTwitch()
 
   const tagline = (
     <Box m={{ base: 8, lg: 0, xl: 16 }} mt={{ base: 0, xl: 0 }} textAlign={{ base: 'center', lg: 'left'}}>
