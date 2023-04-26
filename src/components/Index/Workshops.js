@@ -36,7 +36,7 @@ export default function Workshops() {
             <>
               <Box>
                 <Box
-                  d="inline-block"
+                  display="inline-block"
                   bg={`${color || 'red'}.500`}
                   color={`${color || 'red'}.50`}
                   rounded="sm"

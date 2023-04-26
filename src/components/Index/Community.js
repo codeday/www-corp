@@ -88,7 +88,7 @@ function PhotoCard({ photo, authors, wip, eventInfo, projectTitle, href }) {
       as={href && 'a'}
       href={href}
       target="_blank"
-      d="block"
+      display="block"
     >
       {authors && authors.length > 0 && (
         authors.length > 1 ? (

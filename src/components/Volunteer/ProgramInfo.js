@@ -16,7 +16,7 @@ export default function ProgramInfo({ program }) {
 
         <Box>
           <Box fontSize="3xl" fontWeight="bold" mb={4}>
-            <Image src={program.logo.url} height="1em" alt="" d="inline" />{' '}
+            <Image src={program.logo.url} height="1em" alt="" display="inline" />{' '}
             {program.name}
           </Box>
           {program.upcoming.length > 0 && (
@@ -45,7 +45,7 @@ export default function ProgramInfo({ program }) {
         <Box position="relative" pb={{ base: null, md: 16 }}>
           {program.volunteerPositions?.map((pos) => (
             <Box
-              d="inline-block"
+              display="inline-block"
               p={1}
               mr={1}
               mb={1}

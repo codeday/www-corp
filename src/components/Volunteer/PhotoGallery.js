@@ -13,7 +13,7 @@ export default function PhotoGallery(props) {
     >
       {volunteerPhotoGallery.map((vol, i) => (
         <Box
-          d={{
+          display={{
             base: i >= 4*2 ? 'none' : 'block',
             md: i >= 3*3 ? 'none' : 'block',
             lg: i >= 3*3 ? 'none' : 'block',

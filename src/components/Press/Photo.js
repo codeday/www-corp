@@ -6,7 +6,7 @@ export default function Photo({ photo, ...props }) {
   return (
     <Box
       as="a"
-      d="block"
+      display="block"
       href={photo.photo.original}
       target="_blank"
       rel="noopener"

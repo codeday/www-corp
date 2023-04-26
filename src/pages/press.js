@@ -78,7 +78,7 @@ export default function Press({ seed }) {
         <Heading as="h3" fontSize="2xl" mb={4}><a name="assets"></a>Assets</Heading>
         <Box
           as="a"
-          d="block"
+          display="block"
           rel="license"
           href="http://creativecommons.org/licenses/by/4.0/"
           mb={2}

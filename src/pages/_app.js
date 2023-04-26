@@ -23,7 +23,6 @@ function renderSnippet() {
 export default function App ({ Component, pageProps }) {
   return (
     <>
-      <Script strategy="beforeInteractive" src="https://cdn.fundraiseup.com/widget/AHCSATYN" />
       <Script dangerouslySetInnerHTML={{ __html: renderSnippet() }} />
       <ThemeProvider withChat brandColor="red" analyticsId="AHHYLKBK">
         <Provider value={pageProps?.query || {}}>

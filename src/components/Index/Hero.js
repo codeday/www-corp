@@ -35,7 +35,7 @@ export default function Hero({ twitch, ...props }) {
       >
         {tagline}
         <VisibilityCheckBox
-          d={{ base: 'none', lg: 'block' }}
+          display={{ base: 'none', lg: 'block' }}
           mt={{ base: 12, xl: -12 }}
         >
           {twitch?.username ? (

@@ -26,7 +26,7 @@ export default function EduIndex() {
         </Text>
         <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }} gap={4}>
           {eduPrograms?.items?.filter((program) => program.educationDetails).map((program) => (
-            <IconBox as="a" d="block" href={`/edu/${program.webname}`} h="100%" key={program.webname}>
+            <IconBox as="a" display="block" href={`/edu/${program.webname}`} h="100%" key={program.webname}>
               <HeaderIcon><Image src={program.logo.url} h={16} alt="" /></HeaderIcon>
               <HeaderText>{program.name}</HeaderText>
               <BoxBody>{program.shortDescription}</BoxBody>
@@ -41,7 +41,7 @@ export default function EduIndex() {
         </Text>
         <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }} gap={4}>
           {communityPartners?.items?.map((partner) => (
-            <IconBox as="a" d="block" href={partner.url} target="_blank" rel="noopener" h="100%" key={partner.url}>
+            <IconBox as="a" display="block" href={partner.url} target="_blank" rel="noopener" h="100%" key={partner.url}>
               <HeaderIcon><Image src={partner.logo.url} h={16} alt="" /></HeaderIcon>
               <HeaderText>{partner.name}</HeaderText>
               <BoxBody>

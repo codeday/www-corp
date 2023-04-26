@@ -54,7 +54,7 @@ export default function Stats(props) {
           <StatBox
             num={rollupStats.statStudentCount * 0.71}
             label="Underrepresented in CS"
-            d={{ base: 'none', lg: 'block' }}
+            display={{ base: 'none', lg: 'block' }}
             opacity="0.7"
           />
           <StatBox
@@ -66,12 +66,12 @@ export default function Stats(props) {
             num={Math.round(100 * (rollupStats.statLowInterestContinuedCount / rollupStats.statLowInterestCount))}
             unit="%"
             label="Kept Coding After"
-            d={{ base: 'none', md: 'block' }}
+            display={{ base: 'none', md: 'block' }}
             opacity="0.7"
           />
         </Grid>
         <Box textAlign="center" mt={8} opacity="0.7">
-          <Text mb={0} d="inline-block" bold>As seen in...</Text>
+          <Text mb={0} display="inline-block" bold>As seen in...</Text>
           <PreviousCoverageLogos num={5} h={8} mr={4} ml={4} mb={2} />
         </Box>
       </Content>

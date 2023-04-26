@@ -48,7 +48,7 @@ export default function Program({ programWebname }) {
           {audiences.map((aud) => (
             <IconBox as="a" key={aud} href={`/help/${programWebname}/${aud.toLowerCase()}`}>
               <HeaderIcon>
-                <Box d="inline-block" rounded="full" bg="red.600" color="white" p={4} fontSize="4xl" textAlign="center">
+                <Box display="inline-block" rounded="full" bg="red.600" color="white" p={4} fontSize="4xl" textAlign="center">
                   {icons[aud]}
                 </Box>
               </HeaderIcon>

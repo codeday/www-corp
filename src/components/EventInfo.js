@@ -33,7 +33,7 @@ function SubscribeBox({ event, ...rest }) {
         value={destination}
         onChange={(e) => setDestination(e.target.value)}
         placeholder="Phone Number"
-        d="inline-block"
+        display="inline-block"
         w="sm"
         borderTopRightRadius={0}
         borderBottomRightRadius={0}
@@ -121,7 +121,7 @@ export default function Event({ event, ...rest }) {
         </Box>
         <Box textAlign="right">
           {type && (
-            <Text d="inline-block" p={2} bg="current.border" rounded="sm">{type}</Text>
+            <Text display="inline-block" p={2} bg="current.border" rounded="sm">{type}</Text>
           )}
         </Box>
       </Grid>
@@ -153,7 +153,7 @@ export default function Event({ event, ...rest }) {
             >
                 Workshop Recordings
             </Button>
-            <Text d="inline-block" ml={4} fontStyle="italic">This workshop has ended.</Text>
+            <Text display="inline-block" ml={4} fontStyle="italic">This workshop has ended.</Text>
           </>
         )}
       </Box>

@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useRef } from 'react';
+import React, {useState, useReducer, useRef, useEffect} from 'react';
 import { Box, RatioBox } from '@codeday/topo/Atom';
 import UiVolume from '@codeday/topocons/Icon/UiVolume';
 import ReactPlayer from 'react-player';
@@ -17,7 +17,9 @@ export default function PreviewVideo(props) {
   const [pageVisible, setPageVisible] = useState(true);
   const [muted, setMuted] = useState(true);
   const [playing, togglePlaying] = useReducer((prev) => !prev, true);
+  const [pageLoaded, setPageLoaded] = useState(false)
 
+  useEffect(() => setPageLoaded(true), [])
   const onClick = () => {
     if (ref.current.getInternalPlayer().muted) {
       setMuted(false);
@@ -57,17 +59,18 @@ export default function PreviewVideo(props) {
           textAlign="center"
           fontSize="3xl"
           style={{ pointerEvents: 'none' }}
-          d={muted ? undefined : 'none'}
+          display={muted ? undefined : 'none'}
         >
-          <Box p={1} pl={2} pr={2} rounded="sm" bg="rgba(0,0,0,0.6)" d="inline-block">
+          <Box p={1} pl={2} pr={2} rounded="sm" bg="rgba(0,0,0,0.6)" display="inline-block">
             <UiVolume />
             <Box as="span" fontSize="xl" pl={4}>Unmute</Box>
           </Box>
         </Box>
+        {pageLoaded &&
         <ReactPlayer
           url={`https://stream.mux.com/${videoId}.m3u8`}
           playing={(!muted || (inView && pageVisible)) && playing}
-          playsinline="true"
+          playsinline
           muted={muted}
           volume={muted ? 0 : 1}
           width="100%"
@@ -80,7 +83,7 @@ export default function PreviewVideo(props) {
           controls={!muted}
           config={{ file: { attributes: { disablePictureInPicture: true } } }}
           loop={muted}
-        />
+        />}
       </RatioBox>
     </PageVisibility>
   );
