@@ -15,7 +15,7 @@ export default function PhotoTagPicker({ photos, onChange, ...props }) {
       <Text fontWeight="bold" fontSize="sm" color="current.textLight">Show only photos of:</Text>
       {allTags.map((t) => (
         <Box
-          d="inline-block"
+          display="inline-block"
           p={2}
           mr={2}
           mb={2}

@@ -47,7 +47,7 @@ export default function Audience({ programWebname, audience }) {
             {allTags.map((t) => (
               <Box
                 key={t}
-                d="inline-block"
+                display="inline-block"
                 borderWidth={1}
                 rounded="sm"
                 onClick={() => setTag(t === tag ? null : t)}
@@ -71,7 +71,7 @@ export default function Audience({ programWebname, audience }) {
             <Box
               key={faq.sys.id}
               as="a"
-              d="block"
+              display="block"
               p={4}
               pb={0}
               href={`/help/article/${faq.sys.id}`}
