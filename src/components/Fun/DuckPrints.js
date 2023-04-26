@@ -1,11 +1,11 @@
-import React, {useEffect, useState } from "react";
-import { Box, Image } from "@codeday/topo/Atom";
+import React, {useEffect, useState} from "react";
+import { Box } from "@codeday/topo/Atom";
 import { usePrefersReducedMotion } from "@codeday/topo/utils"
-import { keyframes } from '@chakra-ui/react';
 
 function DuckPrint({x, y, r, d}) {
+  // The way this component works results in a bug where, if it ever re-renders before the current set of steps is done,
+  // a second set of footsteps will appear. Let's just pretend that this is a baby duck following their mom
 
-  // const animation =
   return (
         <img
           style={{
@@ -15,19 +15,13 @@ function DuckPrint({x, y, r, d}) {
             top: `${y}em`,
             transform: `rotate(${r+90}deg)`,
             opacity: '0%',
-            animation: `fade 5s linear ${d}s`,
+            // adding a very small random number ensures this value gets rewritten every render, otherwise the
+            // animation never changes away from none
+            animation: `fade 5s linear ${d + Math.random()/100}s 1`,
             width: '3em',
             position: 'absolute',
           }}
-          // pointerEvents="none"
-          // zIndex={999}
-          // left={`${x}em`}
-          // top={`${y}em`}
-          // transform={`rotate(${r+90}deg)`}
-          // opacity="0%"
-          // animation={animation}
-          // w="3em"
-          // position="absolute"
+          onAnimationEnd={e => e.currentTarget.style.animation = '' }
           src="footprint.svg" />
     )
 }
@@ -74,11 +68,10 @@ function makePath(startX, startY, startR, numSteps) {
 
 
 export default function DuckPrints({ stepDelay=1500 }) {
-  const PATH_CHUNKS = 40
+  const PATH_CHUNKS = 10
   const prefersReducedMotion = usePrefersReducedMotion()
   const [path, setPath] = useState(makePath(Math.random() * 100 + 1000, -2, Math.random() * 45, PATH_CHUNKS))
   // initial path has a large offset because wrap does not work with negative numbers
-  const [offset, setOffset] = useState(0)
   const [documentSizeEm, setDocumentSizeEm] = useState({width: undefined, height: undefined})
   useEffect(() => {
     function handleResize() {
@@ -92,10 +85,8 @@ export default function DuckPrints({ stepDelay=1500 }) {
   useEffect(() => {
     setInterval(() => {
       setPath(prevPath => makePath(prevPath[prevPath.length-1].x, prevPath[prevPath.length-1].y, prevPath[prevPath.length-1].r, PATH_CHUNKS))
-      setOffset(prevOffset => prevOffset + PATH_CHUNKS + (5 * 1.5))
     }, PATH_CHUNKS/1.5*1000 + 5000)
-    // I _think_ there is a weird bug here, where the offset and interval grow slowly out of sync as time goes on
-    // I'm not sure what would be causing this, or how to fix it
+
 
   }, [])
   if(prefersReducedMotion) {
@@ -111,7 +102,7 @@ export default function DuckPrints({ stepDelay=1500 }) {
               }`}
           </style>
           {path.map((p, idx) => {
-            return (<DuckPrint x={p.x % (documentSizeEm.width * 1.1)} y={p.y % (documentSizeEm.height * 1.1)} r={p.r} d={(idx + offset) /1.5} />)
+            return (<DuckPrint x={p.x % (documentSizeEm.width * 1.1)} y={p.y % (documentSizeEm.height * 1.1)} r={p.r} d={(idx) /1.5} />)
           })}
         </Box>
     )
