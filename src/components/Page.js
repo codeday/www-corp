@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
 import { Box, CodeDay, Button, Link } from '@codeday/topo/Atom';
@@ -8,16 +8,18 @@ import { useQuery } from '../query';
 import Script from 'next/script';
 import DuckPrints from "./Fun/DuckPrints";
 
-
 const DOMAIN = 'https://www.codeday.org';
 
 export default function Page ({ children, title, darkHeader, slug, seo }) {
+  const [hasLoaded, setHasLoaded] = useState(false)
   const { cms } = useQuery();
   const { mission } = cms || {};
   const [isFundraiseLoaded, setIsFundraiseLoaded] = useState(false)
+
+  useEffect(() => setHasLoaded(true))
   return (
     <Box overflow="hidden">
-      <DuckPrints />
+      { hasLoaded && <DuckPrints />}
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
@@ -77,7 +79,7 @@ export default function Page ({ children, title, darkHeader, slug, seo }) {
         <Footer repository="www-corp" branch="master" mt={32}>
           <CustomLinks>
             <Link href="/help" display="block">FAQs &amp; Help</Link>
-            <Link href="/docs" d="block">Legal Documents</Link>
+            <Link href="/docs" display="block">Legal Documents</Link>
           </CustomLinks>
         </Footer>
       </Box>
