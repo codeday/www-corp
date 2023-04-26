@@ -2,32 +2,32 @@ import React, {useEffect, useState } from "react";
 import { Box, Image } from "@codeday/topo/Atom";
 import { usePrefersReducedMotion } from "@codeday/topo/utils"
 import { keyframes } from '@chakra-ui/react';
-const fade = keyframes`
-0% {
-    opacity: 0%
-}
-2% {
-    opacity: 100%
-}
-100% {
-    opacity: 0%
-}
-`
 
 function DuckPrint({x, y, r, d}) {
 
-  const animation = `${fade} 5s linear ${d}s`
+  // const animation =
   return (
-        <Image
-          pointerEvents="none"
-          zIndex={999}
-          left={`${x}em`}
-          top={`${y}em`}
-          transform={`rotate(${r+90}deg)`}
-          opacity="0%"
-          animation={animation}
-          w="3em"
-          position="absolute"
+        <img
+          style={{
+            pointerEvents: 'none',
+            zIndex: 999,
+            left: `${x}em`,
+            top: `${y}em`,
+            transform: `rotate(${r+90}deg)`,
+            opacity: '0%',
+            animation: `fade 5s linear ${d}s`,
+            width: '3em',
+            position: 'absolute',
+          }}
+          // pointerEvents="none"
+          // zIndex={999}
+          // left={`${x}em`}
+          // top={`${y}em`}
+          // transform={`rotate(${r+90}deg)`}
+          // opacity="0%"
+          // animation={animation}
+          // w="3em"
+          // position="absolute"
           src="footprint.svg" />
     )
 }
@@ -74,7 +74,7 @@ function makePath(startX, startY, startR, numSteps) {
 
 
 export default function DuckPrints({ stepDelay=1500 }) {
-  const PATH_CHUNKS = 40
+  const PATH_CHUNKS = 200
   const prefersReducedMotion = usePrefersReducedMotion()
   const [path, setPath] = useState(makePath(Math.random() * 100 + 1000, -2, Math.random() * 45, PATH_CHUNKS))
   // initial path has a large offset because wrap does not work with negative numbers
@@ -103,6 +103,13 @@ export default function DuckPrints({ stepDelay=1500 }) {
   }
     return (
         <Box position="absolute" w="100%" h="100%" overflow="clip">
+          <style>
+            {`@keyframes fade {
+              0% {opacity: 0%}
+              2% {opacity: 100%;}
+              100% {opacity: 0%}
+              }`}
+          </style>
           {path.map((p, idx) => {
             return (<DuckPrint x={p.x % (documentSizeEm.width * 1.1)} y={p.y % (documentSizeEm.height * 1.1)} r={p.r} d={(idx + offset) /1.5} />)
           })}
