@@ -22,7 +22,7 @@ function DuckPrint({x, y, r, d}) {
             position: 'absolute',
           }}
           onAnimationEnd={e => e.currentTarget.style.animation = '' }
-          src="footprint.svg" />
+          src="/footprint.svg" />
     )
 }
 
