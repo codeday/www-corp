@@ -58,6 +58,7 @@ Program Manager, Volunteers`
 
 export function renderUnknown({email, firstName, lastName, linkedin, region, isOrganize, background}) {
   return `There is no template on file to automatically follow-up with the following volunteer. Please reach out manually.
+NOTE: This email does not have reply-to set, replying to this email will NOT contact the volunteer.
 
 Raw data:
 First Name: ${firstName}

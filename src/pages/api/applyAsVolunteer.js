@@ -27,23 +27,23 @@ async function ApplyAsVolunteer(req, res) {
       }
     ])
     let emailText;
-    if(background === 'industry') {
-      emailText = renderLabsMentor({firstName})
-    } else if (background === 'student' && isOrganize) {
+    // if(background === 'industry') {
+      // emailText = renderLabsMentor({firstName})
+    if (background === 'student' && isOrganize) {
       emailText = renderCodeDayOrganizeRegion({firstName, region})
     } else if (background === 'student' && !isOrganize) {
       emailText = renderCodeDayExistingRegion({firstName, region})
     }
 
     if(emailText) {
-      console.log(await postmark.sendEmail({
+      await postmark.sendEmail({
         MessageStream: 'outbound',
         To: email,
         From: 'charlieliu@codeday.org',
         Subject: 'CodeDay: Volunteering Next Steps',
         Bcc: 'volunteer@codeday.org',
         TextBody: emailText
-      }))
+      })
     } else {
       await postmark.sendEmail({
         MessageStream: 'outbound',

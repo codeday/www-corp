@@ -18,7 +18,7 @@ function groupBy(xs, f) {
 }
 
 
-export default function Wizard({ events, formRef, startBackground='', startRegion='', startPage=0, startSelection=false }) {
+export default function Wizard({ events, formRef, startBackground='', startRegion='', startPage=0, startSelection=false, after }) {
   const { error } = useToasts();
   const regions = new Array(...new Set(events.filter(e => !e.dontAcceptVolunteers).map((e) => ({
     name: e.region?.name || e.name,
@@ -207,13 +207,14 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
                   navigate('last')
                 } else if(page === pages.length - 2) {
                   // if submitting penultimate page, we now have all info
-                  setIsSubmitting
+                  setIsSubmitting(true)
                   try {
-                    const resp = await fetch('api/applyAsVolunteer', {
+                    const resp = await fetch('/api/applyAsVolunteer', {
                       method: 'POST',
                       body: JSON.stringify({ email, firstName, lastName, linkedin, region, isOrganize, background }),
                       headers: {},
                     });
+                    if(after) window.location = after
                     navigate('next')
                   } catch (ex) {
                     error(ex.toString());
