@@ -62,7 +62,7 @@ export default function Announcement(props) {
           borderRadius={4}
           p={4}
           m={0}
-          d="block"
+          display="block"
           as={announcement.link ? 'a' : 'div'}
           href={announcement.link}
           target={announcement.link ? '_blank' : null}
@@ -73,8 +73,8 @@ export default function Announcement(props) {
           textAlign={{ base: 'center', md: 'left' }}
         >
           <Box>
-            <Text mb={0} d="inline">
-                <Text as="span" fontWeight="bold" d={{ base: 'none', md: 'inline' }}>{announcement.type}: </Text>
+            <Text mb={0} display="inline">
+                <Text as="span" fontWeight="bold" display={{ base: 'none', md: 'inline' }}>{announcement.type}: </Text>
                 {announcement.oneline}
             </Text>
           </Box>

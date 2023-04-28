@@ -4,22 +4,19 @@ import { apiFetch } from '@codeday/topo/utils';
 import Page from '../components/Page';
 import Hero from '../components/Index/Hero';
 import Stats from '../components/Index/Stats';
-import Live from '../components/Index/Live';
 import Programs from '../components/Index/Programs';
 import Sponsors from '../components/Index/Sponsors';
 import Announcement from '../components/Index/Announcement';
 import Community from '../components/Index/Community';
 import Quote from '../components/Index/Quotes';
 import Workshops from '../components/Index/Workshops';
-import useTwitch from '../useTwitch';
 import { IndexQuery } from './index.gql';
 
 export default function Home({ seed }) {
-  const twitch = useTwitch();
   return (
     <Page slug="/">
       <Announcement mt={-12} mb={8} />
-      <Hero twitch={twitch} mb={8} />
+      <Hero mb={8} />
       <Stats />
       <Programs />
       <Sponsors />

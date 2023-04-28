@@ -17,9 +17,9 @@ function sortFn(a, b) {
 }
 
 export default function Employees(props) {
-  const { account: { employees, otherTeam } } = useQuery();
+  const { account: { employees, otherTeam, contractors } } = useQuery();
 
-  const sortedEmployees = [...employees.sort(sortFn), ...otherTeam.sort(sortFn)];
+  const sortedEmployees = [...employees.sort(sortFn), ...otherTeam.sort(sortFn), ...contractors.sort(sortFn)];
 
   return (
     <Content wide {...props}>
@@ -28,6 +28,7 @@ export default function Employees(props) {
           <Box p={4}>
             <Box>
               <Image
+                title={emp.username}
                 src={emp.picture.replace('256x256', 'w=100;h=100;fit=crop').replace('s=480', 's=64')}
                 float="left"
                 mr={4}
@@ -37,10 +38,10 @@ export default function Employees(props) {
                 alt=""
               />
               <Text mb={0} pt={2} fontWeight="bold">{emp.name}</Text>
-              <Text fontSize="sm" color="current.textLight">{emp.title || 'Employee'}, {emp.pronoun}</Text>
+              <Text fontSize="sm" color="current.textLight">{emp.title || 'Staff'}, {emp.pronoun}</Text>
             </Box>
             <Box ml="64px" pl={4}>
-              <Text>{emp.bio || `${emp.name} is ${emp.title ? `the ${emp.title}` : 'an employee'} at CodeDay.`}</Text>
+              <Text>{emp.bio || `${emp.name} is ${emp.title ? `the ${emp.title}` : 'a staff member'} at CodeDay.`}</Text>
             </Box>
           </Box>
         ))}

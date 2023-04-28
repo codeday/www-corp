@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useRef } from 'react';
+import React, {useState, useReducer, useRef, useEffect} from 'react';
 import { RatioBox } from '@codeday/topo/Atom';
 import ReactPlayer from 'react-player';
 import { useInView } from 'react-intersection-observer';
@@ -16,7 +16,9 @@ export default function Teaser() {
   const [pageVisible, setPageVisible] = useState(true);
   const [muted, setMuted] = useState(true);
   const [playing, togglePlaying] = useReducer((prev) => !prev, true);
+  const [pageLoaded, setPageLoaded] = useState(false);
 
+  useEffect(() => setPageLoaded(true), [])
   const onClick = () => {
     if (ref.current.getInternalPlayer().muted) {
       setMuted(false);
@@ -45,6 +47,7 @@ export default function Teaser() {
         backgroundRepeat="no-repeat"
         ref={viewRef}
       >
+        {pageLoaded &&
         <ReactPlayer
           url={`https://stream.mux.com/${videoId}.m3u8`}
           playing={(!muted || (inView && pageVisible)) && playing}
@@ -59,7 +62,7 @@ export default function Teaser() {
           ref={ref}
           config={{ file: { attributes: { disablePictureInPicture: true } } }}
           loop
-        />
+        />}
       </RatioBox>
     </PageVisibility>
   );

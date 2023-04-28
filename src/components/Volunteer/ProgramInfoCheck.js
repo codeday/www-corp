@@ -29,7 +29,7 @@ export default function ProgramInfoCheck({ program, disabled }) {
       >
         <Box mt={-3} ml={4}>
           <Box fontSize="3xl" fontWeight="bold" mb={4}>
-            <Image src={program.logo.url} height="1em" alt="" d="inline" />{' '}
+            <Image src={program.logo.url} height="1em" alt="" display="inline" />{' '}
             {program.name}
             {program.virtual && (
               <Box fontWeight="bold" color="red.600" fontSize="md">

@@ -8,6 +8,7 @@ function VolunteerBox({ vol, showTitle }) {
   return (
     <Box>
       <Image
+        title={vol.username}
         src={vol.picture.replace('256x256', 'w=64;h=64;fit=crop').replace('s=480', 's=32')}
         rounded="full"
         width={showTitle ? '32px' : '18px'}
@@ -42,8 +43,8 @@ function VolunteerBox({ vol, showTitle }) {
 }
 
 export default function Volunteers({ seed, ...props }) {
-  const { account: { employees, otherTeam, volunteers, board, emeritus } } = useQuery();
-  const employeeIds = [...employees, ...otherTeam, ...board, ...emeritus].map((e) => e.id);
+  const { account: { employees, otherTeam, volunteers, board, contractors, emeritus } } = useQuery();
+  const employeeIds = [...employees, ...otherTeam, ...board, ...contractors, ...emeritus].map((e) => e.id);
   const justVolunteers = shuffle(volunteers.filter((v) => !employeeIds.includes(v.id)), seed);
 
   const hasTitle = (v) => v.title && v.title !== 'Volunteer' && v.title !== 'Mentor' && v.title !== 'Staff';

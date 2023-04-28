@@ -51,7 +51,7 @@ export default function Volunteer({ seed, layout, startBackground, startRegion, 
       <Box p={6}>
         {layout !== 'go' && (
           <>
-            <Box d={{ base: 'block', md: 'none' }} textAlign="center">
+            <Box display={{ base: 'block', md: 'none' }} textAlign="center">
               <RemindMe />
               {!wizardVisible && (
                 <>
@@ -60,10 +60,10 @@ export default function Volunteer({ seed, layout, startBackground, startRegion, 
                 </>
               )}
             </Box>
-            <Divider d={{ base: (wizardVisible ? 'block' : 'none' ), md: 'none' }} mt={8} mb={8} />
+            <Divider display={{ base: (wizardVisible ? 'block' : 'none' ), md: 'none' }} mt={8} mb={8} />
           </>
         )}
-        <Box d={{ base: ((wizardVisible || layout === 'go') ? 'block' : 'none'), md: 'block' }}>
+        <Box display={{ base: ((wizardVisible || layout === 'go') ? 'block' : 'none'), md: 'block' }}>
           <Wizard
             startBackground={startBackground}
             startPage={startPage}
@@ -115,11 +115,11 @@ export default function Volunteer({ seed, layout, startBackground, startRegion, 
                   <Highlight>helped 50,000+ students find their place in tech,</Highlight> but hundreds of thousands more
                   still need your help.
                 </Text>
-                <Text d={{ base: 'none', md: 'block' }}>
+                <Text display={{ base: 'none', md: 'block' }}>
                   {secondText}
                 </Text>
               </Box>
-              <Box d={{ base: 'none', md: 'block' }}>
+              <Box display={{ base: 'none', md: 'block' }}>
                 <Box bg={colorMode === 'light' ? 'gray.100' : 'gray.900'} p={4} textAlign="center">
                   <Heading as="h3" fontSize="xl">Time Commitment</Heading>
                   <Text mb={2}>
@@ -148,7 +148,7 @@ export default function Volunteer({ seed, layout, startBackground, startRegion, 
       </Content>
       {layout !== 'go' && (
         <>
-          <Content d={{ base: 'block', md: 'none' }} mt={12}>
+          <Content display={{ base: 'block', md: 'none' }} mt={12}>
             <Text fontSize="lg">{secondText}</Text>
           </Content>
           <Content mt={12}>

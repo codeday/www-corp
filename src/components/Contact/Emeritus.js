@@ -8,6 +8,7 @@ function EmeritusBox({ e }) {
   return (
     <Box>
       <Image
+        title={e.username}
         src={e.picture.replace('256x256', 'w=64;h=64;fit=crop').replace('s=480', 's=32')}
         rounded="full"
         width="32px"
@@ -40,8 +41,8 @@ function EmeritusBox({ e }) {
 }
 
 export default function Emeritus({ seed, ...props }) {
-  const { account: { employees, otherTeam, board, emeritus } } = useQuery();
-  const employeeIds = [...employees, ...otherTeam, ...board].map((e) => e.id);
+  const { account: { employees, otherTeam, board, contractors, emeritus } } = useQuery();
+  const employeeIds = [...employees, ...otherTeam, ...contractors, ...board].map((e) => e.id);
   const all = shuffle(emeritus.filter((v) => !employeeIds.includes(v.id)), seed);
 
   return (
