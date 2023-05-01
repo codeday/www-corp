@@ -42,8 +42,8 @@ export default function Volunteer({ program, role, seed, layout }) {
   const secondText = (
     <>
       CodeDay volunteers help with everything from mentoring, to judging, to operational support at events.{' '}
-      <Highlight>No matter who you are, we need your help!</Highlight> You can volunteer whether you're a
-      professional software engineer, a student, or a general community member.{' '}
+      <Highlight>Most volunteer roles do not involve yourself coding, so we encourage you to apply, regardless
+      of your technical background!</Highlight>{' '}
     </>
   );
 
@@ -127,7 +127,7 @@ export default function Volunteer({ program, role, seed, layout }) {
                   <Highlight>helped 50,000+ students find their place in tech,</Highlight> but hundreds of thousands more
                   still need your help.
                 </Text>
-                <Text display={{ base: 'none', md: 'block' }}>
+                <Text display={{ base: 'none', md: 'block' }} mt={2}>
                   {secondText}
                 </Text>
               </Box>
