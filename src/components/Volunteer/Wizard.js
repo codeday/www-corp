@@ -3,11 +3,9 @@ import React, {
 } from 'react';
 import { Collapse } from '@chakra-ui/transition';
 import { Box, Button, Text, Heading, HStack, VStack, TextInput, Divider, Checkbox } from '@codeday/topo/Atom';
-import { CognitoForm, DataCollection } from '@codeday/topo/Molecule';
+import { DataCollection } from '@codeday/topo/Molecule';
 import { useToasts } from '@codeday/topo/utils';
 import LinkedInTag from 'react-linkedin-insight';
-import BackgroundPicker from './BackroundPicker';
-import { isAllowedVolunteerType } from './wizardConfig';
 import { useAfterMountEffect } from '../../utils/useAfterMountEffect';
 import { useUtmSource } from '../../utils/useUtmSource';
 
@@ -53,8 +51,6 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
   const [commitmentLevel, setCommitmentLevel] = useState(0);
   const [hasSelection, setHasSelection] = useState(startSelection);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const utmSource = useUtmSource();
-
 
   const pageBackground = (
     <Box>
@@ -126,7 +122,7 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
         {/*special logic if the only page user sees is contact info*/}
         {startPage === 2?
           background ==='industry'?
-            'Apply to be a mentor for CodeDay Labs' : `Apply to volunteer for CodeDay ${region}` :
+            'Apply to volunteer for CodeDay Labs' : `Apply to volunteer for CodeDay ${region}` :
           'Let us know how to reach out:'}</Heading>
       <VStack w="md" mb={3}>
           <TextInput m={1} placeholder="First Name" value={firstName} onChange={e => { setFirstName(e.target.value); checkEmailCompletion() }}/>
