@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { print } from 'graphql';
@@ -17,27 +17,14 @@ import PhotoGallery from '../../components/Volunteer/PhotoGallery';
 import Highlight from '../../components/Highlight';
 import RemindMe from '../../components/Volunteer/RemindMe';
 
-const PROGRAM_WEIGHT = ["primary", "secondary", "minor"];
 
-export default function Volunteer({ program, role, seed, layout }) {
+export default function Volunteer({ seed, layout, startBackground, startRegion, startPage }) {
+  const formRef = useRef();
   const { colorMode } = useColorMode();
   const { asPath, query } = useRouter();
   const { cms: { volunteerPrograms } } = useQuery();
+  const { clear } = useQuery();
   const [wizardVisible, setWizardVisible] = useState(false);
-  const programsWithUpcoming = volunteerPrograms?.items?.map((program) => {
-    return {
-      ...program,
-      upcoming: upcomingEvents(program.linkedFrom?.events?.items || []),
-    };
-  })
-  .sort((a, b) => {
-    if (a.upcoming.length > 0 && b.upcoming.length > 0)
-      return a.upcoming[0].startsAt - b.upcoming[0].startsAt;
-    if (a.upcoming.length > 0) return -1;
-    if (b.upcoming.length > 0) return 1;
-    return PROGRAM_WEIGHT.indexOf(a.type) - PROGRAM_WEIGHT.indexOf(b.type);
-  })
-   || [];
 
   const secondText = (
     <>
@@ -48,7 +35,7 @@ export default function Volunteer({ program, role, seed, layout }) {
   );
 
   const signUp = (
-    <Box rounded="md" shadow="md" borderWidth={1} borderColor="red.700">
+    <Box rounded="md" shadow="md" borderWidth={1} borderColor="red.700" ref={formRef}>
       <Box
         p={4}
         pl={6}
@@ -78,9 +65,11 @@ export default function Volunteer({ program, role, seed, layout }) {
         )}
         <Box display={{ base: ((wizardVisible || layout === 'go') ? 'block' : 'none'), md: 'block' }}>
           <Wizard
-            programs={programsWithUpcoming.filter((program) => program.volunteerDetails)}
-            defaultPrograms={program ? [ program ] : undefined}
-            defaultRoles={role ? [ role ] : undefined}
+            startBackground={startBackground}
+            startPage={startPage}
+            startRegion={startRegion}
+            events={clear.events}
+            formRef={formRef}
             after={query?.return && query?.returnto ? `https://${query.return}.codeday.org/${query.returnto}` : undefined}
           />
         </Box>
@@ -179,8 +168,7 @@ export default function Volunteer({ program, role, seed, layout }) {
 }
 
 export async function getStaticProps() {
-  const query = await apiFetch(print(VolunteerQuery));
-
+  const query = await apiFetch(print(VolunteerQuery), { now: new Date() });
   return {
     props: {
       query,

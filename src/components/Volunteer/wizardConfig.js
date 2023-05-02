@@ -1,16 +1,16 @@
 export const VOLUNTEER_BACKGROUNDS = {
-  industrySde: 'Software/electrical engineer (full-time)',
-  industryHr: 'HR professional (full-time)',
-  industryOther: 'Another position in the tech industry (full-time)',
-  studentSde: 'Student studying software/electrical engineering',
-  studentOther: 'Another type of student',
-  other: 'Other',
+  industrySde: 'Software/electrical engineer',
+  industryHr: 'HR professional',
+  industryOther: 'Another position in the tech industry',
+  studentHs: 'High-School Student',
+  studentCollege: 'College Student',
+  other: 'Other'
 };
 
 export const VOLUNTEER_BACKGROUND_GROUPS = [
   ['industrySde', 'industryHr', 'industryOther'],
-  ['studentSde'],
-  ['other'],
+  ['studentHs'],
+  ['studentCollege','other'],
 ];
 
 export const VOLUNTEER_ROLES = {
@@ -19,31 +19,15 @@ export const VOLUNTEER_ROLES = {
     description: 'Help students find their place in tech, from writing their first line of code, to shipping an'
                   + ' industry-ready PR, to the non-technical skills they need to succeed.',
     time: 'Varies.',
-    allowed: ['industrySde', 'industryOther', 'studentSde'],
+    allowed: ['industrySde', 'industryOther'],
     color: 'blue',
-  },
-
-  judge: {
-    name: 'Judge',
-    description: 'Talk with students about their projects and decide on awards. (No tech experience required.)',
-    time: '2-3 hours.',
-    allowed: ['industrySde', 'industryHr', 'industryOther'],
-    color: 'gray',
-  },
-
-  speaker: {
-    name: 'Speaker',
-    description: 'Give a talk about your passion in software engineering, design, project management, or careers.',
-    time: 'One hour, plus time to create your presentation.',
-    allowed: ['industrySde', 'industryHr', 'industryOther', 'studentSde'],
-    color: 'orange',
   },
 
   'career advisor': {
     name: 'Career Advisor',
     description: 'Give feedback on student resumes and host practice interviews.',
     time: 'As little as an hour a month (at your own schedule).',
-    allowed: ['industrySde', 'industryHr'],
+    allowed: ['industryHr'],
     color: 'purple',
   },
 
@@ -52,7 +36,13 @@ export const VOLUNTEER_ROLES = {
     description: 'Help promote, organize event logistics, and run fun activities.',
     time: 'Varies.',
     color: 'red',
+    allowed: ['studentHs', 'studentCollege', 'other'],
+    requiresLocalEvent: true
   },
+  'regional manager': {
+    name: 'Organize a CodeDay',
+    description: 'Be the Regional Manager for a CodeDay event. Manage a team of volunteers '
+  }
 };
 
 export function isAllowedVolunteerType(type, backgrounds) {

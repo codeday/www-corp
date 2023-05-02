@@ -3,7 +3,7 @@
 #import "../../components/Volunteer/Testimonials.gql"
 #import "../../components/Volunteer/PhotoGallery.gql"
 
-query VolunteerQuery {
+query VolunteerQuery($now: ClearDateTime!) {
   ...VolunteerProgramInfoComponent
   ...VolunteerTestimonials
   ...VolunteerPhotoGallery
@@ -15,6 +15,18 @@ query VolunteerQuery {
         lastName
         title
         company
+      }
+    }
+  }
+  clear {
+    events(where: { startDate: { gt: $now } }) {
+      name
+      contentfulWebname
+      dontAcceptVolunteers: getMetadata(key: "volunteers.form.hide")
+      region {
+        name
+        countryName
+        aliases
       }
     }
   }

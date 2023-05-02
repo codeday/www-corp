@@ -89,5 +89,12 @@ module.exports = {
     stripe: {
       secretKey: process.env.STRIPE_SECRET_KEY,
     },
+    postmark: {
+     serverToken: process.env.POSTMARK_SERVER_TOKEN,
+    },
+    airtable: {
+      token: process.env.AIRTABLE_TOKEN,
+      base: process.env.AIRTABLE_BASE,
+    },
   },
 };
