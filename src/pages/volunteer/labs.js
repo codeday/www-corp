@@ -11,7 +11,8 @@ export async function getStaticProps() {
       query,
       seed: Math.random(),
       startBackground: 'industry',
-      startPage: 2
+      startPage: 2,
+      layout: 'go'
     },
     revalidate: 300,
   }
