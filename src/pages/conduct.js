@@ -43,7 +43,7 @@ export default function Conduct() {
   const conductEntries = conduct?.items[0]?.subvalues?.items;
 
   return (
-    <Page title={conductTitle} slug="/privacy">
+    <Page title={conductTitle} slug="/privacy" noFun>
       <Content maxWidth="container.md">
         <Heading as="h2" fontSize="5xl" mt={-2} mb={8}>{conductTitle}</Heading>
         <ContentfulRichText json={conductIntro?.json} />

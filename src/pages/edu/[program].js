@@ -52,7 +52,7 @@ export default function EducationProgram({ seed }) {
   };
 
   if (isFallback) return (
-    <Page {...pageProps}>
+    <Page {...pageProps} noFun>
       <Content>
         <Skelly height={12} mb={4} />
         <Grid templateColumns={{ base: "1fr", md: "1fr 1fr", lg: "6fr 3fr" }} gap={8}>
