@@ -78,7 +78,7 @@ export default function Volunteer({ seed, layout, startBackground, startRegion, 
   );
 
   return (
-    <Page slug={`/${asPath}`} title="Volunteer">
+    <Page slug={`/${asPath}`} title="Volunteer" noFun>
       <NextSeo
         description="We need you to help students find their place in the tech industry! (Even if you don't have a tech background!)`"
         openGraph={{

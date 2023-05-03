@@ -10,7 +10,7 @@ import DuckPrints from "./Fun/DuckPrints";
 
 const DOMAIN = 'https://www.codeday.org';
 
-export default function Page ({ children, title, darkHeader, slug, seo }) {
+export default function Page ({ children, title, darkHeader, slug, seo, noFun=false }) {
   const [hasLoaded, setHasLoaded] = useState(false)
   const { cms } = useQuery();
   const { mission } = cms || {};
@@ -19,7 +19,7 @@ export default function Page ({ children, title, darkHeader, slug, seo }) {
   useEffect(() => setHasLoaded(true))
   return (
     <Box overflow="hidden">
-      { hasLoaded && <DuckPrints />}
+      { (hasLoaded && !noFun) && <DuckPrints /> }
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
