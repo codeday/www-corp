@@ -2,7 +2,7 @@ import React, {
   useState, useReducer, useEffect
 } from 'react';
 import { Collapse } from '@chakra-ui/transition';
-import { Box, Button, Text, Heading, HStack, VStack, TextInput, Divider, Checkbox } from '@codeday/topo/Atom';
+import { Box, Button, Text, Heading, HStack, VStack, TextInput, Divider, Checkbox, Radio } from '@codeday/topo/Atom';
 import { DataCollection } from '@codeday/topo/Molecule';
 import { useToasts } from '@codeday/topo/utils';
 import LinkedInTag from 'react-linkedin-insight';
@@ -57,11 +57,14 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
       <Heading as="h3" fontSize="xl" mb={2}>Are you a student?</Heading>
       <HStack>
         <Button
-          onClick={() => { setBackground('student'); setHasSelection(true) }}
+          size="lg"
+          mr={4}
+          onClick={() => { setBackground('student'); navigate('next') }}
           isActive={background === 'student'}
         >I am a student</Button>
         <Button
-          onClick={() => { setBackground('industry'); setHasSelection(true) }}
+          size="lg"
+          onClick={() => { setBackground('industry'); navigate('last') }}
           isActive={background === 'industry'}
         >I am not a student</Button>
       </HStack>
@@ -77,7 +80,7 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
           <Heading as="h4" fontSize="lg" mb={1}>{regionKey}</Heading>
           { regionsByCountry[regionKey].map((r) => (
             <Box d="inline-block" m={2}>
-              <Button isActive={region === r.name} onClick={() => { setRegion(r.name); setHasSelection(true); setIsOrganize(false); }}>{r.name}</Button>
+              <Radio  isChecked={region === r.name} onClick={() => { setRegion(r.name); setHasSelection(true); setIsOrganize(false); }}>{r.name}</Radio>
             </Box>
           )) }
           </Box>
@@ -181,46 +184,47 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
 
   useEffect(() => setHasSelection(false), [page]);
 
-
+  async function onClickNext() {
+    // I wish i could set behavior: 'smooth' here but for some reason
+    // When i set that it stops working entirely??????????????????"??"
+    // Apparently you can fix it by modifying chrome flags but i dont want
+    // it to not work for people who are using the defaults
+    formRef.current.scrollIntoView();
+    if (hasSelection) {
+      if (background === 'industry' && page === 0) {
+        // if industry, we want to skip region selection and get them in touch with
+        // labs team
+        navigate('last')
+      } else if (page === pages.length - 2) {
+        // if submitting penultimate page, we now have all info
+        setIsSubmitting(true)
+        try {
+          const resp = await fetch('/api/applyAsVolunteer', {
+            method: 'POST',
+            body: JSON.stringify({email, firstName, lastName, linkedin, region, isOrganize, background}),
+            headers: {},
+          });
+          if (after) window.location = after
+          navigate('next')
+        } catch (ex) {
+          error(ex.toString());
+        }
+        setIsSubmitting(false);
+      } else {
+        navigate('next');
+      }
+    }
+  }
   return (
     <Box>
       {pages[page]}
-      {!isFinalPage && (
+      {!isFinalPage && page !== 0 && (
         <Box textAlign={{ base: 'center', md: 'right' }} mt={8}>
           <Button
             colorScheme="green"
             isLoading={isSubmitting}
-            onClick={async () => {
-              // I wish i could set behavior: 'smooth' here but for some reason
-              // When i set that it stops working entirely??????????????????"??"
-              // Apparently you can fix it by modifying chrome flags but i dont want
-              // it to not work for people who are using the defaults
-              formRef.current.scrollIntoView();
-              if (hasSelection) {
-                if(background === 'industry' && page === 0) {
-                  // if industry, we want to skip region selection and get them in touch with
-                  // labs team
-                  navigate('last')
-                } else if(page === pages.length - 2) {
-                  // if submitting penultimate page, we now have all info
-                  setIsSubmitting(true)
-                  try {
-                    const resp = await fetch('/api/applyAsVolunteer', {
-                      method: 'POST',
-                      body: JSON.stringify({ email, firstName, lastName, linkedin, region, isOrganize, background }),
-                      headers: {},
-                    });
-                    if(after) window.location = after
-                    navigate('next')
-                  } catch (ex) {
-                    error(ex.toString());
-                  }
-                  setIsSubmitting(false);
-                } else {
-                  navigate('next');
-                }
-            }}}
-            disabled={!hasSelection || isSubmitting}
+            onClick={onClickNext}
+            isDisabled={!hasSelection || isSubmitting}
           >
             Next
           </Button>
