@@ -12,7 +12,7 @@ export default function PrivacyPolicy() {
   const { heading, policy } = useQuery().cms;
 
   return (
-    <Page title={heading?.items[0]?.value} slug="/privacy" noFun>
+    <Page title={heading?.items[0]?.value} slug="/privacy">
       <Content>
         <Heading as="h2" fontSize="5xl" mt={-2} mb={8}>{heading?.items[0]?.value}</Heading>
         <ContentfulRichText json={policy?.items[0]?.richValue?.json} />
