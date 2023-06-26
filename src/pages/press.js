@@ -15,7 +15,7 @@ export default function Press({ seed }) {
   const { cms: { mission, pressContact, pressDetails, programs, previousCoverage }} = useQuery();
 
   return (
-    <Page slug="/press" title="Press" noFun>
+    <Page slug="/press" title="Press">
       <Content>
         <Heading as="h2" fontSize="5xl" mb={8} mt={-8}>Press Kit</Heading>
         <Grid templateColumns={{ base: '1fr', md: '2fr 1fr' }} gap={8} mb={8}>
