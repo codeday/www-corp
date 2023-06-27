@@ -75,10 +75,11 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
       <Heading as="h3" fontSize="xl" mb={2}>Please select a CodeDay City:</Heading>
       {
         // force "Other" to end of list (kind of hacky)
-        [...Object.keys(regionsByCountry).filter(k => k !== 'Other'), 'Other'].map((regionKey) => (
+        [...Object.keys(regionsByCountry).filter(k => k !== 'Other'), Object.keys(regionsByCountry).includes('Other')? 'Other' : undefined].map((regionKey) => (
           <Box>
-          <Heading as="h4" fontSize="lg" mb={1}>{regionKey}</Heading>
-          { regionsByCountry[regionKey].map((r) => (
+            {/* Capitalize first letter of region (this is mostly to fix "the United States" looking weird) */}
+          <Heading as="h4" fontSize="lg" mb={1}>{regionKey?.charAt(0).toUpperCase()}{regionKey?.substring(1)}</Heading>
+          { regionsByCountry[regionKey]?.map((r) => (
             <Box d="inline-block" m={2}>
               <Radio  isChecked={region === r.name} onClick={() => { setRegion(r.name); setHasSelection(true); setIsOrganize(false); }}>{r.name}</Radio>
             </Box>
