@@ -11,7 +11,7 @@ import DuckPrints from './Fun/DuckPrints';
 const DOMAIN = 'https://www.codeday.org';
 const FUNDRAISE_UP_ID = 'XBSBRRMF';
 
-export default function Page ({ children, title, darkHeader, slug, seo, noFun=false }) {
+export default function Page ({ children, title, darkHeader, slug, seo, fun=false }) {
   const [hasLoaded, setHasLoaded] = useState(false)
   const { cms } = useQuery();
   const { mission } = cms || {};
@@ -32,7 +32,7 @@ export default function Page ({ children, title, darkHeader, slug, seo, noFun=fa
 
   return (
     <Box overflow="hidden">
-      { (hasLoaded && !noFun) && <DuckPrints /> }
+      { (hasLoaded && fun) && <DuckPrints /> }
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>

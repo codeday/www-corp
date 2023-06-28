@@ -10,7 +10,7 @@ import { EduProgramsQuery } from './index.gql';
 export default function EduIndex() {
   const { cms: { eduPrograms, communityPartners } } = useQuery();
   return (
-    <Page slug="/edu" title="Education" noFun>
+    <Page slug="/edu" title="Education">
       <Content>
         <Image
           src="https://img.codeday.org/o/4/6/461yxm8rg4esfmoxh51u3e4bfrazeuvbpggg5fvjyrpi197ede5u8285ktdyjirrft.png"
