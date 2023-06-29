@@ -3,20 +3,32 @@ import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
 import { Box, CodeDay, Button, Link } from '@codeday/topo/Atom';
 import { Header, SiteLogo, Main, Menu, Footer, CustomLinks } from '@codeday/topo/Organism';
-import { Fade } from '@chakra-ui/react';
+import { Fade, useColorModeValue } from '@chakra-ui/react';
 import { useQuery } from '../query';
 import Script from 'next/script';
-import DuckPrints from "./Fun/DuckPrints";
+import DuckPrints from './Fun/DuckPrints';
 
 const DOMAIN = 'https://www.codeday.org';
+const FUNDRAISE_UP_BUTTON_ID = 'XBSBRRMF';
 
 export default function Page ({ children, title, darkHeader, slug, seo, fun=false }) {
   const [hasLoaded, setHasLoaded] = useState(false)
   const { cms } = useQuery();
   const { mission } = cms || {};
   const [isFundraiseLoaded, setIsFundraiseLoaded] = useState(false)
+  const bgColor = useColorModeValue('white', '#292929' /* equiv to gray.1100 */);
 
   useEffect(() => setHasLoaded(true))
+
+  useEffect(() => {
+    if (isFundraiseLoaded) {
+      const donateEl = document.getElementById(FUNDRAISE_UP_BUTTON_ID);
+      if (donateEl instanceof HTMLIFrameElement && donateEl.contentDocument.body) {
+        donateEl.contentDocument.body.style.backgroundColor = bgColor;
+      }
+    }
+  }, [bgColor, isFundraiseLoaded]);
+
   return (
     <Box overflow="hidden">
       { (hasLoaded && fun) && <DuckPrints /> }
@@ -56,18 +68,22 @@ export default function Page ({ children, title, darkHeader, slug, seo, fun=fals
             <Button as="a" variant="ghost" href="/volunteer">Volunteer</Button>
             <Button as="a" variant="ghost" href="/press">Press</Button>
             <Box mt={-4} display="inline-block" minW="129px" maxH="48px">
-            <Script strategy="afterInteractive" src="https://cdn.fundraiseup.com/widget/AHCSATYN" onLoad={() => {
-              // this feels very hacky and bad, but I don't think there's a better way to do this?
-              const checkLoadedTask = setTimeout(() => {
-                if(document.getElementById('XBSBRRMF')?.tagName === 'IFRAME') {
-                  setIsFundraiseLoaded(true)
-                  clearTimeout(checkLoadedTask)
-                }
-              }, 500)
-            }}/>
+              <Script
+                strategy="afterInteractive"
+                src="https://cdn.fundraiseup.com/widget/AHCSATYN"
+                onLoad={() => {
+                  // this feels very hacky and bad, but I don't think there's a better way to do this?
+                  const checkLoadedTask = setInterval(() => {
+                    if (document.getElementById(FUNDRAISE_UP_BUTTON_ID) instanceof HTMLIFrameElement) {
+                      setIsFundraiseLoaded(true);
+                      clearInterval(checkLoadedTask);
+                    }
+                  }, 500);
+                }}
+              />
               <Fade in={isFundraiseLoaded}>
                 <Box>
-                <a href="#XBSBRRMF" />
+                  <a href={`#${FUNDRAISE_UP_BUTTON_ID}`} />
                 </Box>
               </Fade>
             </Box>
