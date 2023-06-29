@@ -9,7 +9,7 @@ import Script from 'next/script';
 import DuckPrints from './Fun/DuckPrints';
 
 const DOMAIN = 'https://www.codeday.org';
-const FUNDRAISE_UP_ID = 'XBSBRRMF';
+const FUNDRAISE_UP_BUTTON_ID = 'XBSBRRMF';
 
 export default function Page ({ children, title, darkHeader, slug, seo, fun=false }) {
   const [hasLoaded, setHasLoaded] = useState(false)
@@ -22,8 +22,7 @@ export default function Page ({ children, title, darkHeader, slug, seo, fun=fals
 
   useEffect(() => {
     if (isFundraiseLoaded) {
-      const donateEl = document.getElementById(FUNDRAISE_UP_ID);
-
+      const donateEl = document.getElementById(FUNDRAISE_UP_BUTTON_ID);
       if (donateEl instanceof HTMLIFrameElement && donateEl.contentDocument.body) {
         donateEl.contentDocument.body.style.backgroundColor = bgColor;
       }
@@ -74,17 +73,17 @@ export default function Page ({ children, title, darkHeader, slug, seo, fun=fals
                 src="https://cdn.fundraiseup.com/widget/AHCSATYN"
                 onLoad={() => {
                   // this feels very hacky and bad, but I don't think there's a better way to do this?
-                  const checkLoadedTask = setTimeout(() => {
-                    if (document.getElementById(FUNDRAISE_UP_ID) instanceof HTMLIFrameElement) {
+                  const checkLoadedTask = setInterval(() => {
+                    if (document.getElementById(FUNDRAISE_UP_BUTTON_ID) instanceof HTMLIFrameElement) {
                       setIsFundraiseLoaded(true);
-                      clearTimeout(checkLoadedTask);
+                      clearInterval(checkLoadedTask);
                     }
                   }, 500);
                 }}
               />
               <Fade in={isFundraiseLoaded}>
                 <Box>
-                  <a href={`#${FUNDRAISE_UP_ID}`} />
+                  <a href={`#${FUNDRAISE_UP_BUTTON_ID}`} />
                 </Box>
               </Fade>
             </Box>
