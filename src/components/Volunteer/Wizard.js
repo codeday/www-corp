@@ -41,6 +41,7 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
       startSelection = false
     }
   }
+  
   const [background, setBackground] = useState(startBackground);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -116,10 +117,11 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
       </Collapse>
     </Box>
   )
-  const checkEmailCompletion = () => {
-    const emailRe = new RegExp('.+@.+\..+')
-    if(!hasSelection && firstName && lastName && emailRe.test(email)) setHasSelection(true)
-  }
+  useEffect(() => {
+    const emailRe = new RegExp('.+@.+\\..+')
+    if(firstName && lastName && emailRe.test(email)) setHasSelection(true)
+    else setHasSelection(false)
+  }, [firstName, lastName, email])
   const pageEmail = (
     <Box>
       <Heading as="h3" fontSize="xl" mb={2}>
@@ -129,9 +131,9 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
             'Apply to volunteer for CodeDay Labs' : `Apply to volunteer for CodeDay ${region}` :
           'Let us know how to reach out:'}</Heading>
       <VStack w="md" mb={3}>
-          <TextInput m={1} placeholder="First Name" value={firstName} onChange={e => { setFirstName(e.target.value); checkEmailCompletion() }}/>
-          <TextInput m={1} placeholder="Last Name" value={lastName} onChange={e => { setLastName(e.target.value); checkEmailCompletion() }} />
-          <TextInput m={1} placeholder="Email" value={email} onChange={e => { setEmail(e.target.value); checkEmailCompletion() }}/>
+          <TextInput m={1} placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)}/>
+          <TextInput m={1} placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+          <TextInput m={1} placeholder="Email" value={email}  onChange={e => setEmail(e.target.value)} />
           { background === 'industry'? <TextInput m={1} placeholder="LinkedIn (optional, recommended)" value={linkedin} onChange={e => { setLinkedin(e.target.value) }} /> : undefined }
       </VStack>
       <DataCollection message="pii" />
