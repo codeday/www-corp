@@ -15,6 +15,7 @@ function groupBy(xs, f) {
   return xs.reduce((r, v, i, a, k = f(v)) => ((r[k] || (r[k] = [])).push(v), r), {});
 }
 
+const emailRe = new RegExp('.+@.+\\..+')
 
 export default function Wizard({ events, formRef, startBackground='', startRegion='', startPage=0, startSelection=false, after }) {
   const { error } = useToasts();
@@ -118,7 +119,6 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
     </Box>
   )
   useEffect(() => {
-    const emailRe = new RegExp('.+@.+\\..+')
     if(firstName && lastName && emailRe.test(email)) setHasSelection(true)
     else setHasSelection(false)
   }, [firstName, lastName, email])
