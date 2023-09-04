@@ -1111,10 +1111,10 @@
   resolved "https://registry.yarnpkg.com/@codeday/prettier-config/-/prettier-config-1.0.0.tgz#d8e56710ea9bfacb56fb6f5e0dd7fd458a4f6f84"
   integrity sha512-WhowgOeolC6StREzIXvI9cqarhKDlcsNxPgLFa0Z4kkBEJ2UnUg34gJD61Lrfn/YFJRTHu9I3KONQm2gFbWfxg==
 
-"@codeday/topo@^9.2.7":
-  version "9.2.7"
-  resolved "https://registry.yarnpkg.com/@codeday/topo/-/topo-9.2.7.tgz#3ed22610ea5927b680269142c417de60afa7d81d"
-  integrity sha512-JSi6TaSk0ehyI8i0P9/WiKZ2NwqEcW68m/T7iYRuA/J1ZgLS9i/7yeLijINcas/MdSOdOxXWc79+Hva6HnNXig==
+"@codeday/topo@^9.2.9":
+  version "9.2.9"
+  resolved "https://registry.yarnpkg.com/@codeday/topo/-/topo-9.2.9.tgz#613a21f6f8f861605c45fca7621d92bf14a95196"
+  integrity sha512-H/lF6C5fcwzyoRZkf6lYHczGVYP3Py0jWRla/9HA/R5w4x4ohDwU5OajUi1v0twe5HIBO0Kms98RvwEF3VUWWg==
   dependencies:
     "@accessible/use-id" "^1.1.2"
     "@chakra-ui/react" "^2.5.1"
