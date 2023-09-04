@@ -7,19 +7,14 @@ module.exports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  webpack: (config, {
-    isServer,
-  }) => {
+  webpack: (config, { isServer }) => {
     // eslint-disable-next-line node/no-process-env
 
     const originalEntry = config.entry;
     config.entry = async () => {
       const entries = await originalEntry();
 
-      if (
-        entries['main.js'] &&
-        !entries['main.js'].includes('./src/polyfills.js')
-      ) {
+      if (entries['main.js'] && !entries['main.js'].includes('./src/polyfills.js')) {
         entries['main.js'].unshift('./src/polyfills.js');
       }
 
@@ -74,6 +69,11 @@ module.exports = {
         destination: 'https://event.codeday.org/organize',
         permanent: false,
       },
+      {
+        source: '/volunteers',
+        destination: '/volunteer',
+        permanent: false,
+      },
     ];
 
     return [
@@ -90,7 +90,7 @@ module.exports = {
       secretKey: process.env.STRIPE_SECRET_KEY,
     },
     postmark: {
-     serverToken: process.env.POSTMARK_SERVER_TOKEN,
+      serverToken: process.env.POSTMARK_SERVER_TOKEN,
     },
     airtable: {
       token: process.env.AIRTABLE_TOKEN,
