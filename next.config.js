@@ -36,8 +36,12 @@ module.exports = {
     domains: ['f2.codeday.org'],
   },
   async redirects() {
-    const { cms } = await apiFetch('{ cms { regions { items { webname } } } }');
-    const webnames = (cms && cms.regions && cms.regions.items ? cms.regions.items : []).map((r) => r.webname);
+    const { cms } = await apiFetch('{ cms { regions { items { webname aliases } } } }');
+    const webnames = (cms && cms.regions && cms.regions.items ? cms.regions.items : []).flatMap((r) => [
+      r.webname,
+      ...(r.aliases || []),
+    ]);
+    console.log(webnames);
     const staticRedirects = [
       {
         source: '/privacy/controls',
