@@ -19,12 +19,12 @@ const emailRe = new RegExp('.+@.+\\..+')
 
 export default function Wizard({ events, formRef, startBackground='', startRegion='', startPage=0, startSelection=false, after }) {
   const { error } = useToasts();
-  const regions = new Array(...new Set(events.filter(e => !e.dontAcceptVolunteers).map((e) => ({
+  const regions = new Array(...new Set(events.filter(e => !e.dontAcceptVolunteers).map((e) => (JSON.stringify({
     name: e.region?.name || e.name,
     webname: e.contentfulWebname,
     country: e.region?.countryName || 'Other',
     aliases: e.region?.aliases || []
-  }))))
+  }))))).map((e) => JSON.parse(e)) // json -> string -> json for deduplication
   const regionsByCountry = groupBy(regions, (r) => r.country);
   if(startRegion) {
     const webnamesToRegion = {}
