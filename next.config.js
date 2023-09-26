@@ -41,7 +41,6 @@ module.exports = {
       r.webname,
       ...(r.aliases || []),
     ]);
-    console.log(webnames);
     const staticRedirects = [
       {
         source: '/privacy/controls',

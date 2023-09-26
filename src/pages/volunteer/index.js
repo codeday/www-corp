@@ -16,6 +16,7 @@ import Testimonials from '../../components/Volunteer/Testimonials';
 import PhotoGallery from '../../components/Volunteer/PhotoGallery';
 import Highlight from '../../components/Highlight';
 import RemindMe from '../../components/Volunteer/RemindMe';
+import { DateTime } from 'luxon';
 
 
 export default function Volunteer({ seed, layout, startBackground, startRegion, startPage }) {
@@ -168,7 +169,7 @@ export default function Volunteer({ seed, layout, startBackground, startRegion, 
 }
 
 export async function getStaticProps() {
-  const query = await apiFetch(print(VolunteerQuery), { now: new Date() });
+  const query = await apiFetch(print(VolunteerQuery), { now: DateTime.now().minus({ months: 6 }) });
   return {
     props: {
       query,
