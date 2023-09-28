@@ -55,7 +55,7 @@ async function ApplyAsVolunteer(req, res) {
     await postmark.sendEmail({
       MessageStream: 'outbound',
       To: email,
-      From: 'charlieliu@codeday.org',
+      From: 'volunteer@codeday.org',
       Subject: 'CodeDay: Volunteering Next Steps',
       Bcc: 'volunteer@codeday.org',
       TextBody: emailText
