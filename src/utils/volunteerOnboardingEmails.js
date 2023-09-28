@@ -15,8 +15,7 @@ If interested, please schedule a 15 minute onboarding call via this link: https:
 If you have any questions, feel free to reach out at anytime!
 
 Best,
-Charlie Liu (he/him)
-Program Manager, Volunteers`
+CodeDay Team`
 }
 
 export function renderCodeDayExistingRegion({firstName, region}) {
@@ -33,8 +32,7 @@ It is up to the ${region} team if they want to select you as a volunteer, so mak
 If you have any questions, feel free to reach out!
 
 Best,
-Charlie Liu (he/him)
-Program Manager, Volunteers`
+CodeDay Team`
 }
 
 export function renderCodeDayOrganizeRegion({firstName, region}) {
@@ -49,8 +47,7 @@ Thanks for your interest in organizing a new CodeDay in ${region}! To continue w
 Please keep your answers brief - we are expecting no more than a few sentences per question. If you have any questions for us, feel free to reach out!
 
 Best,
-Charlie Liu (he/him)
-Program Manager, Volunteers`
+CodeDay Team`
 }
 
 export function renderBannedVolunteer({ firstName }) {
@@ -61,9 +58,8 @@ At this moment, we are not interested in offering volunteering opportunities to 
 Decisions regarding your eligibility to volunteer for CodeDay will likely stand for at least 1 year.
 
 Sincerely,
-The CodeDay Team`
+CodeDay Team`
 }
-
 
 export function renderUnknown({email, firstName, lastName, linkedin, region, isOrganize, background}) {
   return `There is no template on file to automatically follow-up with the following volunteer. Please reach out manually.
