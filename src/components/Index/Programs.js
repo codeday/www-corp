@@ -67,15 +67,11 @@ export default function Programs() {
       <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={8}>
         <Box borderWidth={1} borderRadius={2} p={4} boxShadow="md">
           <CodeDay fontSize="4xl" withText />
-          {nextUpcomingEvent(codeDay?.linkedFrom?.events?.items) && Math.floor((nextUpcomingEvent(codeDay?.linkedFrom?.events?.items).startsAt - new Date()) / (24 * 60 * 60 * 1000)) <= 30 &&
-            <Image src="/soon.svg" height={10} alt="" float="right" />}
-          <NextEventDate upcoming={codeDay?.linkedFrom?.events?.items} />
           <Text fontSize="md" mt={4} mb={4}>{codeDay?.shortDescription}</Text>
-          <Text fontSize="md" bold>Choose a location:</Text>
           <Text mb={4} fontSize="sm">
             (Nothing planned nearby? <Link color="red.600" href="https://event.codeday.org/organize">Organize a CodeDay!</Link>)
           </Text>
-          <Box borderWidth={1} maxHeight={{ base: "sm", md: "lg" }} overflowY="auto">
+          <Box borderWidth={1} maxHeight={{ base: "sm", md: "md" }} overflowY="auto">
             {sortedRegions.map((region) => (
               <Box
                 p={2}
@@ -142,7 +138,6 @@ export default function Programs() {
             </Box>
           {mainPrograms?.items?.map((program) => (
             <Box
-              borderBottomWidth={1}
               p={4}
               mb={4}
               display="block"
@@ -156,8 +151,6 @@ export default function Programs() {
                 <Box float="left" width={10} pr={4}>
                   <Image src={program.logo.url} height={6} alt="" />
                 </Box>
-                {nextUpcomingEvent(program.linkedFrom?.events?.items) && Math.floor((nextUpcomingEvent(program.linkedFrom?.events?.items).startsAt - new Date()) / (24 * 60 * 60 * 1000)) <= 30 &&
-                  <Image src="/soon.svg" height={10} alt="" float="right" />}
                 <Text fontSize="lg" mb={0} bold>{program.name}</Text>
               </Box>
               <NextEventDate upcoming={program.linkedFrom?.events?.items} />
@@ -167,33 +160,6 @@ export default function Programs() {
               </Box>
             </Box>
           ))}
-
-          {/* Even more programs! */}
-          <Grid
-            templateColumns={`repeat(${otherProgramsRowSize}, minmax(0, 1fr))`}
-            textAlign="center"
-            gap={Math.round(otherProgramsRowSize / 5)}
-          >
-            {otherPrograms?.items?.map((prog, i) => (
-              <Box
-                borderRightWidth={Math.min(1, (i + 1) % Math.min(otherProgramsRowSize, otherPrograms.items.length))}
-                p={otherProgramsRowSize >= 5 ? 1 : 4}
-                pt={4}
-                pb={4}
-                display="block"
-                as="a"
-                href={prog.url}
-                target="_blank"
-                rel="noopener"
-                key={prog.name}
-              >
-                <Image display="inline-block" src={prog.logo.url} height={12} mb={2} />
-                <br />
-                <Text fontSize={['lg', 'lg', 'lg', 'md', 'sm'][otherProgramsRowSize - 1]} mb={0} bold>{prog.name}</Text>
-              </Box>
-            ))}
-            {[...new Array(1)].map(() => <Box />)}
-          </Grid>
         </Box>
       </Grid>
     </Content>

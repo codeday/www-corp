@@ -47,7 +47,7 @@ export default function Quotes({ seed }) {
           mt={0}
           textAlign="center"
         >
-          In-person in {quoteRegions?.items?.length } cities + worldwide online events.
+          In-person events in {quoteRegions?.items?.length } cities + worldwide online programs.
         </Heading>
         <Grid templateColumns={{ base: '1fr', lg: '40% 60%'}} alignItems="center" gap={8} position="relative">
           {/* Globe */}

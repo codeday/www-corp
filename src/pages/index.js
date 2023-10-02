@@ -19,7 +19,7 @@ export default function Home({ seed }) {
       <Hero mb={8} />
       <Stats />
       <Programs />
-      <Sponsors />
+      <Sponsors mt={12} />
       <Community />
       <Quote seed={seed} />
       <Workshops />

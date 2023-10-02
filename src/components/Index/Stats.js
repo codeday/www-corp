@@ -4,7 +4,6 @@ import { Text, Grid, Box } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
 import { useColorMode } from '@codeday/topo/Theme';
 import { useQuery } from '../../query';
-import PreviousCoverageLogos from '../PreviousCoverageLogos';
 
 function rollup(events) {
   const stats = {};
@@ -70,10 +69,6 @@ export default function Stats(props) {
             opacity="0.7"
           />
         </Grid>
-        <Box textAlign="center" mt={8} opacity="0.7">
-          <Text mb={0} display="inline-block" bold>As seen in...</Text>
-          <PreviousCoverageLogos num={5} h={8} mr={4} ml={4} mb={2} />
-        </Box>
       </Content>
     </Content>
   );
