@@ -195,7 +195,7 @@ export default function Community({ seed, ...props }) {
     if (inView) setHasLoaded(true);
   }, [inView]);
 
-  const { showYourWork, showcase, cms: { indexCommunityPhotos, stats } } = useQuery();
+  const { showcase, cms: { indexCommunityPhotos, stats } } = useQuery();
 
   const studentCount = stats?.items?.reduce((accum, e) => accum + e.statStudentCount, 0);
   const studentCountRound = Math.round(studentCount/10000) * 10000;
@@ -209,10 +209,6 @@ export default function Community({ seed, ...props }) {
     .filter((p) => p.media && p.members && p.members.length > 0);
 
   const cards = shuffle([
-    ...(showYourWork.messages.filter((m => m.author))
-      .map((m) => <Card key={m.imageUrl} photo={m.imageUrl} text={m.text} authors={[m.author]} wip />)
-        || []
-    ),
     ...(showcaseDemos
       .map((d) => (
         <Card
