@@ -6,7 +6,6 @@ import { Header, SiteLogo, Main, Menu, Footer, CustomLinks } from '@codeday/topo
 import { Fade, useColorModeValue } from '@chakra-ui/react';
 import { useQuery } from '../query';
 import Script from 'next/script';
-import DuckPrints from './Fun/DuckPrints';
 
 const DOMAIN = 'https://www.codeday.org';
 const FUNDRAISE_UP_BUTTON_ID = 'XBSBRRMF';
@@ -31,7 +30,6 @@ export default function Page ({ children, title, darkHeader, slug, seo, fun=fals
 
   return (
     <Box overflow="hidden">
-      { (hasLoaded && fun) && <DuckPrints /> }
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
