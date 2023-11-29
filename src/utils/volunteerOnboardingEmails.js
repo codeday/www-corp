@@ -75,3 +75,25 @@ Region: ${region}
 Is Organize? ${isOrganize}
 Background: ${background}`
 }
+
+export function renderEmailRM({email, firstName, lastName, region}) {
+  return `Hi! Someone just filled out the volunteer form offering to help with CodeDay ${region}!
+First Name: ${firstName}
+Last Name: ${lastName}
+Email: ${email}
+
+We've let them know to expect an email from you with follow up questions or next steps.
+`
+}
+
+export function renderEmailRMToStudent({ firstName, region }) {
+  return `Hi ${firstName}!
+Thanks so much for applying to be a volunteer for CodeDay ${region}!
+
+We've passed your details on to the ${region} team, who will be contacting you over email soon with follow up questions and/or next steps.
+In the meantime, if you have any questions about volunteering for CodeDay, please feel free to reply to this email and our team will get back to you as soon as we can!
+
+Best,
+CodeDay Team
+`
+}
