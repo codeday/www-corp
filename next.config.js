@@ -99,5 +99,8 @@ module.exports = {
       token: process.env.AIRTABLE_TOKEN,
       base: process.env.AIRTABLE_BASE,
     },
+    clear_gql: {
+      token: process.env.CLEAR_TOKEN,
+    },
   },
 };
