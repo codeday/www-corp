@@ -21,34 +21,45 @@ const base = new Airtable({ apiKey: serverRuntimeConfig.airtable.token }).base(s
 async function ApplyAsVolunteer(req, res) {
   const { email, firstName, lastName, linkedin, region, isOrganize, background } = JSON.parse(req.body);
   let banned = false;
-  await base('Volunteers')
-    .select({
-      maxRecords: 100,
-      fields: ['Flags'],
 
-      filterByFormula: `TRIM(LOWER({Email})) = "${email.toString().toLowerCase().trim()}"`,
-    })
-    .eachPage((records, fetchNextPage) => {
-      records.forEach((record) => {
-        if ((record.get('Flags') || []).includes('Banned')) banned = true;
-        fetchNextPage();
-      });
+  console.log('a');
+
+  try {
+    const res = await base('Volunteers')
+      .select({
+        maxRecords: 100,
+        fields: ['Flags'],
+
+        filterByFormula: `TRIM(LOWER({Email})) = "${email.toString().toLowerCase().trim()}"`,
+      }).firstPage();
+    res.forEach((record) => {
+      if ((record.get('Flags') || []).includes('Banned')) banned = true;
     });
-  await base('Volunteers').create([
-    {
-      fields: {
-        Name: `${firstName} ${lastName}`,
-        Email: email,
-        LinkedIn: linkedin,
-        'Location (Not Listed)': region,
-        Type: background,
+  } catch (ex) {
+    console.error(ex);
+  }
+  try {
+    await base('Volunteers').create([
+      {
+        fields: {
+          Name: `${firstName} ${lastName}`,
+          Email: email,
+          LinkedIn: linkedin,
+          'Location (Not Listed)': region,
+          Type: background,
+        },
       },
-    },
-  ]);
+    ]);
+  } catch (ex) {
+    console.error(ex);
+  }
+  console.log('foo');
   let emailText;
   // if(background === 'industry') {
   // emailText = renderLabsMentor({firstName})
   // This is disabled for now as we want non-student volunteers to be manually reviewed + followed up with
+
+
   if (banned) {
     emailText = renderBannedVolunteer({ firstName });
   } else if (background === 'student' && isOrganize) {

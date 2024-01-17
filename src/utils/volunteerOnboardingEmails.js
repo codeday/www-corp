@@ -53,9 +53,7 @@ CodeDay Team`
 export function renderBannedVolunteer({ firstName }) {
   return `Hi ${firstName},
 
-At this moment, we are not interested in offering volunteering opportunities to you. We have previously determined that you are not aligned with our mission or values, but you may contact team@codeday.org for further details if necessary.
-
-Decisions regarding your eligibility to volunteer for CodeDay will likely stand for at least 1 year.
+Thank you for your interest in volunteering for CodeDay. At the moment we do not have any volunteering opportunities for which you are eligible.
 
 Sincerely,
 CodeDay Team`
