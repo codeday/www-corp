@@ -24,7 +24,7 @@ export default function App ({ Component, pageProps }) {
   return (
     <>
       <Script dangerouslySetInnerHTML={{ __html: renderSnippet() }} />
-      <ThemeProvider withChat brandColor="red" analyticsId="AHHYLKBK" useSystemColorMode>
+      <ThemeProvider withChat brandColor="red" analyticsId="AHHYLKBK" useSystemColorMode cookies={pageProps.cookies}>
         <Provider value={pageProps?.query || {}}>
           <Component {...pageProps} />
         </Provider>
