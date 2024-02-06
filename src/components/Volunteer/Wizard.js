@@ -2,7 +2,7 @@ import React, {
   useState, useReducer, useEffect
 } from 'react';
 import { Collapse } from '@chakra-ui/transition';
-import { Box, Button, Text, Heading, HStack, VStack, TextInput, Divider, Checkbox, Radio } from '@codeday/topo/Atom';
+import { Box, Button, Text, Heading, HStack, VStack, TextInput, Divider, Checkbox, Radio, Link } from '@codeday/topo/Atom';
 import { DataCollection } from '@codeday/topo/Molecule';
 import { useToasts } from '@codeday/topo/utils';
 import LinkedInTag from 'react-linkedin-insight';
@@ -53,6 +53,7 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
   const [commitmentLevel, setCommitmentLevel] = useState(0);
   const [hasSelection, setHasSelection] = useState(startSelection);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const pageBackground = (
     <Box>
@@ -119,9 +120,9 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
     </Box>
   )
   useEffect(() => {
-    if(firstName && lastName && emailRe.test(email)) setHasSelection(true)
+    if(firstName && lastName && emailRe.test(email) && ( background === 'industry' ? linkedin : true)) setHasSelection(true)
     else setHasSelection(false)
-  }, [firstName, lastName, email])
+  }, [firstName, lastName, email, linkedin])
   const pageEmail = (
     <Box>
       <Heading as="h3" fontSize="xl" mb={2}>
@@ -134,13 +135,19 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
           <TextInput m={1} placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)}/>
           <TextInput m={1} placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
           <TextInput m={1} placeholder="Email" value={email}  onChange={e => setEmail(e.target.value)} />
-          { background === 'industry'? <TextInput m={1} placeholder="LinkedIn (optional, recommended)" value={linkedin} onChange={e => { setLinkedin(e.target.value) }} /> : undefined }
+          { background === 'industry'? <TextInput m={1} placeholder="LinkedIn" value={linkedin} onChange={e => { setLinkedin(e.target.value) }} /> : undefined }
       </VStack>
       <DataCollection message="pii" />
     </Box>
   )
 
-  const pageConfirmation = (
+  const pageConfirmation = submitError? (
+    <Box>
+      <Heading as="h3" fontSize="xl" mb={2}>☹️ An Error Ocurred</Heading>
+      <Text>Please email <Link href='mailto:volunteer@codeday.org'>volunteer@codeday.org</Link> with your application, as well as the following error code:</Text>
+      <Text>{submitError}</Text>
+    </Box>
+  ) : (
     <Box>
       <Heading as="h3" fontSize="xl" mb={2}>✅ Got it!</Heading>
       <Text>We'll be in touch over email in the next few days!</Text>
@@ -207,7 +214,13 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
             body: JSON.stringify({email, firstName, lastName, linkedin, region, isOrganize, background}),
             headers: {},
           });
-          if (after) window.location = after
+          if(!resp.ok) {
+            console.log(resp)
+            setSubmitError(`${resp.status}: ${resp.statusText}`)
+          } else {
+            if (after) window.location = after
+            // Do not redirect if there is an error, as otherwise no indication would be shown to the user that their application was not recieved
+          }
           navigate('next')
         } catch (ex) {
           error(ex.toString());
