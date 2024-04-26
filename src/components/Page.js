@@ -90,12 +90,7 @@ export default function Page ({ children, title, darkHeader, slug, seo, fun=fals
         <Main>
           {children}
         </Main>
-        <Footer repository="www-corp" branch="master" mt={32}>
-          <CustomLinks>
-            <Link href="/help" display="block">FAQs &amp; Help</Link>
-            <Link href="/docs" display="block">Legal Documents</Link>
-          </CustomLinks>
-        </Footer>
+        <Footer repository="www-corp" branch="master" mt={32} />
       </Box>
     </Box>
   )
