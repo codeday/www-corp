@@ -47,25 +47,8 @@ export default function Volunteers({ seed, ...props }) {
   const employeeIds = [...employees, ...otherTeam, ...board, ...contractors, ...emeritus].map((e) => e.id);
   const justVolunteers = shuffle(volunteers.filter((v) => !employeeIds.includes(v.id)), seed);
 
-  const hasTitle = (v) => v.title && v.title !== 'Volunteer' && v.title !== 'Mentor' && v.title !== 'Staff';
-  const withTitle = justVolunteers.filter(hasTitle);
-  const withoutTitle = justVolunteers.filter((v) => !hasTitle(v));
-
   return (
     <Content {...props}>
-      {/* Volunteers with a title */}
-      <Grid
-        templateColumns={{
-          base: 'repeat(2, minmax(0, 1fr))', lg: 'repeat(4, minmax(0, 1fr))',
-        }}
-        columnGap={8}
-        rowGap={1}
-        mb={4}
-      >
-        {withTitle.map((vol) => <VolunteerBox vol={vol} showTitle />)}
-      </Grid>
-
-      {/* Volunteers without a title */}
       <Grid
         templateColumns={{
           base: 'repeat(2, minmax(0, 1fr))',
@@ -76,9 +59,9 @@ export default function Volunteers({ seed, ...props }) {
         columnGap={4}
         rowGap={4}
       >
-        {withoutTitle.map((vol) => <VolunteerBox vol={vol} />)}
+        {justVolunteers.map((vol) => <VolunteerBox vol={vol} />)}
       </Grid>
-      <Text color="current.textLight" textAlign="center" mt={8}>... plus hundreds of day-of volunteers.</Text>
+      <Text color="current.textLight" textAlign="center" mt={8}>... plus hundreds of mentors and day-of volunteers.</Text>
     </Content>
   );
 }
