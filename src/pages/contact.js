@@ -2,6 +2,7 @@ import React from 'react';
 import { print } from 'graphql';
 import { sign } from 'jsonwebtoken';
 import { Grid, Text, Heading, Link, Image } from '@codeday/topo/Atom';
+import EmailIcon from '@codeday/topocons/Icon/Email';
 import { Content } from '@codeday/topo/Molecule';
 import { apiFetch } from '@codeday/topo/utils';
 import Page from '../components/Page';
@@ -44,20 +45,20 @@ export default function Home({ seed }) {
           </Text>
         </Grid>
         <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
-          Meet our team:
+          Team <Link position="relative" top={1} cursor="pointer" href="mailto:team@codeday.org"><EmailIcon /></Link>
         </Heading>
       </Content>
       <Employees seed={seed} mb={8} />
       <Emeritus seed={seed} mb={16} />
       <Content>
         <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
-          Independent members of the board:
+          Independent Board Members <Link position="relative" top={1} cursor="pointer" href="mailto:board-external@codeday.org"><EmailIcon /></Link>
         </Heading>
       </Content>
       <Board seed={seed} mb={16} />
       <Content>
         <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
-          Volunteers:
+          Volunteers
         </Heading>
       </Content>
       <Volunteers seed={seed} />
