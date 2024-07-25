@@ -4,19 +4,9 @@ import { Content } from '@codeday/topo/Molecule';
 import shuffle from 'knuth-shuffle-seeded';
 import { useQuery } from '../../query';
 
-function VolunteerBox({ vol, showTitle }) {
+function VolunteerBox({ name }) {
   return (
     <Box>
-      <Image
-        title={vol.username}
-        src={vol.picture.replace('256x256', 'w=64;h=64;fit=crop').replace('s=480', 's=32')}
-        rounded="full"
-        width={showTitle ? '32px' : '18px'}
-        alt=""
-        float="left"
-        mr={2}
-        mt={1}
-      />
       <Box>
         <Text
           mb={0}
@@ -24,28 +14,41 @@ function VolunteerBox({ vol, showTitle }) {
           overflow="hidden"
           textOverflow="ellipsis"
         >
-          {vol.name}
+          {name}
         </Text>
-        {showTitle && (
-          <Text
-            fontSize="sm"
-            color="current.textLight"
-            whiteSpace="nowrap"
-            overflow="hidden"
-            textOverflow="ellipsis"
-          >
-            {vol.title || 'Volunteer'}
-          </Text>
-        )}
       </Box>
     </Box>
   );
 }
 
+function toTitleCase(str) {
+  return str.replace(
+    /\w\S*/g,
+    text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+  );
+}
+
 export default function Volunteers({ seed, ...props }) {
-  const { account: { employees, otherTeam, volunteers, board, contractors, emeritus } } = useQuery();
+  const { account: { employees, otherTeam, volunteers, board, contractors, emeritus }, labs, clear } = useQuery();
   const employeeIds = [...employees, ...otherTeam, ...board, ...contractors, ...emeritus].map((e) => e.id);
   const justVolunteers = shuffle(volunteers.filter((v) => !employeeIds.includes(v.id)), seed);
+
+  const volunteerNames = [...(
+    new Set(
+      [
+        ...justVolunteers,
+        ...labs.mentors,
+        ...clear.tickets,
+      ]
+      .map(vol => toTitleCase(
+        vol.name
+          ? vol.name
+          : `${vol.firstName || vol.givenName || ''} ${vol.lastName || vol.surname || vol.familyName || ''}`
+      ).replace(/( \.| \*)/g, ''))
+    )
+  )]
+  .filter(a => !a.includes('Volunteer') && a.length > 3 && !a.includes('?'))
+  .sort();
 
   return (
     <Content {...props}>
@@ -57,11 +60,10 @@ export default function Volunteers({ seed, ...props }) {
           xl: 'repeat(5, minmax(0, 1fr))',
         }}
         columnGap={4}
-        rowGap={4}
+        rowGap={1}
       >
-        {justVolunteers.map((vol) => <VolunteerBox vol={vol} />)}
+        {volunteerNames.map((name) => <VolunteerBox name={name} />)}
       </Grid>
-      <Text color="current.textLight" textAlign="center" mt={8}>... plus hundreds of mentors and day-of volunteers.</Text>
     </Content>
   );
 }

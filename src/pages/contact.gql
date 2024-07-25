@@ -54,6 +54,29 @@ query ContactQuery {
       username
       name
       picture
+      pronoun
+    }
+
+    boardEmeritus: roleUsers (roleId: "rol_gbGvK17xrmrpCykr") {
+      id
+      username
+      name
+      picture
+      pronoun
+    }
+  }
+
+  clear {
+    tickets(where:{type:{in:[MENTOR,JUDGE,STAFF]}}) {
+    	firstName
+      lastName
+    }
+  }
+
+  labs {
+    mentors (where:{inStatus:ACCEPTED}) {
+      givenName
+      surname
     }
   }
 
@@ -70,7 +93,19 @@ query ContactQuery {
       }
     }
 
+    fax: strings (where: { key: "contact.public.fax" }, limit: 1) {
+      items {
+        value
+      }
+    }
+
     address: strings (where: { key: "contact.public.address" }, limit: 1) {
+      items {
+        value
+      }
+    }
+
+    officeAddress: strings (where: { key: "contact.public.office-address" }, limit: 1) {
       items {
         value
       }

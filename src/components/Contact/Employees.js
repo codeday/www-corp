@@ -3,10 +3,12 @@ import { Text, Box, Grid, Image, Link } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
 import { useQuery } from '../../query';
 
-const titleContents = ['Executive Director', 'VP', 'Director', 'Head', 'Manager', 'Lead'];
+const titleContents = ['Executive Director', 'President', 'VP', 'Chief', 'Director', 'Head', 'Manager', 'Lead'];
 const titlePrecedence = (title) => titleContents
   .reduce((accum, t, i) => (title && (title.indexOf(t) >= 0) ? Math.min(i, accum) : accum), titleContents.length);
 function sortFn(a, b) {
+  if (a.title.startsWith('Consult') && !b.title.startsWith('Consult')) return 1;
+  if (b.title.startsWith('Consult') && !a.title.startsWith('Consult')) return -1;
   const aPrec = titlePrecedence(a.title);
   const bPrec = titlePrecedence(b.title);
   if (aPrec !== bPrec) return aPrec - bPrec;
@@ -16,16 +18,28 @@ function sortFn(a, b) {
   return 0;
 }
 
+function dedupeByKey(key, arr) {
+  return Object.entries(
+    Object.fromEntries(
+      arr.map(e => [e[key], e])
+    )
+  ).map(([_, e]) => e);
+}
+
 export default function Employees(props) {
   const { account: { employees, otherTeam, contractors } } = useQuery();
 
-  const sortedEmployees = [...employees.sort(sortFn), ...otherTeam.sort(sortFn)];
+  const sortedEmployees = dedupeByKey('username', [
+    ...employees,
+    ...otherTeam,
+    ...contractors,
+  ]).sort(sortFn);
 
   return (
-    <Content wide {...props}>
-      <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }} gap={4}>
+    <Content {...props}>
+      <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }} gap={12}>
         {sortedEmployees.map((emp) => (
-          <Box p={4}>
+          <Box>
             <Box>
               <Image
                 title={emp.username}
