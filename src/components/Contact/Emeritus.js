@@ -4,7 +4,7 @@ import { Content } from '@codeday/topo/Molecule';
 import shuffle from 'knuth-shuffle-seeded';
 import { useQuery } from '../../query';
 
-function EmeritusBox({ e }) {
+function EmeritusBox({ e, board }) {
   return (
     <Box>
       <Image
@@ -33,7 +33,7 @@ function EmeritusBox({ e }) {
           overflow="hidden"
           textOverflow="ellipsis"
         >
-          Emeritus
+          {board ? 'Board Member' : 'Employee'} {(e?.pronoun?.includes?.('she') || e?.pronoun?.includes?.('her')) ? 'Emerita' : 'Emeritus'}
         </Text>
       </Box>
     </Box>
@@ -41,8 +41,10 @@ function EmeritusBox({ e }) {
 }
 
 export default function Emeritus({ seed, ...props }) {
-  const { account: { employees, otherTeam, board, contractors, emeritus } } = useQuery();
+  const { account: { employees, otherTeam, board, contractors, emeritus, boardEmeritus } } = useQuery();
   const employeeIds = [...employees, ...otherTeam, ...contractors, ...board].map((e) => e.id);
+
+  const allBod = shuffle(boardEmeritus.filter((v) => !employeeIds.includes(v.id)), seed);
   const all = shuffle(emeritus.filter((v) => !employeeIds.includes(v.id)), seed);
 
   return (
@@ -54,6 +56,7 @@ export default function Emeritus({ seed, ...props }) {
         columnGap={8}
         rowGap={1}
       >
+        {allBod.map((e) => <EmeritusBox e={e} board />)}
         {all.map((e) => <EmeritusBox e={e} />)}
       </Grid>
     </Content>

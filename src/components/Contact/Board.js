@@ -10,10 +10,10 @@ export default function Employees(props) {
   const uniqueBoard = board.filter((director) => !employeeIds.includes(director.id));
 
   return (
-    <Content wide {...props}>
-      <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }} gap={4}>
+    <Content {...props}>
+      <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }} gap={12}>
         {uniqueBoard.map((director) => (
-          <Box p={4}>
+          <Box>
             <Box>
               <Image
                 title={director.username}
@@ -22,7 +22,6 @@ export default function Employees(props) {
                 mr={4}
                 rounded="full"
                 w="64px"
-                w
                 h="64px"
                 alt=""
               />
