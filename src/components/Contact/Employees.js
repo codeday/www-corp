@@ -53,7 +53,7 @@ export default function Employees(props) {
               />
               <Box  position="relative" top={-2}>
                 <Text mb={0} pt={2} fontWeight="bold">{emp.name}</Text>
-                <Link mt={0} display="block" mb={0} p={0} href={`${emp.username}@codeday.org`} fontSize="sm" color="current.textLight">{emp.username}@codeday.org</Link>
+                <Link mt={0} display="block" mb={0} p={0} href={`mailto:${emp.username}@codeday.org`} fontSize="sm" color="current.textLight">{emp.username}@codeday.org</Link>
                 <Text mt={0} display="block" mb={0} p={0} fontSize="sm" color="current.textLight">{emp.title || 'Staff'}, {emp.pronoun}</Text>
               </Box>
             </Box>
