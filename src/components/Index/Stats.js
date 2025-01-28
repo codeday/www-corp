@@ -33,10 +33,11 @@ function StatBox({
 
 export default function Stats(props) {
   const { colorMode } = useColorMode();
-  const { cms: { stats } } = useQuery();
+  const { cms: { stats, quoteRegions }, labs: { statTotalOutcomes } } = useQuery();
   const rollupStats = rollup(stats.items);
 
-  console.log('colorMode', colorMode)
+  const hours = statTotalOutcomes.find((o) => o.key === 'hoursCount');
+  const labsStudentCount = statTotalOutcomes.find((o) => o.key === 'studentCount');
 
   return (
     <Content
@@ -48,24 +49,21 @@ export default function Stats(props) {
     >
       <Content>
         <Grid templateColumns={{ base: 'repeat(3, 1fr)', md: 'repeat(4, 1fr)', lg: 'repeat(5, 1fr)' }} gap={4}>
-          <StatBox num={rollupStats.statEventCount} label="Events" opacity="0.7"/>
-          <StatBox num={rollupStats.statStudentCount} label="CodeDay Alums" opacity="0.7" />
-          <StatBox
-            num={rollupStats.statStudentCount * 0.71}
-            label="Underrepresented in CS"
-            display={{ base: 'none', lg: 'block' }}
-            opacity="0.7"
-          />
+          <StatBox num={rollupStats.statEventCount} label={`In-Person Events in ${quoteRegions?.items?.length} Cities Worldwide`} opacity="0.7"/>
+          <StatBox num={rollupStats.statStudentCount} label="Total CodeDay Alumni" opacity="0.7" />
           <StatBox
             num={rollupStats.statLowInterestCount}
-            label="Didn't Like CS Before"
+            label="High School Students Started Pursuing Tech Because of CodeDay"
             opacity="0.7"
           />
           <StatBox
-            num={Math.round(100 * (rollupStats.statLowInterestContinuedCount / rollupStats.statLowInterestCount))}
-            unit="%"
-            label="Kept Coding After"
-            display={{ base: 'none', md: 'block' }}
+            num={labsStudentCount?.value}
+            label="College Students Became Open Source Software Contributors"
+            opacity="0.7"
+          />
+          <StatBox
+            num={(rollupStats.statStudentCount * 24) + hours?.value}
+            label="Hours Spent Solving Meaningful Problems"
             opacity="0.7"
           />
         </Grid>
