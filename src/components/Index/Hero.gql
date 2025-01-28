@@ -5,6 +5,11 @@ fragment IndexHeroComponent on Query {
         value
       }
     }
+    tagline: strings (where: { key: "common.tagline" }) {
+      items {
+        value
+      }
+    }
     explainer: asset(id:"6BoY9Ec9J8YRrHcj2RqsCg"){
       url
     }

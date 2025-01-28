@@ -9,13 +9,13 @@ import { useQuery } from '../../query';
 import useTwitch from "../../useTwitch";
 
 export default function Hero({ ...props }) {
-  const { cms: { mission, explainer } } = useQuery();
+  const { cms: { tagline, mission, explainer } } = useQuery();
   const twitch = useTwitch()
 
-  const tagline = (
+  const taglineBlock = (
     <Box m={{ base: 8, lg: 0, xl: 16 }} mt={{ base: 0, xl: 0 }} textAlign={{ base: 'center', lg: 'left'}}>
-      <Heading as="h2" fontSize="6xl" fontWeight="bold" lineHeight="1.1" mt={8}>
-        There's a place in tech for everyone.
+      <Heading as="h2" fontSize="6xl" fontWeight="bold" lineHeight="1.1" mt={0}>
+        {tagline?.items[0]?.value}
       </Heading>
       <Text fontSize="xl" mt={8} mb={8}>{mission?.items[0]?.value}</Text>
       {explainer && (
@@ -35,7 +35,7 @@ export default function Hero({ ...props }) {
         pt={8}
         overflow={!twitch?.username && 'hidden'}
       >
-        {tagline}
+        {taglineBlock}
         <VisibilityCheckBox
           display={{ base: 'none', lg: 'block' }}
           mt={{ base: 12, xl: -12 }}
