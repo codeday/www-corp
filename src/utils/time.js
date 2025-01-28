@@ -34,7 +34,7 @@ export function formatInterval(start, end) {
 
 export function upcomingEvents(events) {
   const now = new Date();
-  return events.map((e) => ({
+  return events.filter((e) => e.startsAt && e.endsAt).map((e) => ({
     startsAt: parseIsoString(e.startsAt),
     endsAt: parseIsoString(e.endsAt),
   }))
