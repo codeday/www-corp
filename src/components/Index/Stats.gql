@@ -11,4 +11,11 @@ fragment IndexStatsComponent on Query {
       }
     }
   }
+
+  labs {
+    statTotalOutcomes {
+      key
+      value
+    }
+  }
 }
