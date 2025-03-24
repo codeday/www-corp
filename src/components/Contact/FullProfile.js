@@ -3,16 +3,11 @@ import { Box, Grid, Text, Image } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
 import { useQuery } from '../../query';
 
-export default function Employees(props) {
-  const { account: { board, employees, otherTeam } } = useQuery();
-
-  const employeeIds = [...employees, ...otherTeam].map((e) => e.id);
-  const uniqueBoard = board.filter((director) => !employeeIds.includes(director.id));
-
+export default function FullProfile({ entries, ...props }) {
   return (
     <Content {...props}>
       <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }} gap={12}>
-        {uniqueBoard.map((director) => (
+        {entries.map((director) => (
           <Box>
             <Box>
               <Image
@@ -26,9 +21,9 @@ export default function Employees(props) {
                 alt=""
               />
               <Text mb={0} pt={2} fontWeight="bold">{director.givenName} {director.familyName}</Text>
-              <Text fontSize="sm" color="current.textLight">Board Member, {director.pronoun}</Text>
+              <Text fontSize="sm" color="current.textLight">Board Member</Text>
             </Box>
-            <Box ml="64px" pl={4}>
+            <Box mt={4} ml="64px" pl={4}>
               <Text>{director.bio || `${director.givenName} is a member of the CodeDay board.`}</Text>
             </Box>
           </Box>

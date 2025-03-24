@@ -3,7 +3,7 @@ import { Text, Box, Grid, Image, Link } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
 import { useQuery } from '../../query';
 
-const titleContents = ['Executive Director', 'President', 'VP', 'Chief', 'Director', 'Head', 'Manager', 'Lead'];
+const titleContents = ['CEO', 'President', 'VP', 'Chief', 'Director', 'Head', 'Manager', 'Lead'];
 const titlePrecedence = (title) => titleContents
   .reduce((accum, t, i) => (title && (title.indexOf(t) >= 0) ? Math.min(i, accum) : accum), titleContents.length);
 function sortFn(a, b) {
@@ -39,8 +39,9 @@ export default function Employees(props) {
 
   return (
     <Content {...props}>
-      <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }} gap={12}>
+      <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap={12}>
         {sortedEmployees.map((emp) => (
+          <Box>
           <Box>
             <Box>
               <Image
@@ -53,15 +54,12 @@ export default function Employees(props) {
                 h="64px"
                 alt=""
               />
-              <Box  position="relative" top={-2}>
-                <Text mb={0} pt={2} fontWeight="bold">{emp.name}</Text>
-                <Link mt={0} display="block" mb={0} p={0} href={`mailto:${emp.username}@codeday.org`} fontSize="sm" color="current.textLight">{emp.username}@codeday.org</Link>
-                <Text mt={0} display="block" mb={0} p={0} fontSize="sm" color="current.textLight">{emp.title || 'Staff'}, {emp.pronoun}</Text>
+              <Box position="relative" top={-1}>
+                <Link href={`mailto:${emp.username}@codeday.org`} mb={0} pt={2} fontWeight="bold">{emp.name}</Link>
+                <Text mt={0} display="block" mb={0} p={0} fontSize="sm" color="current.textLight">{emp.title.split(' - ').slice(0,1) || 'Staff'}</Text>
               </Box>
             </Box>
-            <Box ml="64px" pl={4}>
-              <Text>{emp.bio || `${emp.name} is ${emp.title ? `the ${emp.title}` : 'a staff member'} at CodeDay.`}</Text>
-            </Box>
+          </Box>
           </Box>
         ))}
       </Grid>
