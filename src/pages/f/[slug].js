@@ -29,7 +29,7 @@ export default function Home() {
     return <Error404 />;
   }
 
-  const { image, title, cognitoForm, details, sidebar, prefill } = cms.forms.items[0];
+  const { image, title, cognitoForm, details, sidebar, prefill: cmsPrefill } = cms.forms.items[0];
 
   return (
     <Page slug={`/f/${query.slug}`} title={title}>
@@ -43,7 +43,10 @@ export default function Home() {
             {details && (
               <ContentfulRichText json={details.json} links={details.links} />
             )}
-            <CognitoForm formId={cognitoForm} prefill={prefill} fallback />
+            {/* TODO(@oohwooh) make this better - leftover stuff in `query` might contaminate the prefill with things we don't want,
+            plus `query` is deprecated now in nextjs. Maybe cms should provide allowlist of what fields can be prefilled?         
+            */}
+            <CognitoForm formId={cognitoForm} prefill={{ ...query, ...cmsPrefill }} fallback />
           </Box>
           {sidebar && (
             <Box>
