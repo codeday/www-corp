@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
-import { Box, CodeDay, Button, Link } from '@codeday/topo/Atom';
+import { Box, CodeDay, Button, Link, Text } from '@codeday/topo/Atom';
 import { Header, SiteLogo, Main, Menu, Footer, CustomLinks } from '@codeday/topo/Organism';
 import { Fade, useColorModeValue } from '@chakra-ui/react';
 import { useQuery } from '../query';
 import Script from 'next/script';
+import { Content } from '@codeday/topo/Molecule';
 
 const DOMAIN = 'https://www.codeday.org';
 const FUNDRAISE_UP_BUTTON_ID = 'XBSBRRMF';
@@ -13,9 +14,11 @@ const FUNDRAISE_UP_BUTTON_ID = 'XBSBRRMF';
 export default function Page ({ children, title, darkHeader, slug, seo, fun=false }) {
   const [hasLoaded, setHasLoaded] = useState(false)
   const { cms } = useQuery();
-  const { mission } = cms || {};
+  const { mission, globalSponsors } = cms || {};
   const [isFundraiseLoaded, setIsFundraiseLoaded] = useState(false)
   const bgColor = useColorModeValue('white', '#292929' /* equiv to gray.1100 */);
+
+  const disclaimerTexts = (cms?.globalSponsors?.items || []).flatMap((sponsor) => sponsor.legalDisclaimer.split(`\n`)).filter(Boolean);
 
   useEffect(() => setHasLoaded(true))
 
@@ -92,7 +95,14 @@ export default function Page ({ children, title, darkHeader, slug, seo, fun=fals
         <Main>
           {children}
         </Main>
-        <Footer repository="www-corp" branch="master" mt={32} />
+        <Box mt={32}>
+          <Content fontFamily="mono" color="current.textLight" fontSize="2xs">
+            {disclaimerTexts.map((text) => (
+              <Text mb={4} key={text}>{text}</Text>
+            ))}
+          </Content>
+          <Footer repository="www-corp" branch="master" />
+        </Box>
       </Box>
     </Box>
   )

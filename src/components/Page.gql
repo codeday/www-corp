@@ -5,5 +5,11 @@ fragment PageComponent on Query {
         value
       }
     }
+
+    globalSponsors (where: { legalDisclaimer_exists: true }) {
+      items {
+        legalDisclaimer
+      }
+    }
   }
 }
