@@ -87,8 +87,8 @@ export default function Home() {
           {type}
         </Box>
         <Box mb={2}>
-          <Link fontSize="sm" href={`https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${query.doi}`}>
-            https://doi.org/{process.env.NEXT_PUBLIC_DOI_PREFIX}/{query.doi}
+          <Link fontSize="sm" href={`https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${doiSuffix}`}>
+            https://doi.org/{process.env.NEXT_PUBLIC_DOI_PREFIX}/{doiSuffix}
           </Link>
         </Box>
         <Heading as="h2" fontSize={{ base: '2xl', md: '4xl' }} mb={2}>{title}</Heading>
@@ -133,7 +133,7 @@ export default function Home() {
                         </Box>
                         <Box>
                           <Link as="p" fontSize="sm" fontWeight="bold" mb={0}>{f.title}</Link>
-                          <Text fontSize="sm" mb={0}>{f.fileName}</Text>
+                          <Text fontSize="xs" fontFamily="monospace" mb={0}>{f.fileName}</Text>
                         </Box>
                       </HStack>
                     </Box>
