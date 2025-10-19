@@ -6,7 +6,7 @@ import { PublicationQuery, ListPublicationQuery } from '../../[...doi]/index.gql
 import { useQuery } from '../../../../query';
 import { useRouter } from 'next/router';
 import { print } from 'graphql';
-import { Button, Textarea } from '@codeday/topo/Atom';
+import { Button, Textarea, Skelly, Spinner } from '@codeday/topo/Atom';
 import Page from '../../../../components/Page';
 import { Content } from '@codeday/topo/Molecule';
 import { useMemo } from 'react';

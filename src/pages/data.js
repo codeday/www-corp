@@ -1,15 +1,13 @@
 import { print } from 'graphql';
 import { DateTime } from 'luxon';
 import { useRouter } from 'next/router';
-import Markdown from 'react-markdown';
-import { Text, Link, Heading, Skelly, Spinner, Box, Grid, Divider, HStack, List, ListItem } from '@codeday/topo/Atom';
+import { Text, Link, Heading, Skelly, Spinner, Box, List, ListItem } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
 import { apiFetch } from '@codeday/topo/utils';
 import Error404 from './404';
 import Page from '../components/Page';
 import { ListPublicationsQuery } from './data.gql';
 import { useQuery } from '../query';
-import { sign } from 'jsonwebtoken';
 
 export default function Home() {
   const { cms } = useQuery();
