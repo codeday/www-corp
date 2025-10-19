@@ -2,7 +2,7 @@ import { print } from 'graphql';
 import { DateTime } from 'luxon';
 import { useRouter } from 'next/router';
 import Markdown from 'react-markdown';
-import { Text, Link, Heading, Skelly, Spinner, Box, Grid, Divider, HStack } from '@codeday/topo/Atom';
+import { Text, Link, Heading, Skelly, Spinner, Box, Grid, Divider, HStack, Image } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
 import { apiFetch } from '@codeday/topo/utils';
 import Error404 from '../../404';
@@ -87,7 +87,7 @@ export default function Home() {
           {type}
         </Box>
         <Box mb={2}>
-          <Link fontSize="sm" href={`https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${doiSuffix}`}>
+          <Link fontFamily="monospace" fontSize="sm" href={`https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${doiSuffix}`}>
             https://doi.org/{process.env.NEXT_PUBLIC_DOI_PREFIX}/{doiSuffix}
           </Link>
         </Box>
@@ -96,18 +96,34 @@ export default function Home() {
       <Content>
         <Grid templateColumns={{ base: '1fr', md: '3fr 1fr' }} gap={4}>
           <Box>
-            <Grid
-              templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }}
+            <HStack
               gap={4}
               mb={12}
             >
               {contributors.map((c) => (
                 <Box key={c.username}>
-                  <Link fontSize="sm" fontWeight="bold" mb={0} href={`https://orcid.org/${c.orcid}`}>{c.name}</Link>
+                  
+                  <Box fontSize="md" fontWeight="bold" mb={0}>
+                    {c.name}
+                    {c.orcid && (
+                      <Link
+                        position="relative"
+                        top={0.5}
+                        display="inline-block"
+                        ml={2}
+                        mb={0}
+                        href={`https://orcid.org/${c.orcid}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Image src="/orcid.svg" h="16px" />
+                      </Link>
+                    )}
+                  </Box>
                   <Text fontSize="sm" mb={0}>{c.affiliation || 'CodeDay'}</Text>
                 </Box>
               ))}
-            </Grid>
+            </HStack>
 
             <Box mb={12}>
               <Heading fontSize="lg" mb={2}>{type === 'dataset' ? 'Description' : 'Abstract'}</Heading>
