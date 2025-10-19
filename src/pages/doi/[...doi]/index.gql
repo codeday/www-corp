@@ -12,6 +12,9 @@ query PublicationQuery($doiSuffix: String) {
   cms {
     publications(where: { doiSuffix: $doiSuffix }, limit: 1) {
       items {
+        sys {
+          publishedAt
+        }
         title
         description
         doiSuffix

@@ -19,15 +19,6 @@ function licenseToLink(license) {
   }
 }
 
-function getDateXml(name, dateString) {
-  const dateXml = xmlbuilder.create(name);
-  const date = DateTime.fromISO(dateString);
-  dateXml.ele('month', date.month);
-  dateXml.ele('day', date.day);
-  dateXml.ele('year', date.year);
-  return dateXml;
-}
-
 function getHeadXml(id) {
   const head = xmlbuilder.create('head');
   head.ele('doi_batch_id', id);
@@ -47,7 +38,7 @@ function getInstitutionXml(contributor) {
     } else {
       institution.ele('institution_name', process.env.NEXT_PUBLIC_INSTITUTION_NAME)
       institution.ele('institution_id', { type: 'ror' }, process.env.NEXT_PUBLIC_INSTITUTION_ROR)
-      institution.ele('institution_id', { type: 'insi' }, process.env.NEXT_PUBLIC_INSTITUTION_INSI)
+      institution.ele('institution_id', { type: 'isni' }, process.env.NEXT_PUBLIC_INSTITUTION_ISNI)
       institution.ele('institution_id', { type: 'wikidata' }, process.env.NEXT_PUBLIC_INSTITUTION_WIKIDATA);
     }
     return institution;
@@ -72,33 +63,33 @@ function getDatabaseXml(dataset) {
 
 function getContributorsXml(contributors) {
   const contributorsXml = xmlbuilder.create('contributors');
-  for (const contributor of contributors) {
-    const person = contributorsXml.ele('person_name', { contributor_role: 'author' });
+  for (const i in contributors) {
+    const contributor = contributors[i];
+    const person = contributorsXml.ele('person_name', { contributor_role: 'author', sequence: i === 0 ? 'first' : 'additional' });
     person.ele('given_name', contributor.givenName)
     person.ele('surname', contributor.familyName)
     person.ele('affiliations').importDocument(getInstitutionXml(contributor))
-    person.ele('ORCID', {authenticated: true}, contributor.orcid);
+    person.ele('ORCID', {authenticated: true}, `https://orcid.org/${contributor.orcid}`);
   }
   return contributorsXml;
 }
 
-function getDatasetXml({ title, description, contributors, doiSuffix, publicationDate, license, funderName, funderIdentifier }) {
+function getDatasetXml({ title, description, contributors, doiSuffix, publicationDate, license, funderName, funderIdentifier, sys }) {
   const dataset = xmlbuilder.create('dataset').att('dataset_type', 'collection');
   dataset.importDocument(getContributorsXml(contributors));
   dataset.ele('titles').ele('title', title);
-  dataset.ele('publisher_item').ele('item_number', { 'item_number_type': 'doi' }, `${process.env.NEXT_PUBLIC_DOI_PREFIX}/${doiSuffix}`);
+  dataset.ele('publisher_item').ele('item_number', { 'item_number_type': 'institution' }, doiSuffix);
   dataset.ele('description', { language: 'en' }, description.replace(/\n/g, ' '));
   dataset.ele('format', { 'mime_type': 'text/html' });
 
-  const date = dataset.ele('database_date');
-  date.importDocument(getDateXml('publication_date', publicationDate));
-
-  if (funderName) {
+  if (funderName || (funderIdentifier && funderIdentifier.startsWith('https://ror.org/'))) {
     const funder = dataset.ele('fr:program', { name: 'fundref' });
     const funderGroup = funder.ele('fr:assertion', { name: 'fundgroup' });
-    const funderNameXml = funderGroup.ele('fr:assertion', { name: 'funder_name' }, funderName);
-    if (funderIdentifier) {
-      funderNameXml.ele('fr:assertion', { name: 'funder_identifier' }, funderIdentifier);
+
+    if (funderIdentifier && funderIdentifier.startsWith('https://ror.org/')) {
+      funderGroup.ele('fr:assertion', { name: 'ror' }, funderIdentifier);
+    } else {
+      funderGroup.ele('fr:assertion', { name: 'funder_name' }, funderName);
     }
   }
 
@@ -127,9 +118,10 @@ function getCrossrefXml(publication, id) {
     .att('version', '5.4.0');
 
   root.importDocument(getHeadXml(id));
+  const body = root.ele('body');
 
   if (publication.type === 'dataset') {
-    root.importDocument(
+    body.importDocument(
       getDatabaseXml(
         getDatasetXml(publication)
       )
