@@ -69,7 +69,7 @@ function getContributorsXml(contributors) {
     person.ele('given_name', contributor.givenName)
     person.ele('surname', contributor.familyName)
     person.ele('affiliations').importDocument(getInstitutionXml(contributor))
-    person.ele('ORCID', {authenticated: true}, `https://orcid.org/${contributor.orcid}`);
+    if (contributor.orcid) person.ele('ORCID', {authenticated: true}, `https://orcid.org/${contributor.orcid}`);
   }
   return contributorsXml;
 }
