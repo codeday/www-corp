@@ -1,0 +1,16 @@
+query ListPublicationsQuery {
+  cms {
+    publications (where: { type: "dataset" }) {
+      items {
+        title
+        doiSuffix
+        publicationDate
+        license
+        contributors {
+          name
+          affiliation
+        }
+      }
+    }
+  }
+}
