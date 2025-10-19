@@ -96,12 +96,13 @@ export default function Home() {
       <Content>
         <Grid templateColumns={{ base: '1fr', md: '3fr 1fr' }} gap={4}>
           <Box>
-            <HStack
-              gap={4}
+            <Box
+              display={{ base: 'block', md: 'flex' }}
+              gap={{ base: 0, md: 6 }}
               mb={12}
             >
               {contributors.map((c) => (
-                <Box key={c.username}>
+                <Box key={c.username} mb={4}>
                   
                   <Box fontSize="md" fontWeight="bold" mb={0}>
                     {c.name}
@@ -120,10 +121,10 @@ export default function Home() {
                       </Link>
                     )}
                   </Box>
-                  <Text fontSize="sm" mb={0}>{c.affiliation || 'CodeDay'}</Text>
+                  <Text fontSize="xs" mt={-1} mb={0}>{c.affiliation || 'CodeDay'}</Text>
                 </Box>
               ))}
-            </HStack>
+            </Box>
 
             <Box mb={12}>
               <Heading fontSize="lg" mb={2}>{type === 'dataset' ? 'Description' : 'Abstract'}</Heading>
