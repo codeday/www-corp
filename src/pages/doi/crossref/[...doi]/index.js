@@ -51,6 +51,14 @@ function getDoiDataXml(doi, resource) {
   return doiData;
 }
 
+function getDateXml(elem, date) {
+  const dateXml = xmlbuilder.create(elem);
+  dateXml.ele('month', date.toFormat('MM'));
+  dateXml.ele('day', date.toFormat('dd'));
+  dateXml.ele('year', date.toFormat('yyyy'));
+  return dateXml;
+}
+
 function getDatabaseXml(dataset) {
   const database = xmlbuilder.create('database');
   const metadata = database.ele('database_metadata', { language: 'en' });
@@ -104,6 +112,35 @@ function getDatasetXml({ title, description, contributors, doiSuffix, publicatio
     ));
   return dataset;
 }
+
+function getPostedContentXml({ type, title, description, contributors, doiSuffix, publicationDate, license, funderName, funderIdentifier, sys }) {
+  const dataset = xmlbuilder.create('posted_content').att('type', type);
+  dataset.importDocument(getContributorsXml(contributors));
+  dataset.ele('titles').ele('title', title);
+  dataset.importDocument(getDateXml('posted_date', DateTime.fromISO(publicationDate)));
+
+  if (funderName || (funderIdentifier && funderIdentifier.startsWith('https://ror.org/'))) {
+    const funder = dataset.ele('fr:program', { name: 'fundref' });
+    const funderGroup = funder.ele('fr:assertion', { name: 'fundgroup' });
+
+    if (funderIdentifier && funderIdentifier.startsWith('https://ror.org/')) {
+      funderGroup.ele('fr:assertion', { name: 'ror' }, funderIdentifier);
+    } else {
+      funderGroup.ele('fr:assertion', { name: 'funder_name' }, funderName);
+    }
+  }
+
+  const licenseXml = dataset.ele('ai:program', { name: 'AccessIndicators' });
+  licenseXml.ele('ai:free_to_read');
+  licenseXml.ele('ai:license_ref', { applies_to: 'vor' }, licenseToLink(license));
+
+  dataset.importDocument(
+    getDoiDataXml(
+      `${process.env.NEXT_PUBLIC_DOI_PREFIX}/${doiSuffix}`,
+      `https://www.codeday.org/doi/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${doiSuffix}`
+    ));
+  return dataset;
+}
   
 
 function getCrossrefXml(publication, id) {
@@ -125,6 +162,10 @@ function getCrossrefXml(publication, id) {
       getDatabaseXml(
         getDatasetXml(publication)
       )
+    );
+  } else if (['dissertation', 'preprint', 'other'].includes(publication.type)) {
+    body.importDocument(
+      getPostedContentXml(publication)
     );
   }
 
