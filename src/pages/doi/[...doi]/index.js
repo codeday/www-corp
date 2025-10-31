@@ -22,6 +22,8 @@ function getCitation(publication) {
   const citationAuthors = publication.contributors.map((c) => `${c.familyName}, ${c.givenName}`).join('; ');
   if (publication.type === 'dataset') {
     return `${citationAuthors}, ${DateTime.fromISO(publication.publicationDate).toFormat('yyyy')}, "${publication.title.replace(/"/g, '\'')}", https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${publication.doiSuffix}, CodeDay`;
+  } else if (publication.type === 'other') {
+    return `${citationAuthors}, ${DateTime.fromISO(publication.publicationDate).toFormat('yyyy')}, "${publication.title.replace(/"/g, '\'')}", https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${publication.doiSuffix}, CodeDay`;
   }
 }
 
@@ -66,7 +68,7 @@ export default function Home() {
     return <Error404 />;
   }
 
-  const { title, type, description, contributors, files, doiSuffix, publicationDate, license, funderName } = cms.publications.items[0];
+  const { title, venue, type, description, contributors, files, doiSuffix, publicationDate, license, funderName } = cms.publications.items[0];
 
   return (
     <Page slug={`/doi/${query.doi}`} title={title}>
@@ -99,7 +101,7 @@ export default function Home() {
             <Box
               display={{ base: 'block', md: 'flex' }}
               gap={{ base: 0, md: 6 }}
-              mb={12}
+              mb={6}
             >
               {contributors.map((c) => (
                 <Box key={c.username} mb={4}>
@@ -167,6 +169,13 @@ export default function Home() {
               <Heading fontSize="sm" mb={0}>Published</Heading>
               <Text fontSize="2xs" fontFamily="monospace" mb={2}>{DateTime.fromISO(publicationDate).toFormat('yyyy-MM-dd')}</Text>
               <Divider mb={2} />
+              {venue && (
+                <>
+                  <Heading fontSize="sm" mb={0}>Venue</Heading>
+                  <Text fontSize="2xs" fontFamily="monospace" mb={2}>{venue}</Text>
+                  <Divider mb={2} />
+                </>
+              )}
               <Heading fontSize="sm" mb={0}>License</Heading>
               <Text fontSize="2xs" fontFamily="monospace" mb={2}>{license}</Text>
               <Divider mb={2} />
