@@ -114,7 +114,7 @@ function getDatasetXml({ title, description, contributors, doiSuffix, publicatio
 }
 
 function getPostedContentXml({ type, title, description, contributors, doiSuffix, publicationDate, license, funderName, funderIdentifier, sys }) {
-  const dataset = xmlbuilder.create('posted_content').att('type', type);
+  const dataset = xmlbuilder.create('posted_content').att('type', ['presentation', 'proposal'].includes(type) ? 'other' : type);
   dataset.importDocument(getContributorsXml(contributors));
   dataset.ele('titles').ele('title', title);
   dataset.importDocument(getDateXml('posted_date', DateTime.fromISO(publicationDate)));
@@ -163,7 +163,7 @@ function getCrossrefXml(publication, id) {
         getDatasetXml(publication)
       )
     );
-  } else if (['dissertation', 'preprint', 'other'].includes(publication.type)) {
+  } else if (['dissertation', 'preprint', 'presentation', 'proposal', 'other'].includes(publication.type)) {
     body.importDocument(
       getPostedContentXml(publication)
     );

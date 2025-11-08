@@ -22,6 +22,10 @@ function getCitation(publication) {
   const citationAuthors = publication.contributors.map((c) => `${c.familyName}, ${c.givenName}`).join('; ');
   if (publication.type === 'dataset') {
     return `${citationAuthors}, ${DateTime.fromISO(publication.publicationDate).toFormat('yyyy')}, "${publication.title.replace(/"/g, '\'')}", https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${publication.doiSuffix}, CodeDay`;
+  } else if (publication.type === 'presentation') {
+    return `${citationAuthors}, ${DateTime.fromISO(publication.publicationDate).toFormat('yyyy')}, "${publication.title.replace(/"/g, '\'')}", https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${publication.doiSuffix}, CodeDay`;
+  } else if (publication.type === 'proposal') {
+    return `${citationAuthors}, ${DateTime.fromISO(publication.publicationDate).toFormat('yyyy')}, "${publication.title.replace(/"/g, '\'')}", https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${publication.doiSuffix}, CodeDay`;
   } else if (publication.type === 'other') {
     return `${citationAuthors}, ${DateTime.fromISO(publication.publicationDate).toFormat('yyyy')}, "${publication.title.replace(/"/g, '\'')}", https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${publication.doiSuffix}, CodeDay`;
   }
@@ -73,26 +77,17 @@ export default function Home() {
   return (
     <Page slug={`/doi/${query.doi}`} title={title}>
       <Content mt={-8} mb={2}>
-        <Box
+        <Text
+          display="inline-block"
           fontSize="xs"
+          textTransform="uppercase"
           mb={2}
           fontWeight="bold"
-          p={1}
-          pl={2}
-          pr={2}
-          bg="gray.100"
-          color="black" 
-          borderRadius="md"
-          display="inline-block"
-          textTransform="uppercase"
+          fontStyle="italic"
         >
-          {type}
-        </Box>
-        <Box mb={2}>
-          <Link fontFamily="monospace" fontSize="sm" href={`https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${doiSuffix}`}>
-            https://doi.org/{process.env.NEXT_PUBLIC_DOI_PREFIX}/{doiSuffix}
-          </Link>
-        </Box>
+          {type === 'other' ? '' : type}
+          {['preprint', 'working_paper', 'letter', 'dissertation', 'report', 'review', 'presentation', 'proposal', 'other'].includes(type) ? `${type !== 'other' ? ' - ' : ''}not formally published` : ''}
+        </Text>
         <Heading as="h2" fontSize={{ base: '2xl', md: '4xl' }} mb={2}>{title}</Heading>
       </Content>
       <Content>
@@ -164,7 +159,7 @@ export default function Home() {
           <Box>
             <Box borderWidth={1} borderRadius="md" p={4}>
               <Heading fontSize="sm" mb={0}>DOI</Heading>
-              <Text fontSize="2xs" fontFamily="monospace" mb={2}>{process.env.NEXT_PUBLIC_DOI_PREFIX}/{doiSuffix}</Text>
+              <Link href={`https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${doiSuffix}`} fontSize="2xs" fontFamily="monospace" mb={2}>doi.org/{process.env.NEXT_PUBLIC_DOI_PREFIX}/{doiSuffix}</Link>
               <Divider mb={2} />
               <Heading fontSize="sm" mb={0}>Published</Heading>
               <Text fontSize="2xs" fontFamily="monospace" mb={2}>{DateTime.fromISO(publicationDate).toFormat('yyyy-MM-dd')}</Text>
