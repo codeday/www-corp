@@ -2,7 +2,7 @@ import { print } from 'graphql';
 import { DateTime } from 'luxon';
 import { useRouter } from 'next/router';
 import Markdown from 'react-markdown';
-import { Text, Link, Heading, Skelly, Spinner, Box, Grid, Divider, HStack, Image } from '@codeday/topo/Atom';
+import { Text, Link, Heading, Skelly, Spinner, Box, Grid, Divider, HStack, Image, Button } from '@codeday/topo/Atom';
 import { Content } from '@codeday/topo/Molecule';
 import { apiFetch } from '@codeday/topo/utils';
 import Error404 from '../../404';
@@ -130,31 +130,49 @@ export default function Home() {
               </Text>
             </Box>
 
-            <Box>
-              <Heading fontSize="lg" mb={2}>Files</Heading>
-              <Grid
-                autoFlow="column"
-                templateRows={{ base: `repeat(${files.items.length}, 1fr)`, md: `repeat(${Math.ceil(files.items.length/2)}, 1fr)` }}
-                templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
-                gap={2}
+            {files.items.length === 1 ? (
+              <>
+              <Button
+                as="a"
+                display="inline-block"
+                colorScheme="blue"
+                size="lg"
+                href={files.items[0].contentfulBaseUrl}
               >
-                {files.items.map((f) => (
-                  <Box key={f.contentfulBaseUrl}>
-                    <Box as="a" href={f.contentfulBaseUrl}>
-                      <HStack>
-                        <Box fontSize="2xl" position="relative" top={1}>
-                          <FileIcon file={f} />
-                        </Box>
-                        <Box>
-                          <Link as="p" fontSize="sm" fontWeight="bold" mb={0}>{f.title}</Link>
-                          <Text fontSize="xs" fontFamily="monospace" mb={0}>{f.fileName}</Text>
-                        </Box>
-                      </HStack>
+                <Text mb={0} mt={1.5}>Download</Text>
+                <Text fontSize="xs" mt={0} mb={0}>
+                  <FileIcon file={files.items[0]} />{' '}
+                  {files.items[0].fileName}
+                </Text>
+              </Button>
+              </>
+            ) : (
+              <Box>
+                <Heading fontSize="lg" mb={2}>Files</Heading>
+                <Grid
+                  autoFlow="column"
+                  templateRows={{ base: `repeat(${files.items.length}, 1fr)`, md: `repeat(${Math.ceil(files.items.length/2)}, 1fr)` }}
+                  templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
+                  gap={2}
+                >
+                  {files.items.map((f) => (
+                    <Box key={f.contentfulBaseUrl}>
+                      <Box as="a" href={f.contentfulBaseUrl}>
+                        <HStack>
+                          <Box fontSize="2xl" position="relative" top={1}>
+                            <FileIcon file={f} />
+                          </Box>
+                          <Box>
+                            <Link as="p" fontSize="sm" fontWeight="bold" mb={0}>{f.title}</Link>
+                            <Text fontSize="xs" fontFamily="monospace" mb={0}>{f.fileName}</Text>
+                          </Box>
+                        </HStack>
+                      </Box>
                     </Box>
-                  </Box>
-                ))}
-              </Grid>
-            </Box>
+                  ))}
+                </Grid>
+              </Box>
+            )}
           </Box>
           <Box>
             <Box borderWidth={1} borderRadius="md" p={4}>
