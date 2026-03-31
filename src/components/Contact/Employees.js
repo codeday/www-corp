@@ -55,7 +55,7 @@ export default function Employees(props) {
                 alt=""
               />
               <Box position="relative" top={-1}>
-                <Link href={`mailto:${emp.username}@codeday.org`} mb={0} pt={2} fontWeight="bold">{emp.name}</Link>
+                <Link href={`mailto:${emp.username}@codeday.org`} mb={0} pt={2} fontWeight="bold">{emp.givenName} {emp.familyName}</Link>
                 <Text mt={0} display="block" mb={0} p={0} fontSize="sm" color="current.textLight">{emp.title.split(' - ').slice(0,1) || 'Staff'}</Text>
               </Box>
             </Box>

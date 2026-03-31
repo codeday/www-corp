@@ -38,8 +38,8 @@ export default function Home({ seed }) {
   const justVolunteers = shuffle(volunteers.filter((v) => !otherIds.includes(v.id)), seed);
   const uniqueBoard = board.filter((director) => !employeeIds.includes(director.id));
 
-  const boardEmeritusNames = boardEmeritus.map(e => toTitleCase(e.name).replace(/( \.| \*)/g, ''));
-  const emeritusNames = emeritus.map(e => toTitleCase(e.name).replace(/( \.| \*)/g, ''));
+  const boardEmeritusNames = boardEmeritus.map(e => toTitleCase(e.givenName + ' ' + e.familyName).replace(/( \.| \*)/g, ''));
+  const emeritusNames = emeritus.map(e => toTitleCase(e.givenName + ' ' + e.familyName).replace(/( \.| \*)/g, ''));
 
   const volunteerNames = [...(
     new Set(

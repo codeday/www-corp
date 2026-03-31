@@ -3,7 +3,8 @@ query ContactQuery {
     employees: roleUsers (roleId: "rol_llN0357VXrEoIxoj") {
       id
       username
-      name
+      givenName
+      familyName
       title
       picture
       bio
@@ -13,7 +14,8 @@ query ContactQuery {
     otherTeam: roleUsers (roleId: "rol_6t902YZpsOynmWDt") {
       id
       username
-      name
+      givenName
+      familyName
       title
       picture
       bio
@@ -23,7 +25,8 @@ query ContactQuery {
     contractors: roleUsers (roleId: "rol_kQxfFcpISf1SyqPw") {
       id
       username
-      name
+      givenName
+      familyName
       title
       picture
       bio
@@ -52,7 +55,8 @@ query ContactQuery {
     emeritus: roleUsers (roleId: "rol_H5SU2E05hXd2m9pJ") {
       id
       username
-      name
+      givenName
+      familyName
       picture
       pronoun
     }
@@ -60,7 +64,8 @@ query ContactQuery {
     boardEmeritus: roleUsers (roleId: "rol_gbGvK17xrmrpCykr") {
       id
       username
-      name
+      givenName
+      familyName
       picture
       pronoun
     }

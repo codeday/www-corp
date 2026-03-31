@@ -1,0 +1,18 @@
+query LegalPathsQuery {
+  notion {
+    pages(parentSlug:"legal") {
+      slug
+    }
+  }
+}
+
+query LegalContentQuery($slug: String!, $parentSlug: String!) {
+  notion {
+    page(slug:$slug, parentSlug:$parentSlug) {
+      title
+      slug
+      content
+    }
+  }
+}
+  

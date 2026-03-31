@@ -68,7 +68,7 @@ export default function Page ({ children, title, darkHeader, slug, seo, fun=fals
             <Button as="a" variant="ghost" href="/edu">Educators</Button>
             <Button as="a" variant="ghost" href="/volunteer">Volunteer</Button>
             <Button as="a" variant="ghost" href="/press">Press</Button>
-            {/*
+            
             <Box mt={-4} display="inline-block" minW="129px" maxH="48px">
               <Script
                 strategy="afterInteractive"
@@ -89,7 +89,7 @@ export default function Page ({ children, title, darkHeader, slug, seo, fun=fals
                 </Box>
               </Fade>
             </Box>
-            */}
+            
           </Menu>
         </Header>
         <Main>
