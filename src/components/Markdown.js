@@ -2,7 +2,7 @@ import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import RemarkGFM from 'remark-gfm';
-import { Heading, Text, List, ListItem } from '@codeday/topo/Atom';
+import { Heading, Text, List, ListItem, Box } from '@codeday/topo/Atom';
 import rehypeRaw from 'rehype-raw';
 
 const HEADING_SIZES = ['4xl', '3xl', 'xl', 'md', 'md', 'md'];
@@ -37,9 +37,10 @@ const Markdown = ({ baseHeadingLevel, allowHtml, ...props }) => {
     h4: h(4),
     h5: h(5),
     h6: h(6),
+    tr: (props) => <Box as="tr" {...props} style={{ verticalAlign: 'top' }} />,
     p: (props) => <Text mb={4} {...props} />,
-    ol: (props) => <List mb={6} mt={6} styleType="decimal" {...props} />,
-    ul: (props) => <List mb={6} mt={6} styleType="disc" {...props} />,
+    ol: (props) => <List mb={6} styleType="decimal" {...props} />,
+    ul: (props) => <List mb={6} styleType="disc" {...props} />,
     li: (props) => <ListItem mb={1} ml={4} pl={4} {...props} />,
   };
   return (

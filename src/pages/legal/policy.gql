@@ -16,3 +16,13 @@ query LegalContentQuery($slug: String!, $parentSlug: String!) {
   }
 }
   
+query TermageddonLegalContentQuery {
+  termageddon {
+    terms(locale:"en-US") {
+      disclaimer
+      tos
+      cookies: cookiePolicy
+      privacy: privacyPolicy
+    }
+  }
+}

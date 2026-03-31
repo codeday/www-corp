@@ -48,6 +48,26 @@ module.exports = {
         permanent: false,
       },
       {
+        source: '/legal/privacy/controls',
+        destination: '/f/data-controls',
+        permanent: false,
+      },
+      {
+        source: '/privacy',
+        destination: '/legal/privacy',
+        permanent: false,
+      },
+      {
+        source: '/privacy/third-party',
+        destination: '/legal/privacy',
+        permanent: false,
+      },
+      {
+        source: '/conduct',
+        destination: '/legal/code-of-conduct',
+        permanent: false,
+      },
+      {
         source: '/conduct/report',
         destination: '/f/conduct-report',
         permanent: false,

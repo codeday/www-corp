@@ -6,11 +6,16 @@ import { apiFetch } from '@codeday/topo/utils';
 import Page from '../../components/Page';
 import Markdown from '../../components/Markdown';
 import { useQuery } from '../../query';
-import { LegalPathsQuery, LegalContentQuery } from './policy.gql';
+import { LegalPathsQuery, LegalContentQuery, TermageddonLegalContentQuery } from './policy.gql';
 
-export default function PrivacyPolicy({ query }) {
-  console.log(query);
-  const { page } = useQuery().notion;
+const TERMAGEDDON_POLICIES = ['tos', 'privacy', 'cookies', 'disclaimer'];
+
+export default function Policy({ query, slug }) {
+  
+  const { termageddon, notion } = useQuery();
+  const page = TERMAGEDDON_POLICIES.includes(slug)
+    ? { content: termageddon.terms[slug], title: slug.charAt(0).toUpperCase() + slug.slice(1) }
+    : notion?.page || { content: '', title: 'Not Found' };
 
   return (
     <Page title={page.title} slug={`/legal/${page.slug}`}>
@@ -25,16 +30,30 @@ export default function PrivacyPolicy({ query }) {
 export async function getStaticPaths() {
   const { notion } = await apiFetch(print(LegalPathsQuery));
   return {
-    paths: notion.pages.map((p) => ({ params: { policy: p.slug } })),
+    paths: [
+      ...notion.pages.map((p) => ({ params: { policy: p.slug } })),
+      ...TERMAGEDDON_POLICIES.map((p) => ({ params: { policy: p } })),
+    ],
     fallback: true,
   };
 }
 
 export async function getStaticProps({ params }) {
-  return {
-    props: {
-      query: await apiFetch(print(LegalContentQuery), { slug: params.policy, parentSlug: 'legal' }),
-    },
-    revalidate: 300,
-  };
+  if (TERMAGEDDON_POLICIES.includes(params.policy)) {
+    return {
+      props: {
+        query: await apiFetch(print(TermageddonLegalContentQuery)),
+        slug: params.policy,
+      },
+      revalidate: 300,
+    };
+  } else {
+    return {
+      props: {
+        query: await apiFetch(print(LegalContentQuery), { slug: params.policy, parentSlug: 'legal' }),
+        slug: params.policy,
+      },
+      revalidate: 300,
+    };
+  }
 }
