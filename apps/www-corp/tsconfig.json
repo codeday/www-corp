@@ -1,0 +1,16 @@
+{
+  "extends": "@codeday/tsconfig/nextjs.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "typeRoots": ["./src/@types"]
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

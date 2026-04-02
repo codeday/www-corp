@@ -1,0 +1,11 @@
+{
+  "extends": "@codeday/tsconfig/react-library.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "paths": {
+      "@codeday/topo/*": ["./src/*"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

@@ -5,3 +5,6 @@ node_modules/
 .idea
 .graphqlconfig
 schema.graphql
+*.tsbuildinfo
+.turbo/
+.turbo

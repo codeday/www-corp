@@ -1,0 +1,39 @@
+import React from "react";
+import {
+  forwardRef,
+  Box as ChakraBox,
+  type BoxProps as ChakraBoxProps,
+  type ComponentWithAs,
+} from "@chakra-ui/react";
+import { useTheme } from "@codeday/topo/utils";
+import { dereferenceDottedString } from "@codeday/topo/_utils";
+
+interface BoxProps extends ChakraBoxProps {
+  grad?: string;
+  visuallyHidden?: boolean;
+}
+
+const Box: ComponentWithAs<"div", BoxProps> = forwardRef<BoxProps, "div">(
+  ({ grad, visuallyHidden, ...props }, ref) => {
+    const theme = useTheme();
+    const hiddenProps = {
+      fontSize: "0",
+      width: "1px",
+      height: "1px",
+      display: "inline-block",
+      overflow: "hidden",
+      border: "none",
+      padding: "0",
+      margin: "0",
+    };
+    return (
+      <ChakraBox
+        ref={ref}
+        bgImg={grad && dereferenceDottedString(grad, theme.colors.grad)}
+        {...props}
+        {...(visuallyHidden ? hiddenProps : {})}
+      />
+    );
+  }
+);
+export { Box, type BoxProps };
