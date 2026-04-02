@@ -5,9 +5,8 @@ import { Collapse } from '@chakra-ui/transition';
 import { Box, Button, Text, Heading, HStack, VStack, TextInput, Divider, Checkbox, Radio, Link } from '@codeday/topo/Atom';
 import { DataCollection } from '@codeday/topo/Molecule';
 import { useToasts } from '@codeday/topo/utils';
-import LinkedInTag from 'react-linkedin-insight';
 import { useAfterMountEffect } from '../../utils/useAfterMountEffect';
-import { useUtmSource } from '../../utils/useUtmSource';
+import { useMarketing } from '../../providers';
 
 
 // https://stackoverflow.com/a/48981669
@@ -48,6 +47,7 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [linkedin, setLinkedin] = useState('');
+  const { linkedInConversion } = useMarketing();
   const [region, setRegion] = useState(startRegion);
   const [isOrganize, setIsOrganize] = useState(false);
   const [commitmentLevel, setCommitmentLevel] = useState(0);
@@ -175,7 +175,6 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
   useAfterMountEffect(() => {
     if (!hasStarted) {
       global.analytics?.track('volunteer.started', { style: 'full' });
-      LinkedInTag.init('1831116', null, false);
     }
     setHasStarted(true);
   }, [background, hasStarted]);
@@ -183,6 +182,7 @@ export default function Wizard({ events, formRef, startBackground='', startRegio
   useAfterMountEffect(() => {
     if(isFinalPage) {
       global.analytics?.track('volunteer.submitted');
+      linkedInConversion('volunteer.submitted');
       if (email) global.analytics?.identify(email);
     } else {
       global.analytics?.track('volunteer.partial', {

@@ -37,10 +37,12 @@ export default function Programs() {
   const registrationOpenWebnames = events.filter((e) => e.registrationsOpen).map((e) => e.contentfulWebname);
   const upcomingNameOverrides = Object.fromEntries(events.map((e) => [e.contentfulWebname, e.name]));
 
-  useEffect(async () => {
-    if (typeof window === 'undefined') return;
-    const res = await apiFetch(print(GetMyLocation));
-    setGeo(res?.geo?.mine);
+  useEffect(() => {
+    (async () => {
+      if (typeof window === 'undefined') return;
+      const res = await apiFetch(print(GetMyLocation));
+      setGeo(res?.geo?.mine);
+    })();
   }, [typeof window, setGeo, apiFetch]);
 
   const sortedRegions = (regions?.items || [])

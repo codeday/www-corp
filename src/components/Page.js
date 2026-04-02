@@ -5,31 +5,20 @@ import { Box, CodeDay, Button, Link, Text } from '@codeday/topo/Atom';
 import { Header, SiteLogo, Main, Menu, Footer, CustomLinks } from '@codeday/topo/Organism';
 import { Fade, useColorModeValue } from '@chakra-ui/react';
 import { useQuery } from '../query';
-import Script from 'next/script';
 import { Content } from '@codeday/topo/Molecule';
+import { useFundraise } from '../providers';
 
 const DOMAIN = 'https://www.codeday.org';
 const FUNDRAISE_UP_BUTTON_ID = 'XBSBRRMF';
 
 export default function Page ({ children, title, darkHeader, slug, seo, fun=false }) {
-  const [hasLoaded, setHasLoaded] = useState(false)
   const { cms } = useQuery();
   const { mission, globalSponsors } = cms || {};
-  const [isFundraiseLoaded, setIsFundraiseLoaded] = useState(false)
+  const { isFundraiseLoaded } = useFundraise();
   const bgColor = useColorModeValue('white', '#292929' /* equiv to gray.1100 */);
 
   const disclaimerTexts = (cms?.globalSponsors?.items || []).flatMap((sponsor) => sponsor.legalDisclaimer.split(`\n`)).filter(Boolean);
 
-  useEffect(() => setHasLoaded(true))
-
-  useEffect(() => {
-    if (isFundraiseLoaded) {
-      const donateEl = document.getElementById(FUNDRAISE_UP_BUTTON_ID);
-      if (donateEl instanceof HTMLIFrameElement && donateEl.contentDocument.body) {
-        donateEl.contentDocument.body.style.backgroundColor = bgColor;
-      }
-    }
-  }, [bgColor, isFundraiseLoaded]);
 
   return (
     <Box overflow="hidden">
@@ -70,19 +59,6 @@ export default function Page ({ children, title, darkHeader, slug, seo, fun=fals
             <Button as="a" variant="ghost" href="/press">Press</Button>
             
             <Box mt={-4} display="inline-block" minW="129px" maxH="48px">
-              <Script
-                strategy="afterInteractive"
-                src="https://cdn.fundraiseup.com/widget/AHCSATYN"
-                onLoad={() => {
-                  // this feels very hacky and bad, but I don't think there's a better way to do this?
-                  const checkLoadedTask = setInterval(() => {
-                    if (document.getElementById(FUNDRAISE_UP_BUTTON_ID) instanceof HTMLIFrameElement) {
-                      setIsFundraiseLoaded(true);
-                      clearInterval(checkLoadedTask);
-                    }
-                  }, 500);
-                }}
-              />
               <Fade in={isFundraiseLoaded}>
                 <Box>
                   <a href={`#${FUNDRAISE_UP_BUTTON_ID}`} />

@@ -39,7 +39,7 @@ export default function Sponsors(props) {
                 backgroundPosition="50% 50%"
                 backgroundRepeat="no-repeat"
                 minHeight={16}
-                backgroundOrigin="content-box"
+                style={{ backgroundOrigin: "content-box" }}
                 aria-label={sponsor.name}
               />
             ))}
