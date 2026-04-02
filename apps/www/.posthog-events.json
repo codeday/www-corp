@@ -1,0 +1,42 @@
+[
+  {
+    "event": "volunteer_wizard_started",
+    "description": "User begins interacting with the volunteer sign-up wizard",
+    "file": "src/components/Volunteer/Wizard.tsx"
+  },
+  {
+    "event": "volunteer_wizard_page_advanced",
+    "description": "User advances to a new page in the volunteer wizard",
+    "file": "src/components/Volunteer/Wizard.tsx"
+  },
+  {
+    "event": "volunteer_wizard_completed",
+    "description": "User reaches the final confirmation page after submitting the volunteer form",
+    "file": "src/components/Volunteer/Wizard.tsx"
+  },
+  {
+    "event": "volunteer_remind_me_submitted",
+    "description": "User submits their email for a volunteer reminder link",
+    "file": "src/components/Volunteer/RemindMe.tsx"
+  },
+  {
+    "event": "volunteer_application_submitted",
+    "description": "Server-side: volunteer application received and processed",
+    "file": "src/pages/api/applyAsVolunteer.ts"
+  },
+  {
+    "event": "event_viewed",
+    "description": "User views a CodeDay calendar event page (top of event registration funnel)",
+    "file": "src/pages/e/[calendarId]/[eventId]/index.tsx"
+  },
+  {
+    "event": "form_viewed",
+    "description": "User views a CMS-managed form page (top of form submission funnel)",
+    "file": "src/pages/f/[slug].tsx"
+  },
+  {
+    "event": "donation_page_viewed",
+    "description": "User views the donation page (top of donation funnel)",
+    "file": "src/pages/donate.tsx"
+  }
+]

@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const UiCheck = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M20.262 4.357a.96.96 0 0 1 1.396-.104c.414.374.458 1.027.1 1.459L10.502 19.286a1.92 1.92 0 0 1-2.792.209 2 2 0 0 1-.194-.201l-5.271-6.297a1.067 1.067 0 0 1 .093-1.46.96.96 0 0 1 1.397.098l5.271 6.296z" /></Icon>;

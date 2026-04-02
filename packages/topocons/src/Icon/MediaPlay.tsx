@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const MediaPlay = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M17.984 12.001 7 5.725v12.553zm2.512.869-14 8A1 1 0 0 1 5 20V4a1 1 0 0 1 1.496-.868l14 8a1 1 0 0 1 0 1.737" /></Icon>;

@@ -2,7 +2,14 @@ import { UiX as X } from "@codeday/topocons";
 import React, { useEffect, useReducer } from "react";
 import useSwr from "swr";
 import { useColorMode } from "@chakra-ui/react";
-import { Box, type BoxProps, Button, Grid, Link, Text } from "@codeday/topo/Atom";
+import {
+  Box,
+  type BoxProps,
+  Button,
+  Grid,
+  Link,
+  Text,
+} from "@codeday/topo/Atom";
 import { Content } from "@codeday/topo/Molecule";
 import { useTheme, apiFetch, useLocalStorage } from "@codeday/topo/utils";
 
@@ -36,12 +43,13 @@ const query = (date: string, visibility: any) => `{
   }
 }`;
 
-
 // From https://stackoverflow.com/a/21739514
 function roundTimeQuarterHour(time: Date) {
   var timeToReturn = new Date(time);
 
-  timeToReturn.setMilliseconds(Math.round(timeToReturn.getMilliseconds() / 1000) * 1000);
+  timeToReturn.setMilliseconds(
+    Math.round(timeToReturn.getMilliseconds() / 1000) * 1000,
+  );
   timeToReturn.setSeconds(Math.round(timeToReturn.getSeconds() / 60) * 60);
   timeToReturn.setMinutes(Math.round(timeToReturn.getMinutes() / 15) * 15);
   return timeToReturn;
@@ -71,7 +79,7 @@ function Announcement({ box, ...props }: AnnouncementProps) {
   });
   const [dismissedMessages, setDismissedMessages] = useLocalStorage(
     "topoDismissedAnnouncements",
-    []
+    [],
   );
 
   const dark = colorMode === "dark";
@@ -86,12 +94,12 @@ function Announcement({ box, ...props }: AnnouncementProps) {
               i.programs.items.length === 0 ||
               i.programs.items
                 .map((p: { webname: any }) => p.webname)
-                .includes(programWebname)
+                .includes(programWebname),
           )
           .sort(
             (
               a: { programs: { items: string | any[] }; displayAt: any },
-              b: { programs: { items: string | any[] }; displayAt: any }
+              b: { programs: { items: string | any[] }; displayAt: any },
             ) => {
               if (
                 a.programs.items.length > 0 &&
@@ -101,7 +109,7 @@ function Announcement({ box, ...props }: AnnouncementProps) {
               }
 
               return fromIso(a.displayAt) > fromIso(b.displayAt) ? -1 : 1;
-            }
+            },
           );
 
   const item = sortedItems ? sortedItems[0] : null;
@@ -113,11 +121,13 @@ function Announcement({ box, ...props }: AnnouncementProps) {
 
   if (!item) return <></>;
 
-  const baseColor = {
-    New: "blue",
-    Improved: "indigo",
-    Alert: "red",
-  }[item.type];
+  const baseColor = (
+    {
+      New: "blue",
+      Improved: "indigo",
+      Alert: "red",
+    } as Record<string, string>
+  )[item.type];
 
   if (box) {
     return (

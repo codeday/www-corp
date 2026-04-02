@@ -9,9 +9,10 @@ export default function Menu({ children, ...props }: BoxProps) {
       {/* {children} */}
       {reactChildrenMapRecursive(children, (child) =>
         React.cloneElement(child as React.ReactElement, {
+          //@ts-ignore
           textDecoration: "none",
           transition: "all 0.5s ease-in-out",
-        })
+        }),
       )}
     </Box>
   );

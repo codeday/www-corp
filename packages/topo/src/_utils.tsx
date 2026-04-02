@@ -17,7 +17,7 @@ export const dereferenceDottedString = (str: string, obj: any) =>
 export const debounce = (
   func: { apply: (arg0: undefined, arg1: any[]) => void },
   wait: number | undefined,
-  immediate: any
+  immediate: any,
 ) => {
   let timeout: number | undefined;
   return (...args: any[]) => {
@@ -35,13 +35,13 @@ export const debounce = (
 
 export const reactChildrenMapRecursive = (
   children: React.ReactNode,
-  fn: (child: React.ReactNode) => React.ReactNode
+  fn: (child: React.ReactNode) => React.ReactNode,
 ): React.ReactNode =>
   React.Children.map(children, (child) => {
     if (!React.isValidElement(child)) {
       return child;
     }
-
+    //@ts-ignore
     if (child.props.children) {
       //@ts-ignore
       return fn(
@@ -49,7 +49,7 @@ export const reactChildrenMapRecursive = (
         React.cloneElement(child, {
           //@ts-ignore
           children: reactChildrenMapRecursive(child.props.children, fn),
-        })
+        }),
       );
     }
 
@@ -61,7 +61,7 @@ export const setChildProps =
   (child: React.ReactElement) =>
     React.cloneElement(child, {
       ...(defaultProps || {}),
-      ...(child ? child.props : {}),
+      ...(child ? (child.props as object) : {}),
       ...(props || {}),
       ...(derivedProps ? derivedProps(child) : []),
     });
@@ -74,7 +74,7 @@ export const wrapHtml = (nodes: React.ReactNode) =>
       <Box>{e}</Box>
     ) : (
       e
-    )
+    ),
   );
 
 export const pureRef = <T extends object, P extends As>(
@@ -83,26 +83,26 @@ export const pureRef = <T extends object, P extends As>(
     RightJoinProps<PropsOf<P>, T> & {
       as?: As;
     }
-  >
+  >,
 ) =>
   forwardRef<T, P>((props, ref) =>
-    useMemo(() => Component(props, ref), [props, ref])
+    useMemo(() => Component(props, ref), [props, ref]),
   );
 
 export const makePureBox = (
   name: string | undefined,
   defaultProps?: BoxProps,
-  Component?: typeof React.Component
+  Component?: typeof React.Component,
 ): ComponentWithAs<"div", BoxProps> => {
   const DerivedBox = pureRef<BoxProps, "div">(
     (
       { children, ...props }: any,
-      ref: React.LegacyRef<HTMLDivElement> | undefined
+      ref: React.LegacyRef<HTMLDivElement> | undefined,
     ) => (
       <Box {...defaultProps} {...props} ref={ref}>
         {Component ? <Component>{children}</Component> : children}
       </Box>
-    )
+    ),
   );
 
   DerivedBox.displayName = name;
@@ -111,8 +111,8 @@ export const makePureBox = (
 
 export const childrenOfType = (
   children: React.ReactNode,
-  type: string | React.JSXElementConstructor<any>
+  type: string | React.JSXElementConstructor<any>,
 ) =>
   React.Children.toArray(children).filter(
-    (e) => (e as React.ReactElement<any>).type == type
+    (e) => (e as React.ReactElement<any>).type == type,
   );

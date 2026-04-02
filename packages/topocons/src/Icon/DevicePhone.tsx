@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const DevicePhone = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M17 6H7v12h10zm0-2v-.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5V4zm0 16H7v.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5zM7.5 1h9A2.5 2.5 0 0 1 19 3.5v17a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 5 20.5v-17A2.5 2.5 0 0 1 7.5 1" /></Icon>;

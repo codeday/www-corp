@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const UiShare = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M11 4.414 7.707 7.707a1 1 0 0 1-1.414-1.414l5-5a1 1 0 0 1 1.414 0l5 5a1 1 0 1 1-1.414 1.414L13 4.414V16a1 1 0 0 1-2 0zM16 13a1 1 0 0 1 0-2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2a1 1 0 0 1 0 2H6v8h12v-8z" /></Icon>;

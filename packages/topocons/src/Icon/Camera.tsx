@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const Camera = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M14 6h-4L8.5 8H4v11h16V8h-4.5zM4 6h3.5l1.2-1.6a1 1 0 0 1 .8-.4h5a1 1 0 0 1 .8.4L16.5 6H20a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2m8 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4m0 2a4 4 0 1 1 0-8 4 4 0 0 1 0 8m6 1a1 1 0 1 1 0-2 1 1 0 0 1 0 2" /></Icon>;

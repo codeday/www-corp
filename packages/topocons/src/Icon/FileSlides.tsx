@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const FileSlides = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M5 1h10.597a2 2 0 0 1 1.42.591l3.403 3.43A2 2 0 0 1 21 6.43V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2m9 2H5v17h14V8h-3a2 2 0 0 1-2-2zm2 .407V6h2.574zM11 9a1 1 0 0 1 2 0h4a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2.419l.403.81a.875.875 0 1 1-1.567.78l-.79-1.59H11.4l-.79 1.59a.875.875 0 0 1-1.567-.78l.403-.81H7a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1zm-3 2v4h8v-4z" /></Icon>;

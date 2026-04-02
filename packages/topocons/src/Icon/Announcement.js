@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Announcement = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("@chakra-ui/react");
+const Announcement = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "m8.447 15.579.543 3.803A1 1 0 0 1 8 20.523H5a1 1 0 0 1-.962-.725l-1.597-5.59A4.001 4.001 0 0 1 4 6.523h1.807l8.45-3.38A2 2 0 0 1 17 5v11.046a2 2 0 0 1-2.743 1.857zm-2.143-.857-.497-.199H4.611l1.143 4h1.093zM7 8.2v4.646l8 3.2V5zm-2 .323H4a2 2 0 1 0 0 4h1zm14.326-.922a1 1 0 1 1-.64-1.894l3.935-1.33a1 1 0 0 1 .64 1.894zm0 5.776 3.935 1.33a1 1 0 0 1-.64 1.894l-3.936-1.33a1 1 0 1 1 .64-1.894M19 9.523h4a1 1 0 0 1 0 2h-4a1 1 0 1 1 0-2" }) });
+exports.Announcement = Announcement;

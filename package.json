@@ -8,9 +8,12 @@
     "build": "turbo build",
     "start": "turbo start",
     "lint": "turbo lint",
-    "codegen": "turbo codegen"
+    "codegen": "turbo codegen",
+    "generate": "pnpm run -r generate"
   },
   "devDependencies": {
-    "turbo": "^2.5.4"
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "turbo": "^2.9.3"
   }
 }

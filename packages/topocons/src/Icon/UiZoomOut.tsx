@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const UiZoomOut = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M21.707 20.293a1 1 0 0 1-1.414 1.414l-3.675-3.675a9 9 0 1 1 1.414-1.414zM11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14m4-8a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2z" /></Icon>;

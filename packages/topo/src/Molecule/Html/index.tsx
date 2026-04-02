@@ -1,7 +1,7 @@
 import { useColorModeValue } from "@chakra-ui/react";
 import styled from "@emotion/styled";
 import React from "react";
-import { Box, type BoxProps } from "@codeday/topo/Atom/Box";
+import { Box, type BoxProps } from "@codeday/topo/Atom";
 import { useTheme } from "@codeday/topo/utils";
 
 function Html({ children, ...props }: BoxProps) {

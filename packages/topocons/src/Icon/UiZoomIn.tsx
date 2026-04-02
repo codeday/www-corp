@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const UiZoomIn = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M12 15a1 1 0 0 1-2 0v-3H7a1 1 0 0 1 0-2h3V7a1 1 0 0 1 2 0v3h3a1 1 0 0 1 0 2h-3zm9.707 5.293a1 1 0 0 1-1.414 1.414l-3.675-3.675a9 9 0 1 1 1.414-1.414zM11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14" /></Icon>;

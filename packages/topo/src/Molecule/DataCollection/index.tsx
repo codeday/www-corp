@@ -14,7 +14,7 @@ function DataCollection({ message }: DataCollectionProps) {
   const { fontSizes } = useTheme();
   const renderedText = useString(
     `legal.data.${message}`,
-    message in MessageIcons ? <Skelly /> : message
+    message in MessageIcons ? <Skelly /> : message,
   );
   const moreInfo = useString(`common.more-info`, "More Info");
 

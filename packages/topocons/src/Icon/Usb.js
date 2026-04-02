@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Usb = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("@chakra-ui/react");
+const Usb = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "m18.814 14.02-6.718 6.718a6.5 6.5 0 1 1-9.192-9.192L9.62 4.828a1 1 0 0 1 1.415 0l3.535-3.535a1 1 0 0 1 1.414 0l6.364 6.364a1 1 0 0 1 0 1.414l-3.535 3.536a1 1 0 0 1 0 1.414m-8.486-7.07-6.01 6.01a4.5 4.5 0 1 0 6.364 6.364l6.01-6.01zM5.433 18.118a1.436 1.436 0 1 1 2.03-2.03 1.436 1.436 0 0 1-2.03 2.03m9.845-14.704L12.45 6.243l4.95 4.95 2.828-2.829zm.354 1.768.707.707a.5.5 0 0 1 0 .707l-.707.707a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l.707-.707a.5.5 0 0 1 .707 0m2.121 2.121.707.707a.5.5 0 0 1 0 .708l-.707.707a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.708l.707-.707a.5.5 0 0 1 .707 0" }) });
+exports.Usb = Usb;

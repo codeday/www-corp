@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Hierarchy = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("@chakra-ui/react");
+const Hierarchy = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M13 8v2h5.995a2 2 0 0 1 2 2v1.148a1 1 0 1 1-2 0V12H13v2a1 1 0 0 1-2 0v-2H5.075v1.148a1 1 0 0 1-2 0V12a2 2 0 0 1 2-2H11V8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2m-2-4v2h2V4zM3 17v2h2v-2zm0-2h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2m8 3v2h2v-2zm0-2h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2m8 1v2h2v-2zm0-2h2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2" }) });
+exports.Hierarchy = Hierarchy;

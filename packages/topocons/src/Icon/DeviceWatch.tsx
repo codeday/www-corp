@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const DeviceWatch = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M10 5.009h4V4h-4zm0 14V20h4v-.991zm8-10h.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H18v3c0 1.48-.804 2.773-2 3.465V20a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-1.526a4 4 0 0 1-2-3.465v-6c0-1.48.804-2.774 2-3.465V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1.544c1.196.691 2 1.984 2 3.465m-8-2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2z" /></Icon>;

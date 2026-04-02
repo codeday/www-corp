@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MedicalNote = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("@chakra-ui/react");
+const MedicalNote = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M9 4a3 3 0 0 1 6 0h1a1 1 0 0 1 1 1h1a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h1a1 1 0 0 1 1-1zM6 7v15h12V7zm2 9h8a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2m0 3h4a1 1 0 0 1 0 2H8a1 1 0 0 1 0-2m3-8h1a1 1 0 0 1 0 2h-1v1.25a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1-.75-.75V13H8a1 1 0 0 1 0-2h1V9.75A.75.75 0 0 1 9.75 9h.5a.75.75 0 0 1 .75.75zm1-6a1 1 0 1 0 0-2 1 1 0 0 0 0 2" }) });
+exports.MedicalNote = MedicalNote;

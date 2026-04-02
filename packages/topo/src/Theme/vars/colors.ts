@@ -7,7 +7,7 @@ const linearGrads = (from: string, to: string) =>
     .map((deg) => ({ [deg]: linearGrad(from, to, deg) }))
     .reduce((accum, obj) => ({ ...accum, ...obj }), {});
 
-const colors: Colors = {
+const colors: Record<string, any> = {
   ...theme.colors,
   black: "#252222",
   white: "#ffffff",

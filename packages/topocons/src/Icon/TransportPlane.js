@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TransportPlane = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("@chakra-ui/react");
+const TransportPlane = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "m14.108 16-4.415 4.414A2 2 0 0 1 8.28 21H7.193a1.87 1.87 0 0 1-1.624-2.799l1.28-2.239a5 5 0 0 1-4.065-3.206L1.108 8.287A1.693 1.693 0 0 1 2.693 6h.586a2 2 0 0 1 1.414.586L7.108 9h.72l-1.26-2.201A1.87 1.87 0 0 1 8.193 4H9.28a2 2 0 0 1 1.414.586L15.108 9h4.085a3.5 3.5 0 1 1 0 7zm-5.283-3.496a1 1 0 1 1 1.737.992L7.417 19h.862l6.707-6.707a1 1 0 1 1 1.415 1.414l-.293.293h3.085a1.5 1.5 0 1 0 0-3h-12.5a1 1 0 0 1-.707-.293L3.28 8h-.143l1.52 4.053A3 3 0 0 0 7.466 14h.504zM10.131 9h2.148l-3-3h-.862z" }) });
+exports.TransportPlane = TransportPlane;

@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Trophy = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("@chakra-ui/react");
+const Trophy = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M9 4v7a3 3 0 0 0 6 0V4zm2 16v-4.1a5.01 5.01 0 0 1-3.912-3.963c-2.053-.418-3.39-2.269-3.888-4.74C2.674 4.587 3.16 1.988 4.955 2c.804.005 1.31.009 2.904.01Q7.928 2 8 2h8q.072 0 .141.01c1.595-.001 2.1-.005 2.904-.01 1.794-.012 2.281 2.587 1.755 5.197-.498 2.471-1.835 4.322-3.888 4.74A5.01 5.01 0 0 1 13 15.9V20h2a1 1 0 1 1 0 2H9a1 1 0 0 1 0-2zm7.84-13.198c.17-.851.191-1.728.07-2.372a2.3 2.3 0 0 0-.117-.428L17 4.009v5.789c.896-.442 1.539-1.507 1.84-2.996M7 9.798v-5.79c-.743 0-1.165-.003-1.793-.006a2.3 2.3 0 0 0-.117.428c-.121.644-.1 1.52.07 2.372.301 1.49.944 2.554 1.84 2.996" }) });
+exports.Trophy = Trophy;

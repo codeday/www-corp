@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const UiArrowLeft = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="m8.414 12 8.293-8.293a1 1 0 0 0-1.414-1.414l-9 9a1 1 0 0 0 0 1.414l9 9a1 1 0 0 0 1.414-1.414z" /></Icon>;

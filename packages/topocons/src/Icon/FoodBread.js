@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FoodBread = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("@chakra-ui/react");
+const FoodBread = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M5.555 11.56a2 2 0 0 1 1.128 1.945L6.148 21h11.67l-.646-7.396a2 2 0 0 1 1.172-1.997 4.5 4.5 0 1 0-4.96-7.354 2 2 0 0 1-2.769 0 4.5 4.5 0 1 0-5.06 7.307m-.867 1.802A6.5 6.5 0 1 1 12 2.81a6.5 6.5 0 1 1 7.165 10.62l.645 7.397A2 2 0 0 1 17.818 23H6.148a2 2 0 0 1-1.995-2.142z" }) });
+exports.FoodBread = FoodBread;

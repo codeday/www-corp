@@ -1,0 +1,3 @@
+[submodule "packages/topocons/svg"]
+	path = packages/topocons/svg
+	url = git@github.com:codeday/TopoconsSvg.git

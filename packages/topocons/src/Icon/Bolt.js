@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Bolt = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("@chakra-ui/react");
+const Bolt = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M8.755 14.005H4.002c-.89 0-1.337-1.078-.707-1.707l11-11c.717-.718 1.923-.035 1.677.95l-1.69 6.757h4.72c.87 0 1.325 1.034.737 1.675l-11 12c-.691.755-1.935.107-1.713-.892zm4.401-8.74-6.74 6.74h3.586a1 1 0 0 1 .976 1.217l-1.19 5.354 6.94-7.571h-3.726a1 1 0 0 1-.97-1.243z" }) });
+exports.Bolt = Bolt;

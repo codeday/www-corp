@@ -1,0 +1,10 @@
+{
+  "extends": "@codeday/tsconfig/react-library.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "typeRoots": ["node_modules/@types", "src/@types"],
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"],
+}

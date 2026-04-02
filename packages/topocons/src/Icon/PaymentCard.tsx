@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const PaymentCard = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M4 9h16V7H4zm0 3v6h16v-6zm0-7h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2m3 9h3a1 1 0 0 1 0 2H7a1 1 0 0 1 0-2m6 0h1a1 1 0 0 1 0 2h-1a1 1 0 0 1 0-2" /></Icon>;

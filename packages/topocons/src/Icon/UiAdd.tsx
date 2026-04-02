@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const UiAdd = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M13 11h8.11c1.334 0 1.334 2 0 2H13v8c0 1.334-2 1.334-2 0v-8H3c-1.333 0-1.333-2 0-2h8V3c0-1.333 2-1.333 2 0z" /></Icon>;

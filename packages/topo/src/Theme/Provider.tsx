@@ -102,13 +102,13 @@ const query = `query PageQuery ($locale: String!, $stringKeys: [String!]!, $loca
 }`;
 
 interface ProviderProps {
-  analyticsId?: string;
-  brandColor?: string;
+  analyticsId?: string | null;
+  brandColor?: string | null;
   withChat?: boolean;
   programWebname?: string;
   visibility?: string;
-  initialColorMode: string;
-  useSystemColorMode: boolean;
+  initialColorMode?: string | null;
+  useSystemColorMode?: boolean;
   cookies?: any;
   children?: React.ReactNode;
   locale?: string;
@@ -116,12 +116,12 @@ interface ProviderProps {
 }
 
 const Provider = ({
-  analyticsId,
-  brandColor,
+  analyticsId = null,
+  brandColor = null,
   withChat = false,
-  programWebname,
-  visibility = "public",
-  initialColorMode,
+  programWebname = "",
+  visibility = "Public",
+  initialColorMode = null,
   useSystemColorMode,
   cookies,
   children,
@@ -204,14 +204,6 @@ Provider.propTypes = {
   programWebname: PropTypes.string,
   visibility: PropTypes.string,
   initialColorMode: PropTypes.string,
-};
-Provider.defaultProps = {
-  analyticsId: null,
-  brandColor: null,
-  withChat: false,
-  programWebname: "",
-  visibility: "Public",
-  initialColorMode: null,
 };
 
 function getServerSideProps({ req }: any) {

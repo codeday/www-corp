@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UiDownload = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("@chakra-ui/react");
+const UiDownload = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M11 3a1 1 0 0 1 2 0v9.586l1.293-1.293a1 1 0 0 1 1.414 1.414l-3 3a1 1 0 0 1-1.414 0l-3-3a1 1 0 0 1 1.414-1.414L11 12.586zM8.037 4.787a1 1 0 1 1 .919 1.777 5.08 5.08 0 0 0-2.675 3.663 1 1 0 0 1-.811.82A3.001 3.001 0 0 0 6 17h11a4 4 0 1 0-.375-7.983 1 1 0 0 1-.957-.492 5 5 0 0 0-.86-1.098A1 1 0 0 1 16.2 5.99q.481.466.865 1.01A6 6 0 0 1 17 19H6a5 5 0 0 1-1.55-9.755 7.08 7.08 0 0 1 3.587-4.458" }) });
+exports.UiDownload = UiDownload;

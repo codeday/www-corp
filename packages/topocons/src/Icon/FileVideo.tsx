@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const FileVideo = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M5 1h10.597a2 2 0 0 1 1.42.591l3.403 3.43A2 2 0 0 1 21 6.43V20a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2m11 2.407V6h2.574zM14 3H5v17h14V8h-3a2 2 0 0 1-2-2zm-3.504 7.355 3.985 2.277a1 1 0 0 1 0 1.736l-3.985 2.277A1 1 0 0 1 9 15.777v-4.554a1 1 0 0 1 1.496-.868" /></Icon>;

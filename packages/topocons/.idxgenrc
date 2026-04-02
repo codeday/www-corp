@@ -1,0 +1,7 @@
+{
+  "mode": "auto",
+  "exportMode": "single",
+  "template": "export { $$ } from './$$';",
+  "indexFile": "index.ts",
+  "extensions": ["ts", "tsx"]
+}

@@ -1,0 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PaymentProviderMastercard = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("@chakra-ui/react");
+const PaymentProviderMastercard = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 30 30", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M9.5 5.5C4.265 5.5 0 9.765 0 15s4.265 9.5 9.5 9.5c2.344 0 4.489-.86 6.148-2.275A8.95 8.95 0 0 0 21 24a9 9 0 0 0 9-9 9 9 0 0 0-9-9 8.95 8.95 0 0 0-5.352 1.775A9.45 9.45 0 0 0 9.5 5.5m0 2c1.774 0 3.398.614 4.68 1.637A8.96 8.96 0 0 0 12 15c0 2.242.824 4.288 2.18 5.863A7.47 7.47 0 0 1 9.5 22.5 7.486 7.486 0 0 1 2 15c0-4.153 3.347-7.5 7.5-7.5" }) });
+exports.PaymentProviderMastercard = PaymentProviderMastercard;

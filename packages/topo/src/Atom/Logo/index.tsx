@@ -27,7 +27,7 @@ import * as Icons from "./Icons";
 
 const upperFirst = (string: string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
-  
+
 interface LockupProps extends BoxProps {
   text: React.ReactNode;
   logo: React.ReactNode;
@@ -64,6 +64,7 @@ Lockup.displayName = "Lockup";
 
 export const Logo: ComponentWithAs<"div", any> = pureRef<any, "div">(
   ({ program, withText, text, ...props }, ref) => {
+    //@ts-ignore
     const logoPart = React.createElement(Icons[`${upperFirst(program)}`], {
       display: "inline",
       width: "auto",
@@ -86,6 +87,7 @@ export const Logo: ComponentWithAs<"div", any> = pureRef<any, "div">(
         </Text>
       );
     } else if (withText) {
+      //@ts-ignore
       textPart = React.createElement(Icons[`${upperFirst(program)}Text`], {
         display: "inline",
         width: "auto",
@@ -93,7 +95,7 @@ export const Logo: ComponentWithAs<"div", any> = pureRef<any, "div">(
     }
 
     return <Lockup logo={logoPart} text={textPart} {...props} ref={ref} />;
-  }
+  },
 );
 Logo.displayName = "Logo";
 
@@ -130,7 +132,7 @@ export const StaticLogo: ComponentWithAs<"div", any> = pureRef<any, "div">(
     return (
       <Lockup logo={logoComponent} text={textComponent} {...props} ref={ref} />
     );
-  }
+  },
 );
 StaticLogo.displayName = "Logo";
 

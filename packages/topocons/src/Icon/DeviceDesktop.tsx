@@ -1,0 +1,2 @@
+import { IconProps, Icon } from "@chakra-ui/react";
+export const DeviceDesktop = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M13 18v2h2a1 1 0 0 1 0 2H9a1 1 0 0 1 0-2h2v-2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm-9-5h16V4H4zm0 2v1h16v-1z" /></Icon>;
