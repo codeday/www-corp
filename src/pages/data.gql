@@ -1,4 +1,4 @@
-query ListPublicationsQuery {
+query DataListPublicationsQuery {
   cms {
     publications (where: { type: "dataset" }) {
       items {

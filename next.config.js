@@ -3,14 +3,16 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { apiFetch } = require('@codeday/topo/utils');
 
 module.exports = {
-  swcMinify: true,
-  pageExtensions: ['tsx', 'jsx'],
-  eslint: {
-    ignoreDuringBuilds: true,
+  pageExtensions: ['tsx', 'jsx', 'ts', 'js'],
+  turbopack: {
+    rules: {
+      '*.gql': {
+        loaders: ['./gql-loader.js'],
+        as: '*.js',
+      },
+    },
   },
   webpack: (config, { isServer }) => {
-    // eslint-disable-next-line node/no-process-env
-
     const originalEntry = config.entry;
     config.entry = async () => {
       const entries = await originalEntry();
@@ -21,6 +23,12 @@ module.exports = {
 
       return entries;
     };
+
+    config.module.rules.push({
+      test: /\.gql$/,
+      exclude: /node_modules/,
+      use: [require.resolve('./gql-loader.js')],
+    });
 
     if (process.env.ANALYZE) {
       config.plugins.push(
@@ -34,7 +42,11 @@ module.exports = {
     return config;
   },
   images: {
-    domains: ['f2.codeday.org'],
+    remotePatterns: [
+      {
+        hostname: 'f2.codeday.org',
+      },
+    ],
   },
   async redirects() {
     const { cms } = await apiFetch('{ cms { regions { items { webname aliases } } } }');
@@ -108,20 +120,5 @@ module.exports = {
         permanent: false,
       })),
     ];
-  },
-  serverRuntimeConfig: {
-    stripe: {
-      secretKey: process.env.STRIPE_SECRET_KEY,
-    },
-    postmark: {
-      serverToken: process.env.POSTMARK_SERVER_TOKEN,
-    },
-    airtable: {
-      token: process.env.AIRTABLE_TOKEN,
-      base: process.env.AIRTABLE_BASE,
-    },
-    clear_gql: {
-      token: process.env.CLEAR_TOKEN,
-    },
   },
 };

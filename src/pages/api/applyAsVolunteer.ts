@@ -1,4 +1,3 @@
-import getConfig from 'next/config';
 import { ServerClient } from 'postmark';
 import Airtable from 'airtable';
 import { apiFetch } from '@codeday/topo/utils';
@@ -15,9 +14,8 @@ import {
 
 import { ApplyAsVolunteerQuery } from './applyAsVolunteer.gql';
 
-const { serverRuntimeConfig } = getConfig();
-const postmark = new ServerClient(serverRuntimeConfig.postmark.serverToken);
-const base = new Airtable({ apiKey: serverRuntimeConfig.airtable.token }).base(serverRuntimeConfig.airtable.base);
+const postmark = new ServerClient(process.env.POSTMARK_SERVER_TOKEN!);
+const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(process.env.AIRTABLE_BASE!);
 
 async function ApplyAsVolunteer(req: NextApiRequest, res: NextApiResponse) {
   const { email, firstName, lastName, linkedin, region, isOrganize, background } = JSON.parse(req.body);
@@ -71,7 +69,7 @@ async function ApplyAsVolunteer(req: NextApiRequest, res: NextApiResponse) {
       {
         webname: region.toLowerCase(),
       },
-      { 'X-Clear-Authorization': `Bearer ${serverRuntimeConfig.clear_gql.token}` },
+      { 'X-Clear-Authorization': `Bearer ${process.env.CLEAR_TOKEN}` },
     );
     const cmsRegion = data.cms.regions.items[0];
     const clearRegion = data.clear.findFirstEvent;

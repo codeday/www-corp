@@ -7,7 +7,7 @@ import { apiFetch } from '@codeday/topo/utils';
 import { GetStaticProps } from 'next';
 import Error404 from './404';
 import Page from '../components/Page';
-import { ListPublicationsQuery } from './data.gql';
+import { DataListPublicationsQuery } from './data.gql';
 import { useQuery } from '../query';
 
 export default function Home() {
@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       query: await apiFetch(
-        print(ListPublicationsQuery), {}, {},
+        print(DataListPublicationsQuery), {}, {},
       ),
     },
     revalidate: 300,

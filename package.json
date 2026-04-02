@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "pnpm run codegen; next dev",
+    "build": "pnpm run codegen; next build",
     "start": "next start",
+    "codegen": "graphql-codegen --config codegen.yml",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
@@ -19,7 +20,6 @@
     "@types/react": "^18.2.0",
     "@webcomponents/shadydom": "^1.9.0",
     "airtable": "^0.11.6",
-    "babel-plugin-inline-import-graphql-ast": "^2.4.1",
     "chakra-ui-markdown-renderer": "^4.1.0",
     "emotion-theming": "^10.0.27",
     "express-rate-limit": "^5.2.3",
@@ -32,7 +32,7 @@
     "jsonwebtoken": "^8.5.1",
     "knuth-shuffle-seeded": "^1.0.6",
     "luxon": "^1.27.0",
-    "next": "^13.3.0",
+    "next": "^16.0.0",
     "next-absolute-url": "^1.2.2",
     "next-seo": "^4.7.3",
     "node-fetch": "^2.6.1",
@@ -62,12 +62,15 @@
   },
   "devDependencies": {
     "@codeday/eslint-config": "^3",
-    "@next/bundle-analyzer": "^9.5.2",
+    "@graphql-codegen/cli": "^5.0.7",
+    "@graphql-codegen/typescript-graphql-files-modules": "^3.0.1",
+    "@next/bundle-analyzer": "^16.0.0",
     "@types/node": "^25.5.0",
     "@types/react-dom": "^19.2.3",
     "cross-env": "^7.0.2",
     "eslint": "^8.0.0",
     "prettier": "^2.3.2",
+    "raw-loader": "^4.0.2",
     "typescript": "^6.0.2"
   },
   "prettier": "@codeday/eslint-config/prettier"
