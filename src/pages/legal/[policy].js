@@ -39,21 +39,27 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  if (TERMAGEDDON_POLICIES.includes(params.policy)) {
+  try {
+    if (TERMAGEDDON_POLICIES.includes(params.policy)) {
+      return {
+        props: {
+          query: await apiFetch(print(TermageddonLegalContentQuery)),
+          slug: params.policy,
+        },
+        revalidate: 300,
+      };
+    } else {
+      return {
+        props: {
+          query: await apiFetch(print(LegalContentQuery), { slug: params.policy, parentSlug: 'legal' }),
+          slug: params.policy,
+        },
+        revalidate: 300,
+      };
+    }
+  } catch (e) {
     return {
-      props: {
-        query: await apiFetch(print(TermageddonLegalContentQuery)),
-        slug: params.policy,
-      },
-      revalidate: 300,
-    };
-  } else {
-    return {
-      props: {
-        query: await apiFetch(print(LegalContentQuery), { slug: params.policy, parentSlug: 'legal' }),
-        slug: params.policy,
-      },
-      revalidate: 300,
+      notFound: true,
     };
   }
 }
