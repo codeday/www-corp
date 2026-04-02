@@ -63,9 +63,12 @@
   "devDependencies": {
     "@codeday/eslint-config": "^3",
     "@next/bundle-analyzer": "^9.5.2",
+    "@types/node": "^25.5.0",
+    "@types/react-dom": "^19.2.3",
     "cross-env": "^7.0.2",
     "eslint": "^8.0.0",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "typescript": "^6.0.2"
   },
   "prettier": "@codeday/eslint-config/prettier"
 }
