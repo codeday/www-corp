@@ -1,0 +1,4 @@
+allowBuilds:
+  ejs: true
+  sharp: true
+  unrs-resolver: true

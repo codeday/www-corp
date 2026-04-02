@@ -12,6 +12,12 @@
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
   "dependencies": {
+    "@chakra-ui/checkbox": "^2.3.2",
+    "@chakra-ui/image": "^2.1.0",
+    "@chakra-ui/layout": "^2.3.1",
+    "@chakra-ui/react": "^2.10.9",
+    "@chakra-ui/table": "^2.1.0",
+    "@chakra-ui/transition": "^2.1.0",
     "@codeday/topo": "^9.2.9",
     "@codeday/topocons": "^1.5.0",
     "@emotion/core": "^10.0.34",
