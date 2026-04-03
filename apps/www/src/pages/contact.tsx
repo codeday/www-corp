@@ -12,7 +12,10 @@ import FullProfile from '../components/Contact/FullProfile';
 import TextOnly from '../components/Contact/TextOnly';
 import shuffle from 'knuth-shuffle-seeded';
 import { useQuery } from '../query';
+import { debug } from '@codeday/utils';
 import { ContactQuery } from './contact.gql';
+
+const DEBUG = debug(['www', 'pages', 'contact']);
 
 function nl2br(str: string): string {
   return str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
@@ -178,6 +181,7 @@ export default function Home({ seed }: { seed: number }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
+  DEBUG(process.env);
   const token = sign({ scopes: 'read:users' }, process.env.ACCOUNT_SECRET!, { expiresIn: '3m' });
   const labsToken = sign({ typ: 'a', aud: 'urn:gql.labs.codeday.org' }, process.env.LABS_SECRET!, { expiresIn: '3m' });
   const clearToken = sign({ t: 'A', aud: 'clear-gql' }, process.env.CLEAR_SECRET!, { expiresIn: '3m' });
