@@ -3,6 +3,18 @@
   "ui": "stream",
   "tasks": {
     "build": {
+      "env": [
+        "APP_URL",
+        "STRIPE_SECRET_KEY",
+        "ACCOUNT_SECRET",
+        "AIRTABLE_TOKEN",
+        "AIRTABLE_BASE",
+        "POSTMARK_SERVER_TOKEN",
+        "CLEAR_TOKEN",
+        "CLEAR_SECRET",
+        "LABS_SECRET",
+        "DOI_PREFIX"
+      ],
       "dependsOn": ["^build", "codegen"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
