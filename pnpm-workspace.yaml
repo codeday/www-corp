@@ -36,5 +36,3 @@ catalog:
   react: "^19.0.0"
   react-dom: "^19.0.0"
   typescript: "^6.0.2"
-overrides:
-  utils: link:../../../../Library/pnpm/global/5/node_modules/@codeday/utils
