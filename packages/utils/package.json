@@ -1,0 +1,28 @@
+{
+  "name": "@codeday/utils",
+  "version": "0.0.0",
+  "private": true,
+  "license": "Artistic-2.0",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "lint": "eslint . --max-warnings 0",
+    "clean": "rm -rf dist",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "debug": "^4.4.3"
+  },
+  "devDependencies": {
+    "@codeday/tsconfig": "workspace:*",
+    "@types/debug": "^4.1.13",
+    "@types/node": "catalog:",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "catalog:",
+    "typescript": "catalog:"
+  }
+}

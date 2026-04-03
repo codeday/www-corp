@@ -41,14 +41,18 @@ const getDate = (offsetHours?: number) => {
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      query: await apiFetch(print(IndexQuery), {
-        cmsDate: getDate(),
-        clearDate: getDate(),
-        calendarDateStart: getDate(12 * -1),
-        calendarDateEnd: getDate(24 * 7 * 4),
-      }, {}),
+      query: await apiFetch(
+        print(IndexQuery),
+        {
+          cmsDate: getDate(),
+          clearDate: getDate(),
+          calendarDateStart: getDate(12 * -1),
+          calendarDateEnd: getDate(24 * 7 * 4),
+        },
+        {},
+      ),
       seed: Math.random(),
     },
     revalidate: 300,
   };
-}
+};

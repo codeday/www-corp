@@ -3,16 +3,14 @@
   "version": "0.0.0",
   "description": "Icons for React projects.",
   "exports": {
-    ".": {
-      "types": "./src/Icon/",
-      "default": "./dist/Icon/index.js"
-    }
+    ".": "./src/Icon/index.ts"
   },
   "private": true,
   "license": "UNLICENSED",
   "sideEffects": false,
   "scripts": {
     "build": "tsc",
+    "clean": "rm -rf dist",
     "pregenerate-icons": "rm -rf src/Icon && rm -rf src/optimized-svg && rm -rf dist && svgo -f ./svg/Icon -o src/optimized-svg/Icon && mkdir -p src/Icon",
     "generate-icons": "create-chakra-icons -o src/Icon src/optimized-svg/Icon --typescript --multi -T C",
     "postgenerate-icons": "idxgen src/Icon/ && replace '#000000' 'currentColor' src/Icon/*.tsx && replace '#000' 'currentColor' src/Icon/*.tsx && replace 'blockProgression' 'msBlockProgression' src/Icon/*.tsx && replace '(shapePadding|solidColor|solidOpacity): .*$' '' src/Icon/*.tsx  && replace '<Icon' '<Icon fill=\"currentColor\"' src/Icon/*.tsx && rm -rf src/optimized-svg"

@@ -21,8 +21,6 @@ async function ApplyAsVolunteer(req: NextApiRequest, res: NextApiResponse) {
   const { email, firstName, lastName, linkedin, region, isOrganize, background } = JSON.parse(req.body);
   let banned = false;
 
-  console.log('a');
-
   try {
     const airtableRes = await base('Volunteers')
       .select({
@@ -30,7 +28,8 @@ async function ApplyAsVolunteer(req: NextApiRequest, res: NextApiResponse) {
         fields: ['Flags'],
 
         filterByFormula: `TRIM(LOWER({Email})) = "${email.toString().toLowerCase().trim()}"`,
-      }).firstPage();
+      })
+      .firstPage();
     airtableRes.forEach((record: any) => {
       if ((record.get('Flags') || []).includes('Banned')) banned = true;
     });
@@ -52,12 +51,10 @@ async function ApplyAsVolunteer(req: NextApiRequest, res: NextApiResponse) {
   } catch (ex) {
     console.error(ex);
   }
-  console.log('foo');
   let emailText: string | undefined;
   // if(background === 'industry') {
   // emailText = renderLabsMentor({firstName})
   // This is disabled for now as we want non-student volunteers to be manually reviewed + followed up with
-
 
   if (banned) {
     emailText = renderBannedVolunteer({ firstName });

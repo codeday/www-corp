@@ -8,3 +8,5 @@ schema.graphql
 *.tsbuildinfo
 .turbo/
 .turbo
+.env.local
+.pnpm-store/

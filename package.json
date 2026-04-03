@@ -9,11 +9,15 @@
     "start": "turbo start",
     "lint": "turbo lint",
     "codegen": "turbo codegen",
+    "clean": "rm -rf .next && pnpm run -r clean",
     "generate": "pnpm run -r generate"
   },
   "devDependencies": {
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "turbo": "^2.9.3"
+  },
+  "dependencies": {
+    "utils": "link:../../../../Library/pnpm/global/5/node_modules/@codeday/utils"
   }
 }

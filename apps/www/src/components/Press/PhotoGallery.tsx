@@ -11,19 +11,25 @@ interface PhotoGalleryProps {
   [key: string]: any;
 }
 
-export default function PhotoGallery({seed, ...props}: PhotoGalleryProps) {
+export default function PhotoGallery({ seed, ...props }: PhotoGalleryProps) {
   const [filter, setFilter] = useState<string | null>(null);
-  const { cms: { pressPhotos } } = useQuery();
-  const photos = shuffle((pressPhotos?.items || []).map((m: any) => m), seed);
-  console.log(seed);
+  const {
+    cms: { pressPhotos },
+  } = useQuery();
+  const photos = shuffle(
+    (pressPhotos?.items || []).map((m: any) => m),
+    seed,
+  );
 
   return (
     <Content wide {...props}>
       <PhotoTagPicker mb={8} photos={photos} onChange={setFilter} />
-      <Grid templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)'}} gap={4}>
-        {photos.filter((photo: any) => !filter || photo.tags?.includes(filter)).map((photo: any) => (
-          <Photo rounded={2} height={40} photo={photo} />
-        ))}
+      <Grid templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }} gap={4}>
+        {photos
+          .filter((photo: any) => !filter || photo.tags?.includes(filter))
+          .map((photo: any) => (
+            <Photo key={photo.id} rounded={2} height={40} photo={photo} />
+          ))}
       </Grid>
     </Content>
   );

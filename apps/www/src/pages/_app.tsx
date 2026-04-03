@@ -5,8 +5,14 @@ import { Provider } from '../query';
 import { FundraiseProvider } from '../providers/Fundraise';
 import { CmpProvider } from '../providers/Cmp';
 import { MarketingProvider } from '../providers';
+import { debug } from '@codeday/utils';
+import { useEffect } from 'react';
+const DEBUG = debug(['www', 'pages', '_app']);
 
-export default function App ({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    DEBUG('pageProps', pageProps);
+  }, []);
   return (
     <>
       <ThemeProvider brandColor="red" useSystemColorMode cookies={pageProps.cookies}>

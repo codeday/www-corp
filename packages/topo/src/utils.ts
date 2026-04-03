@@ -1,10 +1,20 @@
 import { useState, useEffect, useCallback } from "react";
 import { GraphQLClient } from "graphql-request";
-import {type ToastId, useTheme, useToast as useToastNative, type UseToastOptions, type CreateToastFnReturn} from "@chakra-ui/react";
+import {
+  type ToastId,
+  useTheme,
+  useToast as useToastNative,
+  type UseToastOptions,
+  type CreateToastFnReturn,
+} from "@chakra-ui/react";
 
-export { useClipboard, useDisclosure, ColorModeScript, usePrefersReducedMotion } from "@chakra-ui/react";
+export {
+  useClipboard,
+  useDisclosure,
+  ColorModeScript,
+  usePrefersReducedMotion,
+} from "@chakra-ui/react";
 // @ts-ignore
-export { useFathom as useAnalytics } from "fathom-react";
 export { useTheme };
 
 export function useSsr() {
@@ -20,11 +30,27 @@ export const apiFetch = (query: any, variables: any, headers: any) => {
 };
 
 export interface UseToastsOptions {
-  success: (title: string, description?: string, options?: UseToastOptions) => ToastId
-  warning: (title: string, description?: string, options?: UseToastOptions) => ToastId
-  error: (title: string, description?: string, options?: UseToastOptions) => ToastId
-  addToast: CreateToastFnReturn
-  info: (title: string, description?: string, options?: UseToastOptions) => ToastId
+  success: (
+    title: string,
+    description?: string,
+    options?: UseToastOptions,
+  ) => ToastId;
+  warning: (
+    title: string,
+    description?: string,
+    options?: UseToastOptions,
+  ) => ToastId;
+  error: (
+    title: string,
+    description?: string,
+    options?: UseToastOptions,
+  ) => ToastId;
+  addToast: CreateToastFnReturn;
+  info: (
+    title: string,
+    description?: string,
+    options?: UseToastOptions,
+  ) => ToastId;
 }
 
 export function useToasts(): UseToastsOptions {
@@ -32,14 +58,14 @@ export function useToasts(): UseToastsOptions {
   return {
     addToast: toast,
     info: (title, description, options) =>
-        toast({ title, description, status: 'info', ...options }),
+      toast({ title, description, status: "info", ...options }),
     success: (title, description, options) =>
-        toast({ title, description, status: 'success', ...options }),
+      toast({ title, description, status: "success", ...options }),
     warning: (title, description, options) =>
-        toast({ title, description, status: 'warning', ...options }),
+      toast({ title, description, status: "warning", ...options }),
     error: (title, description, options) =>
-        toast({ title, description, status: 'error', ...options }),
-  }
+      toast({ title, description, status: "error", ...options }),
+  };
 }
 
 export function useString(key: string | number, initialValue: any) {
@@ -50,20 +76,20 @@ export function useString(key: string | number, initialValue: any) {
 export function useLocalStorage(key: string, initialValue: any) {
   const [hasValue, setHasValue] = useState(false);
   const [value, setValue] = useState(() =>
-      typeof window !== "undefined"
-          ? // eslint-disable-next-line no-undef
-          JSON.parse(window.localStorage.getItem(key) as string) || initialValue
-          : initialValue
+    typeof window !== "undefined"
+      ? // eslint-disable-next-line no-undef
+        JSON.parse(window.localStorage.getItem(key) as string) || initialValue
+      : initialValue,
   );
 
   const handleStorageUpdate = useCallback(
-      //@ts-ignore
-      (event) => {
-        if (event.key === key && event.newValue !== value) {
-          setValue(JSON.parse(event.newValue) || initialValue);
-        }
-      },
-      [value]
+    //@ts-ignore
+    (event) => {
+      if (event.key === key && event.newValue !== value) {
+        setValue(JSON.parse(event.newValue) || initialValue);
+      }
+    },
+    [value],
   );
 
   const setItem = (newValue: any) => {

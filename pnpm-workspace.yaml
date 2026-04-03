@@ -2,7 +2,10 @@ packages:
   - apps/*
   - packages/*
 allowBuilds:
+  core-js: true
   ejs: true
+  esbuild: true
+  protobufjs: true
   sharp: true
   unrs-resolver: true
 catalog:
@@ -25,10 +28,13 @@ catalog:
   "@types/react": "^19.2.14"
   "@types/react-dom": "^19.2.3"
   "emotion-theming": "^10.0.27"
-  framer-motion: "^12.38.0"
   eslint: "^8.35.0"
+  framer-motion: "^12.38.0"
   graphql: "^16.0.1"
+  next: "^16.1.7"
   prop-types: "^15.7.2"
   react: "^19.0.0"
   react-dom: "^19.0.0"
   typescript: "^6.0.2"
+overrides:
+  utils: link:../../../../Library/pnpm/global/5/node_modules/@codeday/utils
