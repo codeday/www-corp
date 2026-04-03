@@ -16,8 +16,5 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "turbo": "^2.9.3"
-  },
-  "dependencies": {
-    "utils": "link:../../../../Library/pnpm/global/5/node_modules/@codeday/utils"
   }
 }
