@@ -181,7 +181,6 @@ export default function Home({ seed }: { seed: number }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  console.log(process.env);
   const token = sign({ scopes: 'read:users' }, process.env.ACCOUNT_SECRET!, { expiresIn: '3m' });
   const labsToken = sign({ typ: 'a', aud: 'urn:gql.labs.codeday.org' }, process.env.LABS_SECRET!, { expiresIn: '3m' });
   const clearToken = sign({ t: 'A', aud: 'clear-gql' }, process.env.CLEAR_SECRET!, { expiresIn: '3m' });

@@ -341,7 +341,7 @@ export default function Wizard({
             headers: {},
           });
           if (!resp.ok) {
-            console.log(resp);
+            DEBUG(resp);
             setSubmitError(`${resp.status}: ${resp.statusText}`);
           } else {
             if (after) window.location.href = after;
