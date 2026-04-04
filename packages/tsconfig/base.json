@@ -4,7 +4,6 @@
     "allowJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "ignoreDeprecations": "6.0",
     "declaration": true,
     "declarationMap": true,
     "incremental": false,
