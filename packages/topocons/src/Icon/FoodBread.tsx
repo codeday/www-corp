@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const FoodBread = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M5.555 11.56a2 2 0 0 1 1.128 1.945L6.148 21h11.67l-.646-7.396a2 2 0 0 1 1.172-1.997 4.5 4.5 0 1 0-4.96-7.354 2 2 0 0 1-2.769 0 4.5 4.5 0 1 0-5.06 7.307m-.867 1.802A6.5 6.5 0 1 1 12 2.81a6.5 6.5 0 1 1 7.165 10.62l.645 7.397A2 2 0 0 1 17.818 23H6.148a2 2 0 0 1-1.995-2.142z" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const FoodBread = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M5.555 11.56a2 2 0 0 1 1.128 1.945L6.148 21h11.67l-.646-7.396a2 2 0 0 1 1.172-1.997 4.5 4.5 0 1 0-4.96-7.354 2 2 0 0 1-2.769 0 4.5 4.5 0 1 0-5.06 7.307m-.867 1.802A6.5 6.5 0 1 1 12 2.81a6.5 6.5 0 1 1 7.165 10.62l.645 7.397A2 2 0 0 1 17.818 23H6.148a2 2 0 0 1-1.995-2.142z" /></Icon>;

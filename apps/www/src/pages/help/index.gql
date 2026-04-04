@@ -1,7 +1,7 @@
 query HelpIndexQuery {
   cms {
-    programs {
-    	items {
+    programs(where: { archived_not: true }) {
+      items {
         name
         webname
         shortDescription

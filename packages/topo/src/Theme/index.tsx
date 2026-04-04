@@ -1,11 +1,7 @@
-export {
-  useColorMode,
-  useColorModeValue,
-  ColorModeScript,
-} from "@chakra-ui/react";
+export { useColorMode, useColorModeValue, ColorModeScript } from "./compat";
 
 export { default as codedayTheme } from "./vars";
 
 export * from "./Provider";
-
-export * from "./query"
+export { useCmp } from "./providers/Cmp";
+export * from "./query";

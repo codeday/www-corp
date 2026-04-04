@@ -18,14 +18,21 @@ interface PolicyProps {
 export default function Policy({ slug }: PolicyProps) {
   const { termageddon, notion } = useQuery();
   const page = TERMAGEDDON_POLICIES.includes(slug)
-    ? { content: termageddon.terms[slug], title: slug.charAt(0).toUpperCase() + slug.slice(1) }
+    ? {
+        content: termageddon.terms[slug],
+        title: slug === 'tos' ? 'Terms of Service' : slug.charAt(0).toUpperCase() + slug.slice(1),
+      }
     : notion?.page || { content: '', title: 'Not Found' };
 
   return (
     <Page title={page.title} slug={`/legal/${page.slug}`}>
       <Content>
-        <Heading as="h2" fontSize="5xl" mt={-2} mb={8}>{page.title}</Heading>
-        <Markdown baseHeadingLevel={3} allowHtml>{page.content}</Markdown>
+        <Heading as="h2" fontSize="5xl" mt={-2} mb={8} lineHeight="1.6">
+          {page.title}
+        </Heading>
+        <Markdown baseHeadingLevel={3} allowHtml>
+          {page.content}
+        </Markdown>
       </Content>
     </Page>
   );
@@ -40,7 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     ],
     fallback: true,
   };
-}
+};
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
@@ -66,4 +73,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       notFound: true,
     };
   }
-}
+};

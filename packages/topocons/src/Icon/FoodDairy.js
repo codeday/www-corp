@@ -1,7 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.FoodDairy = void 0;
-const jsx_runtime_1 = require("react/jsx-runtime");
-const react_1 = require("@chakra-ui/react");
-const FoodDairy = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M14.052 10.1a1.5 1.5 0 0 0 2.891.803zM2.214 5.375q.04-.052.09-.1c.752-.749 1.834-1.47 3.25-2.177 1.38-.69 3.554-1.041 6.57-1.097a3 3 0 0 1 2.177.878l7.402 7.401.016.017a.97.97 0 0 1 .282.784v9.912a1 1 0 0 1-1.165.986l-9.312-1.552a1 1 0 0 1-.757-.598 3 3 0 0 0-5.005-.834 1 1 0 0 1-.91.32l-2.016-.336a1 1 0 0 1-.835-.986v-4.05a1 1 0 0 1 .8-.98 1.5 1.5 0 0 0 0-2.94 1 1 0 0 1-.8-.98v-3.02a.98.98 0 0 1 .213-.648m2.994.193 12.397 3.444-4.718-4.72A1 1 0 0 0 12.16 4c-2.742.051-4.662.361-5.713.887q-.687.344-1.24.68M4 7.307V8.33a3.502 3.502 0 0 1 0 6.327v2.49l.675.112a5 5 0 0 1 7.682 1.28L20 19.812v-8.06l-1.13-.313a3.502 3.502 0 0 1-6.746-1.874z" }) });
-exports.FoodDairy = FoodDairy;

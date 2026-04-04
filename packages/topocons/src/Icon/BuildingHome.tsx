@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const BuildingHome = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M18 20V8.08l-6-4.8-6 4.8V20h3v-6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6zm2-10.32V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9.68l-1.375 1.1a1 1 0 1 1-1.25-1.56l9.376-7.501a2 2 0 0 1 2.498 0l9.376 7.5a1 1 0 1 1-1.25 1.562zM13 14h-2v6h2z" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const BuildingHome = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M18 20V8.08l-6-4.8-6 4.8V20h3v-6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6zm2-10.32V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9.68l-1.375 1.1a1 1 0 1 1-1.25-1.56l9.376-7.501a2 2 0 0 1 2.498 0l9.376 7.5a1 1 0 1 1-1.25 1.562zM13 14h-2v6h2z" /></Icon>;

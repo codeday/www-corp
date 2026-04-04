@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const UiPrint = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M7 10h10V4a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1zm0 8v3h10v-3zm12-8h1a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v3a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h1V4a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3zM4 12v4h16v-4zm13 3a1 1 0 1 1 0-2 1 1 0 0 1 0 2" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const UiPrint = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M7 10h10V4a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1zm0 8v3h10v-3zm12-8h1a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-1v3a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h1V4a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3zM4 12v4h16v-4zm13 3a1 1 0 1 1 0-2 1 1 0 0 1 0 2" /></Icon>;

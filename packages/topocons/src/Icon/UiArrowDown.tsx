@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const UiArrowDown = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M12 15.586 3.707 7.293a1 1 0 0 0-1.414 1.414l9 9a1 1 0 0 0 1.414 0l9-9a1 1 0 0 0-1.414-1.414z" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const UiArrowDown = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M12 15.586 3.707 7.293a1 1 0 0 0-1.414 1.414l9 9a1 1 0 0 0 1.414 0l9-9a1 1 0 0 0-1.414-1.414z" /></Icon>;

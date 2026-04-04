@@ -6,17 +6,17 @@ import React, {
 } from "react";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
 import { useSsr } from "@codeday/topo/utils";
-import { type ComponentWithAs, forwardRef } from "@chakra-ui/react";
+import { type ComponentWithAs } from "@codeday/topo/_utils";
 
 export interface RatioBoxProps extends BoxProps {
   auto?: "w" | "h";
   autoDefault?: string;
 }
 
-const RatioBoxInner = forwardRef<RatioBoxProps, "div">(
+const RatioBoxInner = React.forwardRef<HTMLDivElement, RatioBoxProps>(
   (
     { w, h, auto = "h", autoDefault = "100%", children, ...props },
-    forwardedRef
+    forwardedRef,
   ) => {
     const ref = useRef(null);
     const [computed, setComputed] = useState<number | string>(autoDefault);
@@ -32,15 +32,15 @@ const RatioBoxInner = forwardRef<RatioBoxProps, "div">(
             Math.floor(
               ((ref as React.MutableRefObject<any>).current.clientWidth /
                 (w as number)) *
-                (h as number)
-            )
+                (h as number),
+            ),
           );
         } else if (auto === "w") {
           setComputed(
             Math.floor(
               (ref as React.MutableRefObject<any>).current.clientHeight /
-                (h as number)
-            ) * (w as number)
+                (h as number),
+            ) * (w as number),
           );
         }
       };
@@ -60,19 +60,19 @@ const RatioBoxInner = forwardRef<RatioBoxProps, "div">(
         {children}
       </Box>
     );
-  }
+  },
 );
 
-export const RatioBox: ComponentWithAs<"div", RatioBoxProps> = forwardRef<
-  RatioBoxProps,
-  "div"
+export const RatioBox: ComponentWithAs<"div", RatioBoxProps> = React.forwardRef<
+  HTMLDivElement,
+  RatioBoxProps
 >(({ auto = "h", autoDefault = "100%", children, ...props }, ref) => {
   const ssr = useSsr();
   if (ssr) {
     return (
       <Box
         {...props}
-        ref={ref}
+        ref={ref as any}
         width={auto === "w" ? autoDefault : "100%"}
         height={auto === "h" ? autoDefault : "100%"}
       >
@@ -86,4 +86,4 @@ export const RatioBox: ComponentWithAs<"div", RatioBoxProps> = forwardRef<
       {children}
     </RatioBoxInner>
   );
-});
+}) as ComponentWithAs<"div", RatioBoxProps>;

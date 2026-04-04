@@ -124,7 +124,7 @@ export default function Home() {
             ? `${type !== 'other' ? ' - ' : ''}not formally published`
             : ''}
         </Text>
-        <Heading as="h2" fontSize={{ base: '2xl', md: '4xl' }} mb={2}>
+        <Heading as="h2" fontSize={{ base: '2xl', md: '4xl' }} mb={4} lineHeight="1.2">
           {title}
         </Heading>
       </Content>
@@ -143,7 +143,7 @@ export default function Home() {
                         display="inline-block"
                         ml={2}
                         mb={0}
-                        href={`https://orcid.org/${c.orcid}`}
+                        {...({ href: `https://orcid.org/${c.orcid}` } as any)}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -172,9 +172,9 @@ export default function Home() {
                 <Button
                   as="a"
                   display="inline-block"
-                  colorScheme="blue"
+                  colorPalette="blue"
                   size="lg"
-                  href={files.items[0].contentfulBaseUrl}
+                  {...({ href: files.items[0].contentfulBaseUrl } as any)}
                 >
                   <Text mb={0} mt={1.5}>
                     Download
@@ -200,7 +200,7 @@ export default function Home() {
                 >
                   {files.items.map((f: any) => (
                     <Box key={f.contentfulBaseUrl}>
-                      <Box as="a" href={f.contentfulBaseUrl}>
+                      <Box as="a" {...({ href: f.contentfulBaseUrl } as any)}>
                         <HStack>
                           <Box fontSize="2xl" position="relative" top={1}>
                             <FileIcon file={f} />
@@ -227,7 +227,7 @@ export default function Home() {
                 DOI
               </Heading>
               <Link
-                href={`https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${doiSuffix}`}
+                {...({ href: `https://doi.org/${process.env.NEXT_PUBLIC_DOI_PREFIX}/${doiSuffix}` } as any)}
                 fontSize="2xs"
                 fontFamily="monospace"
                 mb={2}

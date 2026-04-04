@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const MedicalWheelChair = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M22 18.268a2 2 0 1 1-2 0V17h-4a1 1 0 0 1-.278-.04A7 7 0 1 1 7 8.29V5H2a1 1 0 1 1 0-2h6a1 1 0 0 1 1 1v4h9c1 0 1.266.172 1.442.664Q22.003 15.913 22 16zM19.581 15l-1.786-5H13.9a6.98 6.98 0 0 1 2.1 5zM9 20a5 5 0 1 0 0-10 5 5 0 0 0 0 10" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const MedicalWheelChair = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M22 18.268a2 2 0 1 1-2 0V17h-4a1 1 0 0 1-.278-.04A7 7 0 1 1 7 8.29V5H2a1 1 0 1 1 0-2h6a1 1 0 0 1 1 1v4h9c1 0 1.266.172 1.442.664Q22.003 15.913 22 16zM19.581 15l-1.786-5H13.9a6.98 6.98 0 0 1 2.1 5zM9 20a5 5 0 1 0 0-10 5 5 0 0 0 0 10" /></Icon>;

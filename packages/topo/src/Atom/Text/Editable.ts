@@ -1,5 +1,4 @@
-export {
-  Editable,
-  EditableInput,
-  EditablePreview,
-} from "@chakra-ui/react";
+import { Editable as ChakraEditable } from "@chakra-ui/react";
+export const Editable = ChakraEditable.Root;
+export const EditableInput = ChakraEditable.Input;
+export const EditablePreview = ChakraEditable.Preview;

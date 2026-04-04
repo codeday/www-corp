@@ -89,7 +89,7 @@ export default function Programs() {
                 p={2}
                 as="a"
                 display="block"
-                href={`https://event.codeday.org/${region.webname}`}
+               {...{href:`https://event.codeday.org/${region.webname}`} as any}
                 target="_blank"
                 fontSize="xl"
                 borderBottomWidth="1px"
@@ -124,7 +124,7 @@ export default function Programs() {
             mb={4}
             display="block"
             as="a"
-            href={labs.url}
+           {...{href:labs.url} as any}
             target="_blank"
             rel="noopener"
             key={labs.name}
@@ -158,7 +158,7 @@ export default function Programs() {
               mb={4}
               display="block"
               as="a"
-              href={program.url}
+             {...{href:program.url} as any}
               target="_blank"
               rel="noopener"
               key={program.name}

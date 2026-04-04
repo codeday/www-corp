@@ -1,20 +1,9 @@
-// export {
-//   Menu as default,
-//   MenuButton as Button,
-//   MenuList as List,
-//   MenuItem as Item,
-//   MenuGroup as Group,
-//   MenuDivider as Divider,
-//   MenuOptionGroup as OptionGroup,
-//   MenuItemOption as Option,
-// } from '@chakra-ui/react';
-export {
-  Menu as DropdownMenu,
-  MenuButton as DropdownMenuButton,
-  MenuList as DropdownMenuList,
-  MenuItem as DropdownMenuItem,
-  MenuGroup as DropdownMenuGroup,
-  MenuDivider as DropdownMenuDivider,
-  MenuOptionGroup as DropdownMenuOptionGroup,
-  MenuItemOption as DropdownMenuOption,
-} from "@chakra-ui/react";
+import { Menu as ChakraMenu } from "@chakra-ui/react";
+export const DropdownMenu = ChakraMenu.Root;
+export const DropdownMenuButton = ChakraMenu.Trigger;
+export const DropdownMenuList = ChakraMenu.Content;
+export const DropdownMenuItem = ChakraMenu.Item;
+export const DropdownMenuGroup = ChakraMenu.ItemGroup;
+export const DropdownMenuDivider = ChakraMenu.Separator;
+export const DropdownMenuOptionGroup = ChakraMenu.RadioItemGroup;
+export const DropdownMenuOption = ChakraMenu.RadioItem;

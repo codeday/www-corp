@@ -11,7 +11,7 @@ export default function Photo({ photo, ...props }: PhotoProps) {
     <Box
       as="a"
       display="block"
-      href={photo.photo.original}
+     {...{href:photo.photo.original} as any}
       target="_blank"
       rel="noopener"
       backgroundImage={`url(${photo.photo.preview})`}

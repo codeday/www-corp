@@ -1,19 +1,20 @@
 import React from "react";
 import {
-  forwardRef,
   Box as ChakraBox,
   type BoxProps as ChakraBoxProps,
-  type ComponentWithAs,
 } from "@chakra-ui/react";
 import { useTheme } from "@codeday/topo/utils";
-import { dereferenceDottedString } from "@codeday/topo/_utils";
+import {
+  dereferenceDottedString,
+  type ComponentWithAs,
+} from "@codeday/topo/_utils";
 
 interface BoxProps extends ChakraBoxProps {
   grad?: string;
   visuallyHidden?: boolean;
 }
 
-const Box: ComponentWithAs<"div", BoxProps> = forwardRef<BoxProps, "div">(
+const Box = React.forwardRef<HTMLElement, BoxProps>(
   ({ grad, visuallyHidden, ...props }, ref) => {
     const theme = useTheme();
     const hiddenProps = {
@@ -28,12 +29,15 @@ const Box: ComponentWithAs<"div", BoxProps> = forwardRef<BoxProps, "div">(
     };
     return (
       <ChakraBox
-        ref={ref}
-        bgImg={grad && dereferenceDottedString(grad, theme.colors.grad)}
+        ref={ref as any}
+        bgImg={
+          grad ? dereferenceDottedString(grad, theme.colors?.grad) : undefined
+        }
         {...props}
         {...(visuallyHidden ? hiddenProps : {})}
       />
     );
-  }
-);
+  },
+) as ComponentWithAs<"div", BoxProps>;
+
 export { Box, type BoxProps };

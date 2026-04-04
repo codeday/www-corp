@@ -1,23 +1,14 @@
-/* eslint-disable sonarjs/no-duplicate-string */
-import { mode, type StyleFunctionProps } from "@chakra-ui/theme-tools";
-import { type Dict } from "@chakra-ui/utils";
+// Global styles for Chakra UI v3
+// Dark mode is toggled via the "dark" class on <html> by next-themes
+// Component-level color mode is handled via CSS custom properties in createSystem
 
 const styles = {
-  global: (props: Dict | StyleFunctionProps) => ({
+  global: {
     body: {
-      color: mode("black", "whiteAlpha.900")(props),
-      text: mode("black", "whiteAlpha.900")(props),
-      bg: mode("white", "gray.1100")(props),
-      background: mode("white", "gray.1100")(props),
-      primary: mode("brand", "whiteAlpha.900")(props),
-      border: mode("gray.200", "whiteAlpha.300")(props),
-      borderColor: mode("gray.200", "whiteAlpha.300")(props),
-      placeholder: mode("gray.600", "whiteAlpha.400")(props),
-      transition: "background-color 0.5s",
       lineHeight: "base",
       fontFamily: "body",
     },
-  }),
+  },
 };
 
 export default styles;

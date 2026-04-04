@@ -3,3 +3,4 @@ stage1/
 dist/
 src/optimized-svg
 svg/*
+src/*.js

@@ -25,7 +25,7 @@ export default function ProgramInfo({ program }: ProgramInfoProps) {
           {program.upcoming.length > 0 && (
             <Box mb={4}>
               <Text bold mb={1}>Upcoming Dates</Text>
-              <List styleType="disc" pl={2}>
+              <List listStyleType="disc" pl={2}>
                 {program.upcoming.slice(0,3).map((event: any) => (
                   <ListItem>
                     {formatInterval(event.startsAt, event.endsAt)}
@@ -63,7 +63,7 @@ export default function ProgramInfo({ program }: ProgramInfoProps) {
           ))}
           <Button
             as="a"
-            href={`/volunteer/${program.webname}`}
+           {...{href:`/volunteer/${program.webname}`} as any}
             target="_blank"
             rel="noopener"
             w="100%"

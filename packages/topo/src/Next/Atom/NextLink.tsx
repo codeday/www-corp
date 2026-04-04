@@ -1,15 +1,15 @@
 import React from "react";
 import NextJsLink, { type LinkProps as NextJsLinkProps } from "next/link";
-import { type LinkProps, forwardRef } from "@chakra-ui/react";
+import { type LinkProps } from "@chakra-ui/react";
 import { Link } from "@codeday/topo/Atom";
 
 type NextLinkProps = LinkProps &
   Omit<NextJsLinkProps, "passHref" | "legacyBehavior">;
 
-export const NextLink = forwardRef<NextLinkProps, "a">(
+export const NextLink = React.forwardRef<HTMLAnchorElement, NextLinkProps>(
   (
     { href = "", replace, scroll, shallow, prefetch, locale, ...props },
-    ref
+    ref,
   ) => {
     return (
       <NextJsLink
@@ -22,8 +22,8 @@ export const NextLink = forwardRef<NextLinkProps, "a">(
         passHref
         legacyBehavior
       >
-        <Link ref={ref} {...props} />
+        <Link ref={ref as any} {...(props as any)} />
       </NextJsLink>
     );
-  }
+  },
 );

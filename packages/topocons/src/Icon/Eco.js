@@ -1,7 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Eco = void 0;
-const jsx_runtime_1 = require("react/jsx-runtime");
-const react_1 = require("@chakra-ui/react");
-const Eco = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M11 11V7.038h-.68A5.315 5.315 0 0 1 5.065.926a1 1 0 0 1 .878-.844l.49-.055a5.98 5.98 0 0 1 6.353 4.113 5 5 0 0 1 3.767-1.153l.583.063a1 1 0 0 1 .881.838 4.453 4.453 0 0 1-4.398 5.146H13V11h4a2 2 0 0 1 2 2v2c0 .718-.378 1.348-.947 1.7l-.572 5.08A2.5 2.5 0 0 1 14.997 24H9.003a2.5 2.5 0 0 1-2.484-2.22l-.572-5.08A2 2 0 0 1 5 15v-2a2 2 0 0 1 2-2zm5.007 6H7.993l.513 4.556a.5.5 0 0 0 .497.444h5.994a.5.5 0 0 0 .497-.444zM7 15h10v-2H7zm6.619-7.966c1.226 0 2.242-.9 2.424-2.075a3.02 3.02 0 0 0-2.89 2.075zm-3.3-1.996h.642A3.98 3.98 0 0 0 7.015 1.99a3.316 3.316 0 0 0 3.305 3.047" }) });
-exports.Eco = Eco;

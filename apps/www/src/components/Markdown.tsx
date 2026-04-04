@@ -1,4 +1,3 @@
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import RemarkGFM from 'remark-gfm';
@@ -46,13 +45,13 @@ const Markdown = ({ baseHeadingLevel, allowHtml, ...props }: MarkdownProps) => {
     h6: h(6),
     tr: (props: any) => <Box as="tr" {...props} style={{ verticalAlign: 'top' }} />,
     p: (props: any) => <Text mb={4} {...props} />,
-    ol: (props: any) => <List mb={6} styleType="decimal" {...props} />,
-    ul: (props: any) => <List mb={6} styleType="disc" {...props} />,
+    ol: (props: any) => <List mb={6} listStyleType="decimal" {...props} />,
+    ul: (props: any) => <List mb={6} listStyleType="disc" {...props} />,
     li: (props: any) => <ListItem mb={1} ml={4} pl={4} {...props} />,
   };
   return (
     <ReactMarkdown
-      components={ChakraUIRenderer(mdTheme)}
+      components={mdTheme as any}
       remarkPlugins={[RemarkGFM]}
       rehypePlugins={allowHtml ? [rehypeRaw, ...(props.rehypePlugins || [])] : (props.rehypePlugins || [])}
       {...props}

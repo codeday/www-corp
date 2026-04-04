@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const UiTrash = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8H3a1 1 0 1 1 0-2zm2 0h4V4h-4zM7 8v12h10V8zm2 3a1 1 0 0 1 2 0v6a1 1 0 0 1-2 0zm4 0a1 1 0 0 1 2 0v6a1 1 0 0 1-2 0z" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const UiTrash = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2h5a1 1 0 0 1 0 2h-2v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8H3a1 1 0 1 1 0-2zm2 0h4V4h-4zM7 8v12h10V8zm2 3a1 1 0 0 1 2 0v6a1 1 0 0 1-2 0zm4 0a1 1 0 0 1 2 0v6a1 1 0 0 1-2 0z" /></Icon>;

@@ -1,21 +1,7 @@
-import React from "react"
-import { keyframes, css } from "@emotion/react";
+import React from "react";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
-import { useColorModeValue } from "@chakra-ui/react";
-export { Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
-
-const load = keyframes`
-  from {
-    background-position: 200% 0;
-  }
-  to {
-    background-position: -200% 0;
-  }
-`;
-
-const loadAnimation = css`
-  animation: ${load} 8s ease-in-out infinite;
-`;
+import { useColorModeValue } from "@codeday/topo/Theme";
+export { Skeleton, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 
 export const Skelly = (props: BoxProps) => (
   <Box
@@ -24,7 +10,7 @@ export const Skelly = (props: BoxProps) => (
     backgroundSize="800% 100%"
     marginBottom={1}
     borderRadius="sm"
-    css={[loadAnimation]}
+    animation="skelly-load 8s ease-in-out infinite"
     {...props}
   />
 );

@@ -1,4 +1,4 @@
-import { type ComponentWithAs, forwardRef } from "@chakra-ui/react";
+import { type ComponentWithAs } from "@codeday/topo/_utils";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
 import React from "react";
 import NextLink, { type LinkProps as NextLinkProps } from "next/link";
@@ -6,10 +6,10 @@ import NextLink, { type LinkProps as NextLinkProps } from "next/link";
 type BoxAsLinkProps = BoxProps &
   Omit<NextLinkProps, "passHref" | "legacyBehavior">;
 
-export const NextBox: ComponentWithAs<"div", BoxAsLinkProps> = forwardRef<
-  BoxAsLinkProps,
-  "div"
->(({ as, ...props }, ref) => {
+export const NextBox: ComponentWithAs<"div", BoxAsLinkProps> = React.forwardRef<
+  HTMLDivElement,
+  BoxAsLinkProps
+>(({ as, ...props }: any, ref) => {
   if (as == "a") {
     const {
       href = "",
@@ -31,9 +31,9 @@ export const NextBox: ComponentWithAs<"div", BoxAsLinkProps> = forwardRef<
         legacyBehavior
         passHref
       >
-        <Box as={as} ref={ref} {...boxProps} />
+        <Box as={as} ref={ref as any} {...boxProps} />
       </NextLink>
     );
   }
-  return <Box as={as} {...props} />;
-});
+  return <Box as={as} {...(props as any)} />;
+}) as ComponentWithAs<"div", BoxAsLinkProps>;

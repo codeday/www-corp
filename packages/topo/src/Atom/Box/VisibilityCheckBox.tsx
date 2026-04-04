@@ -6,9 +6,9 @@ import React, {
   useImperativeHandle,
 } from "react";
 import { Box, type BoxProps, ClientSideOnlyBox } from "@codeday/topo/Atom";
-import {type ComponentWithAs, forwardRef } from "@chakra-ui/react";
+import { type ComponentWithAs } from "@codeday/topo/_utils";
 
-const VisibilityCheckBoxInner = forwardRef<BoxProps, "div">(
+const VisibilityCheckBoxInner = React.forwardRef<HTMLDivElement, BoxProps>(
   ({ children, ...props }, forwardedRef) => {
     const ref: React.MutableRefObject<any> = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -19,7 +19,6 @@ const VisibilityCheckBoxInner = forwardRef<BoxProps, "div">(
       setIsVisible(ref.current.offsetWidth > 0 || ref.current.offsetHeight > 0);
     useLayoutEffect(() => {
       if (typeof window === "undefined") return () => {};
-
       window.addEventListener("resize", onResize);
       onResize();
       return () => window.removeEventListener("resize", onResize);
@@ -30,15 +29,11 @@ const VisibilityCheckBoxInner = forwardRef<BoxProps, "div">(
         {isVisible && children}
       </Box>
     );
-  }
+  },
 );
 
-// eslint-disable-next-line no-func-assign
-// VisibilityCheckBoxInner = forwardRef(VisibilityCheckBoxInner);
-
-// Wrapping this component with a check for client-side will prevent errors about useLayoutEffect on SSR
-export const VisibilityCheckBox: ComponentWithAs<"div", BoxProps> = forwardRef<BoxProps, "div">(
-  ({ children, ...props }, ref) => {
+export const VisibilityCheckBox: ComponentWithAs<"div", BoxProps> =
+  React.forwardRef<HTMLDivElement, BoxProps>(({ children, ...props }, ref) => {
     return (
       <ClientSideOnlyBox>
         <VisibilityCheckBoxInner ref={ref} {...props}>
@@ -46,5 +41,4 @@ export const VisibilityCheckBox: ComponentWithAs<"div", BoxProps> = forwardRef<B
         </VisibilityCheckBoxInner>
       </ClientSideOnlyBox>
     );
-  }
-);
+  }) as ComponentWithAs<"div", BoxProps>;

@@ -1,7 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Backpack = void 0;
-const jsx_runtime_1 = require("react/jsx-runtime");
-const react_1 = require("@chakra-ui/react");
-const Backpack = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M7 4.79V4a3 3 0 0 1 3-3h1a3 3 0 0 1 3 3v.794q.554.254 1.1.588a6 6 0 0 1 2.872 5.12v.411a3 3 0 0 1 2.395 2.543l.365 2.71A2.5 2.5 0 0 1 18.254 19h-.282a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3h-.254a2.5 2.5 0 0 1-2.478-2.834l.365-2.71A3 3 0 0 1 3 10.92v-.407A6 6 0 0 1 5.876 5.39Q6.435 5.05 7 4.791m-.082 2.307A4 4 0 0 0 5 10.512V19a1 1 0 0 0 1 1h8.972a1 1 0 0 0 1-1v-8.498a4 4 0 0 0-1.914-3.413C12.862 6.358 11.68 6 10.5 6c-1.185 0-2.374.36-3.582 1.097M7.5 10h6a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 6 17.5v-6A1.5 1.5 0 0 1 7.5 10m.5 3h5v-1H8zm0 2v2h5v-2zM9 4.144a7.9 7.9 0 0 1 3 0V4a1 1 0 0 0-1-1h-1a1 1 0 0 0-1 1zM17.972 17h.282a.5.5 0 0 0 .496-.567l-.366-2.71a1 1 0 0 0-.412-.682zM3 17v-3.938a1 1 0 0 0-.384.662l-.366 2.71a.5.5 0 0 0 .496.566z" }) });
-exports.Backpack = Backpack;

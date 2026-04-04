@@ -85,7 +85,7 @@ export default function Audience({ programWebname, audience }: AudienceProps) {
               display="block"
               p={4}
               pb={0}
-              href={`/help/article/${faq.sys.id}`}
+             {...{href:`/help/article/${faq.sys.id}`} as any}
               rounded="sm"
               borderWidth={1}
               mb={2}

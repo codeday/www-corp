@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const UiVolumeLower = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M7.65 16.002H6a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h1.65l4.725-3.781a1 1 0 0 1 1.625.78v14a1 1 0 0 1-1.625.782zM12 7.082l-3.375 2.7a1 1 0 0 1-.625.22H6v4h2a1 1 0 0 1 .625.219l3.375 2.7zm5.657 10.577a1 1 0 0 1-1.414-1.414 6 6 0 0 0 0-8.486 1 1 0 0 1 1.414-1.414 8 8 0 0 1 0 11.314" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const UiVolumeLower = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M7.65 16.002H6a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h1.65l4.725-3.781a1 1 0 0 1 1.625.78v14a1 1 0 0 1-1.625.782zM12 7.082l-3.375 2.7a1 1 0 0 1-.625.22H6v4h2a1 1 0 0 1 .625.219l3.375 2.7zm5.657 10.577a1 1 0 0 1-1.414-1.414 6 6 0 0 0 0-8.486 1 1 0 0 1 1.414-1.414 8 8 0 0 1 0 11.314" /></Icon>;

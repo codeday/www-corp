@@ -1,7 +1,7 @@
 import { UiX as X } from "@codeday/topocons";
 import React, { useEffect, useReducer } from "react";
 import useSwr from "swr";
-import { useColorMode } from "@chakra-ui/react";
+import { useColorMode } from "@codeday/topo/Theme";
 import {
   Box,
   type BoxProps,
@@ -22,31 +22,22 @@ const query = (date: string, visibility: any) => `{
         endAt_gte: "${date}"
       }
     ) {
-
       items {
-        sys {
-          id
-        }
+        sys { id }
         title
         oneline
         displayAt
         type
         link
         displayAt
-        programs {
-          items {
-            webname
-          }
-        }
+        programs { items { webname } }
       }
     }
   }
 }`;
 
-// From https://stackoverflow.com/a/21739514
 function roundTimeQuarterHour(time: Date) {
   var timeToReturn = new Date(time);
-
   timeToReturn.setMilliseconds(
     Math.round(timeToReturn.getMilliseconds() / 1000) * 1000,
   );
@@ -65,9 +56,11 @@ const fromIso = (s: string) => {
   const b = s.split(/\D+/).map((obj) => Number(obj));
   return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
 };
+
 interface AnnouncementProps extends BoxProps {
   box?: boolean;
 }
+
 function Announcement({ box, ...props }: AnnouncementProps) {
   const { colorMode } = useColorMode();
   const { visibility, programWebname } = useTheme();
@@ -101,13 +94,8 @@ function Announcement({ box, ...props }: AnnouncementProps) {
               a: { programs: { items: string | any[] }; displayAt: any },
               b: { programs: { items: string | any[] }; displayAt: any },
             ) => {
-              if (
-                a.programs.items.length > 0 &&
-                b.programs.items.length === 0
-              ) {
+              if (a.programs.items.length > 0 && b.programs.items.length === 0)
                 return -1;
-              }
-
               return fromIso(a.displayAt) > fromIso(b.displayAt) ? -1 : 1;
             },
           );
@@ -141,13 +129,13 @@ function Announcement({ box, ...props }: AnnouncementProps) {
         as={item.link ? "a" : "div"}
         href={item.link}
         target={item.link ? "_blank" : null}
-        {...props}
+        {...(props as any)}
       >
         <Text fontFamily="accent" fontSize="4xl" lineHeight={1.2}>
           {item.title}
         </Text>
         <Text>{item.oneline}</Text>
-        <Button size="sm" colorScheme={baseColor} mb={0}>
+        <Button size="sm" colorPalette={baseColor} mb={0}>
           Learn More
         </Button>
       </Box>
@@ -162,7 +150,7 @@ function Announcement({ box, ...props }: AnnouncementProps) {
       position="relative"
       top="-2px"
       paddingRight={2}
-      onClick={(e) => {
+      onClick={(e: any) => {
         setDismissedMessages([...dismissedMessages, item.sys.id]);
         e.preventDefault();
         e.stopPropagation();
@@ -184,7 +172,7 @@ function Announcement({ box, ...props }: AnnouncementProps) {
       href={item.link}
       target={item.link ? "_blank" : null}
       aria-label="Announcement"
-      {...props}
+      {...(props as any)}
     >
       <Content wide mb={0}>
         <Box display={{ base: "none", lg: "block" }} mb={0}>
@@ -196,7 +184,7 @@ function Announcement({ box, ...props }: AnnouncementProps) {
               </Text>
             </Box>
             <Box textAlign="right">
-              <Button size="sm" colorScheme={baseColor} mb={0}>
+              <Button size="sm" colorPalette={baseColor} mb={0}>
                 Learn More
               </Button>
             </Box>

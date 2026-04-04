@@ -1,15 +1,33 @@
-import { type As } from "@chakra-ui/system";
-import {
-  type PropsOf,
-  type RightJoinProps,
-  forwardRef,
-  type ComponentWithAs,
-} from "@chakra-ui/react";
-import React, { ReactNode, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
-interface IPrototype {
-  prototype: any;
-}
+
+// ---------------------------------------------------------------------------
+// Local replacements for Chakra v2-only utility types
+// ---------------------------------------------------------------------------
+
+type As = React.ElementType;
+
+type PropsOf<T extends As> = React.ComponentPropsWithRef<T>;
+
+type RightJoinProps<
+  SourceProps extends object = {},
+  OverrideProps extends object = {},
+> = Omit<SourceProps, keyof OverrideProps> & OverrideProps;
+
+/**
+ * A polymorphic component type (replaces the Chakra v2 `ComponentWithAs`).
+ * Exported so downstream files can import it from `@codeday/topo/_utils`.
+ */
+export type ComponentWithAs<
+  C extends As,
+  Props extends object = {},
+> = React.ForwardRefExoticComponent<
+  RightJoinProps<PropsOf<C>, Props> & { as?: As } & React.RefAttributes<any>
+> & { displayName?: string };
+
+// ---------------------------------------------------------------------------
+// Misc utilities
+// ---------------------------------------------------------------------------
 
 export const dereferenceDottedString = (str: string, obj: any) =>
   str.split(".").reduce((o, i) => o[i], obj);
@@ -21,7 +39,7 @@ export const debounce = (
 ) => {
   let timeout: number | undefined;
   return (...args: any[]) => {
-    const context = this;
+    const context: any = undefined;
     const later = () => {
       timeout = undefined;
       if (!immediate) func.apply(context, args);
@@ -41,13 +59,11 @@ export const reactChildrenMapRecursive = (
     if (!React.isValidElement(child)) {
       return child;
     }
-    //@ts-ignore
+    // @ts-ignore
     if (child.props.children) {
-      //@ts-ignore
       return fn(
-        //@ts-ignore
-        React.cloneElement(child, {
-          //@ts-ignore
+        React.cloneElement(child as React.ReactElement<any>, {
+          // @ts-ignore
           children: reactChildrenMapRecursive(child.props.children, fn),
         }),
       );
@@ -66,6 +82,10 @@ export const setChildProps =
       ...(derivedProps ? derivedProps(child) : []),
     });
 
+interface IPrototype {
+  prototype: any;
+}
+
 export const wrapHtml = (nodes: React.ReactNode) =>
   (Array.isArray(nodes) ? React.Children.toArray(nodes) : [nodes]).map((e) =>
     typeof e === "string" ||
@@ -77,17 +97,23 @@ export const wrapHtml = (nodes: React.ReactNode) =>
     ),
   );
 
+// ---------------------------------------------------------------------------
+// pureRef — wraps a render function with React.forwardRef + useMemo
+// ---------------------------------------------------------------------------
+
 export const pureRef = <T extends object, P extends As>(
   Component: React.ForwardRefRenderFunction<
     any,
-    RightJoinProps<PropsOf<P>, T> & {
-      as?: As;
-    }
+    RightJoinProps<PropsOf<P>, T> & { as?: As }
   >,
 ) =>
-  forwardRef<T, P>((props, ref) =>
-    useMemo(() => Component(props, ref), [props, ref]),
+  React.forwardRef<any, RightJoinProps<PropsOf<P>, T> & { as?: As }>(
+    (props, ref) => useMemo(() => Component(props as any, ref), [props, ref]),
   );
+
+// ---------------------------------------------------------------------------
+// makePureBox — creates a named, memoised Box-based component
+// ---------------------------------------------------------------------------
 
 export const makePureBox = (
   name: string | undefined,
@@ -106,8 +132,12 @@ export const makePureBox = (
   );
 
   DerivedBox.displayName = name;
-  return DerivedBox;
+  return DerivedBox as ComponentWithAs<"div", BoxProps>;
 };
+
+// ---------------------------------------------------------------------------
+// childrenOfType — filter React children by component type
+// ---------------------------------------------------------------------------
 
 export const childrenOfType = (
   children: React.ReactNode,

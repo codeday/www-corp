@@ -1,17 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-
 import useId from "@accessible/use-id";
-import { type ComponentWithAs, forwardRef } from "@chakra-ui/react";
-
+import { type ComponentWithAs } from "@codeday/topo/_utils";
 import { P as Text, type TextProps } from "./Text";
 
 interface CopyTextProps extends TextProps {
   label: string;
 }
 
-const CopyText: ComponentWithAs<"p", CopyTextProps> = forwardRef<
-  CopyTextProps,
-  "p"
+const CopyText: ComponentWithAs<"p", CopyTextProps> = React.forwardRef<
+  HTMLElement,
+  CopyTextProps
 >(({ children, label, ...props }, ref) => {
   const [width, setWidth] = useState(10);
   const myRef = ref || useRef(null);
@@ -30,7 +28,7 @@ const CopyText: ComponentWithAs<"p", CopyTextProps> = forwardRef<
     <>
       <label htmlFor={id}>{label}</label>
       <Text
-        {...props}
+        {...(props as any)}
         ref={myRef as React.MutableRefObject<any>}
         id={id}
         as="input"
@@ -39,18 +37,17 @@ const CopyText: ComponentWithAs<"p", CopyTextProps> = forwardRef<
         width={`${width}px`}
         bg="transparent"
         readOnly
-        onClick={(e) => {
+        onClick={(e: any) => {
           (e.target as HTMLInputElement).select();
           (e.target as HTMLInputElement).setSelectionRange(
             0,
-            (e.target as HTMLInputElement).value.length + 1
+            (e.target as HTMLInputElement).value.length + 1,
           );
-          // eslint-disable-next-line no-undef
           window.document.execCommand("copy");
         }}
       />
     </>
   );
-});
+}) as ComponentWithAs<"p", CopyTextProps>;
 CopyText.displayName = "CopyText";
 export { CopyText, type CopyTextProps };

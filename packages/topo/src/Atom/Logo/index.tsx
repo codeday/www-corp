@@ -1,9 +1,9 @@
 import React from "react";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
 import { Text } from "@codeday/topo/Atom";
-import { pureRef } from "@codeday/topo/_utils";
+import { pureRef, type ComponentWithAs } from "@codeday/topo/_utils";
 import { withProps } from "recompose";
-import { type ComponentWithAs, useColorModeValue } from "@chakra-ui/react";
+import { useColorModeValue } from "@codeday/topo/Theme";
 import {
   Codeday as CodeDayLogo,
   Labs as LabsLogo,
@@ -23,8 +23,6 @@ import {
 
 import * as Icons from "./Icons";
 
-// generate icons using https://www.npmjs.com/package/create-chakra-icons - create-chakra-icons  -o src/Atom/Logo/Icons.ts ./src/Atom/Logo/svgs --typescript
-
 const upperFirst = (string: string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
 
@@ -32,6 +30,7 @@ interface LockupProps extends BoxProps {
   text: React.ReactNode;
   logo: React.ReactNode;
   logoColor?: string;
+  textColor?: string;
 }
 
 export interface LogoProps extends BoxProps {
@@ -47,7 +46,7 @@ const Lockup = ({
   color,
   ...props
 }: LockupProps) => (
-  <Box display="inline" textDecoration="none" {...props}>
+  <Box display="inline" textDecoration="none" {...(props as any)}>
     <Box color="brand" height="1.1em" display="inline">
       {logo}
     </Box>
@@ -63,12 +62,16 @@ const Lockup = ({
 Lockup.displayName = "Lockup";
 
 export const Logo: ComponentWithAs<"div", any> = pureRef<any, "div">(
-  ({ program, withText, text, ...props }, ref) => {
-    //@ts-ignore
-    const logoPart = React.createElement(Icons[`${upperFirst(program)}`], {
-      display: "inline",
-      width: "auto",
-    });
+  ({ program, withText, text, ...props }: any, ref) => {
+    const logoPart = React.createElement(
+      (Icons as any)[`${upperFirst(program)}`],
+      {
+        display: "inline",
+        width: "auto",
+        height: "1.1em",
+        as: "svg",
+      },
+    );
     let textPart = <></>;
     if (typeof text === "string") {
       textPart = (
@@ -87,23 +90,31 @@ export const Logo: ComponentWithAs<"div", any> = pureRef<any, "div">(
         </Text>
       );
     } else if (withText) {
-      //@ts-ignore
-      textPart = React.createElement(Icons[`${upperFirst(program)}Text`], {
-        display: "inline",
-        width: "auto",
-      });
+      textPart = React.createElement(
+        (Icons as any)[`${upperFirst(program)}Text`],
+        {
+          display: "inline",
+          width: "auto",
+          height: "1.1em",
+          as: "svg",
+        },
+      );
     }
 
-    return <Lockup logo={logoPart} text={textPart} {...props} ref={ref} />;
+    return (
+      <Lockup logo={logoPart} text={textPart} {...props} ref={ref as any} />
+    );
   },
-);
+) as ComponentWithAs<"div", any>;
 Logo.displayName = "Logo";
 
 export const StaticLogo: ComponentWithAs<"div", any> = pureRef<any, "div">(
-  ({ logoPart, textPart, program, withText, text, ...props }, ref) => {
+  ({ logoPart, textPart, program, withText, text, ...props }: any, ref) => {
     const logoComponent = React.createElement(logoPart, {
       display: "inline",
       width: "auto",
+      height: "1.1em",
+      as: "svg",
     });
     let textComponent = <></>;
     if (typeof text === "string") {
@@ -124,16 +135,23 @@ export const StaticLogo: ComponentWithAs<"div", any> = pureRef<any, "div">(
       );
     } else if (withText) {
       textComponent = React.createElement(textPart, {
+        as: "svg",
+        height: "1.1em",
         display: "inline",
         width: "auto",
       });
     }
 
     return (
-      <Lockup logo={logoComponent} text={textComponent} {...props} ref={ref} />
+      <Lockup
+        logo={logoComponent}
+        text={textComponent}
+        {...props}
+        ref={ref as any}
+      />
     );
   },
-);
+) as ComponentWithAs<"div", any>;
 StaticLogo.displayName = "Logo";
 
 export const CodeDay = withProps<any, LogoProps>({

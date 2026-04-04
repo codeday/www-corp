@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
-import { Box, CodeDay, Button, Link, Text } from '@codeday/topo/Atom';
+import { Box, CodeDay, Button, Link, Text, Heading } from '@codeday/topo/Atom';
 import { Header, SiteLogo, Main, Menu, Footer, CustomLinks } from '@codeday/topo/Organism';
-import { Fade, useColorModeValue } from '@chakra-ui/react';
+import { Presence } from '@chakra-ui/react';
 import { useQuery } from '../query';
 import { Content } from '@codeday/topo/Molecule';
 import { useFundraise } from '../providers';
@@ -25,8 +25,6 @@ export default function Page({ children, title, darkHeader, slug, seo, fun = fal
   const { cms } = useQuery();
   const { mission, globalSponsors } = cms || {};
   const { isFundraiseLoaded } = useFundraise();
-  const bgColor = useColorModeValue('white', '#292929' /* equiv to gray.1100 */);
-
   const disclaimerTexts = (cms?.globalSponsors?.items || [])
     .flatMap((sponsor: any) => sponsor.legalDisclaimer.split(`\n`))
     .filter(Boolean);
@@ -65,38 +63,50 @@ export default function Page({ children, title, darkHeader, slug, seo, fun = fal
             </a>
           </SiteLogo>
           <Menu>
-            <Button as="a" variant="ghost" href="/contact">
+            <Button as="a" fontSize="md" fontWeight="600" variant="ghost" mr={2} {...({ href: '/contact' } as any)}>
               Contact
             </Button>
-            <Button as="a" variant="ghost" href="/edu">
-              Educators
-            </Button>
-            <Button as="a" variant="ghost" href="/volunteer">
+            <Button as="a" fontSize="md" fontWeight="600" variant="ghost" mr={2} {...({ href: '/volunteer' } as any)}>
               Volunteer
             </Button>
-            <Button as="a" variant="ghost" href="/press">
+            <Button as="a" fontSize="md" fontWeight="600" variant="ghost" mr={2} {...({ href: '/press' } as any)}>
               Press
             </Button>
 
             <Box mt={-4} display="inline-block" minW="129px" maxH="48px">
-              <Fade in={isFundraiseLoaded}>
+              <Presence present={isFundraiseLoaded} animationName={{ _open: 'fade-in', _closed: 'fade-out' }}>
                 <Box>
-                  <a href={`#${FUNDRAISE_UP_BUTTON_ID}`} />
+                  <a {...({ href: `#${FUNDRAISE_UP_BUTTON_ID}` } as any)} />
                 </Box>
-              </Fade>
+              </Presence>
             </Box>
           </Menu>
         </Header>
         <Main>{children}</Main>
-        <Box mt={32}>
-          <Content fontFamily="mono" color="current.textLight" fontSize="2xs">
-            {disclaimerTexts.map((text: string) => (
-              <Text mb={4} key={text}>
-                {text}
-              </Text>
-            ))}
-          </Content>
-          <Footer repository="web" branch="master">
+        <Box mt={16}>
+          {disclaimerTexts && disclaimerTexts.length > 0 && (
+            <Content>
+              <Box
+                pl="4"
+                pr="4"
+                color="current.textLight"
+                fontSize="2xs"
+                borderWidth="1px"
+                borderRadius="sm"
+                bg="current.bgLight"
+              >
+                <Heading as="h3" fontSize="xs" mb={1} mt={2}>
+                  Funding Statements and Disclaimers
+                </Heading>
+                {disclaimerTexts.map((text: string) => (
+                  <Text mb={4} key={text}>
+                    {text}
+                  </Text>
+                ))}
+              </Box>
+            </Content>
+          )}
+          <Footer repository="web" branch="master" domainName="www.codeday.org">
             {''}
           </Footer>
         </Box>

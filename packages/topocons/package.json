@@ -13,18 +13,16 @@
     "clean": "rm -rf dist",
     "pregenerate-icons": "rm -rf src/Icon && rm -rf src/optimized-svg && rm -rf dist && svgo -f ./svg/Icon -o src/optimized-svg/Icon && mkdir -p src/Icon",
     "generate-icons": "create-chakra-icons -o src/Icon src/optimized-svg/Icon --typescript --multi -T C",
-    "postgenerate-icons": "idxgen src/Icon/ && replace '#000000' 'currentColor' src/Icon/*.tsx && replace '#000' 'currentColor' src/Icon/*.tsx && replace 'blockProgression' 'msBlockProgression' src/Icon/*.tsx && replace '(shapePadding|solidColor|solidOpacity): .*$' '' src/Icon/*.tsx  && replace '<Icon' '<Icon fill=\"currentColor\"' src/Icon/*.tsx && rm -rf src/optimized-svg"
+    "postgenerate-icons": "idxgen src/Icon/ && replace '@chakra-ui/react' '@chakra-ui/react/icon' src/Icon/*.tsx && replace '#000000' 'currentColor' src/Icon/*.tsx && replace '#000' 'currentColor' src/Icon/*.tsx && replace 'blockProgression' 'msBlockProgression' src/Icon/*.tsx && replace '(shapePadding|solidColor|solidOpacity): .*$' '' src/Icon/*.tsx  && replace '<Icon' '<Icon as=\"svg\" width=\"1em\" height=\"1em\" fill=\"currentColor\"' src/Icon/*.tsx && rm -rf src/optimized-svg"
   },
   "devDependencies": {
     "@chakra-ui/react": "catalog:",
     "@codeday/tsconfig": "workspace:*",
     "@emotion/react": "catalog:",
-    "@emotion/styled": "catalog:",
     "@nexite/create-chakra-icons": "^1.1.1",
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "framer-motion": "catalog:",
     "idxgen": "^1.3.1",
     "react": "catalog:",
     "react-dom": "catalog:",

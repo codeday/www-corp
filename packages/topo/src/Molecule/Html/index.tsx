@@ -1,4 +1,4 @@
-import { useColorModeValue } from "@chakra-ui/react";
+import { useColorModeValue } from "@codeday/topo/Theme";
 import styled from "@emotion/styled";
 import React from "react";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
@@ -15,7 +15,7 @@ function Html({ children, ...props }: BoxProps) {
     h4,
     h5,
     h6 {
-      font-family: ${t.fonts.header};
+      font-family: ${t.fonts.heading};
       font-weight: bold;
       margin-bottom: 0.75em;
       padding-top: 0.5em;

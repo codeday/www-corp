@@ -1,7 +1,6 @@
 import React from "react";
-import { pureRef } from "@codeday/topo/_utils";
+import { pureRef, type ComponentWithAs } from "@codeday/topo/_utils";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
-import { type ComponentWithAs } from "@chakra-ui/react";
 
 interface ContentProps extends BoxProps {
   wide?: boolean;
@@ -11,7 +10,7 @@ interface ContentProps extends BoxProps {
 const Content: ComponentWithAs<"div", ContentProps> = pureRef<
   ContentProps,
   "div"
->(({ wide, full, ...props }, ref) => {
+>(({ wide, full, ...props }: any, ref) => {
   const boxProps: any = {
     paddingLeft: 3,
     paddingRight: 3,
@@ -24,6 +23,6 @@ const Content: ComponentWithAs<"div", ContentProps> = pureRef<
     ...props,
   };
   return <Box {...boxProps} />;
-});
+}) as ComponentWithAs<"div", ContentProps>;
 Content.displayName = "Content";
 export { Content, type ContentProps };

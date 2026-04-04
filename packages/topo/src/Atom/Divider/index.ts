@@ -1,1 +1,1 @@
-export { Divider } from "@chakra-ui/react";
+export { Separator as Divider } from "@chakra-ui/react";

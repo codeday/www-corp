@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Image, Text, Box } from "@codeday/topo/Atom";
 import { apiFetch } from "@codeday/topo/utils";
-import { type ChakraProps } from "@chakra-ui/react";
+import { type BoxProps } from "@chakra-ui/react";
 
 const GITHUB_AUTHORS_QUERY = `
 query GithubAuthorsQuery($owner: String, $repository: String!, $path: String, $branch: String) {
@@ -16,7 +16,7 @@ query GithubAuthorsQuery($owner: String, $repository: String!, $path: String, $b
   }
 }`;
 
-export interface GithubAuthorsProps extends ChakraProps {
+export interface GithubAuthorsProps extends BoxProps {
   owner?: string;
   repository: string;
   branch?: string;
@@ -55,14 +55,14 @@ export function GithubAuthors({
       const resp = await apiFetch(
         GITHUB_AUTHORS_QUERY,
         { owner, repository, branch, path },
-        {}
+        {},
       );
       const respA = (resp?.github?.contributors || [])
         .filter((a: ContributorInfo) => a.account?.name)
         .filter(
           (a: ContributorInfo) =>
             a.account!.username !== "tylermenezes" ||
-            resp!.github!.contributors.length <= 2
+            resp!.github!.contributors.length <= 2,
         );
       setAuthors(respA);
       setLoading(false);
@@ -71,7 +71,7 @@ export function GithubAuthors({
 
   if (loading && repository)
     return (
-      <Box {...props}>
+      <Box {...(props as any)}>
         <Text display="inline">&nbsp;</Text>
       </Box>
     );
@@ -86,9 +86,8 @@ export function GithubAuthors({
         path ? `/blob/${branch || "main"}/${path}` : ""
       }`}
       target="_blank"
-      fontFamily="monospace"
       color="current.textLight"
-      {...props}
+      {...(props as any)}
     >
       <Text display="inline-block">
         {authors.length !== 1

@@ -11,7 +11,7 @@ export default function RemindMe(props: any) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { query } = useRouter();
-  const qs = (new URLSearchParams(query as Record<string, string>)).toString();
+  const qs = new URLSearchParams(query as Record<string, string>).toString();
 
   const [hasStarted, setHasStarted] = useState(false);
   useAfterMountEffect(() => {
@@ -24,13 +24,17 @@ export default function RemindMe(props: any) {
 
   if (submitted) {
     return (
-      <Box {...props}><Text>Thanks, we've emailed you a reminder!</Text></Box>
+      <Box {...props}>
+        <Text>Thanks, we've emailed you a reminder!</Text>
+      </Box>
     );
   }
 
   return (
     <Box {...props}>
-      <Text>Don't want to fill this out on your phone? We can email you a link to sign up when you're back at your desk:</Text>
+      <Text>
+        Don't want to fill this out on your phone? We can email you a link to sign up when you're back at your desk:
+      </Text>
       <Flex>
         <InputText
           type="email"
@@ -41,9 +45,9 @@ export default function RemindMe(props: any) {
           mr={2}
         />
         <Button
-          colorScheme="green"
-          isDisabled={email.indexOf('@') < 0}
-          isLoading={submitting}
+          colorPalette="green"
+          disabled={email.indexOf('@') < 0}
+          loading={submitting}
           onClick={async () => {
             setSubmitting(true);
             (global as any).analytics?.track('volunteer.remind-me');
@@ -65,5 +69,5 @@ export default function RemindMe(props: any) {
         </Button>
       </Flex>
     </Box>
-  )
+  );
 }

@@ -17,20 +17,20 @@ export default function Live({ username, ...props }: LiveProps) {
   if (!username || !parent) return <></>;
 
   return (
-    <Box as="a" href={`https://twitch.tv/${username}`} target="_blank" rel="noopener" {...props}>
+    <Box as="a" {...{href:`https://twitch.tv/${username}`, target:"_blank", rel:"noopener"} as any} {...(props as any)}>
       <RatioBox
         as="iframe"
         w={16}
         h={9}
         auto="h"
         autoDefault="480"
-        src={`https://player.twitch.tv/?channel=${username}&parent=${parent}&muted=true&autoplay=true`}
-        frameBorder={0}
-        scrolling="no"
-        allowFullScreen={false}
-        style={{
-          pointerEvents: 'none',
-        }}
+        {...{
+          src:`https://player.twitch.tv/?channel=${username}&parent=${parent}&muted=true&autoplay=true`,
+          frameBorder:0,
+          scrolling:"no",
+          allowFullScreen:false,
+          style:{ pointerEvents: 'none' },
+        } as any}
       />
     </Box>
   );

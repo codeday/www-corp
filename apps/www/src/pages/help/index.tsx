@@ -19,7 +19,7 @@ export default function Help() {
         <Text mb={8}>Choose which program you&apos;d like help with:</Text>
         <Grid templateColumns={{ base: '1fr', md: '1fr 1fr', lg: 'repeat(3, 1fr)'}} gap={8}>
           {programsWithFaqs.map((program: any) => (
-            <IconBox as="a" key={program.webname} href={`/help/${program.webname}`}>
+            <IconBox as="a" key={program.webname}{...{href:`/help/${program.webname}`} as any}>
               <HeaderIcon><Image src={program.logo.url} h={12} alt="" /></HeaderIcon>
               <HeaderText>{program.name}</HeaderText>
               <BoxBody>{program.shortDescription}</BoxBody>

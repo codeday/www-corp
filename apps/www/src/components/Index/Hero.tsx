@@ -23,7 +23,7 @@ export default function Hero({ ...props }: any) {
       </Text>
       {explainer && (
         <VideoLink url={explainer.url} autoPlay>
-          <Button colorScheme="red">
+          <Button colorPalette="red">
             Learn More&nbsp;
             <Play style={{ position: 'relative', top: '-0.15em' }} />
           </Button>

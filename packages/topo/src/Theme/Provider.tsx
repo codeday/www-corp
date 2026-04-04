@@ -1,8 +1,5 @@
-import {
-  ChakraProvider,
-  cookieStorageManagerSSR,
-  localStorageManager,
-} from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
+import { ThemeProvider as NextThemesProvider } from "@wrksz/themes";
 import { Global, css } from "@emotion/react";
 // @ts-ignore
 import PropTypes from "prop-types";
@@ -11,8 +8,14 @@ import React from "react";
 import useSwr from "swr";
 import { apiFetch } from "@codeday/topo/utils";
 
-import codedayTheme from "./vars";
+import codedaySystem, { Theme as codedayTheme } from "./vars";
 import { QueryProvider } from "./query";
+import {
+  ThemeDataProvider,
+  defaultFontSizes,
+  type ThemeData,
+} from "@codeday/topo/utils";
+import { CmpProvider } from "./providers/Cmp";
 
 const customCss = css`
   @font-face {
@@ -130,13 +133,14 @@ const query = `query PageQuery ($locale: String!, $stringKeys: [String!]!, $loca
   }
 }`;
 
-interface ProviderProps {
+export interface ProviderProps {
   analyticsId?: string | null;
   brandColor?: string | null;
   withChat?: boolean;
   visibility?: string;
   initialColorMode?: string | null;
   useSystemColorMode?: boolean;
+  /** @deprecated Cookie-based color mode is no longer supported in v3. */
   cookies?: any;
   children?: React.ReactNode;
   locale?: string;
@@ -144,13 +148,8 @@ interface ProviderProps {
 }
 
 const Provider = ({
-  analyticsId = null,
   brandColor = null,
-  withChat = false,
   visibility = "Public",
-  initialColorMode = null,
-  useSystemColorMode,
-  cookies,
   children,
   locale,
   localizationConfig,
@@ -171,7 +170,8 @@ const Provider = ({
       revalidateOnReconnect: false,
     },
   );
-  let strings = {};
+
+  let strings: Record<string, string> = {};
   if (data?.cms?.strings?.items) {
     strings = data.cms.strings.items.reduce(
       (accum: any, node: any) => ({ ...accum, [node.key]: node.value }),
@@ -179,47 +179,55 @@ const Provider = ({
     );
   }
 
+  // Handle brandColor (mutates theme object — same behaviour as v2)
   if (brandColor && brandColor in codedayTheme.colors) {
     codedayTheme.colors.brand = codedayTheme.colors[brandColor][600];
-    //   codedayTheme.colors.black = codedayTheme.colors.brand[1000];
-    //   codedayTheme.colors.modes.light.textLight = (codedayTheme.colors.brand
-    //     .desaturated || codedayTheme.colors.brand)[800];
-    //   codedayTheme.colors.modes.light.placeholder = (codedayTheme.colors.brand
-    //     .desaturated || codedayTheme.colors.brand)[600];
-    //   codedayTheme.colors.modes.light.border = (codedayTheme.colors.brand
-    //     .desaturated || codedayTheme.colors.brand)[200];
-    //   codedayTheme.colors.modes.light.borderColor = (codedayTheme.colors.brand
-    //     .desaturated || codedayTheme.colors.brand)[200];
   }
-  codedayTheme.config.initialColorMode =
-    initialColorMode ?? codedayTheme.config.initialColorMode;
-  codedayTheme.config.useSystemColorMode =
-    typeof useSystemColorMode !== undefined
-      ? useSystemColorMode
-      : codedayTheme.config.initialColorMode;
+
+  const themeData: ThemeData = {
+    colors: codedayTheme.colors,
+    fonts: codedayTheme.fonts,
+    fontSizes: defaultFontSizes,
+    space: codedayTheme.space || {},
+    radii: codedayTheme.radii || {
+      none: "0",
+      sm: "0.125rem",
+      base: "0.25rem",
+      md: "0.375rem",
+      lg: "0.5rem",
+      xl: "0.75rem",
+      "2xl": "1rem",
+      "3xl": "1.5rem",
+      full: "9999px",
+    },
+    cognito: codedayTheme.cognito,
+    config: codedayTheme.config,
+    visibility,
+    strings,
+    programWebname: undefined,
+  };
+
   return (
-    <>
-      <ChakraProvider
-        theme={{
-          ...codedayTheme,
-          colors: codedayTheme.colors,
-          visibility,
-          strings,
-        }}
-        resetCSS
-        colorModeManager={
-          typeof cookies === "string"
-            ? cookieStorageManagerSSR(cookies)
-            : localStorageManager
-        }
+    <ChakraProvider value={codedaySystem}>
+      <NextThemesProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem={true}
+        storage="none"
+        followSystem
       >
-        <Global styles={customCss} />
-        <script src="https://www.cognitoforms.com/f/seamless.js" defer />
-        <QueryProvider value={data}>{children}</QueryProvider>
-      </ChakraProvider>
-    </>
+        <ThemeDataProvider value={themeData}>
+          <Global styles={customCss} />
+          <script src="https://www.cognitoforms.com/f/seamless.js" defer />
+          <QueryProvider value={data}>
+            <CmpProvider>{children}</CmpProvider>
+          </QueryProvider>
+        </ThemeDataProvider>
+      </NextThemesProvider>
+    </ChakraProvider>
   );
 };
+
 Provider.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
@@ -231,6 +239,7 @@ Provider.propTypes = {
   initialColorMode: PropTypes.string,
 };
 
+/** @deprecated Cookie-based SSR color mode is no longer needed with next-themes. */
 function getServerSideProps({ req }: any) {
   return {
     props: {
@@ -239,8 +248,5 @@ function getServerSideProps({ req }: any) {
   };
 }
 
-export {
-  getServerSideProps,
-  Provider as ThemeProvider,
-  type ProviderProps as ThemeProviderProps,
-};
+export { getServerSideProps, Provider as ThemeProvider };
+export type { ProviderProps as ThemeProviderProps };

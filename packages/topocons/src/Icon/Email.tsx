@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const Email = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M20 16.483V8.03l-4.324 3.992zM18.685 18l-4.479-4.621-.85.784a2 2 0 0 1-2.713 0l-.841-.777L5.316 18zM4 16.484l4.332-4.455-4.332-4zM5.833 7 12 12.694 18.167 7zM4 5h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const Email = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M20 16.483V8.03l-4.324 3.992zM18.685 18l-4.479-4.621-.85.784a2 2 0 0 1-2.713 0l-.841-.777L5.316 18zM4 16.484l4.332-4.455-4.332-4zM5.833 7 12 12.694 18.167 7zM4 5h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2" /></Icon>;

@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const UiFullscreen = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M22 8a1 1 0 0 1-2 0V4h-4a1 1 0 0 1 0-2h4a2 2 0 0 1 2 2zM8 2a1 1 0 1 1 0 2H4v4a1 1 0 1 1-2 0V4a2 2 0 0 1 2-2zm12 14a1 1 0 0 1 2 0v4a2 2 0 0 1-2 2h-4a1 1 0 0 1 0-2h4zM8 20a1 1 0 0 1 0 2H4a2 2 0 0 1-2-2v-4a1 1 0 0 1 2 0v4z" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const UiFullscreen = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M22 8a1 1 0 0 1-2 0V4h-4a1 1 0 0 1 0-2h4a2 2 0 0 1 2 2zM8 2a1 1 0 1 1 0 2H4v4a1 1 0 1 1-2 0V4a2 2 0 0 1 2-2zm12 14a1 1 0 0 1 2 0v4a2 2 0 0 1-2 2h-4a1 1 0 0 1 0-2h4zM8 20a1 1 0 0 1 0 2H4a2 2 0 0 1-2-2v-4a1 1 0 0 1 2 0v4z" /></Icon>;

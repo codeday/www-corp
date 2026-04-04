@@ -43,7 +43,7 @@ export default function Article({ faq }: ArticleProps) {
             <Heading as="h3" fontSize="xl" mb={2}>
               Related Answers
             </Heading>
-            <List styleType="disc">
+            <List listStyleType="disc">
               {faq?.relatedAnswers.items.map((related: any) => (
                 <ListItem key={related.sys.id}>
                   <Link href={`/help/article/${related.sys.id}`}>{related.title}</Link>

@@ -1,6 +1,3 @@
-import { type WithCSSVar } from "@chakra-ui/styled-system";
-import { type Dict } from "@chakra-ui/utils";
-
 /* eslint-disable global-require */
 /*export default (...args: any[]) =>
   `@import url(https://f1.srnd.org/topo/fonts/all.css);${[
@@ -16,10 +13,10 @@ import { type Dict } from "@chakra-ui/utils";
 */
 
 export interface ThemeProps {
-  theme: WithCSSVar<Dict<any>>
-  showTitle: boolean
-  colorMode: string
-  formId: string
+  theme: any;
+  showTitle: boolean;
+  colorMode: string;
+  formId: string;
 }
 
 export default ({ theme, showTitle, colorMode, formId }: any): string => `
@@ -45,7 +42,7 @@ export default ({ theme, showTitle, colorMode, formId }: any): string => `
   #${formId} .cog-cognito {
     --form__width: 100%;
     --form__background-color: ${theme.colors.current.bg};
-    --background-hsl: ${colorMode === 'dark' ? '0, 0%, 16%' : '0, 0, 100%'};
+    --background-hsl: ${colorMode === "dark" ? "0, 0%, 16%" : "0, 0, 100%"};
     --color: ${theme.colors.current.text};
     --header__color: ${theme.colors.current.text};
     --label__color: ${theme.colors.current.text};
@@ -57,13 +54,13 @@ export default ({ theme, showTitle, colorMode, formId }: any): string => `
     --button-secondary__color: white;
     --button-primary__background-color: ${theme.colors.green[600]};
     --button-primary__border-color: ${theme.colors.green[600]};
-    --button-secondary__background-color: ${colorMode === 'dark' ? theme.colors.whiteAlpha[300] : theme.colors.gray[200]};
+    --button-secondary__background-color: ${colorMode === "dark" ? theme.colors.whiteAlpha[300] : theme.colors.gray[200]};
     --button-secondary__color: ${theme.colors.current.text};
     --button-secondary__border-color: ${theme.colors.current.text};
     --input__color: ${theme.colors.current.text};
     --input__background-color: transparent;
-    --placeholder__color: ${colorMode === 'dark' ? theme.colors.whiteAlpha[300] : theme.colors.gray[500]};
-    --input__border-color: ${colorMode === 'dark' ? theme.colors.whiteAlpha[300] : theme.colors.gray[500]};
+    --placeholder__color: ${colorMode === "dark" ? theme.colors.whiteAlpha[300] : theme.colors.gray[500]};
+    --input__border-color: ${colorMode === "dark" ? theme.colors.whiteAlpha[300] : theme.colors.gray[500]};
 
 
     --font-family: ${theme.fonts.body};
@@ -102,4 +99,4 @@ export default ({ theme, showTitle, colorMode, formId }: any): string => `
     --input__padding-h: 15px;
     --toggle__border-radius: 40px;
   }
-`
+`;

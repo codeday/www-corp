@@ -1,10 +1,18 @@
 import FormData from "form-data";
 import React, { useState } from "react";
-import { Box, type BoxProps, Button, Grid, TextInput } from "@codeday/topo/Atom";
+import {
+  Box,
+  type BoxProps,
+  Button,
+  Grid,
+  TextInput,
+} from "@codeday/topo/Atom";
 import { apiFetch, useToasts } from "@codeday/topo/utils";
 
 interface MailingListSubscribeProps extends BoxProps {
   emailList?: string;
+  colorPalette?: string;
+  /** @deprecated use colorPalette */
   colorScheme?: string;
   textList?: any;
   variant?: string;
@@ -16,6 +24,7 @@ function MailingListSubscribe({
   textList,
   fields,
   variant = "solid",
+  colorPalette,
   colorScheme = "green",
   ...props
 }: MailingListSubscribeProps) {
@@ -24,7 +33,7 @@ function MailingListSubscribe({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
-    <Box {...props}>
+    <Box {...(props as any)}>
       <Grid templateColumns="1fr min-content">
         <TextInput
           placeholder={[
@@ -38,21 +47,22 @@ function MailingListSubscribe({
           borderRightWidth={0}
         />
         <Button
-          variant={variant || "solid"}
-          colorScheme={colorScheme || "green"}
-          isLoading={isSubmitting}
+          variant={(variant || "solid") as any}
+          colorPalette={colorPalette ?? colorScheme ?? "green"}
+          loading={isSubmitting}
           onClick={async () => {
-            // TODO: Support for phone lists
             setIsSubmitting(true);
             try {
               await apiFetch(
-                'mutation SubscribeEmail ($list: String!, $email: String!) { email { subscribe(list: $list, email: $email) } }',
+                "mutation SubscribeEmail ($list: String!, $email: String!) { email { subscribe(list: $list, email: $email) } }",
                 { list: emailList, email: input },
-                {}
+                {},
               );
               success(`We've added you to the list!`);
             } catch (ex) {
-              error(`Sorry, we couldn't complete your subscription. Please try again.`);
+              error(
+                `Sorry, we couldn't complete your subscription. Please try again.`,
+              );
             }
             setIsSubmitting(false);
           }}

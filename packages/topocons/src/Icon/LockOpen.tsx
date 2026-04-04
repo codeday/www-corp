@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const LockOpen = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M16 7a4 4 0 1 0-8 0 1 1 0 1 1-2 0 6 6 0 1 1 12 0v3a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3h10zM6 12a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1zm7 5.732V19a1 1 0 0 1-2 0v-1.268a2 2 0 1 1 2 0" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const LockOpen = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M16 7a4 4 0 1 0-8 0 1 1 0 1 1-2 0 6 6 0 1 1 12 0v3a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3h10zM6 12a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1zm7 5.732V19a1 1 0 0 1-2 0v-1.268a2 2 0 1 1 2 0" /></Icon>;

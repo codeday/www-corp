@@ -1,7 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.A11y = void 0;
-const jsx_runtime_1 = require("react/jsx-runtime");
-const react_1 = require("@chakra-ui/react");
-const A11y = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M14.894 17.053a1 1 0 0 1-1.788.894A23 23 0 0 1 12 15.407a23 23 0 0 1-1.106 2.54 1 1 0 0 1-1.788-.894C10.04 15.18 10.5 13.805 10.5 13v-2.066q-1.373-.121-2.743-.464a1 1 0 1 1 .486-1.94Q10.123 9 12 9q1.876 0 3.757-.47a1 1 0 1 1 .486 1.94q-1.37.342-2.743.464V13c0 .805.459 2.181 1.394 4.053M12 23C5.925 23 1 18.075 1 12S5.925 1 12 1s11 4.925 11 11-4.925 11-11 11m0-2a9 9 0 1 0 0-18 9 9 0 0 0 0 18m0-12.5A1.75 1.75 0 1 1 12 5a1.75 1.75 0 0 1 0 3.5" }) });
-exports.A11y = A11y;

@@ -1,7 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PaymentProviderAmex = void 0;
-const jsx_runtime_1 = require("react/jsx-runtime");
-const react_1 = require("@chakra-ui/react");
-const PaymentProviderAmex = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 30 30", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M4 5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h22a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm.816 7.348h1.717l2.27 5.095v-5.095h2.037l1.588 3.548 1.593-3.548h2.075v5.293h-1.297v-3.864l-1.78 3.864h-1.18l-1.735-3.93v3.93H7.486l-.513-1.184H4.379l-.508 1.184H2.5zm12.98 0h5.122l1.44 1.654 1.488-1.643H27.5l-2.326 2.577 2.308 2.714h-1.648l-1.523-1.76-1.559 1.75h-4.955zM5.644 13.465l-.776 1.85H6.45zm13.435.023v.99h2.865v1.006h-2.865v1.045h2.994l1.43-1.593-1.264-1.44z" }) });
-exports.PaymentProviderAmex = PaymentProviderAmex;

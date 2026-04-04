@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const DeviceTv = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M3 6v10h18V6zm4.259 12a1 1 0 0 1-.034.293l-.518 1.932a1 1 0 1 1-1.932-.518L5.233 18H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-2.233l.458 1.707a1 1 0 0 1-1.932.518l-.518-1.932a1 1 0 0 1-.034-.293z" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const DeviceTv = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M3 6v10h18V6zm4.259 12a1 1 0 0 1-.034.293l-.518 1.932a1 1 0 1 1-1.932-.518L5.233 18H3a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-2.233l.458 1.707a1 1 0 0 1-1.932.518l-.518-1.932a1 1 0 0 1-.034-.293z" /></Icon>;

@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const Experiment = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M17 4v13a5 5 0 0 1-10 0V4a1 1 0 1 1 0-2h10a1 1 0 0 1 0 2M9 4v9h6V4z" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const Experiment = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M17 4v13a5 5 0 0 1-10 0V4a1 1 0 1 1 0-2h10a1 1 0 0 1 0 2M9 4v9h6V4z" /></Icon>;

@@ -17,8 +17,7 @@ function PhotoTextCard({ photo, text, authors, wip, href, eventInfo }: any) {
       h="100%"
       overflow="hidden"
       as={href ? 'a' : undefined}
-      href={href}
-      target="_blank"
+      {...({ href, target: '_blank' } as any)}
     >
       <Grid templateColumns="3fr 3fr" h="100%">
         <Box
@@ -79,8 +78,7 @@ function PhotoCard({ photo, authors, wip, eventInfo, projectTitle, href }: any) 
       h="100%"
       position="relative"
       as={href ? 'a' : undefined}
-      href={href}
-      target="_blank"
+      {...({ href, target: '_blank' } as any)}
       display="block"
     >
       {authors &&
@@ -147,7 +145,14 @@ function PhotoCard({ photo, authors, wip, eventInfo, projectTitle, href }: any) 
 function Card({ photo, text, authors, wip, eventInfo, projectTitle, href }: any) {
   const elem =
     text && text.length > 0 ? (
-      <PhotoTextCard photo={photo} text={text} authors={authors} wip={wip} eventInfo={eventInfo} href={href} />
+      <PhotoTextCard
+        photo={photo}
+        text={text}
+        authors={authors}
+        wip={wip}
+        eventInfo={eventInfo}
+        {...({ href: href } as any)}
+      />
     ) : (
       <PhotoCard
         photo={photo}
@@ -155,7 +160,7 @@ function Card({ photo, text, authors, wip, eventInfo, projectTitle, href }: any)
         wip={wip}
         eventInfo={eventInfo}
         projectTitle={projectTitle}
-        href={href}
+        {...({ href: href } as any)}
       />
     );
 
@@ -199,7 +204,7 @@ export default function Community({ seed, ...props }: { seed?: any; [key: string
           photo={d.media.image}
           projectTitle={d.name}
           authors={d.members}
-          href={`https://showcase.codeday.org/project/${d.id}`}
+          {...({ href: `https://showcase.codeday.org/project/${d.id}` } as any)}
         />
       )),
       ...(
@@ -227,7 +232,7 @@ export default function Community({ seed, ...props }: { seed?: any; [key: string
         </Box>
 
         <Content>
-          <Heading as="h2" fontSize="5xl" textAlign="center" mb={8} mt={8} fontWeight="bold">
+          <Heading as="h2" fontSize="5xl" textAlign="center" mb={8} mt={8} lineHeight={1.1} fontWeight="bold">
             {studentCountPrefix} {studentCountRound.toLocaleString()} students have created amazing projects at CodeDay
             events.
           </Heading>

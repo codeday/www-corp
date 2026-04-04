@@ -5,16 +5,16 @@ import {
   pureRef,
   setChildProps,
   wrapHtml,
+  type ComponentWithAs,
 } from "@codeday/topo/_utils";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
-import { type ComponentWithAs } from "@chakra-ui/react";
 
 export const IconBoxIcon = makePureBox("IconBoxIcon");
 export const IconBoxText = makePureBox("IconBoxText");
 export const IconBoxBody = makePureBox("Body");
 
 const IconBox: ComponentWithAs<"div", BoxProps> = pureRef<BoxProps, "div">(
-  ({ children, ...props }, ref) => {
+  ({ children, ...props }: any, ref) => {
     const headerIcon = childrenOfType(children, IconBoxIcon);
     const headerText = childrenOfType(children, IconBoxText);
     const body = childrenOfType(children, IconBoxBody);
@@ -51,5 +51,5 @@ const IconBox: ComponentWithAs<"div", BoxProps> = pureRef<BoxProps, "div">(
       </Box>
     );
   },
-);
+) as ComponentWithAs<"div", BoxProps>;
 export { IconBox };

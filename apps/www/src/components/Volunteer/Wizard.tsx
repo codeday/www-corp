@@ -1,5 +1,5 @@
 import React, { useState, useReducer, useEffect, RefObject } from 'react';
-import { Collapse } from '@chakra-ui/transition';
+import { Collapse } from '@codeday/topo/Molecule';
 import { usePostHog } from '@posthog/react';
 import {
   Box,
@@ -121,7 +121,7 @@ export default function Wizard({
             setBackground('student');
             navigate('next');
           }}
-          isActive={background === 'student'}
+          data-active={background === 'student' ? '' : undefined}
         >
           I am a student
         </Button>
@@ -131,7 +131,7 @@ export default function Wizard({
             setBackground('industry');
             navigate('last');
           }}
-          isActive={background === 'industry'}
+          data-active={background === 'industry' ? '' : undefined}
         >
           I am not a student
         </Button>
@@ -176,7 +176,7 @@ export default function Wizard({
       {/* Clear region state in case they clicked some other region button before this */}
       <Button
         mt={2}
-        isActive={isOrganize}
+        data-active={isOrganize ? '' : undefined}
         onClick={() => {
           setIsOrganize(true);
           setRegion('');
@@ -363,10 +363,10 @@ export default function Wizard({
       {!isFinalPage && page !== 0 && (
         <Box textAlign={{ base: 'center', md: 'right' }} mt={8}>
           <Button
-            colorScheme="green"
-            isLoading={isSubmitting}
+            colorPalette="green"
+            loading={isSubmitting}
             onClick={onClickNext}
-            isDisabled={!hasSelection || isSubmitting}
+            disabled={!hasSelection || isSubmitting}
           >
             Next
           </Button>

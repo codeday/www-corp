@@ -1,7 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Ticket = void 0;
-const jsx_runtime_1 = require("react/jsx-runtime");
-const react_1 = require("@chakra-ui/react");
-const Ticket = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M17.803 13.06a1 1 0 0 1 1.415-1.414l2.828-2.828-.945-.945a3.502 3.502 0 0 1-4.474-4.474l-.945-.945-2.828 2.828a1 1 0 1 1-1.415 1.415l-8.485 8.485.945.945a3.502 3.502 0 0 1 4.474 4.474l.945.945zM2.99 18.047l-1.45-1.45a2 2 0 0 1 0-2.828L14.269 1.04a2 2 0 0 1 2.828 0l1.45 1.45a1 1 0 0 1 .126 1.259 1.5 1.5 0 0 0 2.08 2.079 1 1 0 0 1 1.259.126l1.45 1.45a2 2 0 0 1 0 2.828L10.731 22.96a2 2 0 0 1-2.828 0l-1.45-1.45a1 1 0 0 1-.126-1.259 1.5 1.5 0 0 0-2.08-2.079 1 1 0 0 1-1.259-.126M14.975 7.404a1 1 0 1 1-1.414 1.414 1 1 0 0 1 1.414-1.414m2.121 2.121a1 1 0 1 1-1.414 1.414 1 1 0 0 1 1.414-1.414" }) });
-exports.Ticket = Ticket;

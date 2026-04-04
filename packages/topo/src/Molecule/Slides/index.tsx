@@ -1,4 +1,4 @@
-import { type ComponentWithAs, forwardRef } from "@chakra-ui/react";
+import { type ComponentWithAs } from "@codeday/topo/_utils";
 import React, { useEffect, useReducer } from "react";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
 
@@ -6,12 +6,12 @@ interface SlidesProps extends BoxProps {
   duration?: number;
 }
 
-const Slides: ComponentWithAs<"div", SlidesProps> = forwardRef<
-  SlidesProps,
-  "div"
->(({ duration = 15, transitionDuration = 1, children, ...props }, ref) => {
+const Slides: ComponentWithAs<"div", SlidesProps> = React.forwardRef<
+  HTMLDivElement,
+  SlidesProps
+>(({ duration = 15, transitionDuration = 1, children, ...props }: any, ref) => {
   const [visibleIndex, nextSlide] = useReducer(
-    (lastIndex) => (lastIndex + 1) % React.Children.count(children),
+    (lastIndex: number) => (lastIndex + 1) % React.Children.count(children),
     0,
   );
 
@@ -21,7 +21,12 @@ const Slides: ComponentWithAs<"div", SlidesProps> = forwardRef<
   }, [duration]);
 
   return (
-    <Box position="relative" overflow="hidden" {...props} ref={ref}>
+    <Box
+      position="relative"
+      overflow="hidden"
+      {...(props as any)}
+      ref={ref as any}
+    >
       {React.Children.map(children, (child, index) => (
         <Box
           key={(child as React.ReactElement<any>).key || index}
@@ -39,16 +44,6 @@ const Slides: ComponentWithAs<"div", SlidesProps> = forwardRef<
       ))}
     </Box>
   );
-});
+}) as ComponentWithAs<"div", SlidesProps>;
 Slides.displayName = "Slides";
-// Slides.propTypes = {
-//   duration: PropTypes.number,
-//   transitionDuration: PropTypes.number,
-//   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-// };
-// Slides.defaultProps = {
-//   duration: 15,
-//   transitionDuration: 1,
-//   children: null,
-// };
 export { Slides, type SlidesProps };

@@ -1,4 +1,29 @@
-import { type Colors, theme } from "@chakra-ui/theme";
+// Alpha color scales (previously from @chakra-ui/theme)
+const blackAlpha: Record<string, string> = {
+  50: "rgba(0, 0, 0, 0.04)",
+  100: "rgba(0, 0, 0, 0.06)",
+  200: "rgba(0, 0, 0, 0.08)",
+  300: "rgba(0, 0, 0, 0.16)",
+  400: "rgba(0, 0, 0, 0.24)",
+  500: "rgba(0, 0, 0, 0.36)",
+  600: "rgba(0, 0, 0, 0.48)",
+  700: "rgba(0, 0, 0, 0.64)",
+  800: "rgba(0, 0, 0, 0.80)",
+  900: "rgba(0, 0, 0, 0.92)",
+};
+
+const whiteAlpha: Record<string, string> = {
+  50: "rgba(255, 255, 255, 0.04)",
+  100: "rgba(255, 255, 255, 0.06)",
+  200: "rgba(255, 255, 255, 0.08)",
+  300: "rgba(255, 255, 255, 0.16)",
+  400: "rgba(255, 255, 255, 0.24)",
+  500: "rgba(255, 255, 255, 0.36)",
+  600: "rgba(255, 255, 255, 0.48)",
+  700: "rgba(255, 255, 255, 0.64)",
+  800: "rgba(255, 255, 255, 0.80)",
+  900: "rgba(255, 255, 255, 0.92)",
+};
 
 const linearGrad = (from: string, to: string, deg: number) =>
   `linear-gradient(${deg}deg, ${from} 0%, ${to} 100%)`;
@@ -8,7 +33,8 @@ const linearGrads = (from: string, to: string) =>
     .reduce((accum, obj) => ({ ...accum, ...obj }), {});
 
 const colors: Record<string, any> = {
-  ...theme.colors,
+  blackAlpha,
+  whiteAlpha,
   black: "#252222",
   white: "#ffffff",
   gray: {
@@ -163,6 +189,7 @@ const colors: Record<string, any> = {
     1000: "#2b121f",
   },
 };
+
 // eslint-disable-next-line prefer-destructuring
 colors.brand = colors.red[600];
 colors.success = {
@@ -181,12 +208,12 @@ colors.grad = {
   peachy: linearGrads(colors.red[500], colors.orange[500]),
   taffy: linearGrads(colors.yellow[500], colors.pink[500]),
   darken: {
-    sm: linearGrads(colors.blackAlpha[300], "rgba(0,0,0,0)"),
-    lg: linearGrads(colors.blackAlpha[700], "rgba(0,0,0,0)"),
+    sm: linearGrads(blackAlpha[300], "rgba(0,0,0,0)"),
+    lg: linearGrads(blackAlpha[700], "rgba(0,0,0,0)"),
   },
   lighten: {
-    sm: linearGrads(colors.whiteAlpha[300], "rgba(255, 255, 255 ,0)"),
-    lg: linearGrads(colors.whiteAlpha[700], "rgba(255, 255, 255 ,0)"),
+    sm: linearGrads(whiteAlpha[300], "rgba(255, 255, 255 ,0)"),
+    lg: linearGrads(whiteAlpha[700], "rgba(255, 255, 255 ,0)"),
   },
   skelly: `linear-gradient(270deg, ${colors.gray[300]} 0, ${colors.gray[100]} 50%, ${colors.gray[300]} 100%)`,
   darkSkelly: `linear-gradient(270deg, ${colors.gray[800]} 0, ${colors.gray[700]} 50%, ${colors.gray[800]} 100%)`,
@@ -204,17 +231,17 @@ colors.modes = {
     placeholder: colors.gray[600],
   },
   dark: {
-    color: colors.whiteAlpha[900],
-    text: colors.whiteAlpha[900],
+    color: whiteAlpha[900],
+    text: whiteAlpha[900],
     textLight: "#717171",
     bg: colors.gray[1100],
     background: colors.gray[1100],
     primary: colors.brand,
-    border: colors.whiteAlpha[300],
-    borderColor: colors.whiteAlpha[300],
-    placeholder: colors.whiteAlpha[400],
+    border: whiteAlpha[300],
+    borderColor: whiteAlpha[300],
+    placeholder: whiteAlpha[400],
   },
 };
-colors.current = colors.modes.light; // Todo: change this later
+colors.current = colors.modes.light;
 
 export default colors;

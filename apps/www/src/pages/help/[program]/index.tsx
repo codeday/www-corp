@@ -54,7 +54,7 @@ export default function Program({ programWebname }: ProgramProps) {
         <Text mb={8}>Which best describes you?</Text>
         <Grid templateColumns={{ base: '1fr', md: '1fr 1fr', lg: 'repeat(3, 1fr)' }} gap={8}>
           {audiences.map((aud: string) => (
-            <IconBox as="a" key={aud} href={`/help/${programWebname}/${aud.toLowerCase()}`}>
+            <IconBox as="a" key={aud}{...{href:`/help/${programWebname}/${aud.toLowerCase()}`} as any}>
               <HeaderIcon>
                 <Box
                   display="inline-block"

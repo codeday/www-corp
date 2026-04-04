@@ -1,7 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Mouse = void 0;
-const jsx_runtime_1 = require("react/jsx-runtime");
-const react_1 = require("@chakra-ui/react");
-const Mouse = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "m15.243 6.757 4.95 4.95a6 6 0 1 1-8.486 8.485l-4.95-4.95a6 6 0 0 1-.635-7.738l-.358-.84a.91.91 0 0 0-.838-.555 2.72 2.72 0 0 1-2.597-1.907L2.046 3.3a1 1 0 1 1 1.908-.6l.284.904a.72.72 0 0 0 .688.505c1.167 0 2.221.697 2.679 1.771l.056.133a6 6 0 0 1 7.582.744m-4.95 4.95-2.74-2.74a4 4 0 0 0 .619 4.86zm-.707 3.535 3.536 3.536a4 4 0 0 0 5.656-5.657l-3.535-3.536zm-.618-7.689 2.74 2.74 2.12-2.122a4 4 0 0 0-4.86-.618" }) });
-exports.Mouse = Mouse;

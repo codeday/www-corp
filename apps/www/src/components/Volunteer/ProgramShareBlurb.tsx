@@ -45,10 +45,10 @@ export default function ProgramShareBlurb({ program }: ProgramShareBlurbProps) {
           <Button
             as="a"
             target="_blank"
-            href={`https://www.linkedin.com/shareArticle/?url=${encodeURIComponent(
+           {...{href:`https://www.linkedin.com/shareArticle/?url=${encodeURIComponent(
               `https://www.codeday.org/volunteer/${program.webname}`,
-            )}`}
-            colorScheme="blue"
+            )}`} as any}
+            colorPalette="blue"
             mb={8}
           >
             Share on LinkedIn
@@ -59,7 +59,7 @@ export default function ProgramShareBlurb({ program }: ProgramShareBlurbProps) {
                 More Resources
               </Heading>
               {program.volunteerRecruitingResources?.items.map((i: any) => (
-                <Link href={i.url} target="_blank" rel="noopener">
+                <Link{...{href:i.url} as any} target="_blank" rel="noopener">
                   <Grid templateColumns="1fr 3fr" borderWidth={1} mb={1} gap={2} alignItems="center" minHeight={16}>
                     {i.contentType.split('/')[0] === 'image' ? (
                       <Image src={i.preview} alt={i.title} />

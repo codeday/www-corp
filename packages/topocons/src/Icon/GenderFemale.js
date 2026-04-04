@@ -1,7 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.GenderFemale = void 0;
-const jsx_runtime_1 = require("react/jsx-runtime");
-const react_1 = require("@chakra-ui/react");
-const GenderFemale = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M9.907 12.57a1 1 0 0 1-.062.14L7.64 17h8.722l-2.22-4.316a1 1 0 0 1-.07-.165l-.536-1.028a1 1 0 1 1 1.773-.925l1.993 3.82a.417.417 0 0 0 .68-.465l-2.057-4.213a.5.5 0 0 0-.057-.093l-.1-.155a3.5 3.5 0 0 0-1.874-1.674l-.716-.27a1 1 0 0 1-.157-1.795 2 2 0 1 0-2.04 0 1 1 0 0 1-.157 1.794l-.716.271a3.5 3.5 0 0 0-1.875 1.675l-.099.155a.5.5 0 0 0-.057.092L6.02 13.922a.417.417 0 0 0 .69.452l1.988-3.808a1 1 0 0 1 1.773.925zM11 21.5V19h-1v2.5a.5.5 0 1 0 1 0m2-2.5v2.5a.5.5 0 1 0 1 0V19zm-5 0H6.82a1.5 1.5 0 0 1-1.334-2.186l.204-.397a2.417 2.417 0 0 1-1.468-3.374l2.057-4.212q.092-.189.213-.36a5.5 5.5 0 0 1 2.196-2.227 4 4 0 1 1 6.623 0 5.5 5.5 0 0 1 2.195 2.225q.122.171.216.362l2.057 4.213a2.417 2.417 0 0 1-1.468 3.373l.204.397A1.5 1.5 0 0 1 17.18 19H16v2.5a2.5 2.5 0 0 1-4 2 2.5 2.5 0 0 1-4-2z" }) });
-exports.GenderFemale = GenderFemale;

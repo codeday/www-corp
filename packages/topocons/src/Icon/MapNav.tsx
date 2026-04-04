@@ -1,2 +1,2 @@
-import { IconProps, Icon } from "@chakra-ui/react";
-export const MapNav = (props: IconProps) => <Icon fill="currentColor" viewBox="0 0 24 24" {...props}><path d="m19.506 5.166-8.397 8.428q.033.055.063.112l3.344 6.43zm2.208-.332-5.31 15.932a1.99 1.99 0 0 1-3.653.288l-3.344-6.43-6.43-3.344a1.99 1.99 0 0 1 .289-3.652l15.931-5.31a1.99 1.99 0 0 1 2.517 2.516" /></Icon>;
+import { IconProps, Icon } from "@chakra-ui/react/icon";
+export const MapNav = (props: IconProps) => <Icon as="svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 24 24" {...props}><path d="m19.506 5.166-8.397 8.428q.033.055.063.112l3.344 6.43zm2.208-.332-5.31 15.932a1.99 1.99 0 0 1-3.653.288l-3.344-6.43-6.43-3.344a1.99 1.99 0 0 1 .289-3.652l15.931-5.31a1.99 1.99 0 0 1 2.517 2.516" /></Icon>;

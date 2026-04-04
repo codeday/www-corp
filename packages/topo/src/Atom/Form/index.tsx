@@ -1,24 +1,20 @@
 import React from "react";
-import {
-  FormControl,
-  FormLabel,
-  type FormControlProps,
-  type FormLabelProps,
-  forwardRef,
-  type ComponentWithAs,
-} from "@chakra-ui/react";
+import { Field } from "@chakra-ui/react";
+import { type ComponentWithAs } from "@codeday/topo/_utils";
 
-const ComposedFormControl: ComponentWithAs<"div", FormControlProps> = forwardRef<FormControlProps, "div">(
-  (props: FormControlProps, ref) => (
-    <FormControl marginBottom={4} marginTop={4} ref={ref} {...props} />
-  )
-);
+type FormControlProps = React.ComponentPropsWithRef<typeof Field.Root>;
+type FormLabelProps = React.ComponentPropsWithRef<typeof Field.Label>;
 
-const ComposedFormLabel = forwardRef<FormLabelProps, "div">(
-  (props: FormLabelProps, ref) => (
-    <FormLabel fontWeight={600} ref={ref} {...props} />
-  )
-);
+const ComposedFormControl: ComponentWithAs<"div", FormControlProps> =
+  React.forwardRef<HTMLDivElement, FormControlProps>((props, ref) => (
+    <Field.Root marginBottom={4} marginTop={4} ref={ref as any} {...props} />
+  )) as ComponentWithAs<"div", FormControlProps>;
+
+const ComposedFormLabel: ComponentWithAs<"label", FormLabelProps> =
+  React.forwardRef<HTMLLabelElement, FormLabelProps>((props, ref) => (
+    <Field.Label fontWeight={600} ref={ref as any} {...props} />
+  )) as ComponentWithAs<"label", FormLabelProps>;
 
 export { ComposedFormControl as FormControl, ComposedFormLabel as FormLabel };
-export { FormErrorMessage, FormHelperText } from "@chakra-ui/react";
+export const FormErrorMessage = Field.ErrorText;
+export const FormHelperText = Field.HelperText;

@@ -46,7 +46,7 @@ export default function Press({ seed }: PressProps) {
             </Box>
 
             <Box textAlign="center">
-              <Button colorScheme="blue" as="a" href="#assets">Download Press Images &amp; Logos</Button>
+              <Button colorPalette="blue" as="a" {...{href:"#assets"} as any}>Download Press Images &amp; Logos</Button>
             </Box>
 
             <Box textAlign="center" mt={4}>
@@ -68,7 +68,7 @@ export default function Press({ seed }: PressProps) {
         <Heading as="h3" fontSize="2xl" mb={8} textAlign="center">Recent Coverage</Heading>
         <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)', xl: 'repeat(4, 1fr)' }} gap={8} mb={8}>
           {previousCoverage?.items?.map((coverage: any) => (
-            <Box as="a" href={coverage.url} target="_blank" rel="noopener" key={coverage.url}>
+            <Box as="a" {...{href:coverage.url, target:"_blank", rel:"noopener"} as any} key={coverage.url}>
               <Text fontWeight="bold" mb={0}>{coverage.title}</Text>
               <Text color="current.textLight">
                 {coverage.publicationName},{' '}
@@ -85,7 +85,7 @@ export default function Press({ seed }: PressProps) {
           as="a"
           display="block"
           rel="license"
-          href="http://creativecommons.org/licenses/by/4.0/"
+          {...{href:"http://creativecommons.org/licenses/by/4.0/"} as any}
           mb={2}
         >
           <Image
@@ -108,7 +108,7 @@ export default function Press({ seed }: PressProps) {
           on file.
         </Text>
         <Flex alignItems="center">
-          <Button as="a" href="https://f1.codeday.org/logos.zip" colorScheme="blue">Download Logos</Button>
+          <Button as="a" colorPalette="blue" {...{href:"https://f1.codeday.org/logos.zip"} as any}>Download Logos</Button>
           <Text mb={0} pl={4} fontSize="sm" color="current.textLight">
             All logos and names are trademarks of CodeDay.
           </Text>

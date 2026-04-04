@@ -41,7 +41,7 @@ function SubscribeBox({ event, ...rest }: { event: any; [key: string]: any }) {
         borderTopLeftRadius={0}
         borderBottomLeftRadius={0}
         position="relative"
-        colorScheme="blue"
+        colorPalette="blue"
         onClick={async () => {
           setIsLoading(true);
           try {
@@ -55,7 +55,7 @@ function SubscribeBox({ event, ...rest }: { event: any; [key: string]: any }) {
         >
           Remind Me
         </Button>
-        <Button as="a" href={addLinkGoogle} target="_blank" ml={2}>Add to Google Calendar</Button>
+        <Button as="a" {...{href:addLinkGoogle, target:"_blank"} as any} ml={2}>Add to Google Calendar</Button>
     </Box>
   )
 }
@@ -134,7 +134,7 @@ export default function Event({ event, ...rest }: { event: any; [key: string]: a
               {event.location && (
                 <>
                   <Link fontSize="lg" href={event.location} target="_blank" mr={4}>{event.location}</Link>
-                  <Button as="a" href={event.location} target="_blank" colorScheme="blue">
+                  <Button as="a" {...{href:event.location, target:"_blank"} as any} colorPalette="blue">
                     {almostHasStarted ? 'Join' : 'Pre-Register'}
                   </Button>
                 </>
@@ -144,10 +144,9 @@ export default function Event({ event, ...rest }: { event: any; [key: string]: a
         ) : (
           <>
             <Button
-              colorScheme="blue"
+              colorPalette="blue"
               as="a"
-              href="https://www.youtube.com/c/codeday"
-              target="_blank"
+              {...{href:"https://www.youtube.com/c/codeday",target:"_blank"} as any}
             >
                 Workshop Recordings
             </Button>

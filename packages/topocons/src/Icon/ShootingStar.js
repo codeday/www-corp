@@ -1,7 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ShootingStar = void 0;
-const jsx_runtime_1 = require("react/jsx-runtime");
-const react_1 = require("@chakra-ui/react");
-const ShootingStar = (props) => (0, jsx_runtime_1.jsx)(react_1.Icon, { fill: "currentColor", viewBox: "0 0 24 24", ...props, children: (0, jsx_runtime_1.jsx)("path", { d: "M6.878 16.34a1 1 0 0 1 .715.715l.37 1.415.788-1.231a1 1 0 0 1 .9-.46l1.46.086-.927-1.13a1 1 0 0 1-.158-.999l.533-1.362-1.362.533a1 1 0 0 1-.999-.158l-1.13-.928.085 1.46a1 1 0 0 1-.459.9l-1.231.79zm-4.13.988c-.844-.22-1.021-1.339-.287-1.81l2.661-1.704-.185-3.156c-.05-.87.959-1.384 1.633-.831l2.444 2.004 2.944-1.151c.812-.317 1.613.484 1.295 1.295l-1.15 2.944 2.003 2.444c.553.674.039 1.684-.831 1.633l-3.156-.185-1.705 2.661c-.47.734-1.589.557-1.81-.286l-.798-3.059zM13.225 2.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 1 1-1.414-1.414zm7 7a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 1 1-1.414-1.414zm-1-6a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 1 1-1.414-1.414z" }) });
-exports.ShootingStar = ShootingStar;
