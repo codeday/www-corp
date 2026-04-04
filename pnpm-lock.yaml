@@ -95,6 +95,9 @@ importers:
       airtable:
         specifier: ^0.11.6
         version: 0.11.6
+      botid:
+        specifier: ^1.5.11
+        version: 1.5.11(next@16.0.10(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       express-rate-limit:
         specifier: ^5.2.3
         version: 5.5.1
@@ -206,9 +209,6 @@ importers:
       urlencode:
         specifier: ^1.1.0
         version: 1.1.0
-      webpack-bundle-analyzer:
-        specifier: ^3.9.0
-        version: 3.9.0
       xmlbuilder:
         specifier: ^15.1.1
         version: 15.1.1
@@ -252,6 +252,12 @@ importers:
       '@types/urlencode':
         specifier: ^1.1.4
         version: 1.1.4
+      '@types/webpack-bundle-analyzer':
+        specifier: ^4.7.0
+        version: 4.7.0
+      baseline-browser-mapping:
+        specifier: ^2.10.14
+        version: 2.10.14
       cross-env:
         specifier: ^7.0.2
         version: 7.0.3
@@ -267,6 +273,9 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 6.0.2
+      webpack-bundle-analyzer:
+        specifier: ^3.9.0
+        version: 3.9.0
 
   packages/topo:
     dependencies:
@@ -2429,6 +2438,9 @@ packages:
   '@types/urlencode@1.1.4':
     resolution: {integrity: sha512-eBIJ1j50IlTOCd9Xq7Jd4XTinD0LRZkJfEbx8RXCRuVkOwWTenfEWquT5XlOXfpjFw3dP1U7vxxXExlU8R/rWA==}
 
+  '@types/webpack-bundle-analyzer@4.7.0':
+    resolution: {integrity: sha512-c5i2ThslSNSG8W891BRvOd/RoCjI2zwph8maD22b1adtSns20j+0azDDMCK06DiVrzTgnwiDl5Ntmu1YRJw8Sg==}
+
   '@types/ws@8.18.1':
     resolution: {integrity: sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==}
 
@@ -3130,8 +3142,8 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
-  baseline-browser-mapping@2.10.13:
-    resolution: {integrity: sha512-BL2sTuHOdy0YT1lYieUxTw/QMtPBC3pmlJC6xk8BBYVv6vcw3SGdKemQ+Xsx9ik2F/lYDO9tqsFQH1r9PFuHKw==}
+  baseline-browser-mapping@2.10.14:
+    resolution: {integrity: sha512-fOVLPAsFTsQfuCkvahZkzq6nf8KvGWanlYoTh0SVA0A/PIUxQGU2AOZAoD95n2gFLVDW/jP6sbGLny95nmEuHA==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -3158,6 +3170,17 @@ packages:
 
   boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
+
+  botid@1.5.11:
+    resolution: {integrity: sha512-KOO1A3+/vFVJk5aFoG3sNwiogKFPVR+x4aw4gQ1b2e0XoE+i5xp48/EZn+WqR07jRHeDGwHWQUOtV5WVm7xiww==}
+    peerDependencies:
+      next: '*'
+      react: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      next:
+        optional: true
+      react:
+        optional: true
 
   brace-expansion@1.1.13:
     resolution: {integrity: sha512-9ZLprWS6EENmhEOpjCYW2c8VkmOvckIJZfkr7rBW6dObmfgJ/L1GpSYW5Hpo9lDz4D1+n0Ckz8rU7FwHDQiG/w==}
@@ -8833,6 +8856,17 @@ snapshots:
 
   '@types/urlencode@1.1.4': {}
 
+  '@types/webpack-bundle-analyzer@4.7.0':
+    dependencies:
+      '@types/node': 25.5.0
+      tapable: 2.3.2
+      webpack: 5.105.4
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+      - webpack-cli
+
   '@types/ws@8.18.1':
     dependencies:
       '@types/node': 25.5.0
@@ -9890,7 +9924,7 @@ snapshots:
 
   base64-js@1.5.1: {}
 
-  baseline-browser-mapping@2.10.13: {}
+  baseline-browser-mapping@2.10.14: {}
 
   bfj@6.1.2:
     dependencies:
@@ -9930,6 +9964,11 @@ snapshots:
 
   boolbase@1.0.0: {}
 
+  botid@1.5.11(next@16.0.10(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4):
+    optionalDependencies:
+      next: 16.0.10(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      react: 19.2.4
+
   brace-expansion@1.1.13:
     dependencies:
       balanced-match: 1.0.2
@@ -9947,7 +9986,7 @@ snapshots:
 
   browserslist@4.28.2:
     dependencies:
-      baseline-browser-mapping: 2.10.13
+      baseline-browser-mapping: 2.10.14
       caniuse-lite: 1.0.30001784
       electron-to-chromium: 1.5.331
       node-releases: 2.0.37
