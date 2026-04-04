@@ -1,7 +1,8 @@
+import { Box, Heading, type HeadingProps } from "@chakra-ui/react";
+import { pureRef, type ComponentWithAs } from "@codeday/topo/_utils";
 import React from "react";
 import { withProps } from "recompose";
-import { pureRef, type ComponentWithAs } from "@codeday/topo/_utils";
-import { Box, Heading, type HeadingProps } from "@chakra-ui/react";
+
 import { type BoxProps } from "../Box";
 
 export interface TextProps extends BoxProps {
@@ -47,6 +48,4 @@ export const H6 = withProps<HeadingProps, HeadingProps>({
   as: "h6",
   size: "sm",
 })(Heading);
-export const Span = withProps<TextProps, any>({ as: "span", marginBottom: 4 })(
-  Box,
-);
+export const Span = withProps<TextProps, any>({ as: "span", marginBottom: 4 })(Box);

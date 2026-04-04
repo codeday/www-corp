@@ -1,10 +1,10 @@
 fragment PreviousCoverageLogosComponent on Query {
   cms {
-    coverageLogos: newsCoverages (where: { featured: true }, order: date_DESC, limit: 20) {
+    coverageLogos: newsCoverages(where: { featured: true }, order: date_DESC, limit: 20) {
       items {
-        publicationName,
+        publicationName
         publicationLogo {
-          url(transform: {width: 200})
+          url(transform: { width: 200 })
         }
         url
       }

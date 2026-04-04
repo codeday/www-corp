@@ -1,19 +1,19 @@
-import React, { useState, useReducer, useRef, useEffect } from 'react';
-import { Box, RatioBox } from '@codeday/topo/Atom';
-import { UiVolume } from '@codeday/topocons';
-import ReactPlayer from 'react-player';
-import { useInView } from 'react-intersection-observer';
-import PageVisibility from 'react-page-visibility';
+import { Box, RatioBox } from "@codeday/topo/Atom";
+import { UiVolume } from "@codeday/topocons";
+import React, { useState, useReducer, useRef, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
+import PageVisibility from "react-page-visibility";
+import ReactPlayer from "react-player";
 
 // eslint-disable-next-line no-secrets/no-secrets
-const videoId = 'c1BhPbPJvRjeGvUutUIgrCG5bCsgT021q';
+const videoId = "c1BhPbPJvRjeGvUutUIgrCG5bCsgT021q";
 const thumbWidth = 640;
 const thumbHeight = 480;
 const startAt = 14;
 
 export default function PreviewVideo(props: any) {
   const ref = useRef<any>(null);
-  const { ref: viewRef, inView } = useInView({ rootMargin: '200px', initialInView: true });
+  const { ref: viewRef, inView } = useInView({ rootMargin: "200px", initialInView: true });
   const [pageVisible, setPageVisible] = useState(true);
   const [muted, setMuted] = useState(true);
   const [playing, togglePlaying] = useReducer((prev: boolean) => !prev, true);
@@ -58,8 +58,8 @@ export default function PreviewVideo(props: any) {
           color="white"
           textAlign="center"
           fontSize="3xl"
-          style={{ pointerEvents: 'none' }}
-          display={muted ? undefined : 'none'}
+          style={{ pointerEvents: "none" }}
+          display={muted ? undefined : "none"}
         >
           <Box p={1} pl={2} pr={2} rounded="sm" bg="rgba(0,0,0,0.6)" display="inline-block">
             <UiVolume />
@@ -79,7 +79,7 @@ export default function PreviewVideo(props: any) {
             height="100%"
             onClick={onClick}
             onPlay={onPlay}
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: "pointer" }}
             pip={false}
             ref={ref}
             controls={!muted}

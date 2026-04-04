@@ -17,7 +17,7 @@ query FormQuery($slug: String) {
         slug
         prefill
         image {
-          url(transform: { width: 1000, height: 300, resizeStrategy: CROP})
+          url(transform: { width: 1000, height: 300, resizeStrategy: CROP })
         }
         details {
           json

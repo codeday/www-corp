@@ -1,7 +1,7 @@
-'use strict';
-const path = require('path');
-const fs = require('fs');
-const { parse, visit } = require('graphql');
+"use strict";
+const path = require("path");
+const fs = require("fs");
+const { parse, visit } = require("graphql");
 
 function resolveImports(source, filePath, visited = new Set()) {
   if (visited.has(filePath)) return [];
@@ -13,11 +13,11 @@ function resolveImports(source, filePath, visited = new Set()) {
   const queryLines = [];
 
   for (const line of lines) {
-    if (line.trim().startsWith('#import')) {
+    if (line.trim().startsWith("#import")) {
       const match = line.match(/#import\s+["']([^"']+)["']/);
       if (match) {
         const importPath = path.resolve(dir, match[1]);
-        const importSource = fs.readFileSync(importPath, 'utf-8');
+        const importSource = fs.readFileSync(importPath, "utf-8");
         definitions = definitions.concat(resolveImports(importSource, importPath, visited));
       }
     } else {
@@ -25,7 +25,7 @@ function resolveImports(source, filePath, visited = new Set()) {
     }
   }
 
-  const cleanSource = queryLines.join('\n').trim();
+  const cleanSource = queryLines.join("\n").trim();
   if (cleanSource) {
     const doc = parse(cleanSource);
     definitions = definitions.concat(doc.definitions);
@@ -36,13 +36,17 @@ function resolveImports(source, filePath, visited = new Set()) {
 
 function deduplicateDefs(defs) {
   const seen = new Set();
-  return defs.slice().reverse().filter((def) => {
-    if (def.kind === 'FragmentDefinition') {
-      if (seen.has(def.name.value)) return false;
-      seen.add(def.name.value);
-    }
-    return true;
-  }).reverse();
+  return defs
+    .slice()
+    .reverse()
+    .filter((def) => {
+      if (def.kind === "FragmentDefinition") {
+        if (seen.has(def.name.value)) return false;
+        seen.add(def.name.value);
+      }
+      return true;
+    })
+    .reverse();
 }
 
 function collectFragmentRefs(def) {
@@ -68,7 +72,7 @@ function getTransitiveDeps(name, definitionMap, seen = new Set()) {
 }
 
 module.exports = function (source) {
-  this.cacheable && this.cacheable();
+  if (this.cacheable) this.cacheable();
 
   const allDefs = resolveImports(source, this.resourcePath);
   const uniqueDefs = deduplicateDefs(allDefs);
@@ -81,14 +85,14 @@ module.exports = function (source) {
   }
 
   const namedDefs = uniqueDefs.filter(
-    (d) => (d.kind === 'OperationDefinition' || d.kind === 'FragmentDefinition') && d.name,
+    (d) => (d.kind === "OperationDefinition" || d.kind === "FragmentDefinition") && d.name,
   );
 
   function stripLoc(key, val) {
-    return key === 'loc' ? undefined : val;
+    return key === "loc" ? undefined : val;
   }
 
-  const fullDoc = { kind: 'Document', definitions: uniqueDefs };
+  const fullDoc = { kind: "Document", definitions: uniqueDefs };
   let output = `const _doc = ${JSON.stringify(fullDoc, stripLoc)};\n`;
   output += `export default _doc;\n\n`;
 
@@ -96,7 +100,7 @@ module.exports = function (source) {
     const name = def.name.value;
     const deps = getTransitiveDeps(name, definitionMap);
     const subsetDefs = uniqueDefs.filter((d) => d.name && deps.has(d.name.value));
-    const subsetDoc = { kind: 'Document', definitions: subsetDefs };
+    const subsetDoc = { kind: "Document", definitions: subsetDefs };
     output += `export const ${name} = ${JSON.stringify(subsetDoc, stripLoc)};\n`;
   }
 

@@ -1,4 +1,4 @@
-query HelpProgramAudienceQuery ($programWebname: String!, $audience: String!) {
+query HelpProgramAudienceQuery($programWebname: String!, $audience: String!) {
   cms {
     programs(where: { webname: $programWebname }, limit: 1) {
       items {
@@ -11,14 +11,17 @@ query HelpProgramAudienceQuery ($programWebname: String!, $audience: String!) {
           pressPhotos(limit: 1) {
             items {
               photo {
-                url(transform: {width: 1024, height: 250, resizeStrategy: FILL, quality: 80})
+                url(transform: { width: 1024, height: 250, resizeStrategy: FILL, quality: 80 })
               }
             }
           }
         }
       }
     }
-    faqs (where: { program: { webname: $programWebname }, audience_contains_all: [$audience] }, order: [featured_DESC]) {
+    faqs(
+      where: { program: { webname: $programWebname }, audience_contains_all: [$audience] }
+      order: [featured_DESC]
+    ) {
       items {
         title
         tags
@@ -35,7 +38,7 @@ query HelpProgramAudienceQuery ($programWebname: String!, $audience: String!) {
 
 query HelpProgramAudiencePathsQuery {
   cms {
-    programs (limit: 100) {
+    programs(limit: 100) {
       items {
         webname
         linkedFrom {

@@ -1,6 +1,7 @@
-import React from 'react';
-import { Box, Text } from '@codeday/topo/Atom';
-import BioInfo from './BioInfo';
+import { Box, Text } from "@codeday/topo/Atom";
+import React from "react";
+
+import BioInfo from "./BioInfo";
 
 interface TextQuoteProps {
   testimonial: any;
@@ -11,7 +12,7 @@ export default function TextQuote({ testimonial, ...props }: TextQuoteProps) {
   return (
     <Box {...props}>
       <Text
-        fontSize={testimonial.quote.length > 350 ? 'xl' : '2xl'}
+        fontSize={testimonial.quote.length > 350 ? "xl" : "2xl"}
         fontStyle="italic"
         borderLeftWidth={3}
         borderColor="red.600"

@@ -1,5 +1,5 @@
-import React from "react";
 import { Checkbox as ChakraCheckbox } from "@chakra-ui/react";
+import React from "react";
 
 interface CheckboxProps {
   isChecked?: boolean;
@@ -43,9 +43,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     <ChakraCheckbox.Control>
       <ChakraCheckbox.Indicator />
     </ChakraCheckbox.Control>
-    {children != null && (
-      <ChakraCheckbox.Label>{children}</ChakraCheckbox.Label>
-    )}
+    {children != null && <ChakraCheckbox.Label>{children}</ChakraCheckbox.Label>}
   </ChakraCheckbox.Root>
 );
 

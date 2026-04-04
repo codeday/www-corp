@@ -1,13 +1,14 @@
-import React from 'react';
-import { print } from 'graphql';
-import { Heading } from '@codeday/topo/Atom';
-import { Content } from '@codeday/topo/Molecule';
-import { apiFetch } from '@codeday/topo/utils';
-import { GetStaticProps } from 'next';
-import Page from '../components/Page';
-import ContentfulRichText from '../components/ContentfulRichText';
-import { useQuery } from '../query';
-import { EcoQuery } from './eco.gql';
+import { Heading } from "@codeday/topo/Atom";
+import { Content } from "@codeday/topo/Molecule";
+import { apiFetch } from "@codeday/topo/utils";
+import { print } from "graphql";
+import { GetStaticProps } from "next";
+import React from "react";
+
+import ContentfulRichText from "../components/ContentfulRichText";
+import Page from "../components/Page";
+import { useQuery } from "../query";
+import { EcoQuery } from "./eco.gql";
 
 export default function Eco() {
   const { details } = useQuery().cms;
@@ -15,7 +16,9 @@ export default function Eco() {
   return (
     <Page title="Ecological Footprint" slug="/eco">
       <Content maxWidth="container.md">
-        <Heading as="h2" fontSize="5xl" mt={-2} mb={8}>Ecological Footprint</Heading>
+        <Heading as="h2" fontSize="5xl" mt={-2} mb={8}>
+          Ecological Footprint
+        </Heading>
         <ContentfulRichText json={details?.items[0]?.richValue?.json} />
       </Content>
     </Page>
@@ -29,4 +32,4 @@ export const getStaticProps: GetStaticProps = async () => {
     },
     revalidate: 300,
   };
-}
+};

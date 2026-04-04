@@ -1,6 +1,6 @@
-import React from 'react';
-import shuffle from 'knuth-shuffle-seeded';
-import { Box, Grid, Text, Image } from '@codeday/topo/Atom';
+import { Box, Grid, Text, Image } from "@codeday/topo/Atom";
+import shuffle from "knuth-shuffle-seeded";
+import React from "react";
 
 interface BioInfoProps {
   testimonial: any;
@@ -9,22 +9,22 @@ interface BioInfoProps {
 
 export default function BioInfo({
   testimonial: {
-    firstName, lastName, groupName, title, company, experience, type, image, program: { name: programName }, region,
+    firstName,
+    lastName,
+    groupName,
+    title,
+    company,
+    type,
+    image,
+    program: { name: programName },
+    region,
   },
   ...props
 }: BioInfoProps) {
-  const randomColor = shuffle([
-    'red',
-    'orange',
-    'yellow',
-    'green',
-    'teal',
-    'cyan',
-    'blue',
-    'indigo',
-    'purple',
-    'pink'
-  ], firstName + lastName)[0];
+  const randomColor = shuffle(
+    ["red", "orange", "yellow", "green", "teal", "cyan", "blue", "indigo", "purple", "pink"],
+    firstName + lastName,
+  )[0];
   return (
     <Grid gap={4} alignItems="center" templateColumns={"1fr 100%"} {...props}>
       <Box width="32px">
@@ -42,20 +42,23 @@ export default function BioInfo({
             textAlign="center"
             pt="0.5em"
           >
-            {firstName[0].toUpperCase()}{lastName ? lastName[0].toUpperCase() : ''}
+            {firstName[0].toUpperCase()}
+            {lastName ? lastName[0].toUpperCase() : ""}
           </Box>
         )}
       </Box>
       <Box>
         <Text mb={0} fontWeight="bold">
           {firstName} {lastName}
-          {groupName && ((firstName || lastName) ? ` (${groupName})` : groupName)}
+          {groupName && (firstName || lastName ? ` (${groupName})` : groupName)}
         </Text>
         <Text mb={0}>
           {programName} {region?.name} {type}
         </Text>
         {title && company && (
-          <Text mb={0}>{title} at {company}</Text>
+          <Text mb={0}>
+            {title} at {company}
+          </Text>
         )}
       </Box>
     </Grid>

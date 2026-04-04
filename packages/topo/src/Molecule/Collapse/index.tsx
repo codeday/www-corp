@@ -1,10 +1,9 @@
-import React from "react";
 import { Collapsible } from "@chakra-ui/react";
+import React from "react";
 
 interface CollapseProps {
   in?: boolean;
   open?: boolean;
-  animateOpacity?: boolean;
   children?: React.ReactNode;
   unmountOnExit?: boolean;
   [key: string]: any;
@@ -13,7 +12,6 @@ interface CollapseProps {
 export const Collapse: React.FC<CollapseProps> = ({
   in: inProp,
   open,
-  animateOpacity,
   unmountOnExit,
   children,
   ...props

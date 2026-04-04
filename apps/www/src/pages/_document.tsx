@@ -1,8 +1,13 @@
-import React from 'react';
+import { ColorModeScript } from "@codeday/topo/Theme";
 import Document, {
-  Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps,
-} from 'next/document';
-import { ColorModeScript } from "@codeday/topo/Theme"
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  DocumentInitialProps,
+} from "next/document";
+import React from "react";
 
 export default class CustomDocument extends Document {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {

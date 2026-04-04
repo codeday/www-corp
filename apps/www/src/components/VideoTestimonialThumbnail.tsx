@@ -1,14 +1,18 @@
-import React from 'react';
-import { Box } from '@codeday/topo/Atom';
-import { MediaPlay } from '@codeday/topocons';
-import VideoLink from './VideoLink';
+import { Box } from "@codeday/topo/Atom";
+import { MediaPlay } from "@codeday/topocons";
+import React from "react";
+
+import VideoLink from "./VideoLink";
 
 interface VideoTestimonialThumbnailProps {
   video: any;
   [key: string]: any;
 }
 
-export default function VideoTestimonialThumbnail({ video, ...props }: VideoTestimonialThumbnailProps) {
+export default function VideoTestimonialThumbnail({
+  video,
+  ...props
+}: VideoTestimonialThumbnailProps) {
   return (
     <VideoLink url={video.video.url} poster={video.largeImage?.url} autoPlay>
       <Box

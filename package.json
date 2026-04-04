@@ -2,19 +2,25 @@
   "name": "@codeday/monorepo",
   "version": "0.0.1",
   "private": true,
-  "packageManager": "pnpm@10.33.0",
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
     "start": "turbo start",
-    "lint": "turbo lint",
+    "lint": "oxlint .",
     "codegen": "turbo codegen",
     "clean": "rm -rf .next && pnpm run -r clean",
-    "generate": "pnpm run -r generate"
+    "generate": "pnpm run -r generate",
+    "lint:fix": "oxlint --fix --fix-suggestions .",
+    "format": "oxfmt --check",
+    "format:fix": "oxfmt ."
   },
   "devDependencies": {
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "oxfmt": "^0.43.0",
+    "oxlint": "^1.58.0",
+    "oxlint-tsgolint": "^0.19.0",
     "turbo": "^2.9.3"
-  }
+  },
+  "packageManager": "pnpm@10.33.0"
 }

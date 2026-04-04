@@ -31,8 +31,22 @@
     "codegen": {
       "outputs": ["src/@types/**"]
     },
-    "lint": {
-      "dependsOn": ["^lint"]
+    "//#lint": {
+      "dependsOn": ["^build"]
+    },
+    "//#lint:fix": {
+      "cache": false,
+      "dependsOn": ["^build"]
+    },
+    "//#format": {},
+    "//#format:fix": {
+      "cache": false
+    },
+    "//#quality": {
+      "dependsOn": ["//#lint", "//#format"]
+    },
+    "//#quality:fix": {
+      "dependsOn": ["//#lint:fix", "//#format:fix"]
     }
   }
 }

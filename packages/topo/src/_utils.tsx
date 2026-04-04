@@ -1,5 +1,5 @@
-import React, { useMemo } from "react";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
+import React, { useMemo } from "react";
 
 // ---------------------------------------------------------------------------
 // Local replacements for Chakra v2-only utility types
@@ -9,10 +9,11 @@ type As = React.ElementType;
 
 type PropsOf<T extends As> = React.ComponentPropsWithRef<T>;
 
-type RightJoinProps<
-  SourceProps extends object = {},
-  OverrideProps extends object = {},
-> = Omit<SourceProps, keyof OverrideProps> & OverrideProps;
+type RightJoinProps<SourceProps extends object = {}, OverrideProps extends object = {}> = Omit<
+  SourceProps,
+  keyof OverrideProps
+> &
+  OverrideProps;
 
 /**
  * A polymorphic component type (replaces the Chakra v2 `ComponentWithAs`).
@@ -76,9 +77,9 @@ export const setChildProps =
   (props: any, defaultProps?: any, derivedProps?: (arg0: any) => any) =>
   (child: React.ReactElement) =>
     React.cloneElement(child, {
-      ...(defaultProps || {}),
+      ...defaultProps,
       ...(child ? (child.props as object) : {}),
-      ...(props || {}),
+      ...props,
       ...(derivedProps ? derivedProps(child) : []),
     });
 
@@ -102,13 +103,10 @@ export const wrapHtml = (nodes: React.ReactNode) =>
 // ---------------------------------------------------------------------------
 
 export const pureRef = <T extends object, P extends As>(
-  Component: React.ForwardRefRenderFunction<
-    any,
-    RightJoinProps<PropsOf<P>, T> & { as?: As }
-  >,
+  Component: React.ForwardRefRenderFunction<any, RightJoinProps<PropsOf<P>, T> & { as?: As }>,
 ) =>
-  React.forwardRef<any, RightJoinProps<PropsOf<P>, T> & { as?: As }>(
-    (props, ref) => useMemo(() => Component(props as any, ref), [props, ref]),
+  React.forwardRef<any, RightJoinProps<PropsOf<P>, T> & { as?: As }>((props, ref) =>
+    useMemo(() => Component(props as any, ref), [props, ref]),
   );
 
 // ---------------------------------------------------------------------------
@@ -121,10 +119,7 @@ export const makePureBox = (
   Component?: typeof React.Component,
 ): ComponentWithAs<"div", BoxProps> => {
   const DerivedBox = pureRef<BoxProps, "div">(
-    (
-      { children, ...props }: any,
-      ref: React.LegacyRef<HTMLDivElement> | undefined,
-    ) => (
+    ({ children, ...props }: any, ref: React.LegacyRef<HTMLDivElement> | undefined) => (
       <Box {...defaultProps} {...props} ref={ref}>
         {Component ? <Component>{children}</Component> : children}
       </Box>
@@ -142,7 +137,4 @@ export const makePureBox = (
 export const childrenOfType = (
   children: React.ReactNode,
   type: string | React.JSXElementConstructor<any>,
-) =>
-  React.Children.toArray(children).filter(
-    (e) => (e as React.ReactElement<any>).type == type,
-  );
+) => React.Children.toArray(children).filter((e) => (e as React.ReactElement<any>).type == type);

@@ -1,4 +1,4 @@
-query GetMyLocation{
+query GetMyLocation {
   geo {
     mine {
       lat
@@ -9,18 +9,18 @@ query GetMyLocation{
 
 fragment IndexProgramsComponent on Query {
   clear {
-    events (where: { endDate: { gte: $clearDate } }) {
+    events(where: { endDate: { gte: $clearDate } }) {
       name
       contentfulWebname
       registrationsOpen
     }
   }
   cms {
-    codeDayProgram: programs(where: { webname:"codeday" }) {
+    codeDayProgram: programs(where: { webname: "codeday" }) {
       items {
         shortDescription
         linkedFrom {
-          events (limit: 100) {
+          events(limit: 100) {
             items {
               startsAt
               endsAt
@@ -30,7 +30,7 @@ fragment IndexProgramsComponent on Query {
       }
     }
 
-    labsProgram: programs(where: { webname:"labs" }) {
+    labsProgram: programs(where: { webname: "labs" }) {
       items {
         name
         url
@@ -38,7 +38,7 @@ fragment IndexProgramsComponent on Query {
           url
         }
         linkedFrom {
-          events (limit: 100) {
+          events(limit: 100) {
             items {
               startsAt
               endsAt
@@ -49,7 +49,9 @@ fragment IndexProgramsComponent on Query {
       }
     }
 
-    mainPrograms: programs(where: { webname_not_in:["codeday","labs"], type:"primary", archived_not: true }) {
+    mainPrograms: programs(
+      where: { webname_not_in: ["codeday", "labs"], type: "primary", archived_not: true }
+    ) {
       items {
         name
         url
@@ -58,7 +60,7 @@ fragment IndexProgramsComponent on Query {
           url
         }
         linkedFrom {
-          events (limit: 100) {
+          events(limit: 100) {
             items {
               startsAt
               endsAt
@@ -68,7 +70,9 @@ fragment IndexProgramsComponent on Query {
       }
     }
 
-    otherPrograms: programs(where: { webname_not_in:["codeday", "labs"], type_not:"primary", archived_not: true }) {
+    otherPrograms: programs(
+      where: { webname_not_in: ["codeday", "labs"], type_not: "primary", archived_not: true }
+    ) {
       items {
         name
         url
@@ -79,7 +83,7 @@ fragment IndexProgramsComponent on Query {
       }
     }
 
-    regions (limit: 500) {
+    regions(limit: 500) {
       items {
         name
         webname

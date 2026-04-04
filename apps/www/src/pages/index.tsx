@@ -1,17 +1,18 @@
-import React from 'react';
-import { print } from 'graphql';
-import { apiFetch } from '@codeday/topo/utils';
-import { GetStaticProps } from 'next';
-import Page from '../components/Page';
-import Hero from '../components/Index/Hero';
-import Stats from '../components/Index/Stats';
-import Programs from '../components/Index/Programs';
-import Sponsors from '../components/Index/Sponsors';
-import Announcement from '../components/Index/Announcement';
-import Community from '../components/Index/Community';
-import Quote from '../components/Index/Quotes';
-import Workshops from '../components/Index/Workshops';
-import { IndexQuery } from './index.gql';
+import { apiFetch } from "@codeday/topo/utils";
+import { print } from "graphql";
+import { GetStaticProps } from "next";
+import React from "react";
+
+import Announcement from "../components/Index/Announcement";
+import Community from "../components/Index/Community";
+import Hero from "../components/Index/Hero";
+import Programs from "../components/Index/Programs";
+import Quote from "../components/Index/Quotes";
+import Sponsors from "../components/Index/Sponsors";
+import Stats from "../components/Index/Stats";
+import Workshops from "../components/Index/Workshops";
+import Page from "../components/Page";
+import { IndexQuery } from "./index.gql";
 
 interface HomeProps {
   seed: number;

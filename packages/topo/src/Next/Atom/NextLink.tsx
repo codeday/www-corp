@@ -1,16 +1,12 @@
-import React from "react";
-import NextJsLink, { type LinkProps as NextJsLinkProps } from "next/link";
 import { type LinkProps } from "@chakra-ui/react";
 import { Link } from "@codeday/topo/Atom";
+import NextJsLink, { type LinkProps as NextJsLinkProps } from "next/link";
+import React from "react";
 
-type NextLinkProps = LinkProps &
-  Omit<NextJsLinkProps, "passHref" | "legacyBehavior">;
+type NextLinkProps = LinkProps & Omit<NextJsLinkProps, "passHref" | "legacyBehavior">;
 
 export const NextLink = React.forwardRef<HTMLAnchorElement, NextLinkProps>(
-  (
-    { href = "", replace, scroll, shallow, prefetch, locale, ...props },
-    ref,
-  ) => {
+  ({ href = "", replace, scroll, shallow, prefetch, locale, ...props }, ref) => {
     return (
       <NextJsLink
         href={href}

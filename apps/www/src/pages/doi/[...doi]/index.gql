@@ -33,7 +33,7 @@ query PublicationQuery($doiSuffix: String) {
           familyName
         }
         files {
-        	items {
+          items {
             title
             fileName
             contentfulBaseUrl

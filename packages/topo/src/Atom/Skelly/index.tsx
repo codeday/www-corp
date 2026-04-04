@@ -1,6 +1,6 @@
-import React from "react";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
 import { useColorModeValue } from "@codeday/topo/Theme";
+import React from "react";
 export { Skeleton, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 
 export const Skelly = (props: BoxProps) => (

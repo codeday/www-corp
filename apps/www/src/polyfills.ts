@@ -1,2 +1,2 @@
-require('intersection-observer');
-require('@webcomponents/shadydom');
+require("intersection-observer");
+require("@webcomponents/shadydom");

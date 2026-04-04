@@ -1,15 +1,17 @@
-import { ThemeProvider } from '@codeday/topo/Theme';
-import 'react-responsive-modal/styles.css';
-import { AppProps } from 'next/app';
-import { Provider } from '../query';
-import { MarketingProvider, FundraiseProvider } from '../providers';
-import { debug } from '@codeday/utils';
-import { useEffect } from 'react';
-const DEBUG = debug(['www', 'pages', '_app']);
+import { ThemeProvider } from "@codeday/topo/Theme";
+
+import "react-responsive-modal/styles.css";
+import { debug } from "@codeday/utils";
+import { AppProps } from "next/app";
+import { useEffect } from "react";
+
+import { MarketingProvider, FundraiseProvider } from "../providers";
+import { Provider } from "../query";
+const DEBUG = debug(["www", "pages", "_app"]);
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    DEBUG('pageProps', pageProps);
+    DEBUG("pageProps", pageProps);
   }, []);
   return (
     <>

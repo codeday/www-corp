@@ -1,12 +1,7 @@
-import React, {
-  useState,
-  useImperativeHandle,
-  useLayoutEffect,
-  useRef,
-} from "react";
+import { type ComponentWithAs } from "@codeday/topo/_utils";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
 import { useSsr } from "@codeday/topo/utils";
-import { type ComponentWithAs } from "@codeday/topo/_utils";
+import React, { useState, useImperativeHandle, useLayoutEffect, useRef } from "react";
 
 export interface RatioBoxProps extends BoxProps {
   auto?: "w" | "h";
@@ -14,10 +9,7 @@ export interface RatioBoxProps extends BoxProps {
 }
 
 const RatioBoxInner = React.forwardRef<HTMLDivElement, RatioBoxProps>(
-  (
-    { w, h, auto = "h", autoDefault = "100%", children, ...props },
-    forwardedRef,
-  ) => {
+  ({ w, h, auto = "h", autoDefault = "100%", children, ...props }, forwardedRef) => {
     const ref = useRef(null);
     const [computed, setComputed] = useState<number | string>(autoDefault);
 
@@ -30,17 +22,14 @@ const RatioBoxInner = React.forwardRef<HTMLDivElement, RatioBoxProps>(
         if (auto === "h") {
           setComputed(
             Math.floor(
-              ((ref as React.MutableRefObject<any>).current.clientWidth /
-                (w as number)) *
+              ((ref as React.MutableRefObject<any>).current.clientWidth / (w as number)) *
                 (h as number),
             ),
           );
         } else if (auto === "w") {
           setComputed(
-            Math.floor(
-              (ref as React.MutableRefObject<any>).current.clientHeight /
-                (h as number),
-            ) * (w as number),
+            Math.floor((ref as React.MutableRefObject<any>).current.clientHeight / (h as number)) *
+              (w as number),
           );
         }
       };

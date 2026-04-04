@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { Box, Flex, Button, Text, TextInput as InputText } from '@codeday/topo/Atom';
-import { useToasts } from '@codeday/topo/utils';
-import LinkedInTag from 'react-linkedin-insight';
-import { useRouter } from 'next/router';
-import { useAfterMountEffect } from '../../utils/useAfterMountEffect';
+import { Box, Flex, Button, Text, TextInput as InputText } from "@codeday/topo/Atom";
+import { useToasts } from "@codeday/topo/utils";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import LinkedInTag from "react-linkedin-insight";
+
+import { useAfterMountEffect } from "../../utils/useAfterMountEffect";
 
 export default function RemindMe(props: any) {
-  const { error, success } = useToasts();
-  const [email, setEmail] = useState('');
+  const { error } = useToasts();
+  const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { query } = useRouter();
@@ -16,8 +17,8 @@ export default function RemindMe(props: any) {
   const [hasStarted, setHasStarted] = useState(false);
   useAfterMountEffect(() => {
     if (!hasStarted) {
-      (global as any).analytics?.track('volunteer.started', { style: 'remind-me' });
-      LinkedInTag.init('1831116', null, false);
+      (global as any).analytics?.track("volunteer.started", { style: "remind-me" });
+      LinkedInTag.init("1831116", null, false);
     }
     setHasStarted(true);
   }, [email, hasStarted]);
@@ -33,7 +34,8 @@ export default function RemindMe(props: any) {
   return (
     <Box {...props}>
       <Text>
-        Don't want to fill this out on your phone? We can email you a link to sign up when you're back at your desk:
+        Don't want to fill this out on your phone? We can email you a link to sign up when you're
+        back at your desk:
       </Text>
       <Flex>
         <InputText
@@ -46,16 +48,16 @@ export default function RemindMe(props: any) {
         />
         <Button
           colorPalette="green"
-          disabled={email.indexOf('@') < 0}
+          disabled={email.indexOf("@") < 0}
           loading={submitting}
           onClick={async () => {
             setSubmitting(true);
-            (global as any).analytics?.track('volunteer.remind-me');
+            (global as any).analytics?.track("volunteer.remind-me");
             (global as any).analytics?.identify(email);
             try {
-              const resp = await fetch('https://hooks.zapier.com/hooks/catch/2757438/b9486tx', {
-                method: 'POST',
-                body: JSON.stringify({ email, referrer: query?.ref || '', qs }),
+              await fetch("https://hooks.zapier.com/hooks/catch/2757438/b9486tx", {
+                method: "POST",
+                body: JSON.stringify({ email, referrer: query?.ref || "", qs }),
                 headers: {},
               });
               setSubmitted(true);

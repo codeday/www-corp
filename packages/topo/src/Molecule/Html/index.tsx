@@ -1,8 +1,8 @@
+import { Box, type BoxProps } from "@codeday/topo/Atom";
 import { useColorModeValue } from "@codeday/topo/Theme";
+import { useTheme } from "@codeday/topo/utils";
 import styled from "@emotion/styled";
 import React from "react";
-import { Box, type BoxProps } from "@codeday/topo/Atom";
-import { useTheme } from "@codeday/topo/utils";
 
 function Html({ children, ...props }: BoxProps) {
   const t = useTheme();

@@ -1,4 +1,4 @@
-import { Box, BoxProps } from "@codeday/topo/Atom";
+import { Box } from "@codeday/topo/Atom";
 import { withProps } from "recompose";
 
 interface StatusDotProps {
@@ -13,10 +13,7 @@ const StatusDot = withProps<any, StatusDotProps>((props: StatusDotProps) => ({
   width: props.size || 3,
   height: props.size || 3,
   display: "inline-block",
-  bg:
-    (props.online && "green.500") ||
-    ((props.away || props.pending) && "orange.400") ||
-    "red.600",
+  bg: (props.online && "green.500") || ((props.away || props.pending) && "orange.400") || "red.600",
   borderRadius: "full",
   title:
     (props.online && "online") ||

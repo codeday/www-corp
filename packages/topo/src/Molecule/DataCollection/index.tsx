@@ -1,7 +1,7 @@
-import { Promise, Secure, UiInfo } from "@codeday/topocons";
-import React from "react";
 import { Box, Grid, Link, Skelly } from "@codeday/topo/Atom";
 import { useString, useTheme } from "@codeday/topo/utils";
+import { Promise, Secure, UiInfo } from "@codeday/topocons";
+import React from "react";
 
 const MessageIcons = {
   pii: Promise,
@@ -28,9 +28,7 @@ function DataCollection({ message }: DataCollectionProps) {
         alignItems="center"
       >
         <Box display={{ base: "none", md: "block" }} fontSize="2xl">
-          <MessageIcon
-            style={{ position: "relative", top: "-2px", fill: "currentColor" }}
-          />
+          <MessageIcon style={{ position: "relative", top: "-2px", fill: "currentColor" }} />
         </Box>
         <Box fontSize="sm">
           {renderedText} (

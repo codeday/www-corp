@@ -1,4 +1,3 @@
-import React from "react";
 import {
   childrenOfType,
   makePureBox,
@@ -8,6 +7,7 @@ import {
   type ComponentWithAs,
 } from "@codeday/topo/_utils";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
+import React from "react";
 
 export const IconBoxIcon = makePureBox("IconBoxIcon");
 export const IconBoxText = makePureBox("IconBoxText");

@@ -1,9 +1,9 @@
-import React, { Children, cloneElement, useState } from "react";
-import { UiX, UiMenu } from "@codeday/topocons";
 import { childrenOfType, setChildProps } from "@codeday/topo/_utils";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
 import { Content } from "@codeday/topo/Molecule";
 import { useColorModeValue } from "@codeday/topo/Theme";
+import { UiX, UiMenu } from "@codeday/topocons";
+import React, { Children, cloneElement, useState } from "react";
 
 import Menu from "./menu";
 import SiteLogo from "./site-logo";
@@ -12,7 +12,6 @@ interface HeaderProps extends BoxProps {
   underscore?: boolean;
   gradAmount?: any;
   noPadding?: boolean;
-  noGrad?: boolean;
   darkBackground?: boolean;
 }
 
@@ -21,15 +20,11 @@ const Header = ({
   children,
   gradAmount,
   noPadding,
-  noGrad,
   darkBackground = useColorModeValue(false, true),
   ...props
 }: HeaderProps) => {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
-  const childrenWithProps = React.Children.map(
-    children as React.ReactElement[],
-    setChildProps({})
-  );
+  const childrenWithProps = React.Children.map(children as React.ReactElement[], setChildProps({}));
   const logo = childrenOfType(childrenWithProps, SiteLogo);
   const menu = childrenOfType(childrenWithProps, Menu);
   return (
@@ -55,11 +50,7 @@ const Header = ({
             borderBottomWidth={underscore ? "1px" : 0}
           >
             <Box float="left">{logo}</Box>
-            <Box
-              float="right"
-              textAlign="right"
-              display={{ base: "none", lg: "block" }}
-            >
+            <Box float="right" textAlign="right" display={{ base: "none", lg: "block" }}>
               {menu}
             </Box>
             <Box
@@ -117,18 +108,15 @@ const Header = ({
             })}
           </Box>
           {Children.map(
-            Children.toArray(
-              (menu[0] as React.ReactElement<any>)?.props?.children
-            ).filter((e) => e),
+            Children.toArray((menu[0] as React.ReactElement<any>)?.props?.children).filter(
+              (e) => e,
+            ),
             (c, i) => (
               <Box
                 pb={4}
                 mb={4}
                 borderBottomWidth={
-                  i + 1 ===
-                  (menu[0] as React.ReactElement<any>).props.children.length
-                    ? 0
-                    : 1
+                  i + 1 === (menu[0] as React.ReactElement<any>).props.children.length ? 0 : 1
                 }
               >
                 {cloneElement(c as React.ReactElement<any>, {
@@ -139,7 +127,7 @@ const Header = ({
                   role: "menuitem",
                 })}
               </Box>
-            )
+            ),
           )}
         </Box>
       </Box>

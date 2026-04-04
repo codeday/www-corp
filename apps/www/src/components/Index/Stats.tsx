@@ -1,9 +1,10 @@
-import React from 'react';
-import CountUp from 'react-countup';
-import { Text, Grid, Box } from '@codeday/topo/Atom';
-import { Content } from '@codeday/topo/Molecule';
-import { useColorMode } from '@codeday/topo/Theme';
-import { useQuery } from '../../query';
+import { Text, Grid, Box } from "@codeday/topo/Atom";
+import { Content } from "@codeday/topo/Molecule";
+import { useColorMode } from "@codeday/topo/Theme";
+import React from "react";
+import CountUp from "react-countup";
+
+import { useQuery } from "../../query";
 
 function rollup(events: any[]): Record<string, number> {
   const stats: Record<string, number> = {};
@@ -18,38 +19,52 @@ function rollup(events: any[]): Record<string, number> {
 }
 
 function StatBox({
-  num, label, unit, ...props
-}: { num: number; label: string; unit?: string; [key: string]: any }) {
+  num,
+  label,
+  unit,
+  ...props
+}: {
+  num: number;
+  label: string;
+  unit?: string;
+  [key: string]: any;
+}) {
   return (
     <Box textAlign="center" {...props}>
       <Text fontSize="4xl" bold mb={0}>
         <CountUp start={0} end={num} duration={0.5} separator="," />
         {unit}
       </Text>
-      <Text fontSize="md" bold mb={0}>{label}</Text>
+      <Text fontSize="md" bold mb={0}>
+        {label}
+      </Text>
     </Box>
   );
 }
 
 export default function Stats(props: any) {
   const { colorMode } = useColorMode();
-  const { cms: { stats, quoteRegions }, labs: { statTotalOutcomes } } = useQuery();
+  const {
+    cms: { stats, quoteRegions },
+    labs: { statTotalOutcomes },
+  } = useQuery();
   const rollupStats = rollup(stats.items);
 
-  const hours = statTotalOutcomes.find((o: any) => o.key === 'hoursCount');
-  const labsStudentCount = statTotalOutcomes.find((o: any) => o.key === 'studentCount');
+  const hours = statTotalOutcomes.find((o: any) => o.key === "hoursCount");
+  const labsStudentCount = statTotalOutcomes.find((o: any) => o.key === "studentCount");
 
   return (
-    <Content
-      full
-      bg={colorMode === 'light' ? 'red.50' : 'red.900'}
-      pt={4}
-      pb={2}
-      {...props}
-    >
+    <Content full bg={colorMode === "light" ? "red.50" : "red.900"} pt={4} pb={2} {...props}>
       <Content>
-        <Grid templateColumns={{ base: 'repeat(3, 1fr)', md: 'repeat(4, 1fr)', lg: 'repeat(5, 1fr)' }} gap={4}>
-          <StatBox num={rollupStats.statEventCount} label={`In-Person Events in ${quoteRegions?.items?.length} Cities Worldwide`} opacity="0.7"/>
+        <Grid
+          templateColumns={{ base: "repeat(3, 1fr)", md: "repeat(4, 1fr)", lg: "repeat(5, 1fr)" }}
+          gap={4}
+        >
+          <StatBox
+            num={rollupStats.statEventCount}
+            label={`In-Person Events in ${quoteRegions?.items?.length} Cities Worldwide`}
+            opacity="0.7"
+          />
           <StatBox num={rollupStats.statStudentCount} label="Total CodeDay Alumni" opacity="0.7" />
           <StatBox
             num={rollupStats.statLowInterestCount}
@@ -62,7 +77,7 @@ export default function Stats(props: any) {
             opacity="0.7"
           />
           <StatBox
-            num={(rollupStats.statStudentCount * 24) + hours?.value}
+            num={rollupStats.statStudentCount * 24 + hours?.value}
             label="Hours Spent Solving Meaningful Problems"
             opacity="0.7"
           />

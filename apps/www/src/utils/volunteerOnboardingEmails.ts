@@ -1,5 +1,4 @@
-
-export function renderLabsMentor({firstName}: {firstName: string}): string {
+export function renderLabsMentor({ firstName }: { firstName: string }): string {
   return `Hi ${firstName},
 
 Thank you for volunteering for CodeDay! We currently have these open roles:
@@ -15,10 +14,16 @@ If interested, please schedule a 15 minute onboarding call via this link: https:
 If you have any questions, feel free to reach out at anytime!
 
 Best,
-CodeDay Team`
+CodeDay Team`;
 }
 
-export function renderCodeDayExistingRegion({firstName, region}: {firstName: string; region: string}): string {
+export function renderCodeDayExistingRegion({
+  firstName,
+  region,
+}: {
+  firstName: string;
+  region: string;
+}): string {
   return `Hi ${firstName},
 
 Thanks for your interest in volunteering for CodeDay ${region}! To continue with the application process, please complete these steps:
@@ -32,10 +37,16 @@ It is up to the ${region} team if they want to select you as a volunteer, so mak
 If you have any questions, feel free to reach out!
 
 Best,
-CodeDay Team`
+CodeDay Team`;
 }
 
-export function renderCodeDayOrganizeRegion({firstName, region}: {firstName: string; region: string}): string {
+export function renderCodeDayOrganizeRegion({
+  firstName,
+  region,
+}: {
+  firstName: string;
+  region: string;
+}): string {
   return `Hi ${firstName},
 
 Thanks for your interest in organizing a new CodeDay in ${region}! To continue with the application process, please answer these 3 short questions:
@@ -47,19 +58,27 @@ Thanks for your interest in organizing a new CodeDay in ${region}! To continue w
 Please keep your answers brief - we are expecting no more than a few sentences per question. If you have any questions for us, feel free to reach out!
 
 Best,
-CodeDay Team`
+CodeDay Team`;
 }
 
-export function renderBannedVolunteer({ firstName }: {firstName: string}): string {
+export function renderBannedVolunteer({ firstName }: { firstName: string }): string {
   return `Hi ${firstName},
 
 Thank you for your interest in volunteering for CodeDay. At the moment we do not have any volunteering opportunities for which you are eligible.
 
 Sincerely,
-CodeDay Team`
+CodeDay Team`;
 }
 
-export function renderUnknown({email, firstName, lastName, linkedin, region, isOrganize, background}: {
+export function renderUnknown({
+  email,
+  firstName,
+  lastName,
+  linkedin,
+  region,
+  isOrganize,
+  background,
+}: {
   email: string;
   firstName: string;
   lastName: string;
@@ -79,10 +98,15 @@ Email: ${email}
 LinkedIn: ${linkedin}
 Region: ${region}
 Is Organize? ${isOrganize}
-Background: ${background}`
+Background: ${background}`;
 }
 
-export function renderEmailRM({email, firstName, lastName, region}: {
+export function renderEmailRM({
+  email,
+  firstName,
+  lastName,
+  region,
+}: {
   email: string;
   firstName: string;
   lastName: string;
@@ -94,10 +118,16 @@ Last Name: ${lastName}
 Email: ${email}
 
 We've let them know to expect an email from you with follow up questions or next steps.
-`
+`;
 }
 
-export function renderEmailRMToStudent({ firstName, region }: {firstName: string; region: string}): string {
+export function renderEmailRMToStudent({
+  firstName,
+  region,
+}: {
+  firstName: string;
+  region: string;
+}): string {
   return `Hi ${firstName}!
 Thanks so much for applying to be a volunteer for CodeDay ${region}!
 
@@ -106,5 +136,5 @@ In the meantime, if you have any questions about volunteering for CodeDay, pleas
 
 Best,
 CodeDay Team
-`
+`;
 }

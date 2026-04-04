@@ -1,10 +1,5 @@
+import { RadioGroup as ChakraRadioGroup, Stack, HStack, VStack } from "@chakra-ui/react";
 import React from "react";
-import {
-  RadioGroup as ChakraRadioGroup,
-  Stack,
-  HStack,
-  VStack,
-} from "@chakra-ui/react";
 export { Stack, HStack, VStack };
 
 interface RadioProps {
@@ -36,9 +31,7 @@ export const Radio: React.FC<RadioProps> = ({
     <ChakraRadioGroup.Item value={value} {...props}>
       <ChakraRadioGroup.ItemHiddenInput />
       <ChakraRadioGroup.ItemIndicator />
-      {children != null && (
-        <ChakraRadioGroup.ItemText>{children}</ChakraRadioGroup.ItemText>
-      )}
+      {children != null && <ChakraRadioGroup.ItemText>{children}</ChakraRadioGroup.ItemText>}
     </ChakraRadioGroup.Item>
   </ChakraRadioGroup.Root>
 );

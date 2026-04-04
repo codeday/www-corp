@@ -1,4 +1,4 @@
-query HelpProgramIndexQuery ($programWebname: String!) {
+query HelpProgramIndexQuery($programWebname: String!) {
   cms {
     programs(where: { webname: $programWebname }, limit: 1) {
       items {
@@ -11,14 +11,14 @@ query HelpProgramIndexQuery ($programWebname: String!) {
           pressPhotos(limit: 1) {
             items {
               photo {
-                url(transform: {width: 1024, height: 250, resizeStrategy: FILL, quality: 80})
+                url(transform: { width: 1024, height: 250, resizeStrategy: FILL, quality: 80 })
               }
             }
           }
         }
       }
     }
-    faqs(where: { program: {webname: $programWebname } }, limit: 1000) {
+    faqs(where: { program: { webname: $programWebname } }, limit: 1000) {
       items {
         audience
       }
@@ -29,7 +29,7 @@ query HelpProgramIndexQuery ($programWebname: String!) {
 query HelpProgramIndexPathsQuery {
   cms {
     programs {
-    	items {
+      items {
         webname
         linkedFrom {
           faqs(limit: 1) {

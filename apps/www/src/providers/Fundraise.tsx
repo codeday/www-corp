@@ -1,9 +1,9 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import Script from 'next/script';
-import Head from 'next/head';
-import { awaitQuerySelectorAll, subscribeQuerySelectorAll } from '@codeday/topo/utils';
-import { debug } from '@codeday/utils';
-const DEBUG = debug(['www', 'providers', 'Fundraise']);
+import { awaitQuerySelectorAll } from "@codeday/topo/utils";
+import { debug } from "@codeday/utils";
+import Head from "next/head";
+import Script from "next/script";
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+const DEBUG = debug(["www", "providers", "Fundraise"]);
 
 interface FundraiseContextType {
   isFundraiseLoaded: boolean;
@@ -34,11 +34,11 @@ export function FundraiseProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (isScriptLoaded) {
-      DEBUG('Fundraise script loaded.');
-      (async () => {
+      DEBUG("Fundraise script loaded.");
+      void (async () => {
         await awaitQuerySelectorAll(FUNDRAISE_UP_IFRAME_SELECTOR);
         setIsFundraiseLoaded(true);
-        DEBUG('Fundraise app loaded.');
+        DEBUG("Fundraise app loaded.");
       })();
     }
   }, [isScriptLoaded]);

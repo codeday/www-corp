@@ -1,15 +1,16 @@
-import React, { ReactNode } from 'react';
-import { DefaultSeo } from 'next-seo';
-import Head from 'next/head';
-import { Box, CodeDay, Button, Link, Text, Heading } from '@codeday/topo/Atom';
-import { Header, SiteLogo, Main, Menu, Footer, CustomLinks } from '@codeday/topo/Organism';
-import { Presence } from '@chakra-ui/react';
-import { useQuery } from '../query';
-import { Content } from '@codeday/topo/Molecule';
-import { useFundraise } from '../providers';
+import { Presence } from "@chakra-ui/react";
+import { Box, CodeDay, Button, Text, Heading } from "@codeday/topo/Atom";
+import { Content } from "@codeday/topo/Molecule";
+import { Header, SiteLogo, Main, Menu, Footer } from "@codeday/topo/Organism";
+import { DefaultSeo } from "next-seo";
+import Head from "next/head";
+import React, { ReactNode } from "react";
 
-const DOMAIN = 'https://www.codeday.org';
-const FUNDRAISE_UP_BUTTON_ID = 'XBSBRRMF';
+import { useFundraise } from "../providers";
+import { useQuery } from "../query";
+
+const DOMAIN = "https://www.codeday.org";
+const FUNDRAISE_UP_BUTTON_ID = "XBSBRRMF";
 
 interface PageProps {
   children?: ReactNode;
@@ -21,9 +22,9 @@ interface PageProps {
   [key: string]: any;
 }
 
-export default function Page({ children, title, darkHeader, slug, seo, fun = false }: PageProps) {
+export default function Page({ children, title, darkHeader, slug, seo }: PageProps) {
   const { cms } = useQuery();
-  const { mission, globalSponsors } = cms || {};
+  const { mission } = cms || {};
   const { isFundraiseLoaded } = useFundraise();
   const disclaimerTexts = (cms?.globalSponsors?.items || [])
     .flatMap((sponsor: any) => sponsor.legalDisclaimer.split(`\n`))
@@ -36,24 +37,24 @@ export default function Page({ children, title, darkHeader, slug, seo, fun = fal
       </Head>
       {seo ?? (
         <DefaultSeo
-          title={title ? `${title} ~ CodeDay` : 'CodeDay'}
+          title={title ? `${title} ~ CodeDay` : "CodeDay"}
           description={mission?.items[0]?.value}
           canonical={`${DOMAIN}${slug}`}
           openGraph={{
-            type: 'website',
-            locale: 'en_US',
-            site_name: 'CodeDay',
+            type: "website",
+            locale: "en_US",
+            site_name: "CodeDay",
             url: `${DOMAIN}${slug}`,
           }}
           twitter={{
-            handle: '@codeday',
-            site: '@codeday',
-            cardType: 'summary_large_image',
+            handle: "@codeday",
+            site: "@codeday",
+            cardType: "summary_large_image",
           }}
         />
       )}
       <Box position="relative">
-        <Header darkBackground={darkHeader} gradAmount={darkHeader && 'lg'} underscore>
+        <Header darkBackground={darkHeader} gradAmount={darkHeader && "lg"} underscore>
           <SiteLogo>
             <a href="/">
               <CodeDay withText />
@@ -63,18 +64,42 @@ export default function Page({ children, title, darkHeader, slug, seo, fun = fal
             </a>
           </SiteLogo>
           <Menu>
-            <Button as="a" fontSize="md" fontWeight="600" variant="ghost" mr={2} {...({ href: '/contact' } as any)}>
+            <Button
+              as="a"
+              fontSize="md"
+              fontWeight="600"
+              variant="ghost"
+              mr={2}
+              {...({ href: "/contact" } as any)}
+            >
               Contact
             </Button>
-            <Button as="a" fontSize="md" fontWeight="600" variant="ghost" mr={2} {...({ href: '/volunteer' } as any)}>
+            <Button
+              as="a"
+              fontSize="md"
+              fontWeight="600"
+              variant="ghost"
+              mr={2}
+              {...({ href: "/volunteer" } as any)}
+            >
               Volunteer
             </Button>
-            <Button as="a" fontSize="md" fontWeight="600" variant="ghost" mr={2} {...({ href: '/press' } as any)}>
+            <Button
+              as="a"
+              fontSize="md"
+              fontWeight="600"
+              variant="ghost"
+              mr={2}
+              {...({ href: "/press" } as any)}
+            >
               Press
             </Button>
 
             <Box mt={-4} display="inline-block" minW="129px" maxH="48px">
-              <Presence present={isFundraiseLoaded} animationName={{ _open: 'fade-in', _closed: 'fade-out' }}>
+              <Presence
+                present={isFundraiseLoaded}
+                animationName={{ _open: "fade-in", _closed: "fade-out" }}
+              >
                 <Box>
                   <a {...({ href: `#${FUNDRAISE_UP_BUTTON_ID}` } as any)} />
                 </Box>
@@ -107,7 +132,7 @@ export default function Page({ children, title, darkHeader, slug, seo, fun = fal
             </Content>
           )}
           <Footer repository="web" branch="master" domainName="www.codeday.org">
-            {''}
+            {""}
           </Footer>
         </Box>
       </Box>

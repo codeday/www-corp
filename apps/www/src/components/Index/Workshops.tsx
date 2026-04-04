@@ -1,19 +1,20 @@
-import React from 'react';
-import { create } from 'random-seed';
-import { Text, Box, Grid, Link, Heading } from '@codeday/topo/Atom';
-import { Content } from '@codeday/topo/Molecule';
-import { parseIsoString, formatShortDate } from '../../utils/time';
-import { useQuery } from '../../query';
+import { Text, Box, Grid, Link, Heading } from "@codeday/topo/Atom";
+import { Content } from "@codeday/topo/Molecule";
+import { create } from "random-seed";
+import React from "react";
+
+import { useQuery } from "../../query";
+import { parseIsoString, formatShortDate } from "../../utils/time";
 
 const fixedColors: Record<string, string> = {
-  Partners: 'gray',
-  Community: 'blue',
-  'CodeDay Labs': 'green',
-  'Virtual CodeDay': 'purple',
-  CodeDay: 'red',
-  Webinars: 'indigo',
+  Partners: "gray",
+  Community: "blue",
+  "CodeDay Labs": "green",
+  "Virtual CodeDay": "purple",
+  CodeDay: "red",
+  Webinars: "indigo",
 };
-const colors = ['green', 'blue', 'orange', 'cyan', 'purple', 'yellow', 'indigo'];
+const colors = ["green", "blue", "orange", "cyan", "purple", "yellow", "indigo"];
 
 export default function Workshops() {
   const { calendar } = useQuery();
@@ -41,8 +42,8 @@ export default function Workshops() {
               <Box>
                 <Box
                   display="inline-block"
-                  bg={`${color || 'red'}.500`}
-                  color={`${color || 'red'}.50`}
+                  bg={`${color || "red"}.500`}
+                  color={`${color || "red"}.50`}
                   rounded="sm"
                   p={2}
                   pt={1}
@@ -75,10 +76,10 @@ export default function Workshops() {
 function formatAMPM(date: Date): string {
   var hours = date.getHours();
   var minutes = date.getMinutes();
-  var ampm = hours >= 12 ? 'pm' : 'am';
+  var ampm = hours >= 12 ? "pm" : "am";
   hours = hours % 12;
   hours = hours ? hours : 12; // the hour '0' should be '12'
-  const minutesStr = minutes < 10 ? '0' + minutes : minutes;
-  var strTime = hours + ':' + minutesStr + ' ' + ampm;
+  const minutesStr = minutes < 10 ? "0" + minutes : minutes;
+  var strTime = hours + ":" + minutesStr + " " + ampm;
   return strTime;
 }

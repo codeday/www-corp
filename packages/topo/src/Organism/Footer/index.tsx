@@ -1,10 +1,4 @@
-import { Eco } from "@codeday/topocons";
-import React, { forwardRef, type ReactNode } from "react";
-import {
-  childrenOfType,
-  makePureBox,
-  type ComponentWithAs,
-} from "@codeday/topo/_utils";
+import { childrenOfType, makePureBox, type ComponentWithAs } from "@codeday/topo/_utils";
 import {
   Box,
   CopyText,
@@ -18,18 +12,17 @@ import {
   type BoxProps,
 } from "@codeday/topo/Atom";
 import { Content, GithubAuthors } from "@codeday/topo/Molecule";
-import { useString } from "@codeday/topo/utils";
 import { useCmp, useQuery } from "@codeday/topo/Theme";
+import { useString } from "@codeday/topo/utils";
+import React, { forwardRef, type ReactNode } from "react";
 
-export const CustomLinks: ComponentWithAs<"div", BoxProps> =
-  makePureBox("Custom Links");
-export const CustomText: ComponentWithAs<"div", BoxProps> =
-  makePureBox("CustomText");
+export const CustomLinks: ComponentWithAs<"div", BoxProps> = makePureBox("Custom Links");
+export const CustomText: ComponentWithAs<"div", BoxProps> = makePureBox("CustomText");
 
 const StandardLinks = ({ domainName }: { domainName?: string }) => {
-  const links = useQuery<
-    { sys: { id: string }; link: string; title: string }[] | undefined
-  >("cms.sites.items");
+  const links = useQuery<{ sys: { id: string }; link: string; title: string }[] | undefined>(
+    "cms.sites.items",
+  );
 
   return (
     <List fontSize="md">
@@ -49,15 +42,12 @@ const StandardLinks = ({ domainName }: { domainName?: string }) => {
         links.map(({ title, link, sys }: any) => {
           const isExternalLink =
             !domainName ||
-            (!link.startsWith(`https://${domainName}`) &&
-              !link.startsWith(`http://${domainName}`));
+            (!link.startsWith(`https://${domainName}`) && !link.startsWith(`http://${domainName}`));
           return (
             <ListItem listStyleType="none" key={sys.id}>
               <Link
                 href={
-                  isExternalLink
-                    ? link
-                    : link.slice(link.indexOf(domainName) + domainName.length)
+                  isExternalLink ? link : link.slice(link.indexOf(domainName) + domainName.length)
                 }
                 target={isExternalLink ? "_blank" : undefined}
                 rel={isExternalLink ? "noopener" : undefined}
@@ -82,20 +72,14 @@ export interface FooterProps extends BoxProps {
 }
 
 const Footer = forwardRef(
-  (
-    { children, repository, owner, branch, domainName, ...props }: FooterProps,
-    ref,
-  ) => {
+  ({ children, repository, owner, branch, domainName, ...props }: FooterProps, ref) => {
     const { ucUi } = useCmp();
     const ccpaLink = useString("legal.ccpa", <Skelly />);
     const resourcesHeading = useString("resources", <Skelly />);
     const customHeading = useString("custom-links", <Skelly />);
     const copyright = useString("copyright", <>&copy; CodeDay</>);
     const nonprofit = useString("nonprofit", "");
-    const maintainedBy = useString(
-      "maintained-by",
-      "This site is open source software created by",
-    );
+    const maintainedBy = useString("maintained-by", "This site is open source software created by");
 
     const localizationContact = useQuery<
       { contactDefaultType: string; contactDefaultValue: string } | undefined
@@ -124,25 +108,15 @@ const Footer = forwardRef(
             />
           </Box>
         )}
-        <Grid
-          templateColumns={{ base: "1fr", md: "6fr 3fr 3fr" }}
-          color="current.textLight"
-        >
-          <Box
-            fontFamily="body"
-            gridRow={{ base: 3, md: 1 }}
-            marginTop={{ base: 6, md: 0 }}
-          >
+        <Grid templateColumns={{ base: "1fr", md: "6fr 3fr 3fr" }} color="current.textLight">
+          <Box fontFamily="body" gridRow={{ base: 3, md: 1 }} marginTop={{ base: 6, md: 0 }}>
             <Box>
               {customText.length > 0 ? (
                 customText
               ) : (
                 <Text>
                   {typeof copyright === "string"
-                    ? copyright.replace(
-                        "{currentYear}",
-                        new Date().getFullYear().toString(),
-                      )
+                    ? copyright.replace("{currentYear}", new Date().getFullYear().toString())
                     : copyright}
                   <br />
                   {nonprofit}{" "}
@@ -214,11 +188,7 @@ const Footer = forwardRef(
                 {ccpaLink}
               </Link>
               <br />
-              <Link
-                as="a"
-                onClick={() => ucUi?.showSecondLayer()}
-                id="usercentrics-psl"
-              >
+              <Link as="a" onClick={() => ucUi?.showSecondLayer()} id="usercentrics-psl">
                 Privacy Settings
               </Link>
             </Box>

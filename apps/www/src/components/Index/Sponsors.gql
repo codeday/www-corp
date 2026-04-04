@@ -6,10 +6,10 @@ fragment IndexSponsorsComponent on Query {
         link
         type
         logo {
-          url(transform: {height: 160, width: 320, resizeStrategy: PAD})
+          url(transform: { height: 160, width: 320, resizeStrategy: PAD })
         }
         darkLogo {
-          url(transform: {height: 160, width: 320, resizeStrategy: PAD})
+          url(transform: { height: 160, width: 320, resizeStrategy: PAD })
         }
       }
     }
@@ -20,10 +20,10 @@ fragment IndexSponsorsComponent on Query {
         link
         type
         logo {
-          url(transform: {height: 80, width: 160, resizeStrategy: PAD})
+          url(transform: { height: 80, width: 160, resizeStrategy: PAD })
         }
         darkLogo {
-          url(transform: {height: 80, width: 160, resizeStrategy: PAD})
+          url(transform: { height: 80, width: 160, resizeStrategy: PAD })
         }
       }
     }

@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic';
-import { useInView } from 'react-intersection-observer';
-import { Box } from '@codeday/topo/Atom';
-import { useTheme } from '@codeday/topo/utils';
+import { Box } from "@codeday/topo/Atom";
+import { useTheme } from "@codeday/topo/utils";
+import dynamic from "next/dynamic";
+import React, { useState, useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
 const options = {
   cameraRotateSpeed: 0.2,
   focusAnimationDuration: 1000,
-  focusEasingFunction: ['Linear', 'None'] as any,
+  focusEasingFunction: ["Linear", "None"] as any,
   markerTooltipRenderer: () => ``,
   markerRadiusScaleRange: [0.02, 0.03] as [number, number],
   enableCameraRotate: false,
@@ -21,7 +21,7 @@ const options = {
 };
 
 //@ts-ignore
-const ReactGlobe = dynamic(() => import('react-globe'), { ssr: false });
+const ReactGlobe = dynamic(() => import("react-globe"), { ssr: false });
 
 function InnerGlobe({ regions, testimonial }: { regions: any[]; testimonial: any }) {
   const { colors } = useTheme();
@@ -50,8 +50,11 @@ function InnerGlobe({ regions, testimonial }: { regions: any[]; testimonial: any
 
   const markers = regions
     ?.map((r) => ({
-      id: `${r.webname}-${testimonial?.region?.webname === r.webname ? 'active' : 'inactive'}`,
-      color: testimonial?.region?.webname === r.webname ? (colors as any).red[600] : (colors as any).white,
+      id: `${r.webname}-${testimonial?.region?.webname === r.webname ? "active" : "inactive"}`,
+      color:
+        testimonial?.region?.webname === r.webname
+          ? (colors as any).red[600]
+          : (colors as any).white,
       value: testimonial?.region?.webname === r.webname ? 20 : 10,
       coordinates: [r.location.lat, r.location.lon] as [number, number],
     }))
@@ -87,11 +90,11 @@ interface GlobeProps {
 }
 
 export default function Globe({ testimonial, regions }: GlobeProps) {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return null;
   }
 
-  const { ref, inView } = useInView({ rootMargin: '500px' });
+  const { ref, inView } = useInView({ rootMargin: "500px" });
   const [hasLoaded, setHasLoaded] = useState(false);
   useEffect(() => {
     if (inView) {

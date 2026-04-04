@@ -1,11 +1,11 @@
-import Form from "@tylermenezes/cognitoforms-react";
-/* eslint-disable no-secrets/no-secrets */
-/* eslint-disable no-undef */
-import React, { useEffect, useState } from "react";
 import { Box, Link, Spinner, Text } from "@codeday/topo/Atom";
 import { DataCollection } from "@codeday/topo/Molecule";
 import { useColorMode } from "@codeday/topo/Theme";
 import { useTheme } from "@codeday/topo/utils";
+import Form from "@tylermenezes/cognitoforms-react";
+/* eslint-disable no-secrets/no-secrets */
+/* eslint-disable no-undef */
+import React, { useEffect, useState } from "react";
 
 import style from "./style";
 
@@ -44,7 +44,7 @@ const CognitoForm = ({
   const typeofWindow = typeof window;
 
   useEffect(() => {
-    if (typeofWindow === 'undefined') return () => { };
+    if (typeofWindow === "undefined") return () => {};
     const timeout = setTimeout(() => setShowFallback(true), 15 * 1000);
     return () => clearTimeout(timeout);
   }, [typeofWindow, setShowFallback, showFallback]);

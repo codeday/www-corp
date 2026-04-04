@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { print } from 'graphql';
-import { apiFetch } from '@codeday/topo/utils';
-import { Box, Grid, Image, Text, Heading } from '@codeday/topo/Atom';
-import { Content } from '@codeday/topo/Molecule';
-import { useColorMode } from '@codeday/topo/Theme';
-import { UiX } from '@codeday/topocons';
-import { GetStaticProps, GetStaticPaths } from 'next';
-import Page from '../../../components/Page';
-import ContentfulRichText from '../../../components/ContentfulRichText';
-import { useQuery } from '../../../query';
-import { HelpProgramAudienceQuery, HelpProgramAudiencePathsQuery } from './audience.gql';
+import { Box, Grid, Image, Text, Heading } from "@codeday/topo/Atom";
+import { Content } from "@codeday/topo/Molecule";
+import { useColorMode } from "@codeday/topo/Theme";
+import { apiFetch } from "@codeday/topo/utils";
+import { UiX } from "@codeday/topocons";
+import { print } from "graphql";
+import { GetStaticProps, GetStaticPaths } from "next";
+import React, { useState } from "react";
+
+import ContentfulRichText from "../../../components/ContentfulRichText";
+import Page from "../../../components/Page";
+import { useQuery } from "../../../query";
+import { HelpProgramAudienceQuery, HelpProgramAudiencePathsQuery } from "./audience.gql";
 
 interface AudienceProps {
   programWebname: string;
@@ -26,8 +27,9 @@ export default function Audience({ programWebname, audience }: AudienceProps) {
   const program = programs?.items[0] || null;
 
   const photos =
-    events?.items?.map((e: any) => e?.linkedFrom?.pressPhotos?.items[0]?.photo?.url).filter((photo: any) => photo) ||
-    [];
+    events?.items
+      ?.map((e: any) => e?.linkedFrom?.pressPhotos?.items[0]?.photo?.url)
+      .filter((photo: any) => photo) || [];
   const photo = photos[0] || null;
 
   const allTags = faqs?.items
@@ -35,10 +37,15 @@ export default function Audience({ programWebname, audience }: AudienceProps) {
     .reduce((accum: string[], tags: string[]) => [...accum, ...tags], [])
     .reduce((accum: string[], t: string) => (accum.includes(t) ? accum : [...accum, t]), []);
 
-  const filteredFaqs = !tag ? faqs?.items : faqs?.items?.filter((faq: any) => faq?.tags?.includes(tag));
+  const filteredFaqs = !tag
+    ? faqs?.items
+    : faqs?.items?.filter((faq: any) => faq?.tags?.includes(tag));
 
   return (
-    <Page slug={`/help/${programWebname}/${audience.toLowerCase()}`} title={`${audience} ~ ${program.name} ~ Help`}>
+    <Page
+      slug={`/help/${programWebname}/${audience.toLowerCase()}`}
+      title={`${audience} ~ ${program.name} ~ Help`}
+    >
       <Content mt={-8}>
         {photo && <Image src={photo} alt="" w="100%" mb={8} rounded="sm" />}
         <Heading as="h2" fontSize="5xl" mb={4}>
@@ -63,12 +70,12 @@ export default function Audience({ programWebname, audience }: AudienceProps) {
                 pl={2}
                 pr={2}
                 cursor="pointer"
-                color={t === tag ? 'current.text' : 'current.textLight'}
+                color={t === tag ? "current.text" : "current.textLight"}
               >
                 {t}
                 {t === tag && (
                   <>
-                    {' '}
+                    {" "}
                     <UiX />
                   </>
                 )}
@@ -77,7 +84,7 @@ export default function Audience({ programWebname, audience }: AudienceProps) {
           </Box>
         )}
 
-        <Grid templateColumns={{ base: '1fr', lg: '1fr 1fr' }} gap={8}>
+        <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap={8}>
           {filteredFaqs?.map((faq: any) => (
             <Box
               key={faq.sys.id}
@@ -85,7 +92,7 @@ export default function Audience({ programWebname, audience }: AudienceProps) {
               display="block"
               p={4}
               pb={0}
-             {...{href:`/help/article/${faq.sys.id}`} as any}
+              {...({ href: `/help/article/${faq.sys.id}` } as any)}
               rounded="sm"
               borderWidth={1}
               mb={2}
@@ -102,9 +109,9 @@ export default function Audience({ programWebname, audience }: AudienceProps) {
                 position="absolute"
                 height={24}
                 background={
-                  colorMode === 'light'
-                    ? 'linear-gradient(0deg, rgba(255,255,255,1) 25%, rgba(255,255,255,0) 100%)'
-                    : 'linear-gradient(0deg, rgba(41,41,41,1) 25%, rgba(41,41,41,0) 100%)'
+                  colorMode === "light"
+                    ? "linear-gradient(0deg, rgba(255,255,255,1) 25%, rgba(255,255,255,0) 100%)"
+                    : "linear-gradient(0deg, rgba(41,41,41,1) 25%, rgba(41,41,41,0) 100%)"
                 }
                 bottom={0}
                 left={0}
@@ -143,9 +150,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
           program?.linkedFrom?.faqs?.items
             ?.map((faq: any) => faq.audience)
             .reduce((accum: string[], auds: string[]) => [...accum, ...auds], [])
-            .reduce((accum: string[], aud: string) => (accum.includes(aud) ? accum : [...accum, aud]), []) || [];
+            .reduce(
+              (accum: string[], aud: string) => (accum.includes(aud) ? accum : [...accum, aud]),
+              [],
+            ) || [];
 
-        return audiences.map((aud: string) => ({ params: { program: program.webname, audience: aud.toLowerCase() } }));
+        return audiences.map((aud: string) => ({
+          params: { program: program.webname, audience: aud.toLowerCase() },
+        }));
       })
       .reduce((accum: any[], elem: any[]) => [...accum, ...elem], []),
     fallback: true,

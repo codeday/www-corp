@@ -1,28 +1,29 @@
-import React from 'react';
-import { print } from 'graphql';
-import { sign } from 'jsonwebtoken';
-import { Box, Grid, Text, Heading, Link, Image, Divider } from '@codeday/topo/Atom';
-import { Email as EmailIcon } from '@codeday/topocons';
-import { Content } from '@codeday/topo/Molecule';
-import { apiFetch } from '@codeday/topo/utils';
-import { GetStaticProps } from 'next';
-import Page from '../components/Page';
-import Employees from '../components/Contact/Employees';
-import FullProfile from '../components/Contact/FullProfile';
-import TextOnly from '../components/Contact/TextOnly';
-import shuffle from 'knuth-shuffle-seeded';
-import { useQuery } from '../query';
-import { debug } from '@codeday/utils';
-import { ContactQuery } from './contact.gql';
+import { Box, Grid, Text, Heading, Link, Image, Divider } from "@codeday/topo/Atom";
+import { Content } from "@codeday/topo/Molecule";
+import { apiFetch } from "@codeday/topo/utils";
+import { Email as EmailIcon } from "@codeday/topocons";
+import { print } from "graphql";
+import { sign } from "jsonwebtoken";
+import shuffle from "knuth-shuffle-seeded";
+import { GetStaticProps } from "next";
+import React from "react";
 
-const DEBUG = debug(['www', 'pages', 'contact']);
+import Employees from "../components/Contact/Employees";
+import FullProfile from "../components/Contact/FullProfile";
+import TextOnly from "../components/Contact/TextOnly";
+import Page from "../components/Page";
+import { useQuery } from "../query";
+import { ContactQuery } from "./contact.gql";
 
 function nl2br(str: string): string {
-  return str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
+  return str.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1<br />$2");
 }
 
 function toTitleCase(str: string): string {
-  return str.replace(/\w\S*/g, (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase());
+  return str.replace(
+    /\w\S*/g,
+    (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
+  );
 }
 
 export default function Home({ seed }: { seed: number }) {
@@ -34,7 +35,9 @@ export default function Home({ seed }: { seed: number }) {
   } = useQuery();
 
   const employeeIds = employees.map((e: any) => e.id);
-  const otherIds = [...employees, ...otherTeam, ...board, ...contractors, ...emeritus].map((e: any) => e.id);
+  const otherIds = [...employees, ...otherTeam, ...board, ...contractors, ...emeritus].map(
+    (e: any) => e.id,
+  );
   const justVolunteers = shuffle(
     volunteers.filter((v: any) => !otherIds.includes(v.id)),
     seed,
@@ -42,10 +45,10 @@ export default function Home({ seed }: { seed: number }) {
   const uniqueBoard = board.filter((director: any) => !employeeIds.includes(director.id));
 
   const boardEmeritusNames = boardEmeritus.map((e: any) =>
-    toTitleCase(e.givenName + ' ' + e.familyName).replace(/( \.| \*)/g, ''),
+    toTitleCase(e.givenName + " " + e.familyName).replace(/( \.| \*)/g, ""),
   );
   const emeritusNames = emeritus.map((e: any) =>
-    toTitleCase(e.givenName + ' ' + e.familyName).replace(/( \.| \*)/g, ''),
+    toTitleCase(e.givenName + " " + e.familyName).replace(/( \.| \*)/g, ""),
   );
 
   const volunteerNames = [
@@ -54,12 +57,12 @@ export default function Home({ seed }: { seed: number }) {
         toTitleCase(
           vol.name
             ? vol.name
-            : `${vol.firstName || vol.givenName || ''} ${vol.lastName || vol.surname || vol.familyName || ''}`,
-        ).replace(/( \.| \*)/g, ''),
+            : `${vol.firstName || vol.givenName || ""} ${vol.lastName || vol.surname || vol.familyName || ""}`,
+        ).replace(/( \.| \*)/g, ""),
       ),
     ),
   ]
-    .filter((a: string) => !a.includes('Volunteer') && a.length > 3 && !a.includes('?'))
+    .filter((a: string) => !a.includes("Volunteer") && a.length > 3 && !a.includes("?"))
     .sort();
 
   return (
@@ -76,7 +79,7 @@ export default function Home({ seed }: { seed: number }) {
           Let&apos;s Talk.
         </Heading>
         <Grid
-          templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
+          templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
           gap={8}
           alignItems="center"
           mb={12}
@@ -103,9 +106,14 @@ export default function Home({ seed }: { seed: number }) {
           <Text fontWeight="bold" fontSize="2xl" mb={1}>
             <Link href={`mailto:${email?.items[0]?.value}`}>{email?.items[0]?.value}</Link>
             <br />
-            <Link href={`tel:${phone?.items[0]?.value.replace(/[^0-9]/g, '')}`}>{phone?.items[0]?.value}</Link>
+            <Link href={`tel:${phone?.items[0]?.value.replace(/[^0-9]/g, "")}`}>
+              {phone?.items[0]?.value}
+            </Link>
             <br />
-            <Link href={`tel:${fax?.items[0]?.value.replace(/[^0-9]/g, '')}`}>{fax?.items[0]?.value}</Link> (fax)
+            <Link href={`tel:${fax?.items[0]?.value.replace(/[^0-9]/g, "")}`}>
+              {fax?.items[0]?.value}
+            </Link>{" "}
+            (fax)
           </Text>
         </Grid>
       </Content>
@@ -115,8 +123,14 @@ export default function Home({ seed }: { seed: number }) {
       </Content>
 
       <Content>
-        <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
-          Team{' '}
+        <Heading
+          as="h3"
+          fontSize="xl"
+          color="current.textLight"
+          textAlign={{ base: "left", md: "center" }}
+          mt={12}
+        >
+          Team{" "}
           <Link position="relative" top={1} cursor="pointer" href="mailto:team@codeday.org">
             <EmailIcon />
           </Link>
@@ -129,7 +143,7 @@ export default function Home({ seed }: { seed: number }) {
           as="h4"
           fontSize="sm"
           color="current.textLight"
-          textAlign={{ base: 'left', md: 'center' }}
+          textAlign={{ base: "left", md: "center" }}
           mb={0}
           mt={0}
         >
@@ -143,9 +157,20 @@ export default function Home({ seed }: { seed: number }) {
       </Content>
 
       <Content>
-        <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
-          Independent Board Members{' '}
-          <Link position="relative" top={1} cursor="pointer" href="mailto:board-external@codeday.org">
+        <Heading
+          as="h3"
+          fontSize="xl"
+          color="current.textLight"
+          textAlign={{ base: "left", md: "center" }}
+          mt={12}
+        >
+          Independent Board Members{" "}
+          <Link
+            position="relative"
+            top={1}
+            cursor="pointer"
+            href="mailto:board-external@codeday.org"
+          >
             <EmailIcon />
           </Link>
         </Heading>
@@ -157,21 +182,33 @@ export default function Home({ seed }: { seed: number }) {
           as="h4"
           fontSize="sm"
           color="current.textLight"
-          textAlign={{ base: 'left', md: 'center' }}
+          textAlign={{ base: "left", md: "center" }}
           mb={0}
           mt={0}
         >
           Emeriti
         </Heading>
       </Content>
-      <TextOnly fontSize="sm" color="current.textLight" names={boardEmeritusNames} mt={-2} mb={16} />
+      <TextOnly
+        fontSize="sm"
+        color="current.textLight"
+        names={boardEmeritusNames}
+        mt={-2}
+        mb={16}
+      />
 
       <Content>
         <Divider />
       </Content>
 
       <Content>
-        <Heading as="h3" fontSize="xl" color="current.textLight" textAlign={{ base: 'left', md: 'center' }} mt={12}>
+        <Heading
+          as="h3"
+          fontSize="xl"
+          color="current.textLight"
+          textAlign={{ base: "left", md: "center" }}
+          mt={12}
+        >
           Volunteers
         </Heading>
       </Content>
@@ -181,9 +218,13 @@ export default function Home({ seed }: { seed: number }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const token = sign({ scopes: 'read:users' }, process.env.ACCOUNT_SECRET!, { expiresIn: '3m' });
-  const labsToken = sign({ typ: 'a', aud: 'urn:gql.labs.codeday.org' }, process.env.LABS_SECRET!, { expiresIn: '3m' });
-  const clearToken = sign({ t: 'A', aud: 'clear-gql' }, process.env.CLEAR_SECRET!, { expiresIn: '3m' });
+  const token = sign({ scopes: "read:users" }, process.env.ACCOUNT_SECRET!, { expiresIn: "3m" });
+  const labsToken = sign({ typ: "a", aud: "urn:gql.labs.codeday.org" }, process.env.LABS_SECRET!, {
+    expiresIn: "3m",
+  });
+  const clearToken = sign({ t: "A", aud: "clear-gql" }, process.env.CLEAR_SECRET!, {
+    expiresIn: "3m",
+  });
   return {
     props: {
       query: await apiFetch(
@@ -191,8 +232,8 @@ export const getStaticProps: GetStaticProps = async () => {
         {},
         {
           Authorization: `Bearer ${token}`,
-          'X-Labs-Authorization': `Bearer ${labsToken}`,
-          'X-Clear-Authorization': `Bearer ${clearToken}`,
+          "X-Labs-Authorization": `Bearer ${labsToken}`,
+          "X-Clear-Authorization": `Bearer ${clearToken}`,
         },
       ),
       seed: Math.random(),

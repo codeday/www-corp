@@ -1,31 +1,25 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { ThemeProvider as NextThemesProvider } from "@wrksz/themes";
+import { apiFetch } from "@codeday/topo/utils";
+import { ThemeDataProvider, defaultFontSizes, type ThemeData } from "@codeday/topo/utils";
 import { Global, css } from "@emotion/react";
+import { ThemeProvider as NextThemesProvider } from "@wrksz/themes";
 // @ts-ignore
 import PropTypes from "prop-types";
 /* eslint-disable no-undef */
 import React from "react";
 import useSwr from "swr";
-import { apiFetch } from "@codeday/topo/utils";
 
-import codedaySystem, { Theme as codedayTheme } from "./vars";
-import { QueryProvider } from "./query";
-import {
-  ThemeDataProvider,
-  defaultFontSizes,
-  type ThemeData,
-} from "@codeday/topo/utils";
 import { CmpProvider } from "./providers/Cmp";
+import { QueryProvider } from "./query";
+import codedaySystem, { Theme as codedayTheme } from "./vars";
 
 const customCss = css`
   @font-face {
     font-family: "Sofia Pro";
     src:
-      url("https://f1.codeday.org/topo/fonts/SofiaPro-Bold.woff2")
-        format("woff2"),
+      url("https://f1.codeday.org/topo/fonts/SofiaPro-Bold.woff2") format("woff2"),
       url("https://f1.codeday.org/topo/fonts/SofiaPro-Bold.woff") format("woff"),
-      url("https://f1.codeday.org/topo/fonts/SofiaPro-Bold.ttf")
-        format("truetype");
+      url("https://f1.codeday.org/topo/fonts/SofiaPro-Bold.ttf") format("truetype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -33,12 +27,9 @@ const customCss = css`
   @font-face {
     font-family: "Sofia Pro";
     src:
-      url("https://f1.codeday.org/topo/fonts/SofiaPro-Regular.woff2")
-        format("woff2"),
-      url("https://f1.codeday.org/topo/fonts/SofiaPro-Regular.woff")
-        format("woff"),
-      url("https://f1.codeday.org/topo/fonts/SofiaPro-Regular.ttf")
-        format("truetype");
+      url("https://f1.codeday.org/topo/fonts/SofiaPro-Regular.woff2") format("woff2"),
+      url("https://f1.codeday.org/topo/fonts/SofiaPro-Regular.woff") format("woff"),
+      url("https://f1.codeday.org/topo/fonts/SofiaPro-Regular.ttf") format("truetype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -46,12 +37,9 @@ const customCss = css`
   @font-face {
     font-family: "Sofia Pro";
     src:
-      url("https://f1.codeday.org/topo/fonts/SofiaPro-Regularitalic.woff2")
-        format("woff2"),
-      url("https://f1.codeday.org/topo/fonts/SofiaPro-Regularitalic.woff")
-        format("woff"),
-      url("https://f1.codeday.org/topo/fonts/SofiaPro-Regularitalic.ttf")
-        format("truetype");
+      url("https://f1.codeday.org/topo/fonts/SofiaPro-Regularitalic.woff2") format("woff2"),
+      url("https://f1.codeday.org/topo/fonts/SofiaPro-Regularitalic.woff") format("woff"),
+      url("https://f1.codeday.org/topo/fonts/SofiaPro-Regularitalic.ttf") format("truetype");
     font-weight: 400;
     font-style: italic;
     font-display: swap;
@@ -60,21 +48,16 @@ const customCss = css`
     font-family: "Gosha Sans";
     font-weight: 700;
     src:
-      url("https://f1.codeday.org/topo/fonts/GoshaSans-Bold.woff2")
-        format("woff2"),
-      url("https://f1.codeday.org/topo/fonts/GoshaSans-Bold.woff")
-        format("woff"),
-      url("https://f1.codeday.org/topo/fonts/GoshaSans-Bold.ttf")
-        format("truetype");
+      url("https://f1.codeday.org/topo/fonts/GoshaSans-Bold.woff2") format("woff2"),
+      url("https://f1.codeday.org/topo/fonts/GoshaSans-Bold.woff") format("woff"),
+      url("https://f1.codeday.org/topo/fonts/GoshaSans-Bold.ttf") format("truetype");
     font-display: swap;
   }
   @font-face {
     font-family: "Fira Code";
     src:
-      url("https://f1.codeday.org/topo/fonts/firacode-bold-webfont.woff2")
-        format("woff2"),
-      url("https://f1.codeday.org/topo/fonts/firacode-bold-webfont.woff")
-        format("woff");
+      url("https://f1.codeday.org/topo/fonts/firacode-bold-webfont.woff2") format("woff2"),
+      url("https://f1.codeday.org/topo/fonts/firacode-bold-webfont.woff") format("woff");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -82,10 +65,8 @@ const customCss = css`
   @font-face {
     font-family: "Fira Code";
     src:
-      url("https://f1.codeday.org/topo/fonts/firacode-regular-webfont.woff2")
-        format("woff2"),
-      url("https://f1.codeday.org/topo/fonts/firacode-regular-webfont.woff")
-        format("woff");
+      url("https://f1.codeday.org/topo/fonts/firacode-regular-webfont.woff2") format("woff2"),
+      url("https://f1.codeday.org/topo/fonts/firacode-regular-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -229,10 +210,8 @@ const Provider = ({
 };
 
 Provider.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-  ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element])
+    .isRequired,
   analyticsId: PropTypes.string,
   brandColor: PropTypes.string,
   visibility: PropTypes.string,

@@ -1,19 +1,25 @@
-import React from 'react';
-import { print } from 'graphql';
-import { apiFetch } from '@codeday/topo/utils';
-import { Box, Grid, Image, Text, Heading } from '@codeday/topo/Atom';
-import { Content, IconBox, IconBoxIcon as HeaderIcon, IconBoxText as HeaderText } from '@codeday/topo/Molecule';
+import { Box, Grid, Image, Text, Heading } from "@codeday/topo/Atom";
+import {
+  Content,
+  IconBox,
+  IconBoxIcon as HeaderIcon,
+  IconBoxText as HeaderText,
+} from "@codeday/topo/Molecule";
+import { apiFetch } from "@codeday/topo/utils";
 import {
   Backpack as StudentIcon,
   BuildingHome as ParentIcon,
   BuildingSchool as SchoolIcon,
   BuildingOffice as PartnerIcon,
   IdCard as VolunteerIcon,
-} from '@codeday/topocons';
-import { GetStaticProps, GetStaticPaths } from 'next';
-import Page from '../../../components/Page';
-import { useQuery } from '../../../query';
-import { HelpProgramIndexQuery, HelpProgramIndexPathsQuery } from './index.gql';
+} from "@codeday/topocons";
+import { print } from "graphql";
+import { GetStaticProps, GetStaticPaths } from "next";
+import React from "react";
+
+import Page from "../../../components/Page";
+import { useQuery } from "../../../query";
+import { HelpProgramIndexQuery, HelpProgramIndexPathsQuery } from "./index.gql";
 
 const icons: Record<string, React.ReactElement> = {
   Student: <StudentIcon />,
@@ -37,11 +43,15 @@ export default function Program({ programWebname }: ProgramProps) {
     faqs?.items
       ?.map((faq: any) => faq.audience)
       .reduce((accum: string[], auds: string[]) => [...accum, ...auds], [])
-      .reduce((accum: string[], aud: string) => (accum.includes(aud) ? accum : [...accum, aud]), []) || [];
+      .reduce(
+        (accum: string[], aud: string) => (accum.includes(aud) ? accum : [...accum, aud]),
+        [],
+      ) || [];
 
   const photos =
-    events?.items?.map((e: any) => e?.linkedFrom?.pressPhotos?.items[0]?.photo?.url).filter((photo: any) => photo) ||
-    [];
+    events?.items
+      ?.map((e: any) => e?.linkedFrom?.pressPhotos?.items[0]?.photo?.url)
+      .filter((photo: any) => photo) || [];
   const photo = photos[0] || null;
 
   return (
@@ -52,9 +62,13 @@ export default function Program({ programWebname }: ProgramProps) {
           {program.name} Helpdesk
         </Heading>
         <Text mb={8}>Which best describes you?</Text>
-        <Grid templateColumns={{ base: '1fr', md: '1fr 1fr', lg: 'repeat(3, 1fr)' }} gap={8}>
+        <Grid templateColumns={{ base: "1fr", md: "1fr 1fr", lg: "repeat(3, 1fr)" }} gap={8}>
           {audiences.map((aud: string) => (
-            <IconBox as="a" key={aud}{...{href:`/help/${programWebname}/${aud.toLowerCase()}`} as any}>
+            <IconBox
+              as="a"
+              key={aud}
+              {...({ href: `/help/${programWebname}/${aud.toLowerCase()}` } as any)}
+            >
               <HeaderIcon>
                 <Box
                   display="inline-block"

@@ -1,19 +1,20 @@
-import React from 'react';
-import { print } from 'graphql';
-import { useRouter } from 'next/router';
-import { Heading, Image, Skelly, Spinner, Box, Grid } from '@codeday/topo/Atom';
-import { Content, CognitoForm } from '@codeday/topo/Molecule';
-import { apiFetch } from '@codeday/topo/utils';
-import { GetStaticProps, GetStaticPaths } from 'next';
-import Error404 from '../404';
-import ContentfulRichText from '../../components/ContentfulRichText';
-import Page from '../../components/Page';
-import { FormQuery, ListFormsQuery } from './form.gql';
-import { useQuery } from '../../query';
+import { Heading, Image, Skelly, Spinner, Box, Grid } from "@codeday/topo/Atom";
+import { Content, CognitoForm } from "@codeday/topo/Molecule";
+import { apiFetch } from "@codeday/topo/utils";
+import { print } from "graphql";
+import { GetStaticProps, GetStaticPaths } from "next";
+import { useRouter } from "next/router";
+import React from "react";
+
+import ContentfulRichText from "../../components/ContentfulRichText";
+import Page from "../../components/Page";
+import { useQuery } from "../../query";
+import Error404 from "../404";
+import { FormQuery, ListFormsQuery } from "./form.gql";
 
 export default function Home() {
   const { cms } = useQuery();
-  const { isFallback, query } = useRouter();
+  const { query } = useRouter();
 
   if (!cms) {
     return (
@@ -23,7 +24,7 @@ export default function Home() {
           <Spinner />
         </Content>
       </Page>
-    )
+    );
   }
 
   if (cms?.forms?.items.length < 1) {
@@ -35,15 +36,16 @@ export default function Home() {
   return (
     <Page slug={`/f/${query.slug}`} title={title}>
       <Content>
-        {image && (
-          <Image src={image.url} alt="" mb={4} mt={-4} rounded="md" />
-        )}
-        <Heading as="h2" fontSize="4xl" mb={8}>{title}</Heading>
-        <Grid templateColumns={sidebar ? {base: '1fr', md: '3fr 2fr', lg: '2fr 1fr'} : '1fr'} gap={8}>
+        {image && <Image src={image.url} alt="" mb={4} mt={-4} rounded="md" />}
+        <Heading as="h2" fontSize="4xl" mb={8}>
+          {title}
+        </Heading>
+        <Grid
+          templateColumns={sidebar ? { base: "1fr", md: "3fr 2fr", lg: "2fr 1fr" } : "1fr"}
+          gap={8}
+        >
           <Box>
-            {details && (
-              <ContentfulRichText json={details.json} links={details.links} />
-            )}
+            {details && <ContentfulRichText json={details.json} links={details.links} />}
             {/* TODO(@oohwooh) make this better - leftover stuff in `query` might contaminate the prefill with things we don't want,
             plus `query` is deprecated now in nextjs. Maybe cms should provide allowlist of what fields can be prefilled?
             */}
@@ -66,14 +68,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const query = await apiFetch(print(ListFormsQuery), {}, {});
 
   return {
-    paths: query?.cms?.forms?.items?.map((i: any) => ({
-      params: {
-        slug: i.slug
-      }
-    })) || [],
+    paths:
+      query?.cms?.forms?.items?.map((i: any) => ({
+        params: {
+          slug: i.slug,
+        },
+      })) || [],
     fallback: true,
   };
-}
+};
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string;
@@ -83,4 +86,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     },
     revalidate: 300,
   };
-}
+};

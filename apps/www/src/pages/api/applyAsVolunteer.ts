@@ -1,49 +1,50 @@
-import { ServerClient } from 'postmark';
-import Airtable from 'airtable';
-import { apiFetch } from '@codeday/topo/utils';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { apiFetch } from "@codeday/topo/utils";
+import Airtable from "airtable";
+import { NextApiRequest, NextApiResponse } from "next";
+import { ServerClient } from "postmark";
+
 import {
   renderBannedVolunteer,
   renderCodeDayExistingRegion,
   renderCodeDayOrganizeRegion,
   renderEmailRM,
   renderEmailRMToStudent,
-  renderLabsMentor,
   renderUnknown,
-} from '../../utils/volunteerOnboardingEmails';
-
-import { ApplyAsVolunteerQuery } from './applyAsVolunteer.gql';
+} from "../../utils/volunteerOnboardingEmails";
+import { ApplyAsVolunteerQuery } from "./applyAsVolunteer.gql";
 
 const postmark = new ServerClient(process.env.POSTMARK_SERVER_TOKEN!);
 const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(process.env.AIRTABLE_BASE!);
 
 async function ApplyAsVolunteer(req: NextApiRequest, res: NextApiResponse) {
-  const { email, firstName, lastName, linkedin, region, isOrganize, background } = JSON.parse(req.body);
+  const { email, firstName, lastName, linkedin, region, isOrganize, background } = JSON.parse(
+    req.body,
+  );
   let banned = false;
 
   try {
-    const airtableRes = await base('Volunteers')
+    const airtableRes = await base("Volunteers")
       .select({
         maxRecords: 100,
-        fields: ['Flags'],
+        fields: ["Flags"],
 
         filterByFormula: `TRIM(LOWER({Email})) = "${email.toString().toLowerCase().trim()}"`,
       })
       .firstPage();
     airtableRes.forEach((record: any) => {
-      if ((record.get('Flags') || []).includes('Banned')) banned = true;
+      if ((record.get("Flags") || []).includes("Banned")) banned = true;
     });
   } catch (ex) {
     console.error(ex);
   }
   try {
-    await base('Volunteers').create([
+    await base("Volunteers").create([
       {
         fields: {
           Name: `${firstName} ${lastName}`,
           Email: email,
           LinkedIn: linkedin,
-          'Location (Not Listed)': region,
+          "Location (Not Listed)": region,
           Type: background,
         },
       },
@@ -58,27 +59,27 @@ async function ApplyAsVolunteer(req: NextApiRequest, res: NextApiResponse) {
 
   if (banned) {
     emailText = renderBannedVolunteer({ firstName });
-  } else if (background === 'student' && isOrganize) {
+  } else if (background === "student" && isOrganize) {
     emailText = renderCodeDayOrganizeRegion({ firstName, region });
-  } else if (background === 'student' && !isOrganize) {
+  } else if (background === "student" && !isOrganize) {
     const data = await apiFetch(
       ApplyAsVolunteerQuery,
       {
         webname: region.toLowerCase(),
       },
-      { 'X-Clear-Authorization': `Bearer ${process.env.CLEAR_TOKEN}` },
+      { "X-Clear-Authorization": `Bearer ${process.env.CLEAR_TOKEN}` },
     );
     const cmsRegion = data.cms.regions.items[0];
     const clearRegion = data.clear.findFirstEvent;
 
-    if (cmsRegion?.newVolunteerPipeline === 'email-rm' && clearRegion?.managers[0]) {
+    if (cmsRegion?.newVolunteerPipeline === "email-rm" && clearRegion?.managers[0]) {
       const rmEmailText = renderEmailRM({ firstName, lastName, email, region });
       await postmark.sendEmail({
-        MessageStream: 'outbound',
+        MessageStream: "outbound",
         To: `${clearRegion.managers[0]}@codeday.org`,
-        From: 'volunteer@codeday.org',
+        From: "volunteer@codeday.org",
         Subject: `CodeDay ${region} volunteer application: ${firstName} ${lastName}`,
-        Bcc: 'volunteer@codeday.org',
+        Bcc: "volunteer@codeday.org",
         TextBody: rmEmailText,
       });
       emailText = renderEmailRMToStudent({ firstName, region });
@@ -89,20 +90,28 @@ async function ApplyAsVolunteer(req: NextApiRequest, res: NextApiResponse) {
 
   if (emailText) {
     await postmark.sendEmail({
-      MessageStream: 'outbound',
+      MessageStream: "outbound",
       To: email,
-      From: 'volunteer@codeday.org',
-      Subject: 'CodeDay: Volunteering Next Steps',
-      Bcc: 'volunteer@codeday.org',
+      From: "volunteer@codeday.org",
+      Subject: "CodeDay: Volunteering Next Steps",
+      Bcc: "volunteer@codeday.org",
       TextBody: emailText,
     });
   } else {
     await postmark.sendEmail({
-      MessageStream: 'outbound',
-      To: 'volunteer@codeday.org',
-      From: 'volunteer@codeday.org',
-      Subject: 'Volunteer form unhandled template',
-      TextBody: renderUnknown({ email, firstName, lastName, linkedin, region, isOrganize, background }),
+      MessageStream: "outbound",
+      To: "volunteer@codeday.org",
+      From: "volunteer@codeday.org",
+      Subject: "Volunteer form unhandled template",
+      TextBody: renderUnknown({
+        email,
+        firstName,
+        lastName,
+        linkedin,
+        region,
+        isOrganize,
+        background,
+      }),
     });
   }
   return res.status(200).json({});

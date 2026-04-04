@@ -1,14 +1,15 @@
-import React from 'react';
-import { print } from 'graphql';
-import { DateTime } from 'luxon';
-import { apiFetch } from '@codeday/topo/utils';
-import { Content } from '@codeday/topo/Molecule';
-import { Text, Heading, Link, Box, List, ListItem } from '@codeday/topo/Atom';
-import { UiArrowRight } from '@codeday/topocons';
-import { GetStaticProps, GetStaticPaths } from 'next';
-import Page from '../../../components/Page';
-import ContentfulRichText from '../../../components/ContentfulRichText';
-import { HelpArticleQuery, HelpArticlePathsQuery } from './article.gql';
+import { Text, Heading, Link, Box, List, ListItem } from "@codeday/topo/Atom";
+import { Content } from "@codeday/topo/Molecule";
+import { apiFetch } from "@codeday/topo/utils";
+import { UiArrowRight } from "@codeday/topocons";
+import { print } from "graphql";
+import { DateTime } from "luxon";
+import { GetStaticProps, GetStaticPaths } from "next";
+import React from "react";
+
+import ContentfulRichText from "../../../components/ContentfulRichText";
+import Page from "../../../components/Page";
+import { HelpArticleQuery, HelpArticlePathsQuery } from "./article.gql";
 
 interface ArticleProps {
   faq: any;
@@ -32,7 +33,7 @@ export default function Article({ faq }: ArticleProps) {
           {faq.audience.map((aud: string, i: number) => (
             <React.Fragment key={aud}>
               <Link href={`/help/${faq.program.webname}/${aud.toLowerCase()}`}>{aud}s</Link>
-              {i !== faq.audience.length - 1 && ','}{' '}
+              {i !== faq.audience.length - 1 && ","}{" "}
             </React.Fragment>
           ))}
         </Text>

@@ -8,7 +8,7 @@ query VolunteerQuery($now: ClearDateTime!) {
   ...VolunteerTestimonials
   ...VolunteerPhotoGallery
   cms {
-    testimonials: testimonials(where: { featured: true, type_in:["Volunteer", "Mentor"] }) {
+    testimonials: testimonials(where: { featured: true, type_in: ["Volunteer", "Mentor"] }) {
       items {
         ...VideoTestimonialThumbnailComponent
         firstName

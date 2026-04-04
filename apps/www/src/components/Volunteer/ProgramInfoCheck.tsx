@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Box, Text, Image, List, ListItem, Checkbox } from '@codeday/topo/Atom';
-import { formatInterval } from '../../utils/time';
-import ContentfulRichText from '../ContentfulRichText';
+import { Box, Text, Image, List, ListItem, Checkbox } from "@codeday/topo/Atom";
+import React, { useState } from "react";
+
+import { formatInterval } from "../../utils/time";
+import ContentfulRichText from "../ContentfulRichText";
 
 interface ProgramInfoCheckProps {
   program: any;
@@ -14,10 +15,10 @@ export default function ProgramInfoCheck({ program, disabled }: ProgramInfoCheck
 
   return (
     <Box
-      cursor={disabled ? 'cursor' : undefined}
+      cursor={disabled ? "cursor" : undefined}
       borderWidth={1}
-      borderColor={isSelected ? undefined : 'transparent'}
-      shadow={isSelected ? 'md' : undefined}
+      borderColor={isSelected ? undefined : "transparent"}
+      shadow={isSelected ? "md" : undefined}
       p={4}
       pt={6}
       pb={2}

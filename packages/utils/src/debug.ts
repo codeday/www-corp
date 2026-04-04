@@ -1,9 +1,7 @@
 import debugFactory from "debug";
 
 function hasDebugConfig() {
-  return typeof window !== "undefined"
-    ? !!window.localStorage?.debug
-    : !!process.env.DEBUG;
+  return typeof window !== "undefined" ? !!window.localStorage?.debug : !!process.env.DEBUG;
 }
 
 function defaultEnableDebug() {

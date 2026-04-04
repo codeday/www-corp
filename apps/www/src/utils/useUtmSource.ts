@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 export function useUtmSource(): string {
   const { query } = useRouter();
@@ -9,5 +9,8 @@ export function useUtmSource(): string {
     o: query?.utm_content,
     t: query?.utm_term,
   };
-  return Object.keys(vars).filter((k) => vars[k]).map((k) => `${k}:${vars[k]}`).join(',');
+  return Object.keys(vars)
+    .filter((k) => vars[k])
+    .map((k) => `${k}:${vars[k]}`)
+    .join(",");
 }

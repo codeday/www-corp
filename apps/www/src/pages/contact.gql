@@ -1,6 +1,6 @@
 query ContactQuery {
   account {
-    employees: roleUsers (roleId: "rol_llN0357VXrEoIxoj") {
+    employees: roleUsers(roleId: "rol_llN0357VXrEoIxoj") {
       id
       username
       givenName
@@ -11,7 +11,7 @@ query ContactQuery {
       pronoun
     }
 
-    otherTeam: roleUsers (roleId: "rol_6t902YZpsOynmWDt") {
+    otherTeam: roleUsers(roleId: "rol_6t902YZpsOynmWDt") {
       id
       username
       givenName
@@ -22,7 +22,7 @@ query ContactQuery {
       pronoun
     }
 
-    contractors: roleUsers (roleId: "rol_kQxfFcpISf1SyqPw") {
+    contractors: roleUsers(roleId: "rol_kQxfFcpISf1SyqPw") {
       id
       username
       givenName
@@ -33,7 +33,7 @@ query ContactQuery {
       pronoun
     }
 
-    board: roleUsers (roleId: "rol_cU5c8wlFVbSh6I2w") {
+    board: roleUsers(roleId: "rol_cU5c8wlFVbSh6I2w") {
       id
       username
       givenName
@@ -44,7 +44,7 @@ query ContactQuery {
       pronoun
     }
 
-    volunteers: roleUsers (roleId: "rol_Z10C6Hfr4bfqYa4r") {
+    volunteers: roleUsers(roleId: "rol_Z10C6Hfr4bfqYa4r") {
       id
       username
       name
@@ -52,7 +52,7 @@ query ContactQuery {
       picture
     }
 
-    emeritus: roleUsers (roleId: "rol_H5SU2E05hXd2m9pJ") {
+    emeritus: roleUsers(roleId: "rol_H5SU2E05hXd2m9pJ") {
       id
       username
       givenName
@@ -61,7 +61,7 @@ query ContactQuery {
       pronoun
     }
 
-    boardEmeritus: roleUsers (roleId: "rol_gbGvK17xrmrpCykr") {
+    boardEmeritus: roleUsers(roleId: "rol_gbGvK17xrmrpCykr") {
       id
       username
       givenName
@@ -72,45 +72,45 @@ query ContactQuery {
   }
 
   clear {
-    tickets(where:{type:{in:[MENTOR,JUDGE,STAFF]}}) {
-    	firstName
+    tickets(where: { type: { in: [MENTOR, JUDGE, STAFF] } }) {
+      firstName
       lastName
     }
   }
 
   labs {
-    mentors (where:{inStatus:ACCEPTED}) {
+    mentors(where: { inStatus: ACCEPTED }) {
       givenName
       surname
     }
   }
 
   cms {
-    email: strings (where: { key: "contact.public.email" }, limit: 1) {
+    email: strings(where: { key: "contact.public.email" }, limit: 1) {
       items {
         value
       }
     }
 
-    phone: strings (where: { key: "contact.public.phone" }, limit: 1) {
+    phone: strings(where: { key: "contact.public.phone" }, limit: 1) {
       items {
         value
       }
     }
 
-    fax: strings (where: { key: "contact.public.fax" }, limit: 1) {
+    fax: strings(where: { key: "contact.public.fax" }, limit: 1) {
       items {
         value
       }
     }
 
-    address: strings (where: { key: "contact.public.address" }, limit: 1) {
+    address: strings(where: { key: "contact.public.address" }, limit: 1) {
       items {
         value
       }
     }
 
-    officeAddress: strings (where: { key: "contact.public.office-address" }, limit: 1) {
+    officeAddress: strings(where: { key: "contact.public.office-address" }, limit: 1) {
       items {
         value
       }

@@ -12,10 +12,7 @@ fragment IndexAnnouncementComponent on Query {
     }
   }
   cms {
-    announcements(
-      where: { visibility: "Public", displayAt_lte: $cmsDate, endAt_gte: $cmsDate }
-    ) {
-
+    announcements(where: { visibility: "Public", displayAt_lte: $cmsDate, endAt_gte: $cmsDate }) {
       items {
         sys {
           id

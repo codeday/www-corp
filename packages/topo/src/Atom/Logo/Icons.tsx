@@ -1,5 +1,5 @@
-import React from "react";
 import { type IconProps, Icon } from "@chakra-ui/react";
+import React from "react";
 export const ClearText = (props: IconProps) => (
   <Icon as="svg" viewBox="0 0 2654.43 1050.35" {...props}>
     <defs>

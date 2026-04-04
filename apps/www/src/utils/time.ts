@@ -1,16 +1,16 @@
 const MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
 export function parseIsoString(s: string): Date {
@@ -19,7 +19,7 @@ export function parseIsoString(s: string): Date {
 }
 
 export function formatShortDate(d: Date, withMonth?: boolean, withYear?: boolean): string {
-  return `${withMonth ? `${MONTHS[d.getMonth()]} ` : ''}${d.getDate()}${withYear ? `, ${d.getFullYear()}` : ''}`;
+  return `${withMonth ? `${MONTHS[d.getMonth()]} ` : ""}${d.getDate()}${withYear ? `, ${d.getFullYear()}` : ""}`;
 }
 
 export function formatInterval(start: Date, end: Date): string {
@@ -29,7 +29,7 @@ export function formatInterval(start: Date, end: Date): string {
   return [
     formatShortDate(start, true, differentYears),
     formatShortDate(end, differentMonths, true),
-  ].join(' — ');
+  ].join(" — ");
 }
 
 interface EventWithDates {
@@ -44,13 +44,16 @@ interface ParsedEvent {
 
 export function upcomingEvents(events: EventWithDates[]): ParsedEvent[] {
   const now = new Date();
-  return events.filter((e) => e.startsAt && e.endsAt).map((e) => ({
-    startsAt: parseIsoString(e.startsAt!),
-    endsAt: parseIsoString(e.endsAt!),
-  }))
-    .filter((e) => e.endsAt > now)
-    .sort((a, b) => a.endsAt.getTime() - b.endsAt.getTime())
-    || [];
+  return (
+    events
+      .filter((e) => e.startsAt && e.endsAt)
+      .map((e) => ({
+        startsAt: parseIsoString(e.startsAt!),
+        endsAt: parseIsoString(e.endsAt!),
+      }))
+      .filter((e) => e.endsAt > now)
+      .sort((a, b) => a.endsAt.getTime() - b.endsAt.getTime()) || []
+  );
 }
 
 export function nextUpcomingEvent(events: EventWithDates[]): ParsedEvent | null {

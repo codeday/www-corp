@@ -14,7 +14,7 @@ fragment IndexQuotesComponent on Query {
         experience
         type
         image {
-          url(transform: {width: 32, height: 32})
+          url(transform: { width: 32, height: 32 })
         }
         program {
           name

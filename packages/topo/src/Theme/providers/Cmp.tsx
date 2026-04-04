@@ -1,14 +1,7 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useReducer,
-  ReactNode,
-} from "react";
+import { debug } from "@codeday/utils";
 import Head from "next/head";
 import Script from "next/script";
-import { debug } from "@codeday/utils";
+import { createContext, useContext, useState, useEffect, useReducer, ReactNode } from "react";
 
 const DEBUG = debug(["topo", "Theme", "providers", "Cmp"]);
 
@@ -46,23 +39,15 @@ export function CmpProvider({ children }: { children: ReactNode }) {
   const [ucUi, setUcUi] = useState<any>(undefined);
 
   const [awaitingConsent, setAwaitingConsent] = useReducer(
-    (
-      state: AwaitingConsentState,
-      action: AwaitingConsentAction,
-    ): AwaitingConsentState => {
+    (state: AwaitingConsentState, action: AwaitingConsentAction): AwaitingConsentState => {
       if (action.type === "add") {
         return {
           ...state,
-          [action.provider]: [
-            ...(state[action.provider] || []),
-            action.callback,
-          ],
+          [action.provider]: [...(state[action.provider] || []), action.callback],
         };
       }
       if (action.type === "remove") {
-        return Object.fromEntries(
-          Object.entries(state).filter(([key]) => key !== action.provider),
-        );
+        return Object.fromEntries(Object.entries(state).filter(([key]) => key !== action.provider));
       }
       if (action.type === "clear") {
         return {};
@@ -96,18 +81,14 @@ export function CmpProvider({ children }: { children: ReactNode }) {
 
   const checkConsent = (provider: string) => {
     return (
-      (ucUi.getServicesBaseInfo() || []).filter(
-        (s: any) => s.id === provider && s.consent.status,
-      ).length > 0
+      (ucUi.getServicesBaseInfo() || []).filter((s: any) => s.id === provider && s.consent.status)
+        .length > 0
     );
   };
 
   useEffect(() => {
     if (!isConsentRequired) {
-      DEBUG(
-        "isConsentRequired changed to false, executing callbacks:",
-        awaitingConsent,
-      );
+      DEBUG("isConsentRequired changed to false, executing callbacks:", awaitingConsent);
       Object.entries(awaitingConsent).forEach(([provider, callbacks]) => {
         if (checkConsent(provider)) {
           callbacks.forEach((callback) => callback());
@@ -119,10 +100,7 @@ export function CmpProvider({ children }: { children: ReactNode }) {
 
   const withConsent = (provider: string, callback: () => void) => {
     if (isConsentRequired) {
-      DEBUG(
-        "withConsent: consent required, adding to awaitingConsent for",
-        provider,
-      );
+      DEBUG("withConsent: consent required, adding to awaitingConsent for", provider);
       setAwaitingConsent({ type: "add", provider, callback });
     } else if (uc.getStatus(provider)) {
       callback();
@@ -130,9 +108,7 @@ export function CmpProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <CmpContext.Provider
-      value={{ isCmpLoaded, isConsentRequired, withConsent, uc, ucUi }}
-    >
+    <CmpContext.Provider value={{ isCmpLoaded, isConsentRequired, withConsent, uc, ucUi }}>
       <Head>
         <link rel="preconnect" href="https://privacy-proxy.usercentrics.eu" />
         <link
@@ -154,8 +130,7 @@ export function CmpProvider({ children }: { children: ReactNode }) {
         strategy="beforeInteractive"
         onReady={() => {
           const checkCmpLoaded = () =>
-            typeof (window as any)?.uc !== "undefined" &&
-            (window as any).uc.isCMPLoaded;
+            typeof (window as any)?.uc !== "undefined" && (window as any).uc.isCMPLoaded;
 
           if (checkCmpLoaded()) {
             setIsCmpLoaded(true);

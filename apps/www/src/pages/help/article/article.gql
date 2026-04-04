@@ -39,7 +39,7 @@ query HelpArticleQuery($article: String!) {
 
 query HelpArticlePathsQuery {
   cms {
-    faqs (limit: 1000) {
+    faqs(limit: 1000) {
       items {
         sys {
           id

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { type BoxProps } from "@chakra-ui/react";
 import { Image, Text, Box } from "@codeday/topo/Atom";
 import { apiFetch } from "@codeday/topo/utils";
-import { type BoxProps } from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
 
 const GITHUB_AUTHORS_QUERY = `
 query GithubAuthorsQuery($owner: String, $repository: String!, $path: String, $branch: String) {
@@ -49,20 +49,15 @@ export function GithubAuthors({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    (async () => {
+    void (async () => {
       if (!repository) return;
       setLoading(true);
-      const resp = await apiFetch(
-        GITHUB_AUTHORS_QUERY,
-        { owner, repository, branch, path },
-        {},
-      );
+      const resp = await apiFetch(GITHUB_AUTHORS_QUERY, { owner, repository, branch, path }, {});
       const respA = (resp?.github?.contributors || [])
         .filter((a: ContributorInfo) => a.account?.name)
         .filter(
           (a: ContributorInfo) =>
-            a.account!.username !== "tylermenezes" ||
-            resp!.github!.contributors.length <= 2,
+            a.account!.username !== "tylermenezes" || resp!.github!.contributors.length <= 2,
         );
       setAuthors(respA);
       setLoading(false);
@@ -90,16 +85,13 @@ export function GithubAuthors({
       {...(props as any)}
     >
       <Text display="inline-block">
-        {authors.length !== 1
-          ? titlePlural || title || "Authors:"
-          : title || "Author:"}
+        {authors.length !== 1 ? titlePlural || title || "Authors:" : title || "Author:"}
       </Text>
       {authors.slice(0, displayMax).map((a, i) => {
         const secondToLast = i === authors.length - 2;
         const last = i === authors.length - 1;
         const displayComma = (!last && authors.length > 2) || exceedsMax;
-        const displayAnd =
-          (secondToLast && !exceedsMax) || (last && exceedsMax);
+        const displayAnd = (secondToLast && !exceedsMax) || (last && exceedsMax);
         return (
           <Box display="inline-block" key={a.account!.username} pl={2}>
             <Image
@@ -118,9 +110,7 @@ export function GithubAuthors({
         );
       })}
       {exceedsMax &&
-        `and ${authors.length - displayMax} other${
-          authors.length - displayMax !== 1 ? "s" : ""
-        }`}
+        `and ${authors.length - displayMax} other${authors.length - displayMax !== 1 ? "s" : ""}`}
     </Box>
   );
 }

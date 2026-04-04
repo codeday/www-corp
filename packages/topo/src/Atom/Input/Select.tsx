@@ -1,5 +1,5 @@
-import React from "react";
 import { NativeSelect } from "@chakra-ui/react";
+import React from "react";
 
 interface SelectProps {
   placeholder?: string;
@@ -9,9 +9,7 @@ interface SelectProps {
 
 export const Select: React.FC<SelectProps> = ({ placeholder, children, ...props }) => (
   <NativeSelect.Root {...props}>
-    <NativeSelect.Field placeholder={placeholder}>
-      {children}
-    </NativeSelect.Field>
+    <NativeSelect.Field placeholder={placeholder}>{children}</NativeSelect.Field>
     <NativeSelect.Indicator />
   </NativeSelect.Root>
 );

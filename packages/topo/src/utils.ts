@@ -1,12 +1,6 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-} from "react";
-import { GraphQLClient } from "graphql-request";
 import { createToaster } from "@chakra-ui/react";
+import { GraphQLClient } from "graphql-request";
+import { createContext, useContext, useState, useEffect, useCallback } from "react";
 
 // ---------------------------------------------------------------------------
 // ThemeData context (inlined here so next.config.js require() works without
@@ -130,8 +124,7 @@ export function usePrefersReducedMotion() {
     if (typeof window === "undefined") return;
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
-    const handler = (e: MediaQueryListEvent) =>
-      setPrefersReducedMotion(e.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
     mediaQuery.addEventListener("change", handler);
     return () => mediaQuery.removeEventListener("change", handler);
   }, []);
@@ -162,14 +155,10 @@ export interface UseToastsOptions {
 export function useToasts(): UseToastsOptions {
   return {
     addToast: (opts: any) => _toaster.create(opts),
-    info: (title, description) =>
-      _toaster.create({ title, description, type: "info" }),
-    success: (title, description) =>
-      _toaster.create({ title, description, type: "success" }),
-    warning: (title, description) =>
-      _toaster.create({ title, description, type: "warning" }),
-    error: (title, description) =>
-      _toaster.create({ title, description, type: "error" }),
+    info: (title, description) => _toaster.create({ title, description, type: "info" }),
+    success: (title, description) => _toaster.create({ title, description, type: "success" }),
+    warning: (title, description) => _toaster.create({ title, description, type: "warning" }),
+    error: (title, description) => _toaster.create({ title, description, type: "error" }),
   };
 }
 
@@ -239,9 +228,7 @@ export function useLocalStorage(key: string, initialValue: any) {
   return [value, setItem];
 }
 
-export function awaitQuerySelectorAll(
-  selector: string,
-): Promise<NodeListOf<Element>> {
+export function awaitQuerySelectorAll(selector: string): Promise<NodeListOf<Element>> {
   return new Promise((resolve) => {
     if (document.querySelectorAll(selector)) {
       return resolve(document.querySelectorAll(selector));

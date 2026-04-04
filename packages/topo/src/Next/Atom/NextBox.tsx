@@ -1,25 +1,16 @@
 import { type ComponentWithAs } from "@codeday/topo/_utils";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
-import React from "react";
 import NextLink, { type LinkProps as NextLinkProps } from "next/link";
+import React from "react";
 
-type BoxAsLinkProps = BoxProps &
-  Omit<NextLinkProps, "passHref" | "legacyBehavior">;
+type BoxAsLinkProps = BoxProps & Omit<NextLinkProps, "passHref" | "legacyBehavior">;
 
 export const NextBox: ComponentWithAs<"div", BoxAsLinkProps> = React.forwardRef<
   HTMLDivElement,
   BoxAsLinkProps
 >(({ as, ...props }: any, ref) => {
   if (as == "a") {
-    const {
-      href = "",
-      replace,
-      scroll,
-      shallow,
-      prefetch,
-      locale,
-      ...boxProps
-    } = props;
+    const { href = "", replace, scroll, shallow, prefetch, locale, ...boxProps } = props;
     return (
       <NextLink
         href={href}

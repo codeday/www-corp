@@ -9,7 +9,9 @@ fragment VolunteerTestimonials on Query {
         title
         company
         type
-        program { name }
+        program {
+          name
+        }
         image {
           url(transform: { resizeStrategy: FILL, width: 64, height: 64 })
         }

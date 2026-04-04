@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Text, Box } from '@codeday/topo/Atom';
-import { UiX } from '@codeday/topocons';
+import { Text, Box } from "@codeday/topo/Atom";
+import { UiX } from "@codeday/topocons";
+import React, { useState } from "react";
 
 interface PhotoTagPickerProps {
   photos: any[];
@@ -33,8 +33,8 @@ export default function PhotoTagPicker({ photos, onChange, ...props }: PhotoTagP
           cursor="pointer"
           borderWidth={1}
           rounded="sm"
-          color={selectedTag === t ? 'current.text' : 'current.textLight'}
-          borderColor={selectedTag === t ? 'current.text' : 'current.border'}
+          color={selectedTag === t ? "current.text" : "current.textLight"}
+          borderColor={selectedTag === t ? "current.text" : "current.border"}
           onClick={() => {
             const newTag = selectedTag === t ? null : t;
             setSelectedTag(newTag);

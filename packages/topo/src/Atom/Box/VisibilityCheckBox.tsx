@@ -1,12 +1,7 @@
-/* eslint-disable no-undef */
-import React, {
-  useRef,
-  useState,
-  useLayoutEffect,
-  useImperativeHandle,
-} from "react";
-import { Box, type BoxProps, ClientSideOnlyBox } from "@codeday/topo/Atom";
 import { type ComponentWithAs } from "@codeday/topo/_utils";
+import { Box, type BoxProps, ClientSideOnlyBox } from "@codeday/topo/Atom";
+/* eslint-disable no-undef */
+import React, { useRef, useState, useLayoutEffect, useImperativeHandle } from "react";
 
 const VisibilityCheckBoxInner = React.forwardRef<HTMLDivElement, BoxProps>(
   ({ children, ...props }, forwardedRef) => {
@@ -32,13 +27,15 @@ const VisibilityCheckBoxInner = React.forwardRef<HTMLDivElement, BoxProps>(
   },
 );
 
-export const VisibilityCheckBox: ComponentWithAs<"div", BoxProps> =
-  React.forwardRef<HTMLDivElement, BoxProps>(({ children, ...props }, ref) => {
-    return (
-      <ClientSideOnlyBox>
-        <VisibilityCheckBoxInner ref={ref} {...props}>
-          {children}
-        </VisibilityCheckBoxInner>
-      </ClientSideOnlyBox>
-    );
-  }) as ComponentWithAs<"div", BoxProps>;
+export const VisibilityCheckBox: ComponentWithAs<"div", BoxProps> = React.forwardRef<
+  HTMLDivElement,
+  BoxProps
+>(({ children, ...props }, ref) => {
+  return (
+    <ClientSideOnlyBox>
+      <VisibilityCheckBoxInner ref={ref} {...props}>
+        {children}
+      </VisibilityCheckBoxInner>
+    </ClientSideOnlyBox>
+  );
+}) as ComponentWithAs<"div", BoxProps>;

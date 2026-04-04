@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Text } from '@codeday/topo/Atom';
+import { Box, Text } from "@codeday/topo/Atom";
+import React from "react";
 
 interface PhotoProps {
   photo: any;
@@ -11,7 +11,7 @@ export default function Photo({ photo, ...props }: PhotoProps) {
     <Box
       as="a"
       display="block"
-     {...{href:photo.photo.original} as any}
+      {...({ href: photo.photo.original } as any)}
       target="_blank"
       rel="noopener"
       backgroundImage={`url(${photo.photo.preview})`}
@@ -35,13 +35,11 @@ export default function Photo({ photo, ...props }: PhotoProps) {
         p={4}
       >
         <Text fontWeight="bold">
-          {
-            [
-              photo.event?.program?.name,
-              photo.region?.name,
-              photo.event?.startsAt?.substring(0,4)
-            ].join(' ')
-          }
+          {[
+            photo.event?.program?.name,
+            photo.region?.name,
+            photo.event?.startsAt?.substring(0, 4),
+          ].join(" ")}
         </Text>
         {photo.photo.description && <Text>{photo.photo.description}</Text>}
       </Box>

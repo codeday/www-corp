@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Box, Grid, Text, Heading, Image, Button, Divider, Link } from '@codeday/topo/Atom';
-import { UiArrowDown, UiArrowUp, FilePdf } from '@codeday/topocons';
-import ContentfulRichText from '../ContentfulRichText';
+import { Box, Grid, Text, Heading, Image, Button, Divider, Link } from "@codeday/topo/Atom";
+import { UiArrowDown, UiArrowUp, FilePdf } from "@codeday/topocons";
+import React, { useState } from "react";
+
+import ContentfulRichText from "../ContentfulRichText";
 
 interface ProgramShareBlurbProps {
   program: any;
@@ -17,13 +18,13 @@ export default function ProgramShareBlurb({ program }: ProgramShareBlurbProps) {
         <Box textAlign="center">
           <Box bg="current.bg" display="inline-block" p={4} color="blue.800">
             <Link as="div" display="inline-block" mr={2}>
-              {blurbVisible ? 'Hide' : 'Share With Co-Workers'}
+              {blurbVisible ? "Hide" : "Share With Co-Workers"}
             </Link>
             {blurbVisible ? <UiArrowUp /> : <UiArrowDown />}
           </Box>
         </Box>
         <Divider
-          display={blurbVisible ? null : 'none'}
+          display={blurbVisible ? null : "none"}
           position="absolute"
           top="50%"
           transform="translateY(-0.5em)"
@@ -32,7 +33,11 @@ export default function ProgramShareBlurb({ program }: ProgramShareBlurbProps) {
           zIndex={-1}
         />
       </Link>
-      <Grid display={blurbVisible ? null : 'none'} templateColumns={{ base: '1fr', md: '8fr 3fr' }} gap={8}>
+      <Grid
+        display={blurbVisible ? null : "none"}
+        templateColumns={{ base: "1fr", md: "8fr 3fr" }}
+        gap={8}
+      >
         <Box>
           <Heading as="h4" fontSize="2xl" mb={4}>
             Copy-Pastable Email Blurb
@@ -45,9 +50,11 @@ export default function ProgramShareBlurb({ program }: ProgramShareBlurbProps) {
           <Button
             as="a"
             target="_blank"
-           {...{href:`https://www.linkedin.com/shareArticle/?url=${encodeURIComponent(
-              `https://www.codeday.org/volunteer/${program.webname}`,
-            )}`} as any}
+            {...({
+              href: `https://www.linkedin.com/shareArticle/?url=${encodeURIComponent(
+                `https://www.codeday.org/volunteer/${program.webname}`,
+              )}`,
+            } as any)}
             colorPalette="blue"
             mb={8}
           >
@@ -59,9 +66,16 @@ export default function ProgramShareBlurb({ program }: ProgramShareBlurbProps) {
                 More Resources
               </Heading>
               {program.volunteerRecruitingResources?.items.map((i: any) => (
-                <Link{...{href:i.url} as any} target="_blank" rel="noopener">
-                  <Grid templateColumns="1fr 3fr" borderWidth={1} mb={1} gap={2} alignItems="center" minHeight={16}>
-                    {i.contentType.split('/')[0] === 'image' ? (
+                <Link {...({ href: i.url } as any)} target="_blank" rel="noopener">
+                  <Grid
+                    templateColumns="1fr 3fr"
+                    borderWidth={1}
+                    mb={1}
+                    gap={2}
+                    alignItems="center"
+                    minHeight={16}
+                  >
+                    {i.contentType.split("/")[0] === "image" ? (
                       <Image src={i.preview} alt={i.title} />
                     ) : (
                       <Box fontSize={32} textAlign="center">

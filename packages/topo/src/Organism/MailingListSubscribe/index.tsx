@@ -1,13 +1,6 @@
-import FormData from "form-data";
-import React, { useState } from "react";
-import {
-  Box,
-  type BoxProps,
-  Button,
-  Grid,
-  TextInput,
-} from "@codeday/topo/Atom";
+import { Box, type BoxProps, Button, Grid, TextInput } from "@codeday/topo/Atom";
 import { apiFetch, useToasts } from "@codeday/topo/utils";
+import React, { useState } from "react";
 
 interface MailingListSubscribeProps extends BoxProps {
   emailList?: string;
@@ -22,7 +15,6 @@ interface MailingListSubscribeProps extends BoxProps {
 function MailingListSubscribe({
   emailList,
   textList,
-  fields,
   variant = "solid",
   colorPalette,
   colorScheme = "green",
@@ -36,10 +28,9 @@ function MailingListSubscribe({
     <Box {...(props as any)}>
       <Grid templateColumns="1fr min-content">
         <TextInput
-          placeholder={[
-            ...(emailList ? ["email"] : []),
-            ...(textList ? ["phone"] : []),
-          ].join(" or ")}
+          placeholder={[...(emailList ? ["email"] : []), ...(textList ? ["phone"] : [])].join(
+            " or ",
+          )}
           value={input || undefined}
           onChange={(e: any) => setInput(e.target.value)}
           borderTopRightRadius={0}
@@ -59,10 +50,8 @@ function MailingListSubscribe({
                 {},
               );
               success(`We've added you to the list!`);
-            } catch (ex) {
-              error(
-                `Sorry, we couldn't complete your subscription. Please try again.`,
-              );
+            } catch {
+              error(`Sorry, we couldn't complete your subscription. Please try again.`);
             }
             setIsSubmitting(false);
           }}

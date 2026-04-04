@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react';
-import { apiFetch } from '@codeday/topo/utils';
+import { apiFetch } from "@codeday/topo/utils";
+import { useState, useEffect } from "react";
 
 export default function useTwitch(): any {
   const [data, setData] = useState<any>({});
 
   useEffect(() => {
-    if (typeof window === 'undefined') return () => {};
+    if (typeof window === "undefined") return () => {};
 
     const updateTwitch = async () => {
-      const result = await apiFetch(`query {
+      const result = await apiFetch(
+        `query {
         twitch {
           live {
             title
@@ -18,10 +19,13 @@ export default function useTwitch(): any {
             thumbnailLg: thumbnail(width: 1920, height: 1080)
           }
         }
-      }`, {}, {});
+      }`,
+        {},
+        {},
+      );
       setData(result?.twitch?.live || {});
-    }
-    updateTwitch();
+    };
+    void updateTwitch();
     const interval = setInterval(updateTwitch, 60 * 1000);
     return () => clearInterval(interval);
   }, [typeof window]);

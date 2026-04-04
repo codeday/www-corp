@@ -1,15 +1,16 @@
-import React from 'react';
-import { print } from 'graphql';
-import { Heading } from '@codeday/topo/Atom';
-import { Content } from '@codeday/topo/Molecule';
-import { apiFetch } from '@codeday/topo/utils';
-import { GetStaticProps, GetStaticPaths } from 'next';
-import Page from '../../components/Page';
-import Markdown from '../../components/Markdown';
-import { useQuery } from '../../query';
-import { LegalPathsQuery, LegalContentQuery, TermageddonLegalContentQuery } from './policy.gql';
+import { Heading } from "@codeday/topo/Atom";
+import { Content } from "@codeday/topo/Molecule";
+import { apiFetch } from "@codeday/topo/utils";
+import { print } from "graphql";
+import { GetStaticProps, GetStaticPaths } from "next";
+import React from "react";
 
-const TERMAGEDDON_POLICIES = ['tos', 'privacy', 'cookies', 'disclaimer'];
+import Markdown from "../../components/Markdown";
+import Page from "../../components/Page";
+import { useQuery } from "../../query";
+import { LegalPathsQuery, LegalContentQuery, TermageddonLegalContentQuery } from "./policy.gql";
+
+const TERMAGEDDON_POLICIES = ["tos", "privacy", "cookies", "disclaimer"];
 
 interface PolicyProps {
   slug: string;
@@ -20,9 +21,9 @@ export default function Policy({ slug }: PolicyProps) {
   const page = TERMAGEDDON_POLICIES.includes(slug)
     ? {
         content: termageddon.terms[slug],
-        title: slug === 'tos' ? 'Terms of Service' : slug.charAt(0).toUpperCase() + slug.slice(1),
+        title: slug === "tos" ? "Terms of Service" : slug.charAt(0).toUpperCase() + slug.slice(1),
       }
-    : notion?.page || { content: '', title: 'Not Found' };
+    : notion?.page || { content: "", title: "Not Found" };
 
   return (
     <Page title={page.title} slug={`/legal/${page.slug}`}>
@@ -62,13 +63,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     } else {
       return {
         props: {
-          query: await apiFetch(print(LegalContentQuery), { slug: params!.policy, parentSlug: 'legal' }, {}),
+          query: await apiFetch(
+            print(LegalContentQuery),
+            { slug: params!.policy, parentSlug: "legal" },
+            {},
+          ),
           slug: params!.policy,
         },
         revalidate: 300,
       };
     }
-  } catch (e) {
+  } catch {
     return {
       notFound: true,
     };

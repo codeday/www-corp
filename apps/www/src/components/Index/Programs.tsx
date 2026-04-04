@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import haversine from 'haversine-distance';
-import { Box, Grid, Button, Image, Text, CodeDay, Link } from '@codeday/topo/Atom';
-import { Content } from '@codeday/topo/Molecule';
-import { UiStar } from '@codeday/topocons';
-import { nextUpcomingEvent, upcomingEvents, formatInterval } from '../../utils/time';
-import { useQuery } from '../../query';
-import { GetMyLocation } from './Programs.gql';
-import { apiFetch } from '@codeday/topo/utils';
-import { print } from 'graphql';
-import { useColorMode } from '@codeday/topo/Theme';
+import { Box, Grid, Button, Image, Text, CodeDay, Link } from "@codeday/topo/Atom";
+import { Content } from "@codeday/topo/Molecule";
+import { useColorMode } from "@codeday/topo/Theme";
+import { apiFetch } from "@codeday/topo/utils";
+import { UiStar } from "@codeday/topocons";
+import { print } from "graphql";
+import haversine from "haversine-distance";
+import React, { useEffect, useState } from "react";
+
+import { useQuery } from "../../query";
+import { nextUpcomingEvent, upcomingEvents, formatInterval } from "../../utils/time";
+import { GetMyLocation } from "./Programs.gql";
 
 function NextEventDate({ upcoming }: { upcoming: any[] }) {
   const next = nextUpcomingEvent(upcoming);
@@ -16,7 +17,7 @@ function NextEventDate({ upcoming }: { upcoming: any[] }) {
     <Text color="current.textLight" mb={0} fontWeight="bold">
       {upcomingEvents(upcoming)
         .map((e) => formatInterval(e.startsAt, e.endsAt))
-        .join('; ')}
+        .join("; ")}
     </Text>
   ) : (
     <></>
@@ -26,23 +27,28 @@ function NextEventDate({ upcoming }: { upcoming: any[] }) {
 export default function Programs() {
   const { colorMode } = useColorMode();
   const {
-    cms: { regions, mainPrograms, otherPrograms, codeDayProgram, labsProgram },
+    cms: { regions, mainPrograms, codeDayProgram, labsProgram },
     clear: { events },
   } = useQuery();
   const [geo, setGeo] = useState<any>();
   const codeDay = codeDayProgram?.items[0];
   const labs = labsProgram?.items[0];
   let programs = codeDay?.linkedFrom?.events?.items;
-  mainPrograms?.items?.map((program: any) => (programs = programs.concat(program.linkedFrom?.events?.items)));
+  mainPrograms?.items?.map(
+    (program: any) => (programs = programs.concat(program.linkedFrom?.events?.items)),
+  );
 
-  const otherProgramsRowSize = Math.max(3, Math.min((otherPrograms?.items || []).length, 5));
   const upcomingWebnames = events.map((e: any) => e.contentfulWebname);
-  const registrationOpenWebnames = events.filter((e: any) => e.registrationsOpen).map((e: any) => e.contentfulWebname);
-  const upcomingNameOverrides = Object.fromEntries(events.map((e: any) => [e.contentfulWebname, e.name]));
+  const registrationOpenWebnames = events
+    .filter((e: any) => e.registrationsOpen)
+    .map((e: any) => e.contentfulWebname);
+  const upcomingNameOverrides = Object.fromEntries(
+    events.map((e: any) => [e.contentfulWebname, e.name]),
+  );
 
   useEffect(() => {
-    (async () => {
-      if (typeof window === 'undefined') return;
+    void (async () => {
+      if (typeof window === "undefined") return;
       const res = await apiFetch(print(GetMyLocation), {}, {});
       setGeo(res?.geo?.mine);
     })();
@@ -54,7 +60,7 @@ export default function Programs() {
       open: registrationOpenWebnames.includes(r.webname),
       upcoming: upcomingWebnames.includes(r.webname),
       distance:
-        typeof geo?.lat !== 'undefined' && typeof geo?.lng !== 'undefined'
+        typeof geo?.lat !== "undefined" && typeof geo?.lng !== "undefined"
           ? haversine([r.location.lat, r.location.lon], [geo.lat, geo.lng])
           : undefined,
     }))
@@ -70,26 +76,26 @@ export default function Programs() {
   return (
     <Content>
       {/* CodeDay */}
-      <Grid templateColumns={{ base: '1fr', md: '1fr 1fr' }} gap={8}>
+      <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap={8}>
         <Box borderWidth={1} borderRadius={2} p={4} boxShadow="md">
           <CodeDay fontSize="4xl" withText />
           <Text fontSize="md" mt={4} mb={4}>
             {codeDay?.shortDescription}
           </Text>
           <Text mb={4} fontSize="sm">
-            (Nothing planned nearby?{' '}
+            (Nothing planned nearby?{" "}
             <Link color="red.600" href="https://event.codeday.org/organize">
               Organize a CodeDay!
             </Link>
             )
           </Text>
-          <Box borderWidth={1} maxHeight={{ base: 'sm', md: 'md' }} overflowY="auto">
+          <Box borderWidth={1} maxHeight={{ base: "sm", md: "md" }} overflowY="auto">
             {sortedRegions.map((region: any) => (
               <Box
                 p={2}
                 as="a"
                 display="block"
-               {...{href:`https://event.codeday.org/${region.webname}`} as any}
+                {...({ href: `https://event.codeday.org/${region.webname}` } as any)}
                 target="_blank"
                 fontSize="xl"
                 borderBottomWidth="1px"
@@ -124,7 +130,7 @@ export default function Programs() {
             mb={4}
             display="block"
             as="a"
-           {...{href:labs.url} as any}
+            {...({ href: labs.url } as any)}
             target="_blank"
             rel="noopener"
             key={labs.name}
@@ -138,14 +144,14 @@ export default function Programs() {
               </Text>
             </Box>
             <NextEventDate upcoming={labs.linkedFrom?.events?.items} />
-            <Text mt={2} style={{ clear: 'both' }}>
+            <Text mt={2} style={{ clear: "both" }}>
               {labs.shortDescription}
             </Text>
             <Image
               maxW={64}
               mt={4}
               mb={8}
-              src={colorMode === 'dark' ? '/labs-dark.png' : 'labs-light.png'}
+              src={colorMode === "dark" ? "/labs-dark.png" : "labs-light.png"}
               alt="1 mentor + 3 students + 1 project"
             />
             <Box>
@@ -158,7 +164,7 @@ export default function Programs() {
               mb={4}
               display="block"
               as="a"
-             {...{href:program.url} as any}
+              {...({ href: program.url } as any)}
               target="_blank"
               rel="noopener"
               key={program.name}
@@ -172,7 +178,7 @@ export default function Programs() {
                 </Text>
               </Box>
               <NextEventDate upcoming={program.linkedFrom?.events?.items} />
-              <Text mt={2} style={{ clear: 'both' }}>
+              <Text mt={2} style={{ clear: "both" }}>
                 {program.shortDescription}
               </Text>
               <Box>

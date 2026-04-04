@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 const smilSupport = () =>
   typeof window === "undefined"
     ? true
-    : // eslint-disable-next-line no-undef
+    : // eslint-disable-next-line no-undef,no-base-to-string
       window.document
         .createElementNS("http://www.w3.org/2000/svg", "animate")
         .toString()

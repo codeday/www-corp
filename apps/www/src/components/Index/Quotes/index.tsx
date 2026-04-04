@@ -1,11 +1,12 @@
-import React, { useState, useReducer, useEffect } from 'react';
-import { Box, Text, Heading, Grid, VisibilityCheckBox, RatioBox } from '@codeday/topo/Atom';
-import { Content } from '@codeday/topo/Molecule';
-import shuffle from 'knuth-shuffle-seeded';
-import TextQuote from './TextQuote';
-import Globe from './Globe';
-import { useQuery } from '../../../query';
-import VideoTestimonialThumbnail from '../../VideoTestimonialThumbnail';
+import { Box, Text, Heading, Grid, VisibilityCheckBox, RatioBox } from "@codeday/topo/Atom";
+import { Content } from "@codeday/topo/Molecule";
+import shuffle from "knuth-shuffle-seeded";
+import React, { useState, useReducer, useEffect } from "react";
+
+import { useQuery } from "../../../query";
+import VideoTestimonialThumbnail from "../../VideoTestimonialThumbnail";
+import Globe from "./Globe";
+import TextQuote from "./TextQuote";
 
 const DISPLAY_TIME = 10;
 const TRANSITION_TIME = 0.5;
@@ -28,11 +29,14 @@ export default function Quotes({ seed }: QuotesProps) {
   );
 
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [visibleQuoteIndex, nextQuote] = useReducer((previous: number) => (previous + 1) % textQuotes.length, 0);
+  const [visibleQuoteIndex, nextQuote] = useReducer(
+    (previous: number) => (previous + 1) % textQuotes.length,
+    0,
+  );
 
   // Set up the quote transition interval
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
     let transitionTimeout: ReturnType<typeof setTimeout> | null;
     const interval = setInterval(() => {
       setIsTransitioning(true);
@@ -54,9 +58,14 @@ export default function Quotes({ seed }: QuotesProps) {
         <Heading as="h3" fontSize="2xl" fontWeight="bold" mt={0} textAlign="center">
           In-person events in {quoteRegions?.items?.length} cities + worldwide online programs.
         </Heading>
-        <Grid templateColumns={{ base: '1fr', lg: '40% 60%' }} alignItems="center" gap={8} position="relative">
+        <Grid
+          templateColumns={{ base: "1fr", lg: "40% 60%" }}
+          alignItems="center"
+          gap={8}
+          position="relative"
+        >
           {/* Globe */}
-          <VisibilityCheckBox display={{ base: 'none', lg: 'block' }}>
+          <VisibilityCheckBox display={{ base: "none", lg: "block" }}>
             <RatioBox w="1" h="1" auto="h">
               <Globe testimonial={textQuotes[visibleQuoteIndex]} regions={quoteRegions?.items} />
             </RatioBox>
@@ -76,7 +85,7 @@ export default function Quotes({ seed }: QuotesProps) {
         <Text color="current.textLight" fontSize="2xl" mt={12} mb={8} textAlign="center">
           Hear from more students and volunteers:
         </Text>
-        <Grid templateColumns={{ base: 'repeat(2, 1fr)', md: 'repeat(4, minmax(0, 1fr))' }} gap={6}>
+        <Grid templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(4, minmax(0, 1fr))" }} gap={6}>
           {videoQuotes.map((q: any) => (
             <VideoTestimonialThumbnail key={q.video.url} video={q} />
           ))}

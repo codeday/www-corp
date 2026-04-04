@@ -1,13 +1,8 @@
-import {
-  createSystem,
-  defaultConfig,
-  defineConfig,
-  defineRecipe,
-} from "@chakra-ui/react";
+import { createSystem, defaultConfig, defineConfig, defineRecipe } from "@chakra-ui/react";
 
+import { defaultFontSizes } from "../themeContext";
 import colors from "./colors";
 import fonts from "./fonts";
-import { defaultFontSizes } from "../themeContext";
 
 // ---------------------------------------------------------------------------
 // Helper: recursively convert a nested colour object into Chakra v3 token
@@ -16,9 +11,7 @@ import { defaultFontSizes } from "../themeContext";
 // are skipped so that composite entries like `grad`, `modes`, `current`,
 // `success`, and `failure` are not accidentally tokenised.
 // ---------------------------------------------------------------------------
-function toColorScale(
-  obj: Record<string | number, unknown>,
-): Record<string, unknown> {
+function toColorScale(obj: Record<string | number, unknown>): Record<string, unknown> {
   const out: Record<string, unknown> = {};
   for (const [k, v] of Object.entries(obj)) {
     if (typeof v === "string") {
@@ -54,10 +47,7 @@ const PALETTE_KEYS = [
 ] as const;
 
 const paletteTokens = Object.fromEntries(
-  PALETTE_KEYS.map((key) => [
-    key,
-    toColorScale(colors[key] as Record<string | number, unknown>),
-  ]),
+  PALETTE_KEYS.map((key) => [key, toColorScale(colors[key] as Record<string | number, unknown>)]),
 );
 
 const colorTokens = {
@@ -69,12 +59,8 @@ const colorTokens = {
   brand: { value: colors.brand as string },
 
   // Alpha ramps (already defined locally in colors.ts as plain objects)
-  blackAlpha: toColorScale(
-    colors.blackAlpha as Record<string | number, unknown>,
-  ),
-  whiteAlpha: toColorScale(
-    colors.whiteAlpha as Record<string | number, unknown>,
-  ),
+  blackAlpha: toColorScale(colors.blackAlpha as Record<string | number, unknown>),
+  whiteAlpha: toColorScale(colors.whiteAlpha as Record<string | number, unknown>),
 };
 
 // ---------------------------------------------------------------------------

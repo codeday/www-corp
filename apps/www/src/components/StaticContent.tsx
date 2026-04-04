@@ -1,15 +1,13 @@
-import {
-  createElement, useRef, useState, useEffect, ReactNode, ElementType,
-} from 'react';
+import { createElement, useRef, useState, useEffect, ReactNode, ElementType } from "react";
 
 function useStaticContent(): [boolean, React.RefObject<HTMLElement>] {
   const ref = useRef<HTMLElement>(null);
-  const [render, setRender] = useState(typeof window === 'undefined');
+  const [render, setRender] = useState(typeof window === "undefined");
 
   useEffect(() => {
     // check if the innerHTML is empty as client side navigation
     // need to render the component without server-side backup
-    const isEmpty = (ref.current as HTMLElement).innerHTML === '';
+    const isEmpty = (ref.current as HTMLElement).innerHTML === "";
     if (isEmpty) {
       setRender(true);
     }
@@ -24,7 +22,7 @@ interface StaticContentProps {
   [key: string]: any;
 }
 
-export default function StaticContent({ children, element = 'div', ...props }: StaticContentProps) {
+export default function StaticContent({ children, element = "div", ...props }: StaticContentProps) {
   const [render, ref] = useStaticContent();
 
   // if we're in the server or a spa navigation, just render it
@@ -40,6 +38,6 @@ export default function StaticContent({ children, element = 'div', ...props }: S
     ...props,
     ref,
     suppressHydrationWarning: true,
-    dangerouslySetInnerHTML: { __html: '' },
+    dangerouslySetInnerHTML: { __html: "" },
   });
 }

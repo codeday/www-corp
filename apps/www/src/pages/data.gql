@@ -1,6 +1,6 @@
 query DataListPublicationsQuery {
   cms {
-    publications (where: { type: "dataset" }) {
+    publications(where: { type: "dataset" }) {
       items {
         title
         doiSuffix

@@ -1,6 +1,9 @@
 query ApplyAsVolunteerQuery($webname: String!) {
   clear {
-    findFirstEvent(where: { contentfulWebname: { equals: $webname } }, orderBy: { startDate: desc }) {
+    findFirstEvent(
+      where: { contentfulWebname: { equals: $webname } }
+      orderBy: { startDate: desc }
+    ) {
       managers
     }
   }
@@ -9,6 +12,6 @@ query ApplyAsVolunteerQuery($webname: String!) {
       items {
         newVolunteerPipeline
       }
-    } 
+    }
   }
 }

@@ -1,6 +1,3 @@
-import React, { useState, useReducer, useEffect, RefObject } from 'react';
-import { Collapse } from '@codeday/topo/Molecule';
-import { usePostHog } from '@posthog/react';
 import {
   Box,
   Button,
@@ -13,21 +10,28 @@ import {
   Checkbox,
   Radio,
   Link,
-} from '@codeday/topo/Atom';
-import { DataCollection } from '@codeday/topo/Molecule';
-import { useToasts } from '@codeday/topo/utils';
-import { useAfterMountEffect } from '../../utils/useAfterMountEffect';
-import { useMarketing } from '../../providers';
-import { debug } from '@codeday/utils';
+} from "@codeday/topo/Atom";
+import { Collapse } from "@codeday/topo/Molecule";
+import { DataCollection } from "@codeday/topo/Molecule";
+import { useToasts } from "@codeday/topo/utils";
+import { debug } from "@codeday/utils";
+import { usePostHog } from "@posthog/react";
+import React, { useState, useReducer, useEffect, RefObject } from "react";
 
-const DEBUG = debug(['www', 'components', 'Volunteer', 'Wizard']);
+import { useMarketing } from "../../providers";
+import { useAfterMountEffect } from "../../utils/useAfterMountEffect";
+
+const DEBUG = debug(["www", "components", "Volunteer", "Wizard"]);
 
 // https://stackoverflow.com/a/48981669
 function groupBy(xs: any[], f: (x: any) => string): Record<string, any[]> {
-  return xs.reduce((r: any, v: any, i: number, a: any[], k = f(v)) => ((r[k] || (r[k] = [])).push(v), r), {});
+  return xs.reduce(
+    (r: any, v: any, i: number, a: any[], k = f(v)) => ((r[k] || (r[k] = [])).push(v), r),
+    {},
+  );
 }
 
-const emailRe = new RegExp('.+@.+\\..+');
+const emailRe = new RegExp(".+@.+\\..+");
 
 interface WizardProps {
   events: any[];
@@ -42,8 +46,8 @@ interface WizardProps {
 export default function Wizard({
   events,
   formRef,
-  startBackground = '',
-  startRegion = '',
+  startBackground = "",
+  startRegion = "",
   startPage = 0,
   startSelection = false,
   after,
@@ -58,7 +62,7 @@ export default function Wizard({
           JSON.stringify({
             name: e.region?.name || e.name,
             webname: e.contentfulWebname,
-            country: e.region?.countryName || 'Other',
+            country: e.region?.countryName || "Other",
             aliases: e.region?.aliases || [],
           }),
         ),
@@ -67,8 +71,8 @@ export default function Wizard({
   const regionsByCountry = groupBy(regions, (r) => r.country);
 
   useEffect(() => {
-    DEBUG('regions', regions);
-    DEBUG('regionsByCountry', regionsByCountry);
+    DEBUG("regions", regions);
+    DEBUG("regionsByCountry", regionsByCountry);
   }, [regions, regionsByCountry]);
 
   let resolvedStartRegion = startRegion;
@@ -80,22 +84,22 @@ export default function Wizard({
         webnamesToRegion[alias] = r.name;
       });
     });
-    resolvedStartRegion = webnamesToRegion[resolvedStartRegion] || '';
+    resolvedStartRegion = webnamesToRegion[resolvedStartRegion] || "";
   }
   let resolvedStartPage = startPage;
   let resolvedStartBackground = startBackground;
   let resolvedStartSelection = startSelection;
   if (startRegion && !resolvedStartRegion) {
     resolvedStartPage = 0;
-    resolvedStartBackground = '';
+    resolvedStartBackground = "";
     resolvedStartSelection = false;
   }
 
   const [background, setBackground] = useState(resolvedStartBackground);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [linkedin, setLinkedin] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [linkedin, setLinkedin] = useState("");
   const { linkedInConversion } = useMarketing();
   const [region, setRegion] = useState(resolvedStartRegion);
   const [isOrganize, setIsOrganize] = useState(false);
@@ -105,7 +109,7 @@ export default function Wizard({
   const [submitError, setSubmitError] = useState<string | false>(false);
 
   useEffect(() => {
-    posthog?.group('background', background);
+    posthog?.group("background", background);
   }, [background]);
 
   const pageBackground = (
@@ -118,20 +122,20 @@ export default function Wizard({
           size="lg"
           mr={4}
           onClick={() => {
-            setBackground('student');
-            navigate('next');
+            setBackground("student");
+            navigate("next");
           }}
-          data-active={background === 'student' ? '' : undefined}
+          data-active={background === "student" ? "" : undefined}
         >
           I am a student
         </Button>
         <Button
           size="lg"
           onClick={() => {
-            setBackground('industry');
-            navigate('last');
+            setBackground("industry");
+            navigate("last");
           }}
-          data-active={background === 'industry' ? '' : undefined}
+          data-active={background === "industry" ? "" : undefined}
         >
           I am not a student
         </Button>
@@ -146,8 +150,8 @@ export default function Wizard({
       {
         // force "Other" to end of list (kind of hacky)
         [
-          ...Object.keys(regionsByCountry).filter((k) => k !== 'Other'),
-          Object.keys(regionsByCountry).includes('Other') ? 'Other' : undefined,
+          ...Object.keys(regionsByCountry).filter((k) => k !== "Other"),
+          Object.keys(regionsByCountry).includes("Other") ? "Other" : undefined,
         ].map((regionKey) => (
           <Box>
             {/* Capitalize first letter of region (this is mostly to fix "the United States" looking weird) */}
@@ -176,10 +180,10 @@ export default function Wizard({
       {/* Clear region state in case they clicked some other region button before this */}
       <Button
         mt={2}
-        data-active={isOrganize ? '' : undefined}
+        data-active={isOrganize ? "" : undefined}
         onClick={() => {
           setIsOrganize(true);
-          setRegion('');
+          setRegion("");
         }}
       >
         There isn't a CodeDay City in my area
@@ -192,11 +196,12 @@ export default function Wizard({
           </Heading>
           <Text>CodeDay events around the world are organized by students just like you!</Text>
           <Text>
-            You'll manage a team, come up with cool ideas, and help hundreds of students in your community discover CS.
+            You'll manage a team, come up with cool ideas, and help hundreds of students in your
+            community discover CS.
           </Text>
           <Text fontSize="sm">
-            (No prior event organizing experience is required, CodeDay Staff will support + guide you every step of the
-            way)
+            (No prior event organizing experience is required, CodeDay Staff will support + guide
+            you every step of the way)
           </Text>
           <Box m={6}>
             <Collapse in={commitmentLevel >= 0} animateOpacity>
@@ -228,7 +233,12 @@ export default function Wizard({
     </Box>
   );
   useEffect(() => {
-    if (firstName && lastName && emailRe.test(email) && (background === 'industry' ? linkedin : true))
+    if (
+      firstName &&
+      lastName &&
+      emailRe.test(email) &&
+      (background === "industry" ? linkedin : true)
+    )
       setHasSelection(true);
     else setHasSelection(false);
   }, [firstName, lastName, email, linkedin]);
@@ -237,10 +247,10 @@ export default function Wizard({
       <Heading as="h3" fontSize="xl" mb={2}>
         {/*special logic if the only page user sees is contact info*/}
         {resolvedStartPage === 2
-          ? background === 'industry'
-            ? 'Apply to volunteer for CodeDay Labs'
+          ? background === "industry"
+            ? "Apply to volunteer for CodeDay Labs"
             : `Apply to volunteer for CodeDay ${region}`
-          : 'Let us know how to reach out:'}
+          : "Let us know how to reach out:"}
       </Heading>
       <VStack w="md" mb={3}>
         <TextInput
@@ -249,9 +259,19 @@ export default function Wizard({
           value={firstName}
           onChange={(e: any) => setFirstName(e.target.value)}
         />
-        <TextInput m={1} placeholder="Last Name" value={lastName} onChange={(e: any) => setLastName(e.target.value)} />
-        <TextInput m={1} placeholder="Email" value={email} onChange={(e: any) => setEmail(e.target.value)} />
-        {background === 'industry' ? (
+        <TextInput
+          m={1}
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(e: any) => setLastName(e.target.value)}
+        />
+        <TextInput
+          m={1}
+          placeholder="Email"
+          value={email}
+          onChange={(e: any) => setEmail(e.target.value)}
+        />
+        {background === "industry" ? (
           <TextInput
             m={1}
             placeholder="LinkedIn"
@@ -272,8 +292,8 @@ export default function Wizard({
         ☹️ An Error Ocurred
       </Heading>
       <Text>
-        Please email <Link href="mailto:volunteer@codeday.org">volunteer@codeday.org</Link> with your application, as
-        well as the following error code:
+        Please email <Link href="mailto:volunteer@codeday.org">volunteer@codeday.org</Link> with
+        your application, as well as the following error code:
       </Text>
       <Text>{submitError}</Text>
     </Box>
@@ -287,12 +307,16 @@ export default function Wizard({
   );
 
   const pages = [pageBackground, pageRegion, pageEmail, pageConfirmation];
-  const pageIds = ['background', 'region', 'email', 'final'];
+  const pageIds = ["background", "region", "email", "final"];
 
   // 'last' should really be 'penultimate' but 'last' is shorter
   const [page, navigate] = useReducer(
     (prev: number, action: string) =>
-      Math.max(0, action === 'next' ? prev + 1 : prev - 1, action === 'last' ? pages.length - 2 : 0),
+      Math.max(
+        0,
+        action === "next" ? prev + 1 : prev - 1,
+        action === "last" ? pages.length - 2 : 0,
+      ),
     resolvedStartPage,
   );
   const isFinalPage = page === pages.length - 1;
@@ -300,18 +324,18 @@ export default function Wizard({
   const [hasStarted, setHasStarted] = useState(false);
   useAfterMountEffect(() => {
     if (!hasStarted) {
-      posthog?.capture('volunteer.started', { style: 'full' });
+      posthog?.capture("volunteer.started", { style: "full" });
     }
     setHasStarted(true);
   }, [background, hasStarted]);
 
   useAfterMountEffect(() => {
     if (isFinalPage) {
-      posthog?.capture('volunteer.submitted');
-      linkedInConversion('volunteer.submitted');
+      posthog?.capture("volunteer.submitted");
+      linkedInConversion("volunteer.submitted");
       if (email) posthog?.identify(posthog?.get_distinct_id(), { email });
     } else {
-      posthog?.capture('volunteer.partial', {
+      posthog?.capture("volunteer.partial", {
         volunteerPage: pageIds[page],
         background: background,
       });
@@ -327,17 +351,25 @@ export default function Wizard({
     // it to not work for people who are using the defaults
     formRef.current!.scrollIntoView();
     if (hasSelection) {
-      if (background === 'industry' && page === 0) {
+      if (background === "industry" && page === 0) {
         // if industry, we want to skip region selection and get them in touch with
         // labs team
-        navigate('last');
+        navigate("last");
       } else if (page === pages.length - 2) {
         // if submitting penultimate page, we now have all info
         setIsSubmitting(true);
         try {
-          const resp = await fetch('/api/applyAsVolunteer', {
-            method: 'POST',
-            body: JSON.stringify({ email, firstName, lastName, linkedin, region, isOrganize, background }),
+          const resp = await fetch("/api/applyAsVolunteer", {
+            method: "POST",
+            body: JSON.stringify({
+              email,
+              firstName,
+              lastName,
+              linkedin,
+              region,
+              isOrganize,
+              background,
+            }),
             headers: {},
           });
           if (!resp.ok) {
@@ -347,13 +379,13 @@ export default function Wizard({
             if (after) window.location.href = after;
             // Do not redirect if there is an error, as otherwise no indication would be shown to the user that their application was not recieved
           }
-          navigate('next');
+          navigate("next");
         } catch (ex: any) {
           error(ex.toString());
         }
         setIsSubmitting(false);
       } else {
-        navigate('next');
+        navigate("next");
       }
     }
   }
@@ -361,7 +393,7 @@ export default function Wizard({
     <Box>
       {pages[page]}
       {!isFinalPage && page !== 0 && (
-        <Box textAlign={{ base: 'center', md: 'right' }} mt={8}>
+        <Box textAlign={{ base: "center", md: "right" }} mt={8}>
           <Button
             colorPalette="green"
             loading={isSubmitting}

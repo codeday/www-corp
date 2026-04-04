@@ -1,17 +1,10 @@
+import { Box, type BoxProps, Button, Grid, Text } from "@codeday/topo/Atom";
+import { Content } from "@codeday/topo/Molecule";
+import { useColorMode } from "@codeday/topo/Theme";
+import { useTheme, apiFetch, useLocalStorage } from "@codeday/topo/utils";
 import { UiX as X } from "@codeday/topocons";
 import React, { useEffect, useReducer } from "react";
 import useSwr from "swr";
-import { useColorMode } from "@codeday/topo/Theme";
-import {
-  Box,
-  type BoxProps,
-  Button,
-  Grid,
-  Link,
-  Text,
-} from "@codeday/topo/Atom";
-import { Content } from "@codeday/topo/Molecule";
-import { useTheme, apiFetch, useLocalStorage } from "@codeday/topo/utils";
 
 const query = (date: string, visibility: any) => `{
   cms {
@@ -38,9 +31,7 @@ const query = (date: string, visibility: any) => `{
 
 function roundTimeQuarterHour(time: Date) {
   var timeToReturn = new Date(time);
-  timeToReturn.setMilliseconds(
-    Math.round(timeToReturn.getMilliseconds() / 1000) * 1000,
-  );
+  timeToReturn.setMilliseconds(Math.round(timeToReturn.getMilliseconds() / 1000) * 1000);
   timeToReturn.setSeconds(Math.round(timeToReturn.getSeconds() / 60) * 60);
   timeToReturn.setMinutes(Math.round(timeToReturn.getMinutes() / 15) * 15);
   return timeToReturn;
@@ -85,17 +76,14 @@ function Announcement({ box, ...props }: AnnouncementProps) {
           .filter(
             (i: { programs: { items: any[] } }) =>
               i.programs.items.length === 0 ||
-              i.programs.items
-                .map((p: { webname: any }) => p.webname)
-                .includes(programWebname),
+              i.programs.items.map((p: { webname: any }) => p.webname).includes(programWebname),
           )
           .sort(
             (
               a: { programs: { items: string | any[] }; displayAt: any },
               b: { programs: { items: string | any[] }; displayAt: any },
             ) => {
-              if (a.programs.items.length > 0 && b.programs.items.length === 0)
-                return -1;
+              if (a.programs.items.length > 0 && b.programs.items.length === 0) return -1;
               return fromIso(a.displayAt) > fromIso(b.displayAt) ? -1 : 1;
             },
           );
@@ -190,11 +178,7 @@ function Announcement({ box, ...props }: AnnouncementProps) {
             </Box>
           </Grid>
         </Box>
-        <Box
-          display={{ base: "none", md: "block", lg: "none" }}
-          mb={0}
-          textAlign="center"
-        >
+        <Box display={{ base: "none", md: "block", lg: "none" }} mb={0} textAlign="center">
           {Close}
           {item.oneline}
         </Box>

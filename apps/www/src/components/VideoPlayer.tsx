@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import dynamic from 'next/dynamic';
-import { Box } from '@codeday/topo/Atom';
+import { Box } from "@codeday/topo/Atom";
+import dynamic from "next/dynamic";
+import React, { useEffect, useRef } from "react";
 
 //@ts-ignore
-const Hls = dynamic(() => import('hls.js/dist/hls.light.js'), { ssr: false });
+const Hls = dynamic(() => import("hls.js/dist/hls.light.js"), { ssr: false });
 
 interface VideoPlayerProps {
   url?: string;
@@ -16,8 +16,8 @@ interface VideoPlayerProps {
 export default function VideoPlayer({ url, poster, autoPlay, volume, ...props }: VideoPlayerProps) {
   const player = useRef<HTMLVideoElement>(null);
   useEffect(() => {
-    if (typeof window === 'undefined' || typeof player === 'undefined') return;
-    if (url?.split('.').pop() !== 'm3u8') return;
+    if (typeof window === "undefined" || typeof player === "undefined") return;
+    if (url?.split(".").pop() !== "m3u8") return;
     if (!(Hls as any).isSupported()) return;
 
     const hls = new (Hls as any)();

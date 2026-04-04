@@ -1,7 +1,7 @@
-/* eslint-disable no-undef */
-import React, { useRef, useEffect, useState, useMemo } from "react";
 import { debounce, type ComponentWithAs } from "@codeday/topo/_utils";
 import { Box, type BoxProps } from "@codeday/topo/Atom";
+/* eslint-disable no-undef */
+import React, { useRef, useEffect, useState, useMemo } from "react";
 
 export interface SizeBoxProps extends BoxProps {
   onWidthChanged?: (width: any) => null;
@@ -14,12 +14,7 @@ export const SizeBox: ComponentWithAs<"div", SizeBoxProps> = React.forwardRef<
   SizeBoxProps
 >(
   (
-    {
-      onWidthChanged = () => {},
-      onHeightChanged = () => {},
-      onSizeChanged = () => {},
-      ...props
-    },
+    { onWidthChanged = () => {}, onHeightChanged = () => {}, onSizeChanged = () => {}, ...props },
     ref,
   ) => {
     const boxRef: React.MutableRefObject<any> = useRef(null);
@@ -49,8 +44,7 @@ export const SizeBox: ComponentWithAs<"div", SizeBoxProps> = React.forwardRef<
 
     useEffect(() => {
       window.addEventListener("resize", windowChangeSize as any, false);
-      return () =>
-        window.removeEventListener("resize", windowChangeSize as any);
+      return () => window.removeEventListener("resize", windowChangeSize as any);
     }, []);
 
     return useMemo(() => <Box ref={boxRef} {...props} />, [props]);

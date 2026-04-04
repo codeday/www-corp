@@ -8,9 +8,7 @@ import React from "react";
 
 export function useColorMode() {
   const { resolvedTheme, setTheme } = useTheme();
-  const colorMode = (
-    (resolvedTheme ?? "light") === "dark" ? "dark" : "light"
-  ) as "light" | "dark";
+  const colorMode = ((resolvedTheme ?? "light") === "dark" ? "dark" : "light") as "light" | "dark";
   return {
     colorMode,
     setColorMode: setTheme,

@@ -1,11 +1,12 @@
-import React from 'react';
-import { print } from 'graphql';
-import { Text, Heading, Link, Image, Box } from '@codeday/topo/Atom';
-import { Content } from '@codeday/topo/Molecule';
-import { apiFetch } from '@codeday/topo/utils';
-import { GetStaticProps } from 'next';
-import Page from '../components/Page';
-import { Error404Query } from './404.gql';
+import { Text, Heading, Link, Image, Box } from "@codeday/topo/Atom";
+import { Content } from "@codeday/topo/Molecule";
+import { apiFetch } from "@codeday/topo/utils";
+import { print } from "graphql";
+import { GetStaticProps } from "next";
+import React from "react";
+
+import Page from "../components/Page";
+import { Error404Query } from "./404.gql";
 
 export default function Home() {
   return (
@@ -15,11 +16,16 @@ export default function Home() {
           alt=""
           src="https://img.codeday.org/w=1024;h=300;fit=crop;crop=faces,edges/6/t/6ttx5an4wbxypvf324er646d48ri8py88fjwbdwp5cxay8tfwo9nnmdwq9vpbseffz.jpg"
         />
-        <Text as="h2" fontSize="5xl" fontWeight="bold" mt={4}>Oh no!</Text>
-        <Heading as="h2" fontSize="4xl" fontWeight="normal">That page wasn&apos;t found.</Heading>
+        <Text as="h2" fontSize="5xl" fontWeight="bold" mt={4}>
+          Oh no!
+        </Text>
+        <Heading as="h2" fontSize="4xl" fontWeight="normal">
+          That page wasn&apos;t found.
+        </Heading>
         <Box mt={4} mb={16}>
           <Text>
-            If you think this page should be here, please <Link href="mailto:team@codeday.org">contact us.</Link>
+            If you think this page should be here, please{" "}
+            <Link href="mailto:team@codeday.org">contact us.</Link>
           </Text>
         </Box>
       </Content>
@@ -34,4 +40,4 @@ export const getStaticProps: GetStaticProps = async () => {
     },
     revalidate: 300,
   };
-}
+};
