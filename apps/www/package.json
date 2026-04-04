@@ -21,6 +21,7 @@
     "@types/react": "catalog:",
     "@webcomponents/shadydom": "^1.9.0",
     "airtable": "^0.11.6",
+    "botid": "^1.5.11",
     "express-rate-limit": "^5.2.3",
     "graphql": "catalog:",
     "graphql-tag": "^2.11.0",
@@ -58,7 +59,6 @@
     "three": "^0.119.1",
     "truncate": "^2.1.0",
     "urlencode": "^1.1.0",
-    "webpack-bundle-analyzer": "^3.9.0",
     "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
@@ -75,11 +75,14 @@
     "@types/react-dom": "catalog:",
     "@types/react-page-visibility": "^6.4.4",
     "@types/urlencode": "^1.1.4",
+    "@types/webpack-bundle-analyzer": "^4.7.0",
+    "baseline-browser-mapping": "^2.10.14",
     "cross-env": "^7.0.2",
     "eslint": "catalog:",
     "prettier": "^2.3.2",
     "raw-loader": "^4.0.2",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "webpack-bundle-analyzer": "^3.9.0"
   },
   "prettier": "@codeday/eslint-config/prettier"
 }

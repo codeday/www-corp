@@ -1,8 +1,9 @@
-/* eslint-disable node/no-process-env */
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const { apiFetch } = require("@codeday/topo/utils");
+import { apiFetch } from "@codeday/topo/utils";
+import { withBotId } from "botid/next/config";
+import { NextJsWebpackConfig } from "next/dist/server/config-shared";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
-module.exports = {
+const nextConfig = {
   turbopack: {
     rules: {
       "*.gql": {
@@ -11,7 +12,7 @@ module.exports = {
       },
     },
   },
-  webpack: (config, { isServer }) => {
+  webpack: (config: any, { isServer }: any) => {
     const originalEntry = config.entry;
     config.entry = async () => {
       const entries = await originalEntry();
@@ -48,9 +49,9 @@ module.exports = {
     ],
   },
   async redirects() {
-    const { cms } = await apiFetch("{ cms { regions { items { webname aliases } } } }");
+    const { cms } = await apiFetch("{ cms { regions { items { webname aliases } } } }", {}, {});
     const webnames = (cms && cms.regions && cms.regions.items ? cms.regions.items : []).flatMap(
-      (r) => [r.webname, ...(r.aliases || [])],
+      (r: any) => [r.webname, ...(r.aliases || [])],
     );
     const staticRedirects = [
       {
@@ -112,7 +113,7 @@ module.exports = {
 
     return [
       ...staticRedirects,
-      ...webnames.map((webname) => ({
+      ...webnames.map((webname: string) => ({
         source: `/${webname}`,
         destination: `https://event.codeday.org/${webname}`,
         permanent: false,
@@ -120,3 +121,4 @@ module.exports = {
     ];
   },
 };
+export default withBotId(nextConfig);

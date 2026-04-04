@@ -1,5 +1,6 @@
 import { apiFetch } from "@codeday/topo/utils";
 import Airtable from "airtable";
+import { checkBotId } from "botid/server";
 import { NextApiRequest, NextApiResponse } from "next";
 import { ServerClient } from "postmark";
 
@@ -17,6 +18,12 @@ const postmark = new ServerClient(process.env.POSTMARK_SERVER_TOKEN!);
 const base = new Airtable({ apiKey: process.env.AIRTABLE_TOKEN }).base(process.env.AIRTABLE_BASE!);
 
 async function ApplyAsVolunteer(req: NextApiRequest, res: NextApiResponse) {
+  const verification = await checkBotId();
+
+  if (verification.isBot) {
+    return res.status(403).json({ error: "Access denied" });
+  }
+
   const { email, firstName, lastName, linkedin, region, isOrganize, background } = JSON.parse(
     req.body,
   );

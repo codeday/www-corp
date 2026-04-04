@@ -1,4 +1,14 @@
+import { initBotId } from "botid/client/core";
 import posthog from "posthog-js";
+
+initBotId({
+  protect: [
+    {
+      path: "/api/applyAsVolunteer",
+      method: "POST",
+    },
+  ],
+});
 
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN!, {
   api_host: process.env.NEXT_PUBLIC_POSTHOG_PROXY || process.env.NEXT_PUBLIC_POSTHOG_HOST,
