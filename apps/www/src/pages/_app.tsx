@@ -3,7 +3,7 @@ import { ThemeProvider } from "@codeday/topo/Theme";
 import "react-responsive-modal/styles.css";
 import { debug } from "@codeday/utils";
 import { AppProps } from "next/app";
-import { StrictMode, useEffect } from "react";
+import { Fragment, StrictMode, useEffect } from "react";
 
 import { MarketingProvider, FundraiseProvider } from "../providers";
 import { Provider } from "../query";
