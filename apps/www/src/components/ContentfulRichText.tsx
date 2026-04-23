@@ -1,5 +1,5 @@
 import { Box, Image, Text, Link, Heading, List, ListItem, Divider } from "@codeday/topo/Atom";
-import React from "react";
+import React, { Fragment } from "react";
 
 import StaticContent from "./StaticContent";
 
@@ -71,14 +71,16 @@ function mapRichText({
 
   const innerContent =
     content &&
-    content.map((c: any) =>
-      mapRichText({
-        ...c,
-        links,
-        h1Size,
-        isRootElement: nodeType === "document",
-      }),
-    );
+    content.map((c: any) => (
+      <Fragment key={c.id}>
+        {mapRichText({
+          ...c,
+          links,
+          h1Size,
+          isRootElement: nodeType === "document",
+        })}
+      </Fragment>
+    ));
 
   const nodeTypes: Record<string, any> = {
     document: <>{innerContent}</>,
@@ -149,7 +151,7 @@ interface ContentfulRichTextProps {
   h1Size?: string;
 }
 
-export default function FaqAnswers({ json, links, h1Size }: ContentfulRichTextProps) {
+export default function ContentfulRichText({ json, links, h1Size }: ContentfulRichTextProps) {
   if (!json) return <></>;
   return <StaticContent>{mapRichText({ ...json, links, h1Size })}</StaticContent>;
 }

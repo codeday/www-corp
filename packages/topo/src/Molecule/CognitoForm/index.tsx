@@ -2,11 +2,11 @@ import { Box, Link, Spinner, Text } from "@codeday/topo/Atom";
 import { DataCollection } from "@codeday/topo/Molecule";
 import { useColorMode } from "@codeday/topo/Theme";
 import { useTheme } from "@codeday/topo/utils";
-import Form from "@tylermenezes/cognitoforms-react";
 /* eslint-disable no-secrets/no-secrets */
 /* eslint-disable no-undef */
 import React, { useEffect, useState } from "react";
 
+import Form from "./form";
 import style from "./style";
 
 interface CognitoFormProps {
